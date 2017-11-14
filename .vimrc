@@ -61,3 +61,7 @@ endif
 
 set ignorecase
 set clipboard=unnamedplus
+set backupdir=~/tmp
+set undodir=~/tmp
+set swapfile
+set dir=~/tmp
