@@ -169,13 +169,12 @@ bindsym $mod+Shift+Return exec ". ~/.config/i3/bind_one_time_command.sh"
 bindsym $modw+f exec ". ~/.config/i3/bind_find_all.sh"
 bindsym $modw+c exec ". ~/.config/i3/bind_copy_path.sh"
 
-# Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec amixer -q sset Master 2%+
 bindsym XF86AudioLowerVolume exec amixer -q sset Master 2%-
 bindsym XF86AudioMute exec amixer -q sset Master toggle
 bindsym Print exec ". ~/.config/i3/bind_print_screen.sh"
 bindsym $mod+shift+s exec ". ~/.config/i3/bind_region_select.sh"
-bindsym $mod+shift+r exec ~/.config/i3/record-screen.sh gif
+
 client.background       #ffffff
 
 workspace_layout tabbed
