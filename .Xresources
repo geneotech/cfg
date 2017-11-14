@@ -1,0 +1,8 @@
+xterm*font: PxPlus IBM VGA8 12
+xterm*faceName: Misc Fixed SemiCondensed 14 
+xterm*termName: xterm-256color
+xterm*vt100*foreground: white
+xterm*vt100*background: black
+rofi*font: Misc Fixed Medium Semi-Condensed 10
+rofi*allowBoldFonts: false
+rofi*boldMode: false 
