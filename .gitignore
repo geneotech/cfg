@@ -1,5 +1,6 @@
 .config/ranger/bookmarks
 .config/ranger/tagged
+.config/ranger/history
 vlc-qt-interface.conf
 QtProject.conf
 .config/dconf
