@@ -2,7 +2,6 @@
 .config/ranger/tagged
 vlc-qt-interface.conf
 QtProject.conf
-Trolltech.conf
 .config/dconf
 .config/okularrc
 .config/okularpartrc
