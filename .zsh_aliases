@@ -16,3 +16,4 @@ alias gdifft='git difftool -d '
 alias gall="git add ."
 alias gcmall="gall; gcm "
 alias gpush="git push "
+alias gcleanup="git reset --hard; git clean -d -x -f "
