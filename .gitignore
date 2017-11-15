@@ -13,3 +13,4 @@ QtProject.conf
 .config/cmus/playlist.pl
 .config/cmus/search-history
 .config/meld/history.ini
+.config/i3/workspace/current
