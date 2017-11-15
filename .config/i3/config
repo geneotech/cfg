@@ -161,7 +161,8 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
 bindsym $modw+r exec ". ~/.config/i3/bind_ranger.sh"
-bindsym $modw+h exec ". ~/.config/i3/bind_htop.sh"
+bindsym Control+$mod+Delete exec ". ~/.config/i3/bind_htop.sh"
+bindsym $modw+h exec zsh -c ". ~/.config/i3/workspace/bind_open_workspace.sh" 
 bindsym $modw+x exec firefox
 bindsym $modw+v exec ". ~/.config/i3/bind_open_editor.sh"
 bindsym $modw+g exec ". ~/.config/i3/bind_google.sh"
