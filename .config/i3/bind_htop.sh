@@ -1,1 +1,1 @@
-xterm -e "htop"
+terminator -e "htop"

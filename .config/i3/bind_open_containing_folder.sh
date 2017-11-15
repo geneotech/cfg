@@ -4,7 +4,7 @@ LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) | sed 1d | rofi -hide-
 
 if [[ -d $LOCATION ]] 
 then
-  xterm -e "ranger $LOCATION"
+  terminator -e "ranger $LOCATION"
 else
-  xterm -e "ranger --selectfile=$LOCATION" 
+  terminator -e "ranger --selectfile=$LOCATION" 
 fi

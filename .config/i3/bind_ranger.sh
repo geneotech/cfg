@@ -1,1 +1,1 @@
-xterm -e "ranger"
+terminator -e "ranger"

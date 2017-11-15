@@ -169,6 +169,7 @@ bindsym $mod+Shift+Return exec ". ~/.config/i3/bind_one_time_command.sh"
 bindsym $modw+f exec ". ~/.config/i3/bind_find_all.sh"
 bindsym $modw+c exec ". ~/.config/i3/bind_copy_path.sh"
 bindsym $modw+o exec ". ~/.config/i3/bind_open_containing_folder.sh"
+bindsym $modw+s exec ". ~/.config/i3/bind_open_shell_in.sh"
 
 # Current workspace bindings
 
