@@ -6,3 +6,9 @@ QtProject.conf
 .config/dconf
 .config/okularrc
 .config/okularpartrc
+.config/cmus/autosave
+.config/cmus/cache
+.config/cmus/command-history
+.config/cmus/lib.pl
+.config/cmus/playlist.pl
+.config/cmus/search-history
