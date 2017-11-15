@@ -1,1 +1,1 @@
-xterm -e "vim"
+terminator -e "vim"
