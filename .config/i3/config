@@ -175,11 +175,21 @@ bindsym $modw+s exec ". ~/.config/i3/bind_open_shell_in.sh"
 
 bindsym Control+p exec ". ~/.config/i3/workspace/bind_workspace_find_all.sh"
 
-# Other bindings
+# Volume bindings
 
 bindsym XF86AudioRaiseVolume exec amixer -q sset Master 2%+
 bindsym XF86AudioLowerVolume exec amixer -q sset Master 2%-
 bindsym XF86AudioMute exec amixer -q sset Master toggle
+
+# Player bindings
+
+bindsym XF86AudioPlay exec cmus-remote -u 
+bindsym XF86AudioStop exec cmus-remote -s 
+bindsym XF86AudioPrev exec cmus-remote -r 
+bindsym XF86AudioNext exec cmus-remote -n 
+
+# Screen capture bindings
+
 bindsym Print exec ". ~/.config/i3/bind_print_screen.sh"
 bindsym $mod+shift+s exec ". ~/.config/i3/bind_region_select.sh"
 
