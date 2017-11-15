@@ -1,3 +1,3 @@
-cd $WORKSPACE
-gdiff
-terminator
+#cd $WORKSPACE
+#terminator &!;
+meld $WORKSPACE
