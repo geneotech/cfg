@@ -6,7 +6,8 @@ if [[ -d $LOCATION ]]
 then
   terminator -e "ranger $LOCATION"
 else
-  RIFLE_RESULT=$(rifle $LOCATION)
+ cd $(dirname $LOCATION)
+ RIFLE_RESULT=$(rifle $LOCATION)
  if [[ ! -z $RIFLE_RESULT ]]
  then
    terminator -e "ranger --selectfile=$LOCATION" 
