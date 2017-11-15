@@ -1,0 +1,3 @@
+cd $WORKSPACE
+gdiff
+terminator

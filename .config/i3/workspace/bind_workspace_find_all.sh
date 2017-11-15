@@ -1,4 +1,4 @@
-LOCATION=$(find -L ~/Hypersomnia | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'go to:')
+LOCATION=$(find -L $WORKSPACE | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'go to:')
 
 [[ -z $LOCATION ]] && return
 
