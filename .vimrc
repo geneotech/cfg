@@ -93,4 +93,13 @@ autocmd BufReadPost *
      \ endif
 " Remember info about open buffers on close
 set viminfo^=%
+
+" Let the window's title be the filename
 set title
+
+" Let us see relative line numbers by default
+" set number relativenumber
+set number
+
+" Let us only see the filename
+set titlestring=%t%m
