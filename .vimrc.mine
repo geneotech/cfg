@@ -43,3 +43,4 @@ set number
 
 " Let us only see the filename
 set titlestring=%t%m
+nmap <S-e> :!ranger<CR>

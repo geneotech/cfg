@@ -1,1 +1,1 @@
-terminator -e "nvim $1"
+terminator -e "vim $1"
