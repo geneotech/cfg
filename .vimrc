@@ -59,47 +59,4 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
-set ignorecase
-set clipboard=unnamedplus
-set backupdir=/tmp
-set undodir=/tmp
-set swapfile
-set dir=/tmp
-
-" When searching try to be smart about cases
-set smartcase
-
-" Highlight search results
-set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-set tabstop=4
-
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
-" Remember info about open buffers on close
-set viminfo^=%
-
-" Let the window's title be the filename
-set title
-
-" Let us see relative line numbers by default
-" set number relativenumber
-set number
-
-" Let us only see the filename
-set titlestring=%t%m
+source ~/.vimrc.mine
