@@ -4,11 +4,12 @@ LOCATION=$(find -L $WORKSPACE | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'go t
 
 if [[ -d $LOCATION ]] 
 then
-  xterm -e "ranger $LOCATION"
+  terminator -e "ranger $LOCATION"
 else
-  RIFLE_RESULT=$(rifle $LOCATION)
+ cd $(dirname $LOCATION)
+ RIFLE_RESULT=$(rifle $LOCATION)
  if [[ ! -z $RIFLE_RESULT ]]
  then
-   xterm -e "ranger --selectfile=$LOCATION" 
+   terminator -e "ranger --selectfile=$LOCATION" 
  fi 
 fi
