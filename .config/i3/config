@@ -157,7 +157,6 @@ bindsym $mod+r mode "resize"
 #}
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
-bindsym $modw+r exec ". ~/.config/i3/bind_ranger.sh"
 bindsym Control+$mod+Delete exec ". ~/.config/i3/bind_htop.sh"
 bindsym $modw+x exec firefox
 bindsym $modw+v exec ". ~/.config/ranger/open_editor_separate.sh"
@@ -176,6 +175,7 @@ bindsym Control+p exec zsh -c ". ~/.config/i3/workspace/bind_workspace_find_all.
 bindsym Control+Shift+a exec zsh -c ". ~/.config/i3/workspace/bind_workspace_status.sh"
 bindsym Control+Shift+l exec zsh -c ". ~/.config/i3/workspace/bind_workspace_log.sh"
 bindsym $mod+Return exec zsh -c ". ~/.config/i3/workspace/bind_open_workspace.sh" 
+bindsym $modw+r exec ". ~/.config/i3/workspace/bind_workspace_ranger.sh"
 
 # Volume bindings
 
