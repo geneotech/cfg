@@ -1,6 +1,4 @@
 source ~/.config/i3/workspace/current
-alias vsc='sudo code --user-data-dir="/root/.vscode-root" &!;'
-#alias vsc='sudo code --user-data-dir="/root/.vscode-root"'
 alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'
 alias dusage='sudo gdmap &!; exit'
