@@ -1,1 +1,1 @@
-terminator -e "vim $1"
+vim $1

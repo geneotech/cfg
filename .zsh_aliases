@@ -12,6 +12,7 @@ alias glg="git log "
 alias gcm="git commit -m "
 alias gdiff='git diff '
 alias gdifft='git difftool -d '
+alias gadd="git add "
 alias gall="git add ."
 alias gcmall="gall; gcm "
 alias gpush="git push "
