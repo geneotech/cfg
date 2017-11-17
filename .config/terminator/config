@@ -9,6 +9,7 @@
   title_use_system_font = False
 [keybindings]
   copy = <Primary>c
+  hide_window = None
   move_tab_left = <Primary><Shift>Page_Down
   page_down = Page_Down
   page_down_half = <Primary>Down
