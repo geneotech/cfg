@@ -8,8 +8,25 @@
   title_hide_sizetext = True
   title_use_system_font = False
 [keybindings]
+  broadcast_all = None
+  broadcast_group = None
+  broadcast_off = None
+  close_term = None
+  close_window = None
   copy = <Primary>c
+  cycle_next = None
+  cycle_prev = None
+  edit_tab_title = None
+  edit_terminal_title = None
+  edit_window_title = None
+  go_down = None
+  go_left = None
+  go_next = None
+  go_prev = None
+  go_right = None
+  go_up = None
   hide_window = None
+  layout_launcher = None
   move_tab_left = <Primary><Shift>Page_Down
   page_down = Page_Down
   page_down_half = <Primary>Down
