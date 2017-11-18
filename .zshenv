@@ -1,1 +1,1 @@
-. ~/.zsh_aliases
+. ~/.shared_aliases
