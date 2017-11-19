@@ -1,5 +1,5 @@
-xterm*font: PxPlus IBM VGA8 12
-xterm*faceName: Misc Fixed SemiCondensed 14 
+xterm*font: Consolas Regular 11
+xterm*faceName: Consolas Regular 11 
 xterm*termName: xterm-256color
 xterm*vt100*foreground: white
 xterm*vt100*background: black

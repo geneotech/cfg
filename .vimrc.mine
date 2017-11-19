@@ -26,6 +26,10 @@ set mat=2
 
 set tabstop=4
 
+" Don't know why but somehow this makes indentation work normally
+" (puts just one tab instead of two)
+set shiftwidth=4
+
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
