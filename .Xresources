@@ -5,4 +5,8 @@ xterm*vt100*foreground: white
 xterm*vt100*background: black
 rofi*font: Misc Fixed Medium Semi-Condensed 10
 rofi*allowBoldFonts: false
-rofi*boldMode: false 
+rofi*boldMode: false
+URxvt*font:           xft:Consolas:pixelsize=14
+URxvt*boldFont:       xft:Consolas:bold:pixelsize=14
+URxvt*italicFont:     xft:Consolas:italic:pixelsize=14
+URxvt*boldItalicFont: xft:Consolas:bold:italic:pixelsize=14
