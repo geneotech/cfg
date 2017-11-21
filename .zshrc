@@ -22,3 +22,6 @@ compinit
 # End of lines added by compinstall
 . /home/pbc/.shared_aliases
 export PS1="%d>"
+
+eval $NEWCMD
+export NEWCMD=

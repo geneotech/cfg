@@ -1,2 +1,2 @@
 cd $WORKSPACE
-terminator
+$TERMINAL

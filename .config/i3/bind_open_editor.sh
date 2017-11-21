@@ -1,1 +1,1 @@
-terminator -e "vim"
+$TERMINAL $EDITOR

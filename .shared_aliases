@@ -1,3 +1,5 @@
+export TERMINAL=alacritty
+export EDITOR=vim
 source ~/.config/i3/workspace/current
 alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'

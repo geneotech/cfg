@@ -1,1 +1,1 @@
-terminator -e "ranger $WORKSPACE"
+$TERMINAL -e ranger $WORKSPACE

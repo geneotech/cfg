@@ -8,4 +8,4 @@ then
 else
   cd $(dirname $LOCATION)
 fi
-terminator
+$TERMINAL

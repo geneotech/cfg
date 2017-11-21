@@ -1,6 +1,6 @@
 if [[ $TERM -eq "linux" ]]
 then
-	terminator -e "source ~/.config/ranger/open_editor.sh $1" &!
+	export NEWCMD="$EDITOR $1"; $TERMINAL > /dev/null
 else
-	source ~/.config/ranger/open_editor.sh $1
+	$EDITOR $1
 fi

@@ -1,1 +1,1 @@
-terminator -e "htop"
+$TERMINAL -e htop

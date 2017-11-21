@@ -6,12 +6,12 @@ LOCATION=$(find -L $WORKSPACE | awk '{ print length, $0 }' | sort -n -s | cut -d
 
 if [[ -d $LOCATION ]] 
 then
-  terminator -e "ranger $LOCATION"
+  $TERMINAL -e ranger $LOCATION
 else
  cd $(dirname $LOCATION)
  RIFLE_RESULT=$(rifle $LOCATION)
  if [[ ! -z $RIFLE_RESULT ]]
  then
-   terminator -e "ranger --selectfile=$LOCATION" 
+   $TERMINAL -e ranger --selectfile=$LOCATION
  fi 
 fi
