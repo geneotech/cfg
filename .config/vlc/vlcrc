@@ -3199,7 +3199,7 @@ sout-x264-tune=film
 [gl] # OpenGL video output (experimental)
 
 # OpenGL extension (string)
-#gl=
+gl=glx
 
 [vout_sdl] # Simple DirectMedia Layer video output
 
