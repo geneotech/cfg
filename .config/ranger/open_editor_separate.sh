@@ -2,7 +2,8 @@ if [[ "${TERM}" == "linux" ]]
 then
 	# echo "Term is ${TERM}. Opening $1 in separate $TERMINAL" >> /home/pbc/termlog.txt
 
-	export NEWCMD="$EDITOR $1"; $TERMINAL > /dev/null
+	$($TERMINAL -e zsh -c "$EDITOR $1")
+	#export NEWCMD="$EDITOR $1"; $TERMINAL > /dev/null
 else
 	# echo "Term is ${TERM}. Opening $1 in place." >> /home/pbc/termlog.txt
 

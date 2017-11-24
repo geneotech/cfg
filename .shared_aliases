@@ -1,5 +1,10 @@
+stty -ixon
 export TERMINAL=alacritty
 export EDITOR=vim
+export VISUAL=~/.config/i3/bind_open_editor.sh
+alias mkexe='sudo chmod +x '
+# my text file extensions for use in grep searches
+export EXTS=""
 source ~/.config/i3/workspace/current
 alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'
@@ -21,3 +26,8 @@ alias gpush="git push "
 alias gclean="git clean -d -x -f "
 alias gcleanup="git reset --hard; git clean -d -x -f "
 alias meldh="meld $PWD"
+
+alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
+alias rmpkg="yaourt -Rsn "
+alias prmpkg="sudo pacman -Rsn "
+

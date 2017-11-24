@@ -2,7 +2,7 @@
 # /home/pbc/.nvidia-settings-rc
 #
 # Configuration file for nvidia-settings - the NVIDIA X Server Settings utility
-# Generated on Mon Nov 20 15:37:13 2017
+# Generated on Thu Nov 23 20:17:31 2017
 #
 
 # ConfigProperties:
@@ -13,9 +13,9 @@ SliderTextEntries = Yes
 IncludeDisplayNameInConfigFile = No
 ShowQuitDialog = Yes
 UpdateRulesOnProfileNameChange = Yes
-Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
-Timer = Thermal_Monitor_(GPU_0),Yes,1000
 Timer = Memory_Used_(GPU_0),Yes,3000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
 
 # Attributes:
 
@@ -29,6 +29,7 @@ Timer = Memory_Used_(GPU_0),Yes,3000
 0/LogAnisoAppControlled=1
 0/OpenGLImageSettings=0
 0/FSAAAppEnhanced=0
+0/XVideoSyncToDisplayID=DVI-I-1
 [DPY:DVI-I-0]/Dithering=0
 [DPY:DVI-I-0]/DitheringMode=0
 [DPY:DVI-I-0]/DitheringDepth=0

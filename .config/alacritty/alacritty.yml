@@ -73,7 +73,7 @@ font:
     # style: Italic
 
   # Point size of the font
-  size: 11.0
+  size: 10.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -98,7 +98,7 @@ render_timer: false
 
 # Use custom cursor colors. If true, display the cursor in the cursor.foreground
 # and cursor.background colors, otherwise invert the colors of the cursor.
-custom_cursor_colors: false
+custom_cursor_colors: true
 
 # Colors (Tomorrow Night Bright)
 colors:
@@ -110,7 +110,7 @@ colors:
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
     text: '0x000000'
-    cursor: '0xffffff'
+    cursor: '0xff5000'
 
   # Normal colors
   normal:
@@ -251,7 +251,7 @@ live_config_reload: false
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
-  - { key: V,        mods: Control|Shift,    action: Paste               }
+  - { key: V,        mods: Control,    action: Paste               }
   - { key: C,        mods: Control|Shift,    action: Copy                }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }

@@ -6,6 +6,10 @@ set undodir=/tmp
 set swapfile
 set dir=/tmp
 
+set nobackup
+set noswapfile
+set noundofile
+
 " When searching try to be smart about cases
 set smartcase
 
@@ -42,9 +46,29 @@ set viminfo^=%
 set title
 
 " Let us see relative line numbers by default
-" set number relativenumber
-set number
+set number relativenumber
+" set number
 
 " Let us only see the filename
 set titlestring=%t%m
 nmap <S-e> :!ranger<CR>
+
+" If the current buffer has never been saved, it will have no name,
+" call the file browser to save it, otherwise just save it.
+command -nargs=0 -bar Update if &modified 
+                           \|    if empty(bufname('%'))
+                           \|        browse confirm write
+                           \|    else
+                           \|        confirm write
+                           \|    endif
+                           \|endif
+nnoremap <silent> <C-S> :<C-u>Update<CR>
+inoremap <c-s> <Esc>:Update<CR>
+
+augroup myvimrc
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost l*    lwindow
+augroup END
+
+map <F4> :execute "silent grep -srnw --binary-files=without-match --exclude-dir=.git $WORKSPACE -e " . expand("<cword>") . " " <bar> cwindow <bar> redraw!<CR>
