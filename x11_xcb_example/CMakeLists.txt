@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.2)
 
 project(onecpp)
 message("Building onecpp.")
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/extra-cmake-modules/find-modules")
 set(CMAKE_CXX_FLAGS
 	"${CMAKE_CXX_FLAGS} -std=gnu++1z"
 )
@@ -31,9 +31,6 @@ find_package(X11 REQUIRED)
 include_directories(${X11_INCLUDE_DIR})
 target_link_libraries(onecpp ${X11_LIBRARIES})
 #target_link_libraries(onecpp xcb)
-
-find_package(ECM REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 find_package(XCB REQUIRED)
 include_directories(${XCB_INCLUDE_DIR})
