@@ -14,3 +14,7 @@ QtProject.conf
 .config/cmus/search-history
 .config/meld/history.ini
 .config/i3/workspace/current
+.config/transmission/resume
+.config/transmission/torrents
+.config/transmission/stats.json
+.config/transmission/dht.dat

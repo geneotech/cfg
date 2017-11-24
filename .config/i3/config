@@ -166,6 +166,7 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
 bindsym Control+$mod+Delete exec zsh -c ". ~/.config/i3/bind_htop.sh"
 bindsym $modw+x exec firefox
+bindsym $modw+t exec transmission-gtk
 bindsym $modw+v exec zsh -c "~/.config/i3/bind_open_editor.sh"
 bindsym $modw+g exec zsh -c ". ~/.config/i3/bind_google.sh"
 bindsym $mod+Shift+Return exec zsh -c ". ~/.config/i3/bind_one_time_command.sh"
@@ -212,3 +213,5 @@ client.focused_inactive #000000 #000000 #ffffff #484e50   #5f676a
 client.unfocused        #000000 #000000 #888888 #292d2e   #222222
 client.urgent           #2f343a #2f343a #ffffff #900000   #900000
 client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
+
+# for_window [title="Hypersomnia"] floating enable
