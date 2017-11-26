@@ -12,7 +12,7 @@ set noundofile
 
 " When searching try to be smart about cases
 set smartcase
-
+ls -a
 " Highlight search results
 set hlsearch
 
@@ -71,15 +71,18 @@ augroup myvimrc
     autocmd QuickFixCmdPost l*    lwindow
 augroup END
 
-map <F4> :execute "silent grep -srnw --binary-files=without-match --exclude-dir=.git $WORKSPACE -e " . expand("<cword>") . " " <bar> cwindow <bar> redraw!<CR>
+map <F4> :execute "silent Ggrep -e " . expand("<cword>") . " " <bar> redraw!<CR>
 colorscheme elflord
 map <C-l> :execute "silent Glog" <bar> redraw!<CR>
 map <C-s> :execute "Gstatus"<CR>
 map <C-d> :execute "Gdiff"<CR>
 map <C-C> :execute "Gcommit"<CR>
 nmap <C-a> GVgg
+nmap <C-f> :silent Ggrep "" <bar> redraw!<left><left><left><left><left><left><left><left><left><left><left>
+vmap <C-f> :silent Ggrep '<,'> <bar> redraw!<CR>
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+hi TabLineFill term=bold cterm=bold ctermbg=0
