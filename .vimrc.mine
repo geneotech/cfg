@@ -72,3 +72,4 @@ augroup myvimrc
 augroup END
 
 map <F4> :execute "silent grep -srnw --binary-files=without-match --exclude-dir=.git $WORKSPACE -e " . expand("<cword>") . " " <bar> cwindow <bar> redraw!<CR>
+colorscheme elflord
