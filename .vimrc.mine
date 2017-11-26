@@ -62,8 +62,8 @@ command -nargs=0 -bar Update if &modified
                            \|        confirm write
                            \|    endif
                            \|endif
-nnoremap <silent> <C-S> :<C-u>Update<CR>
-inoremap <c-s> <Esc>:Update<CR>
+"nnoremap <silent> <C-S> :<C-u>Update<CR>
+"inoremap <c-s> <Esc>:Update<CR>
 
 augroup myvimrc
     autocmd!
@@ -74,6 +74,9 @@ augroup END
 map <F4> :execute "silent grep -srnw --binary-files=without-match --exclude-dir=.git $WORKSPACE -e " . expand("<cword>") . " " <bar> cwindow <bar> redraw!<CR>
 colorscheme elflord
 map <C-l> :execute "silent Glog" <bar> redraw!<CR>
+map <C-s> :execute "Gstatus"<CR>
+map <C-d> :execute "Gdiff"<CR>
+map <C-C> :execute "Gcommit"<CR>
 nmap <C-a> GVgg
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
