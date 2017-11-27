@@ -10,6 +10,9 @@ set nobackup
 set noswapfile
 set noundofile
 
+" disable folding
+set nofoldenable
+
 " When searching try to be smart about cases
 set smartcase
 
@@ -114,8 +117,17 @@ nmap <C-a> GVgg
 " Color fixes
 colorscheme elflord
 
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+highlight DiffAdd    cterm=bold ctermbg=17 
+highlight DiffDelete cterm=bold ctermbg=17
+highlight DiffChange cterm=bold ctermbg=17 
+highlight DiffText   cterm=bold ctermbg=88 
+
 hi TabLineFill term=bold cterm=bold ctermbg=0
+
+runtime plugin/gitgutter.vim
+execute "GitGutterLineHighlightsEnable"
+
+highlight GitGutterAdd ctermfg=Green ctermbg=Black
+highlight GitGutterChange ctermfg=Yellow ctermbg=Black
+highlight GitGutterChangeDelete ctermfg=Yellow ctermbg=Black
+highlight GitGutterDelete ctermfg=Red ctermbg=Black
