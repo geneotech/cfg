@@ -12,7 +12,7 @@ set noundofile
 
 " When searching try to be smart about cases
 set smartcase
-ls -a
+
 " Highlight search results
 set hlsearch
 
@@ -55,31 +55,64 @@ nmap <S-e> :!ranger<CR>
 
 " If the current buffer has never been saved, it will have no name,
 " call the file browser to save it, otherwise just save it.
-command -nargs=0 -bar Update if &modified 
-                           \|    if empty(bufname('%'))
-                           \|        browse confirm write
-                           \|    else
-                           \|        confirm write
-                           \|    endif
-                           \|endif
+"command -nargs=0 -bar Update if &modified 
+                           "\|    if empty(bufname('%'))
+                           "\|        browse confirm write
+                           "\|    else
+                           "\|        confirm write
+                           "\|    endif
+                           "\|endif
 "nnoremap <silent> <C-S> :<C-u>Update<CR>
 "inoremap <c-s> <Esc>:Update<CR>
 
-augroup myvimrc
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* cwindow
-    autocmd QuickFixCmdPost l*    lwindow
-augroup END
+function! s:get_visual_selection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfunction
 
-map <F4> :execute "silent Ggrep -e " . expand("<cword>") . " " <bar> redraw!<CR>
-colorscheme elflord
-map <C-l> :execute "silent Glog" <bar> redraw!<CR>
+" Automatically opens the quickfix window after common commands
+" and redraws the window to avoid glitches
+"augroup myvimrc
+    "autocmd!
+    "autocmd QuickFixCmdPost [^l]* cwindow | redraw!
+    "autocmd QuickFixCmdPost l* lwindow | redraw!
+"augroup END
+
+runtime plugin/grepper.vim
+let g:grepper.dir = 'repo'
+let g:grepper.highlight = 1
+let g:grepper.tools = ['git']
+
+let g:grepper.operator.dir = 'repo'
+let g:grepper.operator.highlight = 1
+let g:grepper.operator.tools = ['git']
+"
+" Search word under cursor
+nmap <F4> :execute "Grepper -tool git -cword -noprompt"<CR>
+" Search selection
+vmap <F4>   <plug>(GrepperOperator)
+" Standard CTRL+f search
+nmap <C-f> :execute "Grepper -tool git -noprompt -query "<left>
+" For motions
+nmap gs  <plug>(GrepperOperator)
+
+" vim-fugitive bindings 
+map <C-l> :execute "silent Glog"<CR> 
 map <C-s> :execute "Gstatus"<CR>
 map <C-d> :execute "Gdiff"<CR>
 map <C-C> :execute "Gcommit"<CR>
 nmap <C-a> GVgg
-nmap <C-f> :silent Ggrep "" <bar> redraw!<left><left><left><left><left><left><left><left><left><left><left>
-vmap <C-f> :silent Ggrep '<,'> <bar> redraw!<CR>
+
+" Color fixes
+colorscheme elflord
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
