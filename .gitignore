@@ -18,3 +18,4 @@ QtProject.conf
 .config/transmission/torrents
 .config/transmission/stats.json
 .config/transmission/dht.dat
+.vim/.netrwhist
