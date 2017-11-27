@@ -97,7 +97,7 @@ let g:grepper.tools = ['git']
 let g:grepper.operator.dir = 'repo'
 let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
-"
+
 " Search word under cursor
 nmap <F4> :execute "Grepper -tool git -cword -noprompt"<CR>
 " Search selection
@@ -113,21 +113,30 @@ map <C-s> :execute "Gstatus"<CR>
 map <C-d> :execute "Gdiff"<CR>
 map <C-C> :execute "Gcommit"<CR>
 nmap <C-a> GVgg
+nmap U :execute "GitGutterRevertHunk"<CR>
 
 " Color fixes
-colorscheme elflord
+set termguicolors
 
-highlight DiffAdd    cterm=bold ctermbg=17 
-highlight DiffDelete cterm=bold ctermbg=17
-highlight DiffChange cterm=bold ctermbg=17 
-highlight DiffText   cterm=bold ctermbg=88 
+colorscheme moonfly
 
-hi TabLineFill term=bold cterm=bold ctermbg=0
+highlight DiffAdd    ctermbg=16 guibg=#001c09 guifg=NONE
+highlight DiffDelete ctermbg=17 guibg=#1c0000 guifg=NONE
+highlight DiffChange ctermbg=17 guibg=#101010 guifg=NONE  
+highlight DiffText   ctermbg=88 guibg=#050505 guifg=NONE  
+
 
 runtime plugin/gitgutter.vim
 execute "GitGutterLineHighlightsEnable"
+"execute "GitGutterSignsDisable"
+highlight GitGutterAdd guifg=darkgreen 
+highlight GitGutterChange guifg=darkyellow 
+highlight GitGutterChangeDelete guifg=darkyellow 
+highlight GitGutterDelete guifg=darkred
 
-highlight GitGutterAdd ctermfg=Green ctermbg=Black
-highlight GitGutterChange ctermfg=Yellow ctermbg=Black
-highlight GitGutterChangeDelete ctermfg=Yellow ctermbg=Black
-highlight GitGutterDelete ctermfg=Red ctermbg=Black
+highlight LineNr ctermbg=black guibg=#080808
+highlight CursorLineNR guibg=#080808 guifg=NONE
+"highlight Normal ctermbg=black guibg=black
+
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"

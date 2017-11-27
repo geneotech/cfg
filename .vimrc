@@ -18,7 +18,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-dispatch'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'guns/xterm-color-table.vim'
+Plugin 'bluz71/vim-moonfly-colors'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
