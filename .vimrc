@@ -18,6 +18,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-dispatch'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'guns/xterm-color-table.vim'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
