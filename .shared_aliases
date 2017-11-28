@@ -1,7 +1,7 @@
 stty -ixon
 export TERMINAL=alacritty
 export EDITOR=vim
-export VISUAL=~/.config/i3/bind_open_editor.sh
+export VISUAL=~/runvim.sh
 alias mkexe='sudo chmod +x '
 # my text file extensions for use in grep searches
 export EXTS=""
