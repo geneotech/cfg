@@ -119,16 +119,23 @@ runtime plugin/gitgutter.vim
 execute "GitGutterLineHighlightsEnable"
 "execute "GitGutterSignsDisable"
 
+" Prevent live updating of git gutter, it annoys me while writing
+set updatetime=999999999
+
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 " Color fixes
 set termguicolors
 
-"colorscheme moonfly
-"highlight LineNr ctermbg=black guibg=#080808
-"highlight CursorLineNR guibg=#080808 guifg=NONE
-colorscheme gryffin
+colorscheme moonfly
+highlight LineNr ctermbg=black guibg=#080808
+highlight CursorLineNR guibg=#080808 guifg=NONE
+
+"highlight LineNr ctermbg=black guibg=black
+"highlight CursorLineNR guibg=black guifg=NONE
+"highlight Normal guibg=black
+"colorscheme gryffin
 
 highlight DiffAdd    ctermbg=16 guibg=#001c09 guifg=NONE
 highlight DiffDelete ctermbg=17 guibg=#1c0000 guifg=NONE
