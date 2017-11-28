@@ -100,6 +100,8 @@ let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
 let g:grepper.operator.stop = 300
 
+nmap <tab> <c-w><c-w>
+
 nmap <C-j> :tabprevious<CR>
 nmap <C-k> :tabnext<CR>
 nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
