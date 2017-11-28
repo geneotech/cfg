@@ -20,6 +20,9 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
 Plugin 'gryftir/gryffin'
 Plugin 'vim-scripts/Conque-GDB'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+"Plugin 'abudden/taghighlight-automirror'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
