@@ -100,7 +100,23 @@ let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
 let g:grepper.operator.stop = 300
 
-nmap <tab> <c-w><c-w>
+" These four executions so that the alt works. Tested under Alacritty.
+
+execute "set <M-h>=\eh"
+execute "set <M-j>=\ej"
+execute "set <M-k>=\ek"
+execute "set <M-l>=\el"
+
+" Easily move between splits
+
+nmap <M-h> :winc h<CR>
+nmap <M-j> :winc j<CR>
+nmap <M-k> :winc k<CR>
+nmap <M-l> :winc l<CR>
+
+" Also prevents the editor from being closed when the last tab closes
+
+nmap <c-w> :close<CR>
 
 nmap <C-j> :tabprevious<CR>
 nmap <C-k> :tabnext<CR>
