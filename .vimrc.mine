@@ -115,28 +115,28 @@ map <C-C> :execute "Gcommit"<CR>
 nmap <C-a> GVgg
 nmap U :execute "GitGutterRevertHunk"<CR>
 
+runtime plugin/gitgutter.vim
+execute "GitGutterLineHighlightsEnable"
+"execute "GitGutterSignsDisable"
+
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+
 " Color fixes
 set termguicolors
 
-colorscheme moonfly
+"colorscheme moonfly
+"highlight LineNr ctermbg=black guibg=#080808
+"highlight CursorLineNR guibg=#080808 guifg=NONE
+colorscheme gryffin
 
 highlight DiffAdd    ctermbg=16 guibg=#001c09 guifg=NONE
 highlight DiffDelete ctermbg=17 guibg=#1c0000 guifg=NONE
 highlight DiffChange ctermbg=17 guibg=#101010 guifg=NONE  
 highlight DiffText   ctermbg=88 guibg=#050505 guifg=NONE  
 
-
-runtime plugin/gitgutter.vim
-execute "GitGutterLineHighlightsEnable"
-"execute "GitGutterSignsDisable"
 highlight GitGutterAdd guifg=darkgreen 
 highlight GitGutterChange guifg=darkyellow 
 highlight GitGutterChangeDelete guifg=darkyellow 
 highlight GitGutterDelete guifg=darkred
 
-highlight LineNr ctermbg=black guibg=#080808
-highlight CursorLineNR guibg=#080808 guifg=NONE
-"highlight Normal ctermbg=black guibg=black
-
-execute "set t_8f=\e[38;2;%lu;%lu;%lum"
-execute "set t_8b=\e[48;2;%lu;%lu;%lum"
