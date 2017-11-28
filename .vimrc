@@ -15,7 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-dispatch'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
