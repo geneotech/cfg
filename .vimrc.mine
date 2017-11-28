@@ -100,6 +100,11 @@ let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
 let g:grepper.operator.stop = 300
 
+nmap <C-j> :tabprevious<CR>
+nmap <C-k> :tabnext<CR>
+nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
 " Search word under cursor
 nmap <F4> :execute "Grepper -tool git -cword -noprompt"<CR>
 " Search selection
@@ -133,6 +138,9 @@ set termguicolors
 colorscheme moonfly
 highlight LineNr ctermbg=black guibg=#080808
 highlight CursorLineNR guibg=#080808 guifg=NONE
+highlight TabLineFill guifg=#080808 guibg=#080807
+highlight TabLineSel guibg=#202020 
+highlight TabLine guibg=#080808 
 
 "highlight LineNr ctermbg=black guibg=black
 "highlight CursorLineNR guibg=black guifg=NONE
