@@ -25,8 +25,8 @@ set incsearch
 " For regular expressions turn magic on
 set magic
 
-" Show matching brackets when text indicator is over them
-set showmatch
+" Don't complete brackets for me (don't know why does this option has this name)
+set noshowmatch
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
@@ -99,6 +99,9 @@ let g:grepper.operator.dir = 'repo'
 let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
 let g:grepper.operator.stop = 300
+
+" General bindings
+cmap w!! w !sudo tee %
 
 " General keybindings
 nmap <Space>o :on<CR>
