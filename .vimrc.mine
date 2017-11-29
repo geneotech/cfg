@@ -100,6 +100,13 @@ let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
 let g:grepper.operator.stop = 300
 
+" General keybindings
+nmap <Space>o :on<CR>
+
+nmap <Space>s :source $MYVIMRC<CR>
+nmap <Space>v :e ~/cfg/.vimrc<CR>
+nmap <Space>m :e ~/cfg/.vimrc.mine<CR>
+
 " These four executions so that the alt works. Tested under Alacritty.
 
 execute "set <M-h>=\eh"
@@ -115,8 +122,9 @@ nmap <M-k> :winc k<CR>
 nmap <M-l> :winc l<CR>
 
 " Also prevents the editor from being closed when the last tab closes
-
 nmap <c-w> :close<CR>
+
+nmap <c-x> :x<CR>
 
 nmap <C-j> :tabprevious<CR>
 nmap <C-k> :tabnext<CR>
