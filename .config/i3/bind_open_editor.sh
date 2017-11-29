@@ -1,1 +1,1 @@
-zsh -c "$VISUAL $WORKSPACE/Untitled"
+zsh -c "cd $WORKSPACE; $VISUAL Untitled"

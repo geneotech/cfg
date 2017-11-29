@@ -22,6 +22,7 @@ Plugin 'gryftir/gryffin'
 Plugin 'vim-scripts/Conque-GDB'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'francoiscabrol/ranger.vim'
 "Plugin 'abudden/taghighlight-automirror'
 
 " plugin from http://vim-scripts.org/vim/scripts.html

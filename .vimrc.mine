@@ -54,7 +54,7 @@ set number relativenumber
 
 " Let us only see the filename
 set titlestring="VIM"
-nmap <S-e> :!ranger<CR>
+nmap <S-e> :Ranger<CR>
 
 " If the current buffer has never been saved, it will have no name,
 " call the file browser to save it, otherwise just save it.
