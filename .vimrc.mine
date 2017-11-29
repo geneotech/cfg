@@ -187,3 +187,5 @@ highlight GitGutterChange guifg=darkyellow
 highlight GitGutterChangeDelete guifg=darkyellow 
 highlight GitGutterDelete guifg=darkred
 
+" For my gf
+set path+=src/**
