@@ -158,6 +158,10 @@ set updatetime=999999999
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
+runtime plugin/gutentags.vim
+" Gutentags settings
+let g:gutentags_cache_dir='/tmp/tagfiles'
+
 " Color fixes
 set termguicolors
 
