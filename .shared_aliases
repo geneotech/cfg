@@ -31,12 +31,25 @@ alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
 alias rmpkg="yaourt -Rsn "
 alias prmpkg="sudo pacman -Rsn "
 
+LASTERR_PATH=/tmp/last_error.txt
+
+function stripcodes() {
+	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
+	sed -i 's/\r$//g' $1
+	sed -i -e '1d' $1
+}
+
+alias clnerr='stripcodes $LASTERR_PATH'
+
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 
-alias mkd="make -j5 -C build/Debug-x64"
+alias mkd='script -q -c "make run -j5 -C build/Debug-x64" $LASTERR_PATH; clnerr'
 alias mkr="make -j5 -C build/Release-x64"
 
-alias mkdr="make run -j5 -C build/Debug-x64"
+alias mkdr="make run -j5 -C build/Debug-x64 2>&1 | tee /tmp/last_error.txt"
 alias mkdd="make debug -j5 -C build/Debug-x64"
 alias mkrr="make run -j5 -C build/Release-x64"
+
+# Jump to last error in vim
+alias vj='vim --remote-send "<ESC>:cfile /tmp/last_error.txt <CR>"; $(i3-msg "[title=VIM] focus");'
