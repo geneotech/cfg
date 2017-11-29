@@ -1,2 +1,2 @@
-source ~/.shared_aliases
+source ~/shared.sh
 PS1="\w>"

@@ -202,6 +202,13 @@ bindsym XF86AudioNext exec cmus-remote -n
 
 bindsym Print exec ". ~/.config/i3/bind_print_screen.sh"
 bindsym $mod+shift+s exec ". ~/.config/i3/bind_region_select.sh"
+bindsym $mod+shift+r exec zsh -c screen_capture.sh
+
+# IDE-like bindings
+bindsym F7 exec zsh -c vim_make
+# Will also prevent us from wasting time in firefox pressing F5.
+# We'll be forced to press Ctrl+F5 which will cause us to think about ours wasting time.
+bindsym F5 exec zsh -c vim_run
 
 client.background       #ffffff
 

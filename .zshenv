@@ -1,1 +1,1 @@
-. ~/.shared_aliases
+. ~/shared.sh

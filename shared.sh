@@ -33,6 +33,9 @@ alias prmpkg="sudo pacman -Rsn "
 
 LASTERR_PATH=/tmp/last_error.txt
 
+# Jump to last error in vim
+alias vj='vim --remote-send "<ESC>:lfile $LASTERR_PATH <CR>"; $(i3-msg "[title=VIM] focus");'
+
 function stripcodes() {
 	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
 	sed -i 's/\r$//g' $1
@@ -44,12 +47,45 @@ alias clnerr='stripcodes $LASTERR_PATH'
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 
-alias mkd='script -q -c "make run -j5 -C build/Debug-x64" $LASTERR_PATH; clnerr'
+function make_with_logs() {
+	MAKE_TARGET=$1
+	TARGET_DIR=$2
+
+	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > /dev/pts/1 
+}
+
+function make_current() {
+	MAKE_TARGET=$1
+
+	make_with_logs $1 build/current
+}
+
+function vim_target() {
+	vim --remote-send "<ESC>:wa<CR>"
+	cd $WORKSPACE
+	make_current $1
+
+	ERRORS=$(grep -e "error" $LASTERR_PATH)
+	
+	if [[ ! -z $ERRORS ]]
+	then
+		clnerr
+		vj
+	fi
+}
+
+function vim_make() {
+	vim_target all
+}
+
+function vim_run() {
+	vim_target run
+}
+
+alias mkd='script -q -c "make run -j5 -C build/Debug-x64" $LASTERR_PATH > /dev/pts/1; clnerr'
 alias mkr="make -j5 -C build/Release-x64"
 
 alias mkdr="make run -j5 -C build/Debug-x64 2>&1 | tee /tmp/last_error.txt"
 alias mkdd="make debug -j5 -C build/Debug-x64"
 alias mkrr="make run -j5 -C build/Release-x64"
 
-# Jump to last error in vim
-alias vj='vim --remote-send "<ESC>:cfile /tmp/last_error.txt <CR>"; $(i3-msg "[title=VIM] focus");'

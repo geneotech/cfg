@@ -21,10 +21,11 @@ zstyle :compinstall filename '/home/pbc/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-. /home/pbc/.shared_aliases
+. /home/pbc/shared.sh
 export PS1="%d>"
 
 eval "$NEWCMD"
 export NEWCMD=
+alias cusr="rm -rf hypersomnia/cache/usr"
 alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
