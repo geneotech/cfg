@@ -65,7 +65,7 @@ function vim_target() {
 	cd $WORKSPACE
 	make_current $1
 
-	ERRORS=$(grep -e "error" $LASTERR_PATH)
+	ERRORS=$(grep -e "error:" $LASTERR_PATH)
 	
 	if [[ ! -z $ERRORS ]]
 	then
