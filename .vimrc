@@ -183,14 +183,29 @@ nmap <C-k> :tabnext<CR>
 nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
+""" Searching current file """
+
+" General
+nmap <S-f> :execute "Grepper -buffer -tool grep -noprompt -query "<left>
+
+" Search word under cursor
+nmap <F3> :execute "Grepper -buffer -tool grep -cword -noprompt"<CR>
+
+""" Searching whole project """
+
+" General
+nmap <C-f> :execute "Grepper -tool git -noprompt -query "<left>
+
 " Search word under cursor
 nmap <F4> :execute "Grepper -tool git -cword -noprompt"<CR>
+
 " Search selection
 vmap <F4>   <plug>(GrepperOperator)
-" Standard CTRL+f search
-nmap <C-f> :execute "Grepper -tool git -noprompt -query "<left>
+
 " For motions
 nmap gs  <plug>(GrepperOperator)
+
+
 
 " vim-fugitive bindings 
 map <C-l> :execute "silent Glog"<CR> 
