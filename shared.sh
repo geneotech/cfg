@@ -78,14 +78,18 @@ function vim_make() {
 	vim_target all
 }
 
+function vim_debug() {
+	vim_target conque_debug
+}
+
 function vim_run() {
 	vim_target run
 }
 
-alias mkd='script -q -c "make run -j5 -C build/Debug-x64" $LASTERR_PATH > /dev/pts/1; clnerr'
+alias mkd='make run -j5 -C build/Debug-x64'
 alias mkr="make -j5 -C build/Release-x64"
 
-alias mkdr="make run -j5 -C build/Debug-x64 2>&1 | tee /tmp/last_error.txt"
+alias mkdr="make run -j5 -C build/Debug-x64"
 alias mkdd="make debug -j5 -C build/Debug-x64"
 alias mkrr="make run -j5 -C build/Release-x64"
 

@@ -155,9 +155,18 @@ cmap w!! w !sudo tee %
 
 " General keybindings
 nmap <Space>o :on<CR>
+nmap <Space>n :noh<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
 nmap <Space>v :e ~/cfg/.vimrc<CR>
+
+" ConqueGdb settings and keybindings
+runtime plugin/conque_gdb.vim
+
+let g:ConqueTerm_ReadUnfocused = 1
+let g:ConqueTerm_Color = 1
+let g:ConqueTerm_InsertOnEnter = 1
+
 
 " These four executions so that the alt works. Tested under Alacritty.
 
@@ -217,7 +226,8 @@ nmap gs  <plug>(GrepperOperator)
 map <C-l> :execute "silent Glog"<CR> 
 map <C-s> :execute "Gstatus"<CR>
 map <C-d> :execute "Gdiff"<CR>
-map <C-C> :execute "Gcommit"<CR>
+" We will anyway do it from the status window
+" map <C-C> :execute "Gcommit"<CR>
 nmap <C-a> GVgg
 nmap U :execute "GitGutterRevertHunk"<CR>
 
