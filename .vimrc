@@ -180,13 +180,19 @@ nmap <c-x> :x<CR>
 
 nmap <C-j> :tabprevious<CR>
 nmap <C-k> :tabnext<CR>
+
+nmap <C-n> :tabnew<CR>
+
 nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+
+""" Replacing """
+nmap <C-h> :cdo s///g <bar> update<left><left><left><left><left><left><left><left><left><left><left>
 
 """ Searching current file """
 
 " General
-nmap <S-f> :execute "Grepper -buffer -tool grep -noprompt -query "<left>
+nmap <S-f> :execute "Grepper -buffer -tool grep -noprompt -query ''"<left><left>
 
 " Search word under cursor
 nmap <F3> :execute "Grepper -buffer -tool grep -cword -noprompt"<CR>
@@ -194,7 +200,7 @@ nmap <F3> :execute "Grepper -buffer -tool grep -cword -noprompt"<CR>
 """ Searching whole project """
 
 " General
-nmap <C-f> :execute "Grepper -tool git -noprompt -query "<left>
+nmap <C-f> :execute "Grepper -tool git -noprompt -query ''"<left><left>
 
 " Search word under cursor
 nmap <F4> :execute "Grepper -tool git -cword -noprompt"<CR>
