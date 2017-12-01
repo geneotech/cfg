@@ -155,7 +155,6 @@ cmap w!! w !sudo tee %
 
 " General keybindings
 nmap <Space>o :on<CR>
-nmap <Space>n :noh<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
 nmap <Space>v :e ~/cfg/.vimrc<CR>
@@ -166,12 +165,14 @@ runtime plugin/conque_gdb.vim
 let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_Color = 1
 let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CloseOnEnd = 1
+"let g:ConqueTerm_CWInsert = 1
 
 " So that it does not preffix 'server' to our commands
 let g:ConqueGdb_SaveHistory = 1
 
 " Open ConqueGdb window
-nmap <silent> <space>g :ConqueGdb<CR>
+nmap <silent> <space>g :ConqueGdb <bar> :star <CR>
 
 " Avoid having to go to conque window for confirmations
 nnoremap <silent> <space>y :ConqueGdbCommand y<CR>
@@ -183,6 +184,7 @@ nnoremap <silent> <space>n :ConqueGdbCommand n<CR>
 
 " We had to comment out one line in plugin/conque_term.vim for F8 to work,
 " unfortunately
+nmap <silent> <S-F5> :ConqueGdbCommand kill<CR>
 nmap <silent> <F8> :ConqueGdbCommand continue<CR>
 nmap <silent> <F9> <Leader>b 
 nmap <silent> <F10> :ConqueGdbCommand next<CR>
@@ -207,6 +209,11 @@ nmap <M-h> :winc h<CR>
 nmap <M-j> :winc j<CR>
 nmap <M-k> :winc k<CR>
 nmap <M-l> :winc l<CR>
+
+imap <M-h> <ESC>:winc h<CR>
+imap <M-j> <ESC>:winc j<CR>
+imap <M-k> <ESC>:winc k<CR>
+imap <M-l> <ESC>:winc l<CR>
 
 " Also prevents the editor from being closed when the last tab closes
 nmap <c-w> :close<CR>

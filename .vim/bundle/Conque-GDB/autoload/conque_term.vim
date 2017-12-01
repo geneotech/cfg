@@ -456,7 +456,8 @@ let s:windows_vk = {
 function! conque_term#open(...) "{{{
     let command = get(a:000, 0, '')
     let vim_startup_commands = get(a:000, 1, [])
-    let return_to_current  = get(a:000, 2, 0)
+	" CUSTOMIZATION: Always return to the current window
+    let return_to_current  = 1
     let is_buffer  = get(a:000, 3, 1)
     
     if has('unix')
@@ -562,6 +563,8 @@ function! conque_term#open(...) "{{{
     if is_buffer && return_to_current
         sil exe ":sb " . current_buffer
         sil exe ":set switchbuf=" . save_sb
+		" CUSTOMIZATION: We must stop inserting here if InsertOnEnter is on
+		sil exe ":stopi"
     elseif is_buffer
         startinsert!
     endif
@@ -720,6 +723,7 @@ function! conque_term#set_mappings(action) "{{{
         endif
     endif
 
+	" CUSTOMIZATION: Let ESC really work ordinarily
     " leave insert mode
             sil exe 'i' . map_modifier . 'map <silent> <buffer> <Esc><Esc>'
 
@@ -943,6 +947,7 @@ function! conque_term#set_mappings(action) "{{{
 
     " map command to toggle terminal key mappings {{{
     if a:action == 'start'
+		" CUSTOMIZATION: Let F8 work
         "sil exe 'nnoremap ' . g:ConqueTerm_ToggleKey . ' :<C-u>call conque_term#set_mappings("toggle")<CR>'
     endif
     " }}}

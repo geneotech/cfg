@@ -451,6 +451,8 @@ function! conque_gdb#command(cmd)
         sil exe 'noautocmd ' . get(g:conque_gdb_src_splits, g:ConqueGdb_SrcSplit, g:conque_gdb_default_split)
         sil exe 'noautocmd wincmd w'
         sil exe 'noautocmd buffer ' . s:gdb.buffer_number
+		" CUSTOMIZATION: Always resize the split a little
+    	sil exe 'res -15'
         sil exe 'noautocmd wincmd p'
     endif
 

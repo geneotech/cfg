@@ -83,9 +83,10 @@ endif
 command! -nargs=* -complete=file ConqueGdb call conque_gdb#open(<q-args>, [
         \ get(g:conque_gdb_src_splits, g:ConqueGdb_SrcSplit, g:conque_gdb_default_split),
         \ 'buffer ' . bufnr("%"),
-        \ 'wincmd w'])
+        \ 'wincmd w',
+        \ 'res -15'])
 command! -nargs=* -complete=file ConqueGdbSplit call conque_gdb#open(<q-args>, [
-        \ 'rightbelow split'])
+        \ 'split'])
 command! -nargs=* -complete=file ConqueGdbVSplit call conque_gdb#open(<q-args>, [
         \ 'rightbelow vsplit'])
 command! -nargs=* -complete=file ConqueGdbTab call conque_gdb#open(<q-args>, [
