@@ -9,12 +9,10 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
-Plugin 'gryftir/gryffin'
 Plugin 'vim-scripts/Conque-GDB'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'francoiscabrol/ranger.vim'
-Plugin 'jiangmiao/auto-pairs'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,12 +40,11 @@ if has("autocmd")
 
 else
 
-  set autoindent		" always set autoindenting on
-
 endif " has("autocmd")
 
-set autoindent 
-set smartindent
+set noautoindent 
+set nosmartindent
+
 set laststatus=0
 set ignorecase
 set clipboard=unnamedplus
@@ -307,6 +304,12 @@ highlight GitGutterAdd guifg=darkgreen
 highlight GitGutterChange guifg=darkyellow 
 highlight GitGutterChangeDelete guifg=darkyellow 
 highlight GitGutterDelete guifg=darkred
+
+
+set list
+set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
+highlight SpecialKey guifg=#505050
+highlight NonText guifg=#505050
 
 " For my gf
 set path+=src/**
