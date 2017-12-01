@@ -693,6 +693,7 @@ function! conque_term#set_mappings(action) "{{{
     " map ASCII 1-31 {{{
     for c in range(1, 31)
         " <Esc>
+		" CUSTOMIZATION: Let us use ctrl + hjkl
         if c == 27 || c == 3 || c == 8 || c == 10 || c == 11 || c == 12
             continue
         endif
@@ -727,11 +728,8 @@ function! conque_term#set_mappings(action) "{{{
     " leave insert mode
             sil exe 'i' . map_modifier . 'map <silent> <buffer> <Esc><Esc>'
 
-    " Map <C-w> in insert mode
-    if exists('g:ConqueTerm_CWInsert') && g:ConqueTerm_CWInsert == 1
-        inoremap <silent> <buffer> <C-w> <Esc><C-w>
-    endif
-    " }}}
+	" CUSTOMIZATION: let us exit with C-W in insert mode 
+    inoremap <silent> <buffer> <C-w> <Esc>:close<CR>
 
     " map 33 and beyond {{{
     if exists('##InsertCharPre') && g:ConqueTerm_InsertCharPre == 1

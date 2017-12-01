@@ -166,7 +166,7 @@ let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_Color = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
-"let g:ConqueTerm_CWInsert = 1
+let g:ConqueTerm_CWInsert = 0
 "let g:ConqueTerm_UnfocusedUpdateTime = 0
 "let g:ConqueTerm_FocusedUpdateTime = 0
 
@@ -219,6 +219,7 @@ imap <M-l> <ESC>:winc l<CR>
 
 " Also prevents the editor from being closed when the last tab closes
 nmap <c-w> :close<CR>
+imap <c-w> <ESC>:close<CR>
 
 nmap <c-x> :x<CR>
 
