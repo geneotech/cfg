@@ -167,6 +167,8 @@ let g:ConqueTerm_Color = 1
 let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CloseOnEnd = 1
 "let g:ConqueTerm_CWInsert = 1
+"let g:ConqueTerm_UnfocusedUpdateTime = 0
+"let g:ConqueTerm_FocusedUpdateTime = 0
 
 " So that it does not preffix 'server' to our commands
 let g:ConqueGdb_SaveHistory = 1
@@ -184,7 +186,7 @@ nnoremap <silent> <space>n :ConqueGdbCommand n<CR>
 
 " We had to comment out one line in plugin/conque_term.vim for F8 to work,
 " unfortunately
-nmap <silent> <S-F5> :ConqueGdbCommand kill<CR>
+nmap <silent> <S-F5> :execute 'ConqueGdbCommand kill' <bar> only<CR>
 nmap <silent> <F8> :ConqueGdbCommand continue<CR>
 nmap <silent> <F9> <Leader>b 
 nmap <silent> <F10> :ConqueGdbCommand next<CR>
@@ -255,7 +257,6 @@ vmap <F4>   <plug>(GrepperOperator)
 
 " For motions
 nmap gs  <plug>(GrepperOperator)
-
 
 
 " vim-fugitive bindings 
