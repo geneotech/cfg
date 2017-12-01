@@ -167,6 +167,32 @@ let g:ConqueTerm_ReadUnfocused = 1
 let g:ConqueTerm_Color = 1
 let g:ConqueTerm_InsertOnEnter = 1
 
+" So that it does not preffix 'server' to our commands
+let g:ConqueGdb_SaveHistory = 1
+
+" Open ConqueGdb window
+nmap <silent> <space>g :ConqueGdb<CR>
+
+" Avoid having to go to conque window for confirmations
+nnoremap <silent> <space>y :ConqueGdbCommand y<CR>
+nnoremap <silent> <space>n :ConqueGdbCommand n<CR>
+
+" We could set those through g:ConqueGdb_* variables,
+" but ConqueTerm interferes if there are no mappings set for the F keys
+" at the time of its startup.
+
+" We had to comment out one line in plugin/conque_term.vim for F8 to work,
+" unfortunately
+nmap <silent> <F8> :ConqueGdbCommand continue<CR>
+nmap <silent> <F9> <Leader>b 
+nmap <silent> <F10> :ConqueGdbCommand next<CR>
+nmap <silent> <F11> :ConqueGdbCommand step<CR>
+nmap <silent> <S-F11> :ConqueGdbCommand finish<CR>
+
+nmap <silent> <space>t <Leader>t 
+nmap <silent> <space>p <Leader>p 
+nmap <silent> <space>u :ConqueGdbCommand up<CR> 
+nmap <silent> <space>d :ConqueGdbCommand down<CR> 
 
 " These four executions so that the alt works. Tested under Alacritty.
 
