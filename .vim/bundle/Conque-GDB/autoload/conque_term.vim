@@ -693,7 +693,7 @@ function! conque_term#set_mappings(action) "{{{
     " map ASCII 1-31 {{{
     for c in range(1, 31)
         " <Esc>
-        if c == 27 || c == 3
+        if c == 27 || c == 3 || c == 8 || c == 10 || c == 11 || c == 12
             continue
         endif
         if l:action == 'start'

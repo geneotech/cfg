@@ -222,8 +222,11 @@ nmap <c-x> :x<CR>
 
 nmap <C-j> :tabprevious<CR>
 nmap <C-k> :tabnext<CR>
-
 nmap <C-n> :tabnew<CR>
+" So that we can switch tabs at any time
+imap <C-j> <ESC>:tabprevious<CR>
+imap <C-k> <ESC>:tabnext<CR>
+imap <C-n> <ESC>:tabnew<CR>
 
 nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
