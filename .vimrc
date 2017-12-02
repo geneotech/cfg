@@ -45,6 +45,8 @@ endif " has("autocmd")
 set noautoindent 
 set nosmartindent
 
+set nofixendofline
+
 set laststatus=0
 set ignorecase
 set clipboard=unnamedplus
@@ -151,6 +153,7 @@ let g:grepper.operator.stop = 300
 cmap w!! w !sudo tee %
 
 " General keybindings
+nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nmap <Space>o :on<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
