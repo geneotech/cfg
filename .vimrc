@@ -13,6 +13,7 @@ Plugin 'vim-scripts/Conque-GDB'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'francoiscabrol/ranger.vim'
+Plugin 'wojtekmach/vim-rename'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -154,6 +155,7 @@ cmap w!! w !sudo tee %
 
 " General keybindings
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
+nmap <Space>r :call feedkeys(":Rename " . expand('%:t'))<CR>
 nmap <Space>o :on<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
