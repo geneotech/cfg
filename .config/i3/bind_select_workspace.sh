@@ -1,5 +1,6 @@
 WORKSPACES="
 /home/pbc/Hypersomnia
+/home/pbc/Hypersomnia/docs
 /home/pbc/cfg
 /home/pbc/cfg/x11_xcb_example"
 
