@@ -1,4 +1,4 @@
-LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:')
+LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:')
 
 [[ -z $LOCATION ]] && return
 
