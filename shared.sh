@@ -1,3 +1,7 @@
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+PATH="/home/pbc/.gem/bin:$PATH"
+export GEM_HOME=$HOME/.gem
+
 stty -ixon
 export TERMINAL=alacritty
 export EDITOR=vim
