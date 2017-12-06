@@ -70,8 +70,9 @@ function vim_target() {
 	make_current $1
 
 	ERRORS=$(grep -e "error:" $LASTERR_PATH)
+	LINKER_ERRORS=$(grep -e "error: ld" $LASTERR_PATH)
 	
-	if [[ ! -z $ERRORS ]]
+	if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
 	then
 		clnerr
 		vj
