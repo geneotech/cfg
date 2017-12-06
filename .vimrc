@@ -142,7 +142,7 @@ endfunction
 runtime plugin/grepper.vim
 let g:grepper.dir = 'repo'
 let g:grepper.highlight = 1
-let g:grepper.tools = ['git']
+let g:grepper.tools = ['git', 'grep']
 let g:grepper.stop = 300
 
 let g:grepper.operator.dir = 'repo'
@@ -155,7 +155,7 @@ cmap w!! w !sudo tee %
 
 " General keybindings
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
-nmap <Space>r :call feedkeys(":Rename " . expand('%:t'))<CR>
+nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
 nmap <Space>o :on<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
