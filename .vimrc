@@ -159,7 +159,15 @@ nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
 nmap <Space>o :on<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
+nmap <Space>e :e /tmp/last_error.txt<CR>
 nmap <Space>v :e ~/cfg/.vimrc<CR>
+nmap <Space>w :set list!<CR>
+
+nmap <Return>w ciw<C-r>0<ESC>
+nmap <Return>W ciW<C-r>0<ESC>
+nmap <Return>s S<C-r>0<ESC>
+
+map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " ConqueGdb settings and keybindings
 runtime plugin/conque_gdb.vim
@@ -209,29 +217,29 @@ execute "set <M-l>=\el"
 
 " Easily move between splits
 
-nmap <M-h> :winc h<CR>
-nmap <M-j> :winc j<CR>
-nmap <M-k> :winc k<CR>
-nmap <M-l> :winc l<CR>
+nmap <silent> <M-h> :winc h<CR>
+nmap <silent> <M-j> :winc j<CR>
+nmap <silent> <M-k> :winc k<CR>
+nmap <silent> <M-l> :winc l<CR>
 
-imap <M-h> <ESC>:winc h<CR>
-imap <M-j> <ESC>:winc j<CR>
-imap <M-k> <ESC>:winc k<CR>
-imap <M-l> <ESC>:winc l<CR>
+imap <silent> <M-h> <ESC>:winc h<CR>
+imap <silent> <M-j> <ESC>:winc j<CR>
+imap <silent> <M-k> <ESC>:winc k<CR>
+imap <silent> <M-l> <ESC>:winc l<CR>
 
 " Also prevents the editor from being closed when the last tab closes
-nmap <c-w> :close<CR>
-imap <c-w> <ESC>:close<CR>
+nmap <silent> <c-w> :close<CR>
+imap <silent> <c-w> <ESC>:close<CR>
 
-nmap <c-x> :x<CR>
+nmap <silent> <c-x> :x<CR>
 
-nmap <C-j> :tabprevious<CR>
-nmap <C-k> :tabnext<CR>
-nmap <C-n> :tabnew<CR>
+nmap <silent> <C-j> :tabprevious<CR>
+nmap <silent> <C-k> :tabnext<CR>
+nmap <silent> <C-n> :tabnew<CR>
 " So that we can switch tabs at any time
-imap <C-j> <ESC>:tabprevious<CR>
-imap <C-k> <ESC>:tabnext<CR>
-imap <C-n> <ESC>:tabnew<CR>
+imap <silent> <C-j> <ESC>:tabprevious<CR>
+imap <silent> <C-k> <ESC>:tabnext<CR>
+imap <silent> <C-n> <ESC>:tabnew<CR>
 
 nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
@@ -264,11 +272,11 @@ nmap gs  <plug>(GrepperOperator)
 
 " vim-fugitive bindings 
 map <C-l> :execute "silent Glog"<CR> 
-map <C-s> :execute "Gstatus"<CR>
-map <C-d> :execute "Gdiff"<CR>
+map <silent> <C-s> :execute "Gstatus"<CR>
+map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
 " map <C-C> :execute "Gcommit"<CR>
-nmap <C-a> GVgg
+nmap <silent> <C-a> GVgg
 nmap U :execute "GitGutterRevertHunk"<CR>
 
 runtime plugin/gitgutter.vim
@@ -283,7 +291,7 @@ execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 
 runtime plugin/gutentags.vim
 " Gutentags settings
-let g:gutentags_cache_dir='/tmp/tagfiles'
+let g:gutentags_cache_dir='/tmp'
 
 " Color fixes
 set termguicolors

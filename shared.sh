@@ -7,9 +7,11 @@ export TERMINAL=alacritty
 export EDITOR=vim
 export VISUAL=~/runvim.sh
 alias mkexe='sudo chmod +x '
+alias gitmkexe='git update-index --chmod=+x '
 # my text file extensions for use in grep searches
 export EXTS=""
 source ~/.config/i3/workspace/current
+alias nuke='pkill -f '
 alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'
 alias dusage='sudo gdmap &!; exit'
