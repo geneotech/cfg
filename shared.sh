@@ -93,6 +93,12 @@ function vim_run() {
 	vim_target run
 }
 
+function reb() {
+	git fetch upstream
+	git checkout master
+	git rebase upstream/master
+}
+
 alias mkd='make run -j5 -C build/Debug-x64'
 alias mkr="make -j5 -C build/Release-x64"
 
