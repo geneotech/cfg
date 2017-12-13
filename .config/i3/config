@@ -226,3 +226,15 @@ client.urgent           #2f343a #2f343a #ffffff #900000   #900000
 client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 
 # for_window [title="Hypersomnia"] floating enable
+
+mode "moveit" {
+    bindsym Up move up 20px
+    bindsym Left move left 20px
+    bindsym Down move down 20px
+    bindsym Right move right 20px
+    bindsym Mod4+m mode "default"
+}
+bindsym $modw+m focus floating; mode "moveit"
+
+floating_minimum_size 1 x 1
+for_window[title="capture-border"] floating enabled
