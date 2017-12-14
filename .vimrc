@@ -271,7 +271,7 @@ nmap gs  <plug>(GrepperOperator)
 
 
 " vim-fugitive bindings 
-map <C-l> :execute "silent Glog"<CR> 
+map <C-l> :execute "silent Glog -- %" <bar> redraw!<CR> 
 map <silent> <C-s> :execute "Gstatus"<CR>
 map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
@@ -321,6 +321,9 @@ highlight GitGutterChange guifg=darkyellow
 highlight GitGutterChangeDelete guifg=darkyellow 
 highlight GitGutterDelete guifg=darkred
 
+" Wrap lines in diff mode by default
+autocmd FilterWritePre * if &diff | setlocal wrap< | endif
+autocmd FilterWritePre * if &diff | highlight DiffChange guibg=#001538 | endif
 
 set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
 highlight SpecialKey guifg=#505050
