@@ -60,19 +60,44 @@ let s:defaults.operator.prompt = 0
 
 let s:has_doau_modeline = v:version > 703 || v:version == 703 && has('patch442')
 
-function! s:merge_configs(smallconfig, bigconfig) abort
-  let newconfig = deepcopy(a:bigconfig)
-  for key in keys(a:smallconfig)
-    if type(a:smallconfig[key]) == type({})
-      if !has_key(newconfig, key)
-        let newconfig[key] = {}
-      endif
-      call extend(newconfig[key], a:smallconfig[key])
-    else
-      let newconfig[key] = a:smallconfig[key]
+function! s:merge_configs(config, defaults) abort
+  let new = deepcopy(a:config)
+
+  " Add all missing default options.
+  call extend(new, a:defaults, 'keep')
+
+  " Global options.
+  for k in keys(a:config)
+    if k == 'operator'
+      continue
+    endif
+
+    " If only part of an option dict was set, add the missing default keys.
+    if type(new[k]) == type({}) && has_key(a:defaults, k) && new[k] != a:defaults[k]
+      call extend(new[k], a:defaults[k], 'keep')
+    endif
+
+    " Inherit operator option from global option unless it already exists or
+    " has a default value where the global option has not.
+    if !has_key(new.operator, k) || (has_key(a:defaults, k)
+          \                          && new[k] != a:defaults[k]
+          \                          && new.operator[k] == s:defaults.operator[k])
+      let new.operator[k] = deepcopy(new[k])
     endif
   endfor
-  return newconfig
+
+  " Operator options.
+  if has_key(a:config, 'operator')
+    for opt in keys(a:config.operator)
+      " If only part of an operator option dict was set, inherit the missing
+      " keys from the global option.
+      if type(new.operator[opt]) == type({}) && new.operator[opt] != new[opt]
+        call extend(new.operator[opt], new[opt], 'keep')
+      endif
+    endfor
+  endif
+
+  return new
 endfunction
 
 let g:grepper = exists('g:grepper')
@@ -358,9 +383,16 @@ function! s:escape_cword(flags, cword)
 endfunction
 
 " s:compute_working_directory() {{{2
-function! s:compute_working_directory(dirflag) abort
-  for dir in split(a:dirflag, ',')
+function! s:compute_working_directory(flags) abort
+  for dir in split(a:flags.dir, ',')
     if dir == 'repo'
+      if s:get_current_tool_name(a:flags) == 'git'
+        let dir = system(printf('git -C %s rev-parse --show-toplevel',
+              \ expand('%:p:h')))
+        if !v:shell_error
+          return dir
+        endif
+      endif
       for repo in g:grepper.repo
         let repopath = finddir(repo, '.;')
         if empty(repopath)
@@ -541,7 +573,7 @@ function! s:process_flags(flags)
     let a:flags.query = substitute(a:flags.query, '\V\C'.s:magic.cr .'\$', '', '')
     if empty(a:flags.query)
       let a:flags.query = s:escape_cword(a:flags, expand('<cword>'))
-    elseif a:flags.prompt_quote
+    elseif a:flags.prompt_quote == 1
       let a:flags.query = shellescape(a:flags.query)
     endif
   endif
@@ -595,6 +627,14 @@ function! s:prompt(flags)
   let &ttimeout = 1
   let &ttimeoutlen = 100
 
+  if a:flags.prompt_quote == 2 && !has_key(a:flags, 'query_orig')
+    let a:flags.query = "'". a:flags.query ."'\<left>"
+  elseif a:flags.prompt_quote == 3 && !has_key(a:flags, 'query_orig')
+    let a:flags.query = '"'. a:flags.query ."\"\<left>"
+  else
+    let a:flags.query = a:flags.query
+  endif
+
   echohl Question
   call inputsave()
 
@@ -627,9 +667,15 @@ function! s:prompt(flags)
       let a:flags.query = s:escape_cword(a:flags, a:flags.query_orig)
     else
       let is_findstr = s:get_current_tool_name(a:flags) == 'findstr'
-      let a:flags.query = has_key(a:flags, 'query_orig')
-            \ ? (is_findstr ? '' : '-- '). s:escape_query(a:flags, a:flags.query_orig)
-            \ : a:flags.query[:-len(s:magic.next)-1]
+      if has_key(a:flags, 'query_orig')
+        let a:flags.query = (is_findstr ? '' : '-- '). s:escape_query(a:flags, a:flags.query_orig)
+      else
+        if a:flags.prompt_quote >= 2
+          let a:flags.query = a:flags.query[1:-len(s:magic.next)-2]
+        else
+          let a:flags.query = a:flags.query[:-len(s:magic.next)-1]
+        endif
+      endif
     endif
     return s:prompt(a:flags)
   endif
@@ -683,7 +729,7 @@ function! s:run(flags)
 
   let options = {
         \ 'cmd':       s:cmdline,
-        \ 'cmd_dir':   s:compute_working_directory(a:flags.dir),
+        \ 'cmd_dir':   s:compute_working_directory(a:flags),
         \ 'flags':     a:flags,
         \ 'addexpr':   a:flags.quickfix ? 'caddexpr' : 'laddexpr',
         \ 'window':    winnr(),
