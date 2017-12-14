@@ -212,7 +212,7 @@ bindsym $mod+shift+r exec zsh -c screen_capture.sh
 # We'll be forced to press Ctrl+F5 which will cause us to think about ours wasting time.
 bindsym F5 exec zsh -c vim_run
 bindsym F6 exec zsh -c vim_debug
-bindsym F7 exec zsh -c vim_make
+bindsym F7 exec zsh -c vim_build
 
 client.background       #ffffff
 

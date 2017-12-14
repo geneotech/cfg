@@ -12,6 +12,7 @@ alias gitmkexe='git update-index --chmod=+x '
 export EXTS=""
 source ~/.config/i3/workspace/current
 alias nuke='pkill -f '
+alias int='pkill -f --signal 2 '
 alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'
 alias dusage='sudo gdmap &!; exit'
@@ -32,6 +33,7 @@ alias gpush="git push "
 alias gclean="git clean -d -x -f "
 alias gcleanup="git reset --hard; git clean -d -x -f "
 alias meldh="meld $PWD"
+alias serve="bundle exec jekyll serve"
 
 alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
 alias rmpkg="yaourt -Rsn "
@@ -81,15 +83,18 @@ function vim_target() {
 	fi
 }
 
-function vim_make() {
+function vim_build() {
+	int make
 	vim_target all
 }
 
 function vim_debug() {
+	int make
 	vim_target conque_debug
 }
 
 function vim_run() {
+	int make
 	vim_target run
 }
 
