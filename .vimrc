@@ -58,7 +58,9 @@ set noundofile
 
 """""""""" Formatting
 
-au FileType * set fo=
+autocmd FileType * set fo=
+autocmd FileType * setlocal nocindent
+autocmd FileType * setlocal indentkeys+=;,(,)
 
 " Don't complete brackets for me (don't know why does this option has this name)
 set noshowmatch
@@ -72,6 +74,7 @@ set nofixendofline
 
 " When searching try to be smart about cases
 set smartcase
+set ignorecase
 
 " Highlight search results
 set hlsearch
@@ -89,9 +92,6 @@ set laststatus=0
 
 " disable folding
 set nofoldenable
-
-" How many tenths of a second to blink when matching brackets
-set mat=2
 
 set tabstop=4
 " Don't know why but somehow this makes indentation work normally
@@ -348,3 +348,33 @@ function! Tabline()
   return s
 endfunction
 set tabline=%!Tabline()
+
+function! GenericIndent(lnum)
+  if !exists('b:indent_ignore')
+    " this is safe, since we skip blank lines anyway
+    let b:indent_ignore='^$'
+  endif
+  " Find a non-blank line above the current line.
+  let lnum = prevnonblank(a:lnum - 1)
+  while lnum > 0 && getline(lnum) =~ b:indent_ignore
+    let lnum = prevnonblank(lnum - 1)
+  endwhile
+  if lnum == 0
+    return 0
+  endif
+  let curline = getline(a:lnum)
+  let prevline = getline(lnum)
+  let indent = indent(lnum)
+  if ( prevline =~ '[({]\s*$')
+    let indent = indent + &sw
+  endif
+  if (curline =~ '^\s*[)}]*[;,]\{,1}\s*$')
+    let indent = indent - &sw
+  endif
+  return indent
+endfunction
+
+set indentexpr=GenericIndent(v:lnum)
+
+nnoremap p p=`]
+nnoremap P P=`]
