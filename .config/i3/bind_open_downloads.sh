@@ -1,0 +1,1 @@
+$TERMINAL -e ranger ~/Downloads

@@ -34,6 +34,7 @@ alias gclean="git clean -d -x -f "
 alias gcleanup="git reset --hard; git clean -d -x -f "
 alias meldh="meld $PWD"
 alias serve="bundle exec jekyll serve"
+alias xtr="/bin/extract"
 
 alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
 alias rmpkg="yaourt -Rsn "
