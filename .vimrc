@@ -43,13 +43,8 @@ else
 
 endif " has("autocmd")
 
-set noautoindent 
-set nosmartindent
+""""""""" I/O fixes
 
-set nofixendofline
-
-set laststatus=0
-set ignorecase
 set clipboard=unnamedplus
 set backupdir=/tmp
 set undodir=/tmp
@@ -60,8 +55,20 @@ set nobackup
 set noswapfile
 set noundofile
 
-" disable folding
-set nofoldenable
+
+"""""""""" Formatting
+
+au FileType * set fo=
+
+" Don't complete brackets for me (don't know why does this option has this name)
+set noshowmatch
+
+set noautoindent 
+set nosmartindent
+
+set nofixendofline
+
+"""""""""" Searching
 
 " When searching try to be smart about cases
 set smartcase
@@ -75,18 +82,21 @@ set incsearch
 " For regular expressions turn magic on
 set magic
 
-" Don't complete brackets for me (don't know why does this option has this name)
-set noshowmatch
+"""""""""" Viewing
+
+" disable status line
+set laststatus=0
+
+" disable folding
+set nofoldenable
 
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
 set tabstop=4
-
 " Don't know why but somehow this makes indentation work normally
 " (puts just one tab instead of two)
 set shiftwidth=4
-
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -104,32 +114,6 @@ set number relativenumber
 
 " Let us only see the filename
 set titlestring="VIM"
-nmap <S-e> :Ranger<CR>
-
-" If the current buffer has never been saved, it will have no name,
-" call the file browser to save it, otherwise just save it.
-"command -nargs=0 -bar Update if &modified 
-                           "\|    if empty(bufname('%'))
-                           "\|        browse confirm write
-                           "\|    else
-                           "\|        confirm write
-                           "\|    endif
-                           "\|endif
-"nnoremap <silent> <C-S> :<C-u>Update<CR>
-"inoremap <c-s> <Esc>:Update<CR>
-
-function! s:get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [line_start, column_start] = getpos("'<")[1:2]
-    let [line_end, column_end] = getpos("'>")[1:2]
-    let lines = getline(line_start, line_end)
-    if len(lines) == 0
-        return ''
-    endif
-    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][column_start - 1:]
-    return join(lines, "\n")
-endfunction
 
 " Automatically opens the quickfix window after common commands
 " and redraws the window to avoid glitches
@@ -150,7 +134,8 @@ let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['git']
 let g:grepper.operator.stop = 300
 
-" General bindings
+""""""""""  General bindings
+nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
@@ -249,8 +234,9 @@ nmap <C-h> :cdo s///g <bar> update<left><left><left><left><left><left><left><lef
 
 """ Searching current file """
 
+autocmd VimEnter * nmap <Leader>f :execute "Grepper -buffer -tool grep -noprompt -query ''"<left><left>
+
 " General
-nmap <S-f> :execute "Grepper -buffer -tool grep -noprompt -query ''"<left><left>
 
 " Search word under cursor
 nmap <F3> :execute "Grepper -buffer -tool grep -cword -noprompt"<CR>
@@ -332,12 +318,9 @@ highlight NonText guifg=#505050
 " For my gf
 set path+=src/**
 
+" Make tab names show only the filename
 " Thanks to
 " https://github.com/mkitt/tabline.vim
-if (exists("g:loaded_tabline_vim") && g:loaded_tabline_vim) || &cp
-  finish
-endif
-let g:loaded_tabline_vim = 1
 
 function! Tabline()
   let s = ''
