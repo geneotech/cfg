@@ -174,6 +174,7 @@ bindsym $modw+f exec zsh -c ". ~/.config/i3/bind_find_all.sh"
 bindsym $modw+c exec zsh -c ". ~/.config/i3/bind_copy_path.sh"
 bindsym $modw+o exec zsh -c ". ~/.config/i3/bind_open_containing_folder.sh"
 bindsym $modw+s exec zsh -c ". ~/.config/i3/bind_open_shell_in.sh"
+bindsym $modw+d exec zsh -c ". ~/.config/i3/bind_open_downloads.sh"
 
 bindsym Control+Shift+s exec zsh -c ". ~/.config/i3/bind_select_workspace.sh"
 
