@@ -371,29 +371,29 @@ let g:indent_eol_closers = [
 	\';\{1,}' 
 \]
 
-let g:indent_decreaser_pattern = 'public:'
+let g:indent_decreasers = [
+	\'public:', 
+	\'protected:', 
+	\'private:'
+\]
 
-let g:indent_opener_pattern = ''
-let g:indent_closer_pattern = ''
+function! ListToPattern(mylist, prologue, epilogue)
+	let result_list = ''
 
-for opener in g:indent_eol_openers
-	if strlen(g:indent_opener_pattern) > 0
-		let g:indent_opener_pattern = g:indent_opener_pattern . '\|' 
-	endif
+	for elem in a:mylist
+		if strlen(result_list) > 0
+			let result_list = result_list . '\|' 
+		endif
 
-	let g:indent_opener_pattern = g:indent_opener_pattern . opener . '\s*$'
-endfor	
+		let result_list = result_list . a:prologue . elem . a:epilogue
+	endfor	
 
-for closer in g:indent_eol_closers
-	if strlen(g:indent_closer_pattern) > 0
-		let g:indent_closer_pattern = g:indent_closer_pattern . '\|' 
-	endif
+	return result_list
+endfunction
 
-	let g:indent_closer_pattern = g:indent_closer_pattern . '^\s*' . closer . '\s*$'
-endfor	
-
-"echomsg "indent opener: " . g:indent_opener_pattern
-"echomsg "indent closer: " . g:indent_closer_pattern
+let g:indent_opener_pattern = ListToPattern(g:indent_eol_openers, '', '\s*$')
+let g:indent_closer_pattern = ListToPattern(g:indent_eol_closers, '^\s*', '\s*$')
+let g:indent_decreaser_pattern = ListToPattern(g:indent_decreasers, '^\s*', '\s*$')
 
 function! GenericIndent(lnum)
   " Find a non-blank line above the current line.
