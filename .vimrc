@@ -381,17 +381,17 @@ let g:indent_decreasers = [
 \]
 
 function! ListToPattern(mylist, prologue, epilogue)
-	let result_list = ''
+	let result_pattern = ''
 
 	for elem in a:mylist
-		if strlen(result_list) > 0
-			let result_list = result_list . '\|' 
+		if strlen(result_pattern) > 0
+			let result_pattern = result_pattern . '\|' 
 		endif
 
-		let result_list = result_list . a:prologue . elem . a:epilogue
+		let result_pattern = result_pattern . a:prologue . elem . a:epilogue
 	endfor	
 
-	return result_list
+	return result_pattern
 endfunction
 
 let g:indent_opener_pattern = ListToPattern(g:indent_eol_openers, '', '\s*$')
