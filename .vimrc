@@ -58,9 +58,9 @@ set noundofile
 
 """""""""" Formatting
 
-autocmd FileType * set fo=
-autocmd FileType * setlocal nocindent
-autocmd FileType * setlocal indentkeys+=;,(,)
+autocmd FileType cpp setlocal fo=
+autocmd FileType cpp setlocal nocindent
+autocmd FileType cpp setlocal indentkeys+=;,(,)
 
 " Don't complete brackets for me (don't know why does this option has this name)
 set noshowmatch
@@ -350,13 +350,9 @@ endfunction
 set tabline=%!Tabline()
 
 function! GenericIndent(lnum)
-  if !exists('b:indent_ignore')
-    " this is safe, since we skip blank lines anyway
-    let b:indent_ignore='^$'
-  endif
   " Find a non-blank line above the current line.
   let lnum = prevnonblank(a:lnum - 1)
-  while lnum > 0 && getline(lnum) =~ b:indent_ignore
+  while lnum > 0 && getline(lnum) =~ '^\s*$' 
     let lnum = prevnonblank(lnum - 1)
   endwhile
   if lnum == 0
@@ -365,16 +361,20 @@ function! GenericIndent(lnum)
   let curline = getline(a:lnum)
   let prevline = getline(lnum)
   let indent = indent(lnum)
-  if ( prevline =~ '[({]\s*$')
+  let indent_of_prev = indent
+  if ( prevline =~ '[({]\{1,}\s*$')
+    "echomsg "matchprev sw: " . &sw
     let indent = indent + &sw
   endif
-  if (curline =~ '^\s*[)}]*[;,]\{,1}\s*$')
+  if (curline =~ '^\s*[)}]\{1,}[;,]\{,1}\s*$')
+    "echomsg "matchprev sw: " . &sw
     let indent = indent - &sw
   endif
+  "echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . indent_of_prev
   return indent
 endfunction
 
-set indentexpr=GenericIndent(v:lnum)
+autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 
 nnoremap p p=`]
 nnoremap P P=`]
