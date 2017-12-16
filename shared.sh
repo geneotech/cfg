@@ -2,6 +2,7 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/pbc/.gem/bin:$PATH"
 export GEM_HOME=$HOME/.gem
 
+# Don't freeze editor on Ctrl+S
 stty -ixon
 export TERMINAL=alacritty
 export EDITOR=vim
@@ -12,10 +13,10 @@ alias gitmkexe='git update-index --chmod=+x '
 export EXTS=""
 source ~/.config/i3/workspace/current
 alias nuke='pkill -f '
-alias int='pkill -f --signal 2 '
+alias interrupt='pkill -f --signal 2 '
+alias int='interrupt '
 alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'
-alias dusage='sudo gdmap &!; exit'
 alias relx='xrdb ~/.Xresources'
 alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'
 alias diskspace='sudo gdmap -f "/"'
@@ -51,11 +52,6 @@ function stripcodes() {
 	sed -i -e '1d' $1
 }
 
-alias clnerr='stripcodes $LASTERR_PATH'
-
-alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
-
 function make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
@@ -85,17 +81,17 @@ function vim_target() {
 }
 
 function vim_build() {
-	int make
+	interrupt make
 	vim_target all
 }
 
 function vim_debug() {
-	int make
+	interrupt make
 	vim_target conque_debug
 }
 
 function vim_run() {
-	int make
+	interrupt make
 	vim_target run
 }
 
@@ -105,10 +101,15 @@ function reb() {
 	git rebase upstream/master
 }
 
+# Handy building aliases
+alias clnerr='stripcodes $LASTERR_PATH'
+
+alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
+
 alias mkd='make run -j5 -C build/Debug-x64'
 alias mkr="make -j5 -C build/Release-x64"
 
 alias mkdr="make run -j5 -C build/Debug-x64"
 alias mkdd="make debug -j5 -C build/Debug-x64"
 alias mkrr="make run -j5 -C build/Release-x64"
-
