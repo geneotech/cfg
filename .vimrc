@@ -350,7 +350,7 @@ endfunction
 set tabline=%!Tabline()
 
 " The openers are in this order:
-" Matches at least one < or [ or { or ( or doublequote 
+" Matches at least one < or [ or { or ( 
 " Matches comment beginning: /*
 " Matches long assignment breaked over the line
 
