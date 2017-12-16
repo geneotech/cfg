@@ -60,7 +60,7 @@ set noundofile
 
 autocmd FileType cpp setlocal fo=
 autocmd FileType cpp setlocal nocindent
-autocmd FileType cpp setlocal indentkeys+=;,>,),]
+autocmd FileType cpp setlocal indentkeys+=;,>,),],/
 
 " Don't complete brackets for me (don't know why does this option has this name)
 set noshowmatch
@@ -351,22 +351,25 @@ set tabline=%!Tabline()
 
 " The openers are in this order:
 " Matches at least one < or [ or { or ( or doublequote 
-" Beginning of function definition breaked after arguments
+" Matches comment beginning: /*
 " Matches long assignment breaked over the line
 
 let g:indent_eol_openers = [
 	\'[\[<({]\{1,}',
+	\'/\*', 
 	\'='
 \]
 
 " The closers are in this order:
 
 " Matches ] or ) or > or )  or ]; or ); or ...
+" Matches comment closing: */
 " After lambda definition and call in one go
 " After long assignment
 
 let g:indent_eol_closers = [
 	\'[\]>)}]\{1,}[;,]\{,1}', 
+	\'\*/', 
 	\'}();',  
 	\';\{1,}' 
 \]
