@@ -60,7 +60,7 @@ set noundofile
 
 autocmd FileType cpp setlocal fo=
 autocmd FileType cpp setlocal nocindent
-autocmd FileType cpp setlocal indentkeys+=;,(,)
+autocmd FileType cpp setlocal indentkeys+=;,>,),]
 
 " Don't complete brackets for me (don't know why does this option has this name)
 set noshowmatch
@@ -297,7 +297,7 @@ highlight TabLine guibg=#080808
 " Colors for diff in general
 highlight DiffAdd    ctermbg=16 guibg=#001c09 guifg=NONE
 highlight DiffDelete ctermbg=17 guibg=#1c0000 guifg=NONE
-highlight DiffChange ctermbg=17 guibg=#101010 guifg=NONE  
+highlight DiffChange ctermbg=17 guibg=#001538 guifg=NONE  
 " Changed text inside the changed line
 highlight DiffText   ctermbg=88 guibg=#323210 guifg=NONE  
 
@@ -349,10 +349,57 @@ function! Tabline()
 endfunction
 set tabline=%!Tabline()
 
+" The openers are in this order:
+" Matches at least one < or [ or { or ( or doublequote 
+" Beginning of function definition breaked after arguments
+" Matches long assignment breaked over the line
+
+let g:indent_eol_openers = [
+	\'[\[<({]\{1,}',
+	\'='
+\]
+
+" The closers are in this order:
+
+" Matches ] or ) or > or )  or ]; or ); or ...
+" After lambda definition and call in one go
+" After long assignment
+
+let g:indent_eol_closers = [
+	\'[\]>)}]\{1,}[;,]\{,1}', 
+	\'}();',  
+	\';\{1,}' 
+\]
+
+let g:indent_decreaser_pattern = 'public:'
+
+let g:indent_opener_pattern = ''
+let g:indent_closer_pattern = ''
+
+for opener in g:indent_eol_openers
+	if strlen(g:indent_opener_pattern) > 0
+		let g:indent_opener_pattern = g:indent_opener_pattern . '\|' 
+	endif
+
+	let g:indent_opener_pattern = g:indent_opener_pattern . opener . '\s*$'
+endfor	
+
+for closer in g:indent_eol_closers
+	if strlen(g:indent_closer_pattern) > 0
+		let g:indent_closer_pattern = g:indent_closer_pattern . '\|' 
+	endif
+
+	let g:indent_closer_pattern = g:indent_closer_pattern . '^\s*' . closer . '\s*$'
+endfor	
+
+"echomsg "indent opener: " . g:indent_opener_pattern
+"echomsg "indent closer: " . g:indent_closer_pattern
+
 function! GenericIndent(lnum)
   " Find a non-blank line above the current line.
   let lnum = prevnonblank(a:lnum - 1)
-  while lnum > 0 && getline(lnum) =~ '^\s*$' 
+
+  while lnum > 0 && (getline(lnum) =~ '^\s*$' || getline(lnum) =~ g:indent_decreaser_pattern) 
     let lnum = prevnonblank(lnum - 1)
   endwhile
   if lnum == 0
@@ -361,20 +408,20 @@ function! GenericIndent(lnum)
   let curline = getline(a:lnum)
   let prevline = getline(lnum)
   let indent = indent(lnum)
-  let indent_of_prev = indent
-  if ( prevline =~ '[({]\{1,}\s*$')
+  let g:indent_of_prev = indent
+  if ( prevline =~ g:indent_opener_pattern ) 
     "echomsg "matchprev sw: " . &sw
     let indent = indent + &sw
   endif
-  if (curline =~ '^\s*[)}]\{1,}[;,]\{,1}\s*$')
+  if (curline =~ g:indent_closer_pattern || curline =~ g:indent_decreaser_pattern )
     "echomsg "matchprev sw: " . &sw
     let indent = indent - &sw
   endif
-  "echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . indent_of_prev
+  " Additionally, if it is a label, decrease indent"
+  echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . g:indent_of_prev
   return indent
 endfunction
 
 autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
-
-nnoremap p p=`]
-nnoremap P P=`]
+autocmd FileType cpp nnoremap <buffer> p p=`]
+autocmd FileType cpp nnoremap <buffer> P P=`]
