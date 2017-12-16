@@ -426,5 +426,5 @@ function! GenericIndent(lnum)
 endfunction
 
 autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
-autocmd FileType cpp nnoremap <buffer> p p=`]
-autocmd FileType cpp nnoremap <buffer> P P=`]
+autocmd FileType cpp nnoremap <buffer> p p=`]`]
+autocmd FileType cpp nnoremap <buffer> P P=`]`[
