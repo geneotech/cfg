@@ -353,11 +353,13 @@ set tabline=%!Tabline()
 " Matches at least one < or [ or { or ( 
 " Matches comment beginning: /*
 " Matches long assignment breaked over the line
+" Matches return statement breaked over lines
 
 let g:indent_eol_openers = [
 	\'[\[<({]\{1,}',
 	\'/\*', 
-	\'='
+	\'=',
+	\'return'
 \]
 
 " The closers are in this order:

@@ -52,6 +52,9 @@ function stripcodes() {
 	sed -i -e '1d' $1
 }
 
+# Handy building aliases
+alias clnerr='stripcodes $LASTERR_PATH'
+
 function make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
@@ -100,9 +103,6 @@ function reb() {
 	git checkout master
 	git rebase upstream/master
 }
-
-# Handy building aliases
-alias clnerr='stripcodes $LASTERR_PATH'
 
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
