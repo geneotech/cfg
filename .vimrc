@@ -91,7 +91,7 @@ set magic
 set laststatus=0
 
 " disable folding
-set nofoldenable
+" set nofoldenable
 
 set tabstop=4
 " Don't know why but somehow this makes indentation work normally
@@ -257,7 +257,8 @@ nmap gs  <plug>(GrepperOperator)
 
 
 " vim-fugitive bindings 
-map <C-l> :execute "silent Glog -- %" <bar> redraw!<CR> 
+map <S-l> :execute "silent Glog -- %" <bar> redraw!<CR> 
+map <C-l> :execute "silent Glog --" <bar> redraw!<CR> 
 map <silent> <C-s> :execute "Gstatus"<CR>
 map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
@@ -367,12 +368,14 @@ let g:indent_eol_openers = [
 " Matches ] or ) or > or )  or ]; or ); or ...
 " Matches comment closing: */
 " After lambda definition and call in one go
+" Matches end of a long argument list for a function declaration: ) {
 " After long assignment
 
 let g:indent_eol_closers = [
 	\'[\]>)}]\{1,}[;,]\{,1}', 
 	\'\*/', 
 	\'}();',  
+	\')\s*{',
 	\';\{1,}' 
 \]
 
@@ -399,18 +402,28 @@ endfunction
 let g:indent_opener_pattern = ListToPattern(g:indent_eol_openers, '', '\s*$')
 let g:indent_closer_pattern = ListToPattern(g:indent_eol_closers, '^\s*', '\s*$')
 let g:indent_decreaser_pattern = ListToPattern(g:indent_decreasers, '^\s*', '\s*$')
+let g:indent_zeroer_pattern = '^\s*#'
 
 function! GenericIndent(lnum)
   " Find a non-blank line above the current line.
+  let curline = getline(a:lnum)
+
+  if (curline =~ g:indent_zeroer_pattern)
+	  return 0
+  endif
+
   let lnum = prevnonblank(a:lnum - 1)
 
-  while lnum > 0 && (getline(lnum) =~ '^\s*$' || getline(lnum) =~ g:indent_decreaser_pattern) 
+  while lnum > 0 && (
+	  getline(lnum) =~ '^\s*$' 
+	  || getline(lnum) =~ g:indent_decreaser_pattern
+	  || getline(lnum) =~ g:indent_zeroer_pattern
+	) 
     let lnum = prevnonblank(lnum - 1)
   endwhile
   if lnum == 0
     return 0
   endif
-  let curline = getline(a:lnum)
   let prevline = getline(lnum)
   let indent = indent(lnum)
   let g:indent_of_prev = indent
@@ -423,7 +436,7 @@ function! GenericIndent(lnum)
     let indent = indent - &sw
   endif
   " Additionally, if it is a label, decrease indent"
-  echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . g:indent_of_prev
+  " echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . g:indent_of_prev
   return indent
 endfunction
 
