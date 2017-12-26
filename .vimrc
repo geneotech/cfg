@@ -43,6 +43,10 @@ else
 
 endif " has("autocmd")
 
+""""""""" General behaviour
+" always append newline when appending to a register
+set cpoptions+=>
+
 """"""""" I/O fixes
 
 set clipboard=unnamedplus
@@ -126,13 +130,17 @@ set titlestring="VIM"
 runtime plugin/grepper.vim
 let g:grepper.dir = 'repo'
 let g:grepper.highlight = 1
-let g:grepper.tools = ['git', 'grep']
+let g:grepper.tools = ['ag']
 let g:grepper.stop = 300
+let g:grepper.git.grepprg = 'git grep -n --perl-regexp'
+"unlet g:grepper.git.escape
 
 let g:grepper.operator.dir = 'repo'
 let g:grepper.operator.highlight = 1
-let g:grepper.operator.tools = ['git']
+let g:grepper.operator.tools = ['ag']
 let g:grepper.operator.stop = 300
+let g:grepper.operator.git.grepprg = 'git grep -n --perl-regexp'
+"unlet g:grepper.operator.git.escape
 
 """"""""""  General bindings
 nmap <S-e> :Ranger<CR>
@@ -142,6 +150,15 @@ cmap w!! w !sudo tee %
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
 nmap <Space>o :on<CR>
+
+" If cpo-< is not specified, then for some reason, having a newline anywhere in the register
+" makes appending to it add newlines automatically.
+" We have however specified it so we only need the comma
+nnoremap - :let @a=""<CR>
+nnoremap , "A
+"nnoremap ; :let @a=@a."\n"<CR>"A
+
+nmap <silent> <C-c> :let @+ = '#include "' . substitute(expand("%:f"), "src/", "", "") . '"' . "\n" <CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
 nmap <Space>e :e /tmp/last_error.txt<CR>
@@ -244,10 +261,10 @@ nmap <F3> :execute "Grepper -buffer -tool grep -cword -noprompt"<CR>
 """ Searching whole project """
 
 " General
-nmap <C-f> :execute "Grepper -tool git -noprompt -query ''"<left><left>
+nmap <C-f> :Grepper -tool ag -noprompt -query ''<left>
 
 " Search word under cursor
-nmap <F4> :execute "Grepper -tool git -cword -noprompt"<CR>
+nmap <F4> :execute "Grepper -tool ag -cword -noprompt"<CR>
 
 " Search selection
 vmap <F4>   <plug>(GrepperOperator)
@@ -414,11 +431,7 @@ function! GenericIndent(lnum)
 
   let lnum = prevnonblank(a:lnum - 1)
 
-  while lnum > 0 && (
-	  getline(lnum) =~ '^\s*$' 
-	  || getline(lnum) =~ g:indent_decreaser_pattern
-	  || getline(lnum) =~ g:indent_zeroer_pattern
-	) 
+  while lnum > 0 && (getline(lnum) =~ '^\s*$' || getline(lnum) =~ g:indent_decreaser_pattern || getline(lnum) =~ g:indent_zeroer_pattern) 
     let lnum = prevnonblank(lnum - 1)
   endwhile
   if lnum == 0
@@ -436,7 +449,7 @@ function! GenericIndent(lnum)
     let indent = indent - &sw
   endif
   " Additionally, if it is a label, decrease indent"
-  " echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . g:indent_of_prev
+  "echomsg "Cur:" . a:lnum . " Prev: " . prevline . "ind: " . indent . " indofprev: " . g:indent_of_prev
   return indent
 endfunction
 
