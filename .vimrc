@@ -147,14 +147,39 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
+nmap <Space>h :execute "help " . expand("<cword>")<CR>
+
 "nmap <C-P> :FuzzyOpen
 "imap <C-p> <ESC>:FuzzyOpen<CR>
 
 "nmap <C-p> :CtrlP $PWD
 "imap <C-p> <ESC>:CtrlP $PWD<CR>
+
+" F25 is bound to Control + Backspace in Alacritty
+inoremap <F25> <C-W>
+
+" ctrlp bindings
+function! CtrlpCurrentRepo()
+let g:ctrlp_working_path_mode = 'r'
+execute("CtrlP")
+let g:ctrlp_working_path_mode = ''
+endfunction
+
+" F26 is bound to Ctrl+Shift+P in Alacritty
+nmap <F26> :call CtrlpCurrentRepo()<CR>
+
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_by_filename = 1
+
+" Doesn't work for some reason
+" let g:ctrlp_open_new_file = 't'
+" let g:ctrlp_open_multiple_files = 't'
+" But this does
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
 
 nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
@@ -291,8 +316,12 @@ nmap gs  <plug>(GrepperOperator)
 
 
 " vim-fugitive bindings 
+
+" Browse commits with the current file
 map <S-l> :execute "silent Glog -- %" <bar> redraw!<CR> 
+" Browse commits in the whole repository
 map <C-l> :execute "silent Glog --" <bar> redraw!<CR> 
+
 map <silent> <C-s> :execute "Gstatus"<CR>
 map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
