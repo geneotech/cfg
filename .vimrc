@@ -147,18 +147,22 @@ nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
+
+inoremap <C-d> <C-\><C-o>dB
+
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
 nmap <Space>o :on<CR>
 
-" If cpo-< is not specified, then for some reason, having a newline anywhere in the register
+" If cpo-< ik not specified, then for some reason, having a newline anywhere in the register
 " makes appending to it add newlines automatically.
 " We have however specified it so we only need the comma
 nnoremap - :let @a=""<CR>
 nnoremap , "A
 "nnoremap ; :let @a=@a."\n"<CR>"A
 
-nmap <silent> <C-c> :let @+ = '#include "' . substitute(expand("%:f"), "src/", "", "") . '"' . "\n" <CR>
+
+nmap <silent> <C-c> :let @+ = '#include "' . substitute(substitute(expand("%:f"), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' . "\n" <CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
 nmap <Space>e :e /tmp/last_error.txt<CR>
@@ -386,6 +390,7 @@ let g:indent_eol_openers = [
 " Matches comment closing: */
 " After lambda definition and call in one go
 " Matches end of a long argument list for a function declaration: ) {
+" Matches end of a long argument list for a function declaration: ) const {
 " After long assignment
 
 let g:indent_eol_closers = [
@@ -393,6 +398,7 @@ let g:indent_eol_closers = [
 	\'\*/', 
 	\'}();',  
 	\')\s*{',
+	\')\s*const\s*{',
 	\';\{1,}' 
 \]
 
