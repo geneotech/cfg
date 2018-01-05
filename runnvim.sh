@@ -1,2 +1,2 @@
 #!/bin/sh
-$TERMINAL -e zsh -c "cd $WORKSPACE; nvim $@"
+$TERMINAL --working-directory $WORKSPACE -e nvim $@

@@ -13,6 +13,6 @@ else
  then
    # $TERMINAL -e ranger --selectfile=$LOCATION
    # We can anyway open ranger from vim quickly, so let's just edit it as text
-   $VISUAL $LOCATION
+   # $VISUAL $LOCATION
  fi 
 fi
