@@ -40,7 +40,8 @@ alias xtr="/bin/extract"
 alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
 alias rmpkg="yaourt -Rsn "
 alias prmpkg="sudo pacman -Rsn "
-
+alias nogpg='yaourt --m-arg "--skippgpcheck"'
+alias uppkgs='yaourt -Su --aur '
 LASTERR_PATH=/tmp/last_error.txt
 
 # Jump to last error in vim
