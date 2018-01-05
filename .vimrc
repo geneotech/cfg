@@ -93,6 +93,8 @@ set magic
 
 """""""""" Viewing
 
+set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
+
 " disable status line
 set laststatus=0
 
@@ -305,37 +307,11 @@ let g:gutentags_cache_dir='/tmp'
 set termguicolors
 
 colorscheme moonfly
-highlight LineNr ctermbg=black guibg=#080808
-highlight CursorLineNR guibg=#080808 guifg=NONE
-highlight TabLineFill guifg=#080808 guibg=#080807
-highlight TabLineSel guibg=#202020 guifg=white
-highlight TabLine guibg=#080808 
-
-"highlight LineNr ctermbg=black guibg=black
-"highlight CursorLineNR guibg=black guifg=NONE
-"highlight Normal guibg=black
-"colorscheme gryffin
-
-" Colors for diff in general
-highlight DiffAdd    ctermbg=16 guibg=#001c09 guifg=NONE
-highlight DiffDelete ctermbg=17 guibg=#1c0000 guifg=NONE
-highlight DiffChange ctermbg=17 guibg=#001538 guifg=NONE  
-" Changed text inside the changed line
-highlight DiffText   ctermbg=88 guibg=#323210 guifg=NONE  
-
-" Colors for diff markers on the left column
-highlight GitGutterAdd guifg=darkgreen 
-highlight GitGutterChange guifg=darkyellow 
-highlight GitGutterChangeDelete guifg=darkyellow 
-highlight GitGutterDelete guifg=darkred
 
 " Wrap lines in diff mode by default
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd FilterWritePre * if &diff | highlight DiffChange guibg=#001538 | endif
 
-set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
-highlight SpecialKey guifg=#505050
-highlight NonText guifg=#505050
 
 " For my gf
 set path+=src/**
