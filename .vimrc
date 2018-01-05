@@ -9,11 +9,13 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
-Plugin 'vim-scripts/Conque-GDB'
+"Plugin 'vim-scripts/Conque-GDB'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'wojtekmach/vim-rename'
+"Plugin 'cloudhead/neovim-fuzzy'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -145,6 +147,15 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
+"nmap <C-P> :FuzzyOpen
+"imap <C-p> <ESC>:FuzzyOpen<CR>
+
+"nmap <C-p> :CtrlP $PWD
+"imap <C-p> <ESC>:CtrlP $PWD<CR>
+let g:ctrlp_working_path_mode = ''
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_by_filename = 1
+
 nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
 

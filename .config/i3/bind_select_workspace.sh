@@ -5,6 +5,9 @@ WORKSPACES="
 /home/pbc/documentation-theme-jekyll
 /home/pbc/cfg/x11_xcb_example"
 
-NEW_WORKSPACE=$(echo $WORKSPACES | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'select workspace:')
+NEW_WORKSPACE=$(echo $WORKSPACES | sed 1d | rofi -hide-scrollbar -dmenu -i -p "change $WORKSPACE to:")
 
-echo "export WORKSPACE=$NEW_WORKSPACE" > ~/.config/i3/workspace/current
+if [[ ! -z $NEW_WORKSPACE ]]
+then
+	echo "export WORKSPACE=$NEW_WORKSPACE" > ~/.config/i3/workspace/current
+fi
