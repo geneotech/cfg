@@ -1,2 +1,1 @@
-cd $WORKSPACE
-$TERMINAL
+$TERMINAL --working-directory $WORKSPACE

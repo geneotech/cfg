@@ -19,8 +19,10 @@ Plugin 'wojtekmach/vim-rename'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
+if !has('nvim')
+	" Get the defaults that most users want.
+	source $VIMRUNTIME/defaults.vim
+endif
 
 if &t_Co > 2 || has("gui_running")
   " Switch on highlighting the last used search pattern.
@@ -131,16 +133,14 @@ runtime plugin/grepper.vim
 let g:grepper.dir = 'repo'
 let g:grepper.highlight = 1
 let g:grepper.tools = ['ag']
+let g:grepper.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.stop = 300
-let g:grepper.git.grepprg = 'git grep -n --perl-regexp'
-"unlet g:grepper.git.escape
 
 let g:grepper.operator.dir = 'repo'
 let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['ag']
+let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
-let g:grepper.operator.git.grepprg = 'git grep -n --perl-regexp'
-"unlet g:grepper.operator.git.escape
 
 """"""""""  General bindings
 nmap <S-e> :Ranger<CR>
@@ -216,10 +216,10 @@ nmap <silent> <space>d :ConqueGdbCommand down<CR>
 
 " These four executions so that the alt works. Tested under Alacritty.
 
-execute "set <M-h>=\eh"
-execute "set <M-j>=\ej"
-execute "set <M-k>=\ek"
-execute "set <M-l>=\el"
+"execute "set <M-h>=\eh"
+"execute "set <M-j>=\ej"
+"execute "set <M-k>=\ek"
+"execute "set <M-l>=\el"
 
 " Easily move between splits
 
