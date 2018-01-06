@@ -45,9 +45,6 @@ alias nogpg='yaourt --m-arg "--skippgpcheck"'
 alias uppkgs='yaourt -Su --aur '
 LASTERR_PATH=/tmp/last_error.txt
 
-# Jump to last error in vim
-alias vj='vim --remote-send "<ESC>:lfile $LASTERR_PATH <CR>"; $(i3-msg "[title=VIM] focus");'
-
 function stripcodes() {
 	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
 	sed -i 's/\r$//g' $1
@@ -61,42 +58,44 @@ function make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
 
+	rm $LASTERR_PATH
+
 	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > /dev/pts/1 
 }
 
 function make_current() {
 	MAKE_TARGET=$1
 
-	make_with_logs $1 build/current
+	make_with_logs $MAKE_TARGET build/current
 }
 
-function vim_target() {
-	vim --remote-send "<ESC>:wa<CR>"
-	cd $WORKSPACE
-	make_current $1
-
+function handle_last_errors() {
 	ERRORS=$(grep -e "error:" $LASTERR_PATH)
 	LINKER_ERRORS=$(grep -e "error: ld" $LASTERR_PATH)
 	
 	if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
 	then
 		clnerr
-		vj
+		$(i3-msg "[title=NVIM] focus")
 	fi
 }
 
-function vim_build() {
+function vim_target() {
 	interrupt make
+	cd $WORKSPACE
+	make_current $1
+	handle_last_errors
+}
+
+function vim_build() {
 	vim_target all
 }
 
 function vim_debug() {
-	interrupt make
 	vim_target conque_debug
 }
 
 function vim_run() {
-	interrupt make
 	vim_target run
 }
 
@@ -108,10 +107,3 @@ function reb() {
 
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
-
-alias mkd='make run -j5 -C build/Debug-x64'
-alias mkr="make -j5 -C build/Release-x64"
-
-alias mkdr="make run -j5 -C build/Debug-x64"
-alias mkdd="make debug -j5 -C build/Debug-x64"
-alias mkrr="make run -j5 -C build/Release-x64"

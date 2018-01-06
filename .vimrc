@@ -147,6 +147,32 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
+ 
+function! OnBuildEvent(job_id, data, event) dict
+	echomsg "JOB EXITED"
+	lfile /tmp/last_error.txt
+endfunction
+
+function! SucklessMake(targetname)
+	wa
+
+    let callbacks = {
+    \ 'on_exit': function('OnBuildEvent')
+    \ }
+
+	let jobcmd = "zsh -c 'vim_target " . a:targetname . "'"
+	"echomsg jobcmd
+
+    let job1 = jobstart(jobcmd, callbacks)
+endfunction
+
+" Build bindings
+nmap <silent> <F7> :call SucklessMake("all")<CR>
+nmap <silent> <F5> :call SucklessMake("run")<CR>
+
+imap <silent> <F5> <ESC><F5>
+imap <silent> <F7> <ESC><F7>
+
 nmap <Space>h :execute "help " . expand("<cword>")<CR>
 
 "nmap <C-P> :FuzzyOpen
@@ -179,10 +205,10 @@ function! CtrlpGlobal()
 endfunction
 
 " F26 is bound to Ctrl+Shift+P in Alacritty
-nmap <F26> :call CtrlpCurrentRepo()<CR>
+nmap <silent> <F26> :call CtrlpCurrentRepo()<CR>
 
 " F27 is bound to Ctrl+Shift+P in Alacritty
-nmap <F27> :call CtrlpGlobal()<CR>
+nmap <silent> <F27> :call CtrlpGlobal()<CR>
 
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
