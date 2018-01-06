@@ -207,8 +207,13 @@ endfunction
 " F26 is bound to Ctrl+Shift+P in Alacritty
 nmap <silent> <F26> :call CtrlpCurrentRepo()<CR>
 
-" F27 is bound to Ctrl+Shift+P in Alacritty
+" F27 is bound to Win+P in Alacritty
 nmap <silent> <F27> :call CtrlpGlobal()<CR>
+
+" facilitate the above in insert mode as well
+imap <c-p> <ESC><c-p>
+imap <F27> <ESC><F27>
+imap <F28> <ESC><F28>
 
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
