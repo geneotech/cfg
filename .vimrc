@@ -165,8 +165,24 @@ execute("CtrlP")
 let g:ctrlp_working_path_mode = ''
 endfunction
 
+function! CtrlpGlobal()
+	let g:ctrlp_user_command = "cd %s && find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*'"
+	let g:ctrlp_working_path_mode = ''
+	let newloc = system("LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:'); echo $LOCATION")
+
+	if strlen(newloc) > 1 
+		execute ("tabnew " . newloc)
+	endif
+
+	let g:ctrlp_working_path_mode = ''
+	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+endfunction
+
 " F26 is bound to Ctrl+Shift+P in Alacritty
 nmap <F26> :call CtrlpCurrentRepo()<CR>
+
+" F27 is bound to Ctrl+Shift+P in Alacritty
+nmap <F27> :call CtrlpGlobal()<CR>
 
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']

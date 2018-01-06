@@ -1,3 +1,6 @@
+#i3-msg "[title=NVIM] focus"
+#xdotool key super+p
+
 LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:')
 
 [[ -z $LOCATION ]] && return
