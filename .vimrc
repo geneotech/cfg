@@ -342,6 +342,9 @@ nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
+nmap <silent> <F1> :Bufferize messages<CR>
+vmap <silent> <F1> :Bufferize messages<CR>
+imap <silent> <F1> <ESC>:Bufferize messages<CR>
 
 " Terminal bindings
 tnoremap <Esc> <C-\><C-n>
