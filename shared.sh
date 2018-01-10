@@ -67,6 +67,10 @@ function make_with_logs() {
 	rmlogs
 
 	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > /dev/pts/1 
+
+	# Remove timing info line
+	head -n -2 $LASTERR_PATH > /tmp/dobrazaraz
+	cp /tmp/dobrazaraz $LASTERR_PATH
 }
 
 function make_current() {

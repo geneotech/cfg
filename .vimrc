@@ -154,14 +154,14 @@ function! WrapCommand(direction, prefix)
         try
             execute a:prefix . "previous"
         catch /^Vim\%((\a\+)\)\=:E553/
-            execute a:prefix . "last"
+            execute a:prefix . "first"
         catch /^Vim\%((\a\+)\)\=:E\%(776\|42\):/
         endtry
     elseif a:direction == "down"
         try
             execute a:prefix . "next"
         catch /^Vim\%((\a\+)\)\=:E553/
-            execute a:prefix . "first"
+            execute a:prefix . "last"
         catch /^Vim\%((\a\+)\)\=:E\%(776\|42\):/
         endtry
     endif
@@ -173,7 +173,10 @@ nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
 
 " <C-Home> and <C-End> go up and down the location list and wrap around
 nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> ]l :call WrapCommand('down', 'l')<CR>
+nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
+
+nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
+nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
 	wa
@@ -259,8 +262,6 @@ nmap <silent> <F17> :GdbDebugStop<CR>
 nmap <silent> <F21> :GdbClearBreak<CR>
 nmap <silent> <F33> :GdbClearBreak<CR>
 
-nmap <silent> <C-U> :GdbFrameUp<CR>
-nmap <silent> <C-I> :GdbFrameDown<CR>
 nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
 
 let g:gdb_keymap_continue = '<f8>'
@@ -373,7 +374,7 @@ nmap <silent> <C-c> :let @+ = '#include "' . substitute(substitute(expand("%:f")
 nmap <Space>s :source $MYVIMRC<CR>
 
 function! OpenLastErrors()
-	let opencmd = "tabnew term://bash -c 'cat " . g:last_error_path_color . "'"
+	let opencmd = "tabnew term://bash -c 'cat " . g:last_error_path_color . "; bash'"
 	echomsg opencmd
 	execute opencmd
 endfunction
