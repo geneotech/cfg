@@ -963,13 +963,12 @@ function! gdb#Map(type)
         exe 'tunmap ' . g:gdb_keymap_step
         exe 'tunmap ' . g:gdb_keymap_finish
         exe 'tunmap ' . g:gdb_keymap_toggle_break_all
-" <Home> and <End> go up and down the quickfix list and wrap around
+
 nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
 nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
 
-" <C-Home> and <C-End> go up and down the location list and wrap around
-nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> ]l :call WrapCommand('down', 'l')<CR>
+nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
+nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
 
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
@@ -997,15 +996,15 @@ let g:ctrlp_global_command = 'tabnew'
         exe 'vnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbEvalRange<cr>'
         "nnoremap <silent> <c-n> :GdbFrameUp<cr>
         "nnoremap <silent> <c-p> :GdbFrameDown<cr>
-" <Home> and <End> go up and down the quickfix list and wrap around
-nnoremap <silent> [l :call WrapCommand('up', 'c')<CR>
-nnoremap <silent> ]l :call WrapCommand('down', 'c')<CR>
 
-" <C-Home> and <C-End> go up and down the location list and wrap around
 nnoremap <silent> [q :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> ]q :call WrapCommand('down', 'l')<CR>
+
 let g:ctrlp_prompt_mappings = {}
 let g:ctrlp_global_command = 'edit'
+
+nmap <silent> <C-U> :GdbFrameUp<CR>
+nmap <silent> <C-I> :GdbFrameDown<CR>
 
     endif
     "}
