@@ -17,4 +17,5 @@ QtProject.conf
 .config/i3/workspace/current
 .config/transmission
 .config/Syncplay
+.config/discord
 .vim/.netrwhist

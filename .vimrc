@@ -9,13 +9,13 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
-"Plugin 'vim-scripts/Conque-GDB'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'wojtekmach/vim-rename'
-"Plugin 'cloudhead/neovim-fuzzy'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'huawenyu/neogdb.vim'
+Plugin 'AndrewRadev/bufferize.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -166,11 +166,64 @@ function! SucklessMake(targetname)
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 
+
+function! ConfHyper() abort
+    " user special config
+	let current_wp = system("echo -n $WORKSPACE/")
+
+    let this = {
+        \ "Scheme" : 'gdb#SchemeCreate',
+        \ "autorun" : 1,
+        \ "reconnect" : 1,
+        \ "showbreakpoint" : 0,
+        \ "showbacktrace" : 1,
+        \ "conf_gdb_layout" : ["sp"],
+        \ "conf_gdb_cmd" : ['gdb -q -f -cd ' . current_wp . "hypersomnia", current_wp . "build/current/Hypersomnia-Debug"],
+        \ "window" : [
+        \   {   "name":   "gdbserver",
+        \       "status":  0,
+        \   },
+        \ ],
+        \ "state" : {
+        \ }
+        \ }
+
+    return this
+endfunc
+
+function! SucklessDebug()
+	wa
+	let current_wp = system("echo -n $WORKSPACE/")
+	" echomsg current_wp
+
+	let gdbcmd = "GdbLocal ConfHyper"
+	"let gdbcmd = "GdbLocal confloc#me " . current_wp . "build/current/Hypersomnia-Debug '-cd " . current_wp . "hypersomnia'" 
+	echomsg gdbcmd 	
+	execute gdbcmd 
+endfunction
+
+" GDB bindings
+nmap <silent> <S-F5> :GdbDebugStop<CR>
+
+let g:gdb_keymap_continue = '<f8>'
+let g:gdb_keymap_next = '<f10>'
+let g:gdb_keymap_step = '<f11>'
+let g:gdb_keymap_finish = '<S-F11>'
+let g:gdb_keymap_toggle_break = '<f9>'
+
+" What?
+let g:gdb_keymap_until = '<f13>'
+let g:gdb_keymap_refresh = '<f12>'
+let g:gdb_keymap_toggle_break_all = '<f14>'
+
 " Build bindings
+
 nmap <silent> <F7> :call SucklessMake("all")<CR>
+nmap <silent> <F6> :call SucklessDebug()<CR>
 nmap <silent> <F5> :call SucklessMake("run")<CR>
 
 imap <silent> <F5> <ESC><F5>
+imap <silent> <F6> <ESC><F6>
 imap <silent> <F7> <ESC><F7>
 
 nmap <Space>h :execute "help " . expand("<cword>")<CR>
@@ -260,52 +313,6 @@ nmap <Return>s S<C-r>0<ESC>
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
-" ConqueGdb settings and keybindings
-runtime plugin/conque_gdb.vim
-
-let g:ConqueTerm_ReadUnfocused = 1
-let g:ConqueTerm_Color = 1
-let g:ConqueTerm_InsertOnEnter = 1
-let g:ConqueTerm_CloseOnEnd = 1
-let g:ConqueTerm_CWInsert = 0
-"let g:ConqueTerm_UnfocusedUpdateTime = 0
-"let g:ConqueTerm_FocusedUpdateTime = 0
-
-" So that it does not preffix 'server' to our commands
-let g:ConqueGdb_SaveHistory = 1
-
-" Open ConqueGdb window
-nmap <silent> <space>g :ConqueGdb <bar> :star <CR>
-
-" Avoid having to go to conque window for confirmations
-nnoremap <silent> <space>y :ConqueGdbCommand y<CR>
-nnoremap <silent> <space>n :ConqueGdbCommand n<CR>
-
-" We could set those through g:ConqueGdb_* variables,
-" but ConqueTerm interferes if there are no mappings set for the F keys
-" at the time of its startup.
-
-" We had to comment out one line in plugin/conque_term.vim for F8 to work,
-" unfortunately
-nmap <silent> <S-F5> :execute 'ConqueGdbCommand kill' <bar> only<CR>
-nmap <silent> <F8> :ConqueGdbCommand continue<CR>
-nmap <silent> <F9> <Leader>b 
-nmap <silent> <F10> :ConqueGdbCommand next<CR>
-nmap <silent> <F11> :ConqueGdbCommand step<CR>
-nmap <silent> <S-F11> :ConqueGdbCommand finish<CR>
-
-nmap <silent> <space>t <Leader>t 
-nmap <silent> <space>p <Leader>p 
-nmap <silent> <space>u :ConqueGdbCommand up<CR> 
-nmap <silent> <space>d :ConqueGdbCommand down<CR> 
-
-" These four executions so that the alt works. Tested under Alacritty.
-
-"execute "set <M-h>=\eh"
-"execute "set <M-j>=\ej"
-"execute "set <M-k>=\ek"
-"execute "set <M-l>=\el"
-
 " Easily move between splits
 
 nmap <silent> <M-h> :winc h<CR>
@@ -374,7 +381,7 @@ map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
 " map <C-C> :execute "Gcommit"<CR>
 nmap <silent> <C-a> GVgg
-nmap U :execute "GitGutterRevertHunk"<CR>
+nmap U :execute "GitGutterUndoHunk"<CR>
 
 runtime plugin/gitgutter.vim
 execute "GitGutterLineHighlightsEnable"
