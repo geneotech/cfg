@@ -5,4 +5,4 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
-Install: https://github.com/huawenyu/neogdb.vim
+If we're playing with neovim terminal, set scrollback=1 clears scrollback

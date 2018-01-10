@@ -175,9 +175,36 @@ nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
 nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> ]l :call WrapCommand('down', 'l')<CR>
 
+function! StartDebugging()
+	wa
+	let current_wp = system("echo -n $WORKSPACE/")
+	" echomsg current_wp
+
+	let gdbcmd = "GdbLocal ConfHyper"
+	"let gdbcmd = "GdbLocal confloc#me " . current_wp . "build/current/Hypersomnia-Debug '-cd " . current_wp . "hypersomnia'" 
+	echomsg gdbcmd 	
+	execute gdbcmd 
+endfunction
+
+let g:last_error_path = '/tmp/last_error.txt'
+let g:last_error_path_color = '/tmp/last_error_color.txt'
+
 function! OnBuildEvent(job_id, data, event) dict
-	echomsg "JOB EXITED"
-	lfile /tmp/last_error.txt
+	if filereadable(g:last_error_path)
+		execute "lfile " . g:last_error_path
+	else
+		echomsg "Build successful."
+	endif
+endfunction
+
+function! OnDebugBuildEvent(job_id, data, event) dict
+	if filereadable(g:last_error_path)
+		execute "lfile " . g:last_error_path
+	else
+		echomsg "Build successful."
+
+		call StartDebugging()
+	endif
 endfunction
 
 function! SucklessMake(targetname)
@@ -193,6 +220,18 @@ function! SucklessMake(targetname)
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 
+function! SucklessMakeDebug(targetname)
+	wa
+
+    let callbacks = {
+    \ 'on_exit': function('OnDebugBuildEvent')
+    \ }
+
+	let jobcmd = "zsh -c 'vim_target " . a:targetname . "'"
+	"echomsg jobcmd
+
+    let job1 = jobstart(jobcmd, callbacks)
+endfunction
 
 function! ConfHyper() abort
     " user special config
@@ -217,17 +256,6 @@ function! ConfHyper() abort
 
     return this
 endfunc
-
-function! SucklessDebug()
-	wa
-	let current_wp = system("echo -n $WORKSPACE/")
-	" echomsg current_wp
-
-	let gdbcmd = "GdbLocal ConfHyper"
-	"let gdbcmd = "GdbLocal confloc#me " . current_wp . "build/current/Hypersomnia-Debug '-cd " . current_wp . "hypersomnia'" 
-	echomsg gdbcmd 	
-	execute gdbcmd 
-endfunction
 
 " GDB bindings
 " F17 is bound to S+F5 in Alacritty
@@ -255,7 +283,7 @@ let g:gdb_keymap_refresh = '<f12>'
 " Build bindings
 
 nmap <silent> <F7> :call SucklessMake("all")<CR>
-nmap <silent> <F6> :call SucklessDebug()<CR>
+nmap <silent> <F6> :call SucklessMakeDebug("all")<CR>
 nmap <silent> <F5> :call SucklessMake("run")<CR>
 
 imap <silent> <F5> <ESC><F5>
@@ -345,7 +373,14 @@ nnoremap , "A
 nmap <silent> <C-c> :let @+ = '#include "' . substitute(substitute(expand("%:f"), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' . "\n" <CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
-nmap <Space>e :e /tmp/last_error.txt<CR>
+
+function! OpenLastErrors()
+	let opencmd = "tabnew term://bash -c 'cat " . g:last_error_path_color . "'"
+	echomsg opencmd
+	execute opencmd
+endfunction
+
+nmap <Space>e :call OpenLastErrors()<CR>
 nmap <Space>v :e ~/cfg/.vimrc<CR>
 nmap <Space>w :set list!<CR>
 

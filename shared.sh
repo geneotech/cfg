@@ -44,6 +44,12 @@ alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yaourt --m-arg "--skippgpcheck"'
 alias uppkgs='yaourt -Su --aur '
 LASTERR_PATH=/tmp/last_error.txt
+LASTERR_PATH_COLOR=/tmp/last_error_color.txt
+
+function rmlogs() {
+	rm $LASTERR_PATH
+	rm $LASTERR_PATH_COLOR
+}
 
 function stripcodes() {
 	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
@@ -58,7 +64,7 @@ function make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
 
-	rm $LASTERR_PATH
+	rmlogs
 
 	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > /dev/pts/1 
 }
@@ -75,8 +81,11 @@ function handle_last_errors() {
 	
 	if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
 	then
+		cp $LASTERR_PATH $LASTERR_PATH_COLOR
 		clnerr
 		$(i3-msg "[title=NVIM] focus")
+	else
+		rmlogs
 	fi
 }
 
