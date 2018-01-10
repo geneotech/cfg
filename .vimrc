@@ -177,12 +177,7 @@ nnoremap <silent> ]l :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
 	wa
-	let current_wp = system("echo -n $WORKSPACE/")
-	" echomsg current_wp
-
 	let gdbcmd = "GdbLocal ConfHyper"
-	"let gdbcmd = "GdbLocal confloc#me " . current_wp . "build/current/Hypersomnia-Debug '-cd " . current_wp . "hypersomnia'" 
-	echomsg gdbcmd 	
 	execute gdbcmd 
 endfunction
 
@@ -244,7 +239,7 @@ function! ConfHyper() abort
         \ "showbreakpoint" : 1,
         \ "showbacktrace" : 0,
         \ "conf_gdb_layout" : ["vsp"],
-        \ "conf_gdb_cmd" : ['gdb -q -f -cd ' . current_wp . "hypersomnia", current_wp . "build/current/Hypersomnia-Debug"],
+        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', current_wp . "build/current/Hypersomnia-Debug"],
         \ "window" : [
         \   {   "name":   "gdbserver",
         \       "status":  0,
