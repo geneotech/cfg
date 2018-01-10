@@ -842,8 +842,9 @@ endfunction
 
 function! gdb#ClearBreak()
     let s:breakpoints = {}
-    call gdb#RefreshBreakpointSigns(0)
+    call gdb#Breaks2Qf()
     call gdb#RefreshBreakpoints(2)
+    call gdb#RefreshBreakpointSigns(0)
 endfunction
 
 
@@ -962,6 +963,20 @@ function! gdb#Map(type)
         exe 'tunmap ' . g:gdb_keymap_step
         exe 'tunmap ' . g:gdb_keymap_finish
         exe 'tunmap ' . g:gdb_keymap_toggle_break_all
+" <Home> and <End> go up and down the quickfix list and wrap around
+nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
+nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
+
+" <C-Home> and <C-End> go up and down the location list and wrap around
+nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
+nnoremap <silent> ]l :call WrapCommand('down', 'l')<CR>
+
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+let g:ctrlp_global_command = 'tabnew'
+
     elseif a:type ==# "tmap"
         exe 'tnoremap <silent> ' . g:gdb_keymap_refresh . ' <c-\><c-n>:GdbRefresh<cr>i'
         exe 'tnoremap <silent> ' . g:gdb_keymap_continue . ' <c-\><c-n>:GdbContinue<cr>i'
@@ -976,12 +991,22 @@ function! gdb#Map(type)
         exe 'nnoremap <silent> ' . g:gdb_keymap_step . ' :GdbStep<cr>'
         exe 'nnoremap <silent> ' . g:gdb_keymap_finish . ' :GdbFinish<cr>'
         exe 'nnoremap <silent> ' . g:gdb_keymap_until . ' :GdbUntil<cr>'
-        exe 'nnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbToggleBreak<cr>'
+        exe 'nnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbToggleBreak<cr><cr>'
         exe 'nnoremap <silent> ' . g:gdb_keymap_toggle_break_all . ' :GdbToggleBreakAll<cr>'
         exe 'cnoremap <silent> ' . g:gdb_keymap_toggle_break . ' <cr>'
         exe 'vnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbEvalRange<cr>'
         "nnoremap <silent> <c-n> :GdbFrameUp<cr>
         "nnoremap <silent> <c-p> :GdbFrameDown<cr>
+" <Home> and <End> go up and down the quickfix list and wrap around
+nnoremap <silent> [l :call WrapCommand('up', 'c')<CR>
+nnoremap <silent> ]l :call WrapCommand('down', 'c')<CR>
+
+" <C-Home> and <C-End> go up and down the location list and wrap around
+nnoremap <silent> [q :call WrapCommand('up', 'l')<CR>
+nnoremap <silent> ]q :call WrapCommand('down', 'l')<CR>
+let g:ctrlp_prompt_mappings = {}
+let g:ctrlp_global_command = 'edit'
+
     endif
     "}
 endfunction

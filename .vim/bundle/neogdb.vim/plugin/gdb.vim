@@ -54,8 +54,8 @@ function! GdbLocalRemoteStr()
     endif
 endfunction
 
-nnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
-cnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
+"nnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
+"cnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
 
 "nnoremap <silent> <m-pageup> :GdbFrameUp<cr>
 "nnoremap <silent> <m-pagedown> :GdbFrameDown<cr>

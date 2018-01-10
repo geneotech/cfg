@@ -5,7 +5,6 @@ set rtp+=/home/pbc/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
 Plugin 'mhinz/vim-grepper'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
@@ -95,6 +94,7 @@ set magic
 
 """""""""" Viewing
 
+set splitright " For GDB terminal
 set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
 
 " disable status line
@@ -147,7 +147,34 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
- 
+
+" wrap :cnext/:cprevious and :lnext/:lprevious
+function! WrapCommand(direction, prefix)
+    if a:direction == "up"
+        try
+            execute a:prefix . "previous"
+        catch /^Vim\%((\a\+)\)\=:E553/
+            execute a:prefix . "last"
+        catch /^Vim\%((\a\+)\)\=:E\%(776\|42\):/
+        endtry
+    elseif a:direction == "down"
+        try
+            execute a:prefix . "next"
+        catch /^Vim\%((\a\+)\)\=:E553/
+            execute a:prefix . "first"
+        catch /^Vim\%((\a\+)\)\=:E\%(776\|42\):/
+        endtry
+    endif
+endfunction
+
+" <Home> and <End> go up and down the quickfix list and wrap around
+nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
+nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
+
+" <C-Home> and <C-End> go up and down the location list and wrap around
+nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
+nnoremap <silent> ]l :call WrapCommand('down', 'l')<CR>
+
 function! OnBuildEvent(job_id, data, event) dict
 	echomsg "JOB EXITED"
 	lfile /tmp/last_error.txt
@@ -175,9 +202,9 @@ function! ConfHyper() abort
         \ "Scheme" : 'gdb#SchemeCreate',
         \ "autorun" : 1,
         \ "reconnect" : 1,
-        \ "showbreakpoint" : 0,
-        \ "showbacktrace" : 1,
-        \ "conf_gdb_layout" : ["sp"],
+        \ "showbreakpoint" : 1,
+        \ "showbacktrace" : 0,
+        \ "conf_gdb_layout" : ["vsp"],
         \ "conf_gdb_cmd" : ['gdb -q -f -cd ' . current_wp . "hypersomnia", current_wp . "build/current/Hypersomnia-Debug"],
         \ "window" : [
         \   {   "name":   "gdbserver",
@@ -203,18 +230,27 @@ function! SucklessDebug()
 endfunction
 
 " GDB bindings
-nmap <silent> <S-F5> :GdbDebugStop<CR>
+" F17 is bound to S+F5 in Alacritty
+nmap <silent> <F17> :GdbDebugStop<CR>
+" F21 is bound to Shift+F9 in Alacritty
+nmap <silent> <F21> :GdbClearBreak<CR>
+nmap <silent> <F33> :GdbClearBreak<CR>
+
+nmap <silent> <C-U> :GdbFrameUp<CR>
+nmap <silent> <C-I> :GdbFrameDown<CR>
+nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
 
 let g:gdb_keymap_continue = '<f8>'
 let g:gdb_keymap_next = '<f10>'
 let g:gdb_keymap_step = '<f11>'
-let g:gdb_keymap_finish = '<S-F11>'
+" F23 is bound to S+F11 in Alacritty
+let g:gdb_keymap_finish = '<f23>'
 let g:gdb_keymap_toggle_break = '<f9>'
+let g:gdb_keymap_toggle_break_all = '<f33>'
 
 " What?
 let g:gdb_keymap_until = '<f13>'
 let g:gdb_keymap_refresh = '<f12>'
-let g:gdb_keymap_toggle_break_all = '<f14>'
 
 " Build bindings
 
@@ -228,12 +264,6 @@ imap <silent> <F7> <ESC><F7>
 
 nmap <Space>h :execute "help " . expand("<cword>")<CR>
 
-"nmap <C-P> :FuzzyOpen
-"imap <C-p> <ESC>:FuzzyOpen<CR>
-
-"nmap <C-p> :CtrlP $PWD
-"imap <C-p> <ESC>:CtrlP $PWD<CR>
-
 " F25 is bound to Control + Backspace in Alacritty
 inoremap <F25> <C-W>
 
@@ -244,13 +274,15 @@ execute("CtrlP")
 let g:ctrlp_working_path_mode = ''
 endfunction
 
+let g:ctrlp_global_command = 'tabnew'
+
 function! CtrlpGlobal()
 	let g:ctrlp_user_command = "cd %s && find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*'"
 	let g:ctrlp_working_path_mode = ''
 	let newloc = system("LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:'); echo $LOCATION")
 
 	if strlen(newloc) > 1 
-		execute ("tabnew " . newloc)
+		execute (g:ctrlp_global_command . " " . newloc)
 	endif
 
 	let g:ctrlp_working_path_mode = ''
@@ -272,10 +304,7 @@ let g:ctrlp_working_path_mode = ''
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_by_filename = 1
 
-" Doesn't work for some reason
-" let g:ctrlp_open_new_file = 't'
-" let g:ctrlp_open_multiple_files = 't'
-" But this does
+" Open in new tab by default
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
@@ -285,6 +314,19 @@ nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
+
+" Terminal bindings
+tnoremap <Esc> <C-\><C-n>
+
+tmap <M-h> <C-\><C-N><M-h>
+tmap <M-j> <C-\><C-N><M-j>
+tmap <M-k> <C-\><C-N><M-k>
+tmap <M-l> <C-\><C-N><M-l>
+
+tmap <C-h> <C-\><C-N><C-h>
+tmap <C-j> <C-\><C-N><C-j>
+tmap <C-k> <C-\><C-N><C-k>
+tmap <C-l> <C-\><C-N><C-l>
 
 inoremap <C-d> <C-\><C-o>dB
 
@@ -367,7 +409,6 @@ vmap <F4>   <plug>(GrepperOperator)
 
 " For motions
 nmap gs  <plug>(GrepperOperator)
-
 
 " vim-fugitive bindings 
 
@@ -532,3 +573,4 @@ endfunction
 autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
+
