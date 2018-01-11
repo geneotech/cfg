@@ -180,9 +180,13 @@ nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
-	wa
-	let gdbcmd = "GdbLocal ConfHyper"
-	execute gdbcmd 
+	if exists('g:gdb')
+		echomsg "Restarting existing GDB session"
+		GdbInterruptAndRestart
+	else
+		let gdbcmd = "GdbLocal ConfHyper"
+		execute gdbcmd 
+	endif
 endfunction
 
 let g:last_error_path = '/tmp/last_error.txt'
@@ -221,6 +225,10 @@ endfunction
 
 function! SucklessMakeDebug(targetname)
 	wa
+
+"	if exists('g:gdb')
+"		echomsg "Stopping existing GDB session"
+	"endif
 
     let callbacks = {
     \ 'on_exit': function('OnDebugBuildEvent')
@@ -261,7 +269,6 @@ endfunc
 nmap <silent> <F17> :GdbDebugStop<CR>
 " F21 is bound to Shift+F9 in Alacritty
 nmap <silent> <F21> :GdbClearBreak<CR>
-nmap <silent> <F33> :GdbClearBreak<CR>
 
 nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
 

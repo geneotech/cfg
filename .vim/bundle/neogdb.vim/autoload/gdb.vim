@@ -718,6 +718,12 @@ function! gdb#Interrupt()
     call jobsend(g:gdb._client_id, "\<c-c>info line\<cr>")
 endfunction
 
+function! gdb#InterruptAndRestart()
+    if !exists('g:gdb')
+        throw 'Gdb is not running'
+    endif
+    call jobsend(g:gdb._client_id, "\<c-c>info line\<cr>start\<cr>")
+endfunction
 
 function! gdb#SaveVariable(var, file)
     call writefile([string(a:var)], a:file)
@@ -970,11 +976,8 @@ nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
 nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
 
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
 let g:ctrlp_global_command = 'tabnew'
+let g:fzf_action = { 'enter': 'tabnew' }
 
     elseif a:type ==# "tmap"
         exe 'tnoremap <silent> ' . g:gdb_keymap_refresh . ' <c-\><c-n>:GdbRefresh<cr>i'
@@ -1000,7 +1003,7 @@ let g:ctrlp_global_command = 'tabnew'
 nnoremap <silent> [q :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> ]q :call WrapCommand('down', 'l')<CR>
 
-let g:ctrlp_prompt_mappings = {}
+let g:fzf_action = { 'enter': 'edit' }
 let g:ctrlp_global_command = 'edit'
 
 nmap <silent> <C-U> :GdbFrameUp<CR>
