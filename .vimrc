@@ -12,9 +12,10 @@ Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'wojtekmach/vim-rename'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'huawenyu/neogdb.vim'
 Plugin 'AndrewRadev/bufferize.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -291,30 +292,43 @@ nmap <Space>h :execute "help " . expand("<cword>")<CR>
 " F25 is bound to Control + Backspace in Alacritty
 inoremap <F25> <C-W>
 
-" ctrlp bindings
-function! CtrlpCurrentRepo()
-let g:ctrlp_working_path_mode = 'r'
-execute("CtrlP")
-let g:ctrlp_working_path_mode = ''
+" fzf bindings
+
+" So that we also search through hidden files
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+
+function! s:find_git_root()
+  return system('cd ' . expand("%:h") . '; git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
+
+command! -nargs=1 CopyPath let @+ = <q-args>
+
+let g:fzf_action = {
+  \ 'enter': 'tabnew',
+  \ 'ctrl-c': 'CopyPath' }
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+let g:fzf_layout = { 'down': '~24%' }
+
+nmap <silent> <C-t> :Tags<CR>
+imap <silent> <C-t> <ESC>:Tags<CR>
+
+nmap <silent> <C-p> :GFiles<CR>
+imap <silent> <C-p> <ESC>:GFiles<CR>
 
 let g:ctrlp_global_command = 'tabnew'
 
 function! CtrlpGlobal()
-	let g:ctrlp_user_command = "cd %s && find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*'"
-	let g:ctrlp_working_path_mode = ''
 	let newloc = system("LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:'); echo $LOCATION")
 
 	if strlen(newloc) > 1 
 		execute (g:ctrlp_global_command . " " . newloc)
 	endif
-
-	let g:ctrlp_working_path_mode = ''
-	let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endfunction
 
 " F26 is bound to Ctrl+Shift+P in Alacritty
-nmap <silent> <F26> :call CtrlpCurrentRepo()<CR>
+nmap <silent> <F26> :ProjectFiles<CR>
 
 " F27 is bound to Win+P in Alacritty
 nmap <silent> <F27> :call CtrlpGlobal()<CR>
@@ -323,16 +337,6 @@ nmap <silent> <F27> :call CtrlpGlobal()<CR>
 imap <c-p> <ESC><c-p>
 imap <F27> <ESC><F27>
 imap <F28> <ESC><F28>
-
-let g:ctrlp_working_path_mode = ''
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_by_filename = 1
-
-" Open in new tab by default
-let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<c-t>'],
-    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-    \ }
 
 nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
@@ -344,6 +348,9 @@ imap <silent> <F1> <ESC>:Bufferize messages<CR>
 
 " Terminal bindings
 tnoremap <Esc> <C-\><C-n>
+
+" Make ESC always quit the fzf prompt and not just enter normal mode
+autocmd! FileType fzf tnoremap <buffer> <Esc> <c-q>
 
 tmap <M-h> <C-\><C-N><M-h>
 tmap <M-j> <C-\><C-N><M-j>
