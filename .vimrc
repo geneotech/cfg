@@ -651,8 +651,8 @@ function! SelectHunk()
 	if empty(hunk)
 		call gitgutter#utility#warn('cursor is not in a hunk')
     else
-		let gocmd = "normal " . hunk[2] . "gg" . "V" . (hunk[0]+hunk[3]) . "gg"
-		"echomsg gocmd
+		let gocmd = "normal " . hunk[2] . "gg" . "V" . (hunk[2]+hunk[3]-1) . "gg"
+		echomsg string(hunk) . gocmd
 		execute gocmd
 	endif
 endfunction
