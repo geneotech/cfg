@@ -645,3 +645,16 @@ autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
 
+function! SelectHunk()
+    let hunk = gitgutter#hunk#current_hunk()
+
+	if empty(hunk)
+		call gitgutter#utility#warn('cursor is not in a hunk')
+    else
+		let gocmd = "normal " . hunk[2] . "gg" . "V" . (hunk[0]+hunk[3]) . "gg"
+		"echomsg gocmd
+		execute gocmd
+	endif
+endfunction
+
+nmap H :call SelectHunk()<CR>
