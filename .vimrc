@@ -180,13 +180,8 @@ nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
-	if exists('g:gdb')
-		echomsg "Restarting existing GDB session"
-		GdbInterruptAndRestart
-	else
-		let gdbcmd = "GdbLocal ConfHyper"
-		execute gdbcmd 
-	endif
+	let gdbcmd = "GdbLocal ConfHyper"
+	execute gdbcmd 
 endfunction
 
 let g:last_error_path = '/tmp/last_error.txt'
@@ -265,20 +260,48 @@ function! ConfHyper() abort
 endfunc
 
 " GDB bindings
-" F17 is bound to S+F5 in Alacritty
-nmap <silent> <F17> :GdbDebugStop<CR>
-" F21 is bound to Shift+F9 in Alacritty
-nmap <silent> <F21> :GdbClearBreak<CR>
+
+function! NeogdbvimNmapCallback()
+	" Let fzf.vim open files in the current buffer by default.
+	" This is so that, when navigating files,
+	" we don't switch to a new tab and thus *always* see the neogdb's splits. 
+    let g:fzf_action = { 'enter': 'edit' }
+    let g:ctrlp_global_command = 'edit'
+
+	nnoremap <silent> [q :call WrapCommand('up', 'l')<CR>
+	nnoremap <silent> ]q :call WrapCommand('down', 'l')<CR>
+endfunc
+
+function! NeogdbvimUnmapCallback()
+	" Quitting to normal editing. Let fzf.vim open files in the new tab.
+    let g:ctrlp_global_command = 'tabnew'
+    let g:fzf_action = { 'enter': 'tabnew' }
+
+	nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
+	nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
+
+	nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
+	nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
+endfunc
 
 nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
 
 let g:gdb_keymap_continue = '<f8>'
 let g:gdb_keymap_next = '<f10>'
 let g:gdb_keymap_step = '<f11>'
-" F23 is bound to S+F11 in Alacritty
+" Usually, F23 is just Shift+F11
 let g:gdb_keymap_finish = '<f23>'
 let g:gdb_keymap_toggle_break = '<f9>'
+" Usually, F33 is just Ctrl+F9
 let g:gdb_keymap_toggle_break_all = '<f33>'
+let g:gdb_keymap_frame_up = '<c-u>'
+let g:gdb_keymap_frame_down = '<c-i>'
+" Usually, F21 is just Shift+F9
+let g:gdb_keymap_clear_break = '<f21>'
+" Usually, F17 is just Shift+F5
+let g:gdb_keymap_debug_stop = '<f17>'
+
+let g:gdb_require_enter_after_toggling_breakpoint = 0
 
 " What?
 let g:gdb_keymap_until = '<f13>'
@@ -399,7 +422,7 @@ nmap <Space>w :set list!<CR>
 
 nmap <Return>w ciw<C-r>0<ESC>
 nmap <Return>W ciW<C-r>0<ESC>
-nmap <Return>s S<C-r>0<ESC>
+nmap <Return>s dd"0P
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
