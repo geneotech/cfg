@@ -9,9 +9,11 @@ export EDITOR=nvim
 export VISUAL=~/cfg/runnvim.sh
 alias mkexe='sudo chmod +x '
 alias gitmkexe='git update-index --chmod=+x '
+alias wszystkim='sudo chmod 777 -R .'
 # my text file extensions for use in grep searches
 export EXTS=""
 source ~/.config/i3/workspace/current
+alias mycha='source ~/.xinitrc'
 alias ag='ag --hidden'
 alias nuke='pkill -f '
 alias interrupt='pkill -f --signal 2 '
@@ -37,7 +39,6 @@ alias gcleanup="git reset --hard; git clean -d -x -f "
 alias meldh="meld $PWD"
 alias serve="bundle exec jekyll serve"
 alias xtr="/bin/extract"
-
 alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
 alias rmpkg="yaourt -Rsn "
 alias prmpkg="sudo pacman -Rsn "
