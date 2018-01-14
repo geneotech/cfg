@@ -70,7 +70,7 @@ autocmd FileType cpp setlocal fo=
 autocmd FileType cpp setlocal nocindent
 autocmd FileType cpp setlocal indentkeys+=;,>,),],/
 
-" Don't complete brackets for me (don't know why does this option has this name)
+" Don't complete brackets for me (don't know why does this option have this name)
 set noshowmatch
 
 set noautoindent 
@@ -149,6 +149,9 @@ let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
 
+" Quickly select whole hunk the cursor is currently in
+nmap H vic
+
 " wrap :cnext/:cprevious and :lnext/:lprevious
 function! WrapCommand(direction, prefix)
     if a:direction == "up"
@@ -176,8 +179,8 @@ nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
 nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
 nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
 
-nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
+nnoremap <silent> <C-Y> :call WrapCommand('up', 'l')<CR>
+nnoremap <silent> <C-U> :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
 	let gdbcmd = "GdbLocal ConfHyper"
@@ -405,7 +408,7 @@ nnoremap - :let @a=""<CR>
 nnoremap , "A
 "nnoremap ; :let @a=@a."\n"<CR>"A
 
-
+nmap <silent> <C-e> :History<CR>
 nmap <silent> <C-c> :let @+ = '#include "' . substitute(substitute(expand("%:f"), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' . "\n" <CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
@@ -645,16 +648,3 @@ autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
 
-function! SelectHunk()
-    let hunk = gitgutter#hunk#current_hunk()
-
-	if empty(hunk)
-		call gitgutter#utility#warn('cursor is not in a hunk')
-    else
-		let gocmd = "normal " . hunk[2] . "gg" . "V" . (hunk[2]+hunk[3]-1) . "gg"
-		echomsg string(hunk) . gocmd
-		execute gocmd
-	endif
-endfunction
-
-nmap H :call SelectHunk()<CR>

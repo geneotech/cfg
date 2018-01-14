@@ -23,4 +23,5 @@ done
 
 setxkbmap pl
 xrdb ~/.Xresources
+aw-qt
 exec i3
