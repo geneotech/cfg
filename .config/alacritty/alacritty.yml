@@ -254,6 +254,10 @@ key_bindings:
   - { key: Back,     mods: Control,     chars: "\x1b[1;5P"                    }
   - { key: P,     mods: Control|Shift,     chars: "\x1b[1;5Q"                    }
   - { key: P,     mods: Command,     chars: "\x1b[1;5R"                    }
+  - { key: Semicolon,     mods: Control,     chars: "\x1b[1;5S"                    }
+  - { key: Apostrophe,     mods: Control,     chars: "\x1b[15;5~"                   }
+  - { key: Comma,       mods: Control, chars: "\x1b[17;5~"                  }
+  - { key: Period,       mods: Control, chars: "\x1b[18;5~"                  }
   - { key: V,        mods: Control,    action: Paste               }
   - { key: C,        mods: Control|Shift,    action: Copy                }
   - { key: Q,        mods: Command, action: Quit                         }

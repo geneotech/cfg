@@ -171,16 +171,23 @@ function! WrapCommand(direction, prefix)
     endif
 endfunction
 
-" <Home> and <End> go up and down the quickfix list and wrap around
-nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
-nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
+" Alacritty bindings:
+" F28 = Ctrl + ;
+" F29 = Ctrl + '
+" F30 = Ctrl + .
+" F31 = Ctrl + /
 
-" <C-Home> and <C-End> go up and down the location list and wrap around
-nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> [l :call WrapCommand('up', 'l')<CR>
+nmap <silent> <F28> :call WrapCommand('up', 'c')<CR>
+nmap <silent> <F29> :call WrapCommand('down', 'c')<CR>
 
-nnoremap <silent> <C-Y> :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> <C-U> :call WrapCommand('down', 'l')<CR>
+nmap <silent> <F30> :call WrapCommand('up', 'l')<CR>
+nmap <silent> <F31> :call WrapCommand('down', 'l')<CR>
+
+nmap _ 30j 
+nmap + 30k
+
+vmap _ 30j 
+vmap + 30k
 
 function! StartDebugging()
 	let gdbcmd = "GdbLocal ConfHyper"
@@ -271,8 +278,11 @@ function! NeogdbvimNmapCallback()
     let g:fzf_action = { 'enter': 'edit' }
     let g:ctrlp_global_command = 'edit'
 
-	nnoremap <silent> [q :call WrapCommand('up', 'l')<CR>
-	nnoremap <silent> ]q :call WrapCommand('down', 'l')<CR>
+	nmap <silent> <F30> :call WrapCommand('up', 'c')<CR>
+	nmap <silent> <F31> :call WrapCommand('down', 'c')<CR>
+
+	nmap <silent> <F28> :call WrapCommand('up', 'l')<CR>
+	nmap <silent> <F29> :call WrapCommand('down', 'l')<CR>
 endfunc
 
 function! NeogdbvimUnmapCallback()
@@ -280,11 +290,11 @@ function! NeogdbvimUnmapCallback()
     let g:ctrlp_global_command = 'tabnew'
     let g:fzf_action = { 'enter': 'tabnew' }
 
-	nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
-	nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
+	nmap <silent> <F28> :call WrapCommand('up', 'c')<CR>
+	nmap <silent> <F29> :call WrapCommand('down', 'c')<CR>
 
-	nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
-	nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
+	nmap <silent> <F30> :call WrapCommand('up', 'l')<CR>
+	nmap <silent> <F31> :call WrapCommand('down', 'l')<CR>
 endfunc
 
 nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
@@ -337,7 +347,7 @@ endfunction
 command! -nargs=1 CopyPath let @+ = <q-args>
 
 let g:fzf_action = {
-  \ 'enter': 'tabnew',
+  \ 'enter': 'tab drop',
   \ 'ctrl-c': 'CopyPath' }
 
 command! ProjectFiles execute 'Files' s:find_git_root()
@@ -375,6 +385,8 @@ nmap <S-e> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
+vmap <silent> <Space>d :w >> /home/pbc/vtrash<CR>gvd
+
 nmap <silent> <F1> :Bufferize messages<CR>
 vmap <silent> <F1> :Bufferize messages<CR>
 imap <silent> <F1> <ESC>:Bufferize messages<CR>
