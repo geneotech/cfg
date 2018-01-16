@@ -1,7 +1,8 @@
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/pbc/.gem/bin:$PATH"
 export GEM_HOME=$HOME/.gem
-
+# fzf looks only through filenames
+export FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
 # Don't freeze editor on Ctrl+S
 #stty -ixon
 export TERMINAL=alacritty
