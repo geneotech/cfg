@@ -19,3 +19,5 @@ QtProject.conf
 .config/Syncplay
 .config/discord
 .vim/.netrwhist
+.config/activitywatch
+.config/nvim/.netrwhist
