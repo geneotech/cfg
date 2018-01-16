@@ -177,17 +177,11 @@ endfunction
 " F30 = Ctrl + .
 " F31 = Ctrl + /
 
-nmap <silent> <F28> :call WrapCommand('up', 'c')<CR>
-nmap <silent> <F29> :call WrapCommand('down', 'c')<CR>
+nmap <silent> <F29> :call WrapCommand('up', 'c')<CR>
+nmap <silent> <F28> :call WrapCommand('down', 'c')<CR>
 
-nmap <silent> <F30> :call WrapCommand('up', 'l')<CR>
-nmap <silent> <F31> :call WrapCommand('down', 'l')<CR>
-
-nmap _ 30j 
-nmap + 30k
-
-vmap _ 30j 
-vmap + 30k
+nmap <silent> <F31> :call WrapCommand('up', 'l')<CR>
+nmap <silent> <F30> :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
 	let gdbcmd = "GdbLocal ConfHyper"
@@ -278,11 +272,11 @@ function! NeogdbvimNmapCallback()
     let g:fzf_action = { 'enter': 'edit' }
     let g:ctrlp_global_command = 'edit'
 
-	nmap <silent> <F30> :call WrapCommand('up', 'c')<CR>
-	nmap <silent> <F31> :call WrapCommand('down', 'c')<CR>
+	nmap <silent> <F29> :call WrapCommand('up', 'c')<CR>
+	nmap <silent> <F28> :call WrapCommand('down', 'c')<CR>
 
-	nmap <silent> <F28> :call WrapCommand('up', 'l')<CR>
-	nmap <silent> <F29> :call WrapCommand('down', 'l')<CR>
+	nmap <silent> <F31> :call WrapCommand('up', 'l')<CR>
+	nmap <silent> <F30> :call WrapCommand('down', 'l')<CR>
 endfunc
 
 function! NeogdbvimUnmapCallback()
@@ -290,11 +284,11 @@ function! NeogdbvimUnmapCallback()
     let g:ctrlp_global_command = 'tabnew'
     let g:fzf_action = { 'enter': 'tabnew' }
 
-	nmap <silent> <F28> :call WrapCommand('up', 'c')<CR>
-	nmap <silent> <F29> :call WrapCommand('down', 'c')<CR>
+	nmap <silent> <F29> :call WrapCommand('up', 'c')<CR>
+	nmap <silent> <F28> :call WrapCommand('down', 'c')<CR>
 
-	nmap <silent> <F30> :call WrapCommand('up', 'l')<CR>
-	nmap <silent> <F31> :call WrapCommand('down', 'l')<CR>
+	nmap <silent> <F31> :call WrapCommand('up', 'l')<CR>
+	nmap <silent> <F30> :call WrapCommand('down', 'l')<CR>
 endfunc
 
 nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
@@ -348,6 +342,7 @@ command! -nargs=1 CopyPath let @+ = <q-args>
 
 let g:fzf_action = {
   \ 'enter': 'tab drop',
+  \ 'ctrl-s': 'vsplit',
   \ 'ctrl-c': 'CopyPath' }
 
 command! ProjectFiles execute 'Files' s:find_git_root()
