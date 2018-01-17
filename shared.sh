@@ -14,6 +14,23 @@ alias wszystkim='sudo chmod 777 -R .'
 # my text file extensions for use in grep searches
 export EXTS=""
 source ~/.config/i3/workspace/current
+
+function gdbcore() {
+	gdb $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
+}
+
+function hcore() {
+	#gdb -ex="set logging file bt.txt" -ex="set logging on" -ex="bt" -ex="q" $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
+	cd $WORKSPACE
+	gdb -ex="bt" -ex="q" $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
+}
+
+function journalsize() {
+	sudo journalctl --vacuum-size=$1
+}
+
+alias journalgetsize='journalctl --disk-usage'
+alias whenlm="stat -c '%y' "
 alias mycha='source ~/.xinitrc'
 alias ag='ag --hidden'
 alias nuke='pkill -f '
@@ -66,13 +83,28 @@ function make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
 
+	OUTPUT_TERM=/dev/pts/1
+
 	rmlogs
 
-	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > /dev/pts/1 
+	if [[ "$MAKE_TARGET" = "run" ]]; then
+		echo "Run-type target." > $OUTPUT_TERM
+		rm hypersomnia/core
+	fi
+
+	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
 
 	# Remove timing info line
 	head -n -2 $LASTERR_PATH > /tmp/dobrazaraz
 	cp /tmp/dobrazaraz $LASTERR_PATH
+
+	if [[ "$MAKE_TARGET" = "run" ]]; then
+		echo "Run-type target." > $OUTPUT_TERM
+		if [ -f hypersomnia/core ]; then
+			echo "Core found." > $OUTPUT_TERM
+			hcore | tee /dev/pts/1 bt.txt
+		fi
+	fi
 }
 
 function make_current() {
