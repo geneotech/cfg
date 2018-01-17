@@ -148,7 +148,7 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
-
+nmap gf gF
 " Quickly select whole hunk the cursor is currently in
 nmap H vic
 
