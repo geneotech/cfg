@@ -35,7 +35,6 @@ command! GdbUntil call gdb#TBreak()
 command! GdbFrameUp call gdb#FrameUp()
 command! GdbFrameDown call gdb#FrameDown()
 command! GdbInterrupt call gdb#Interrupt()
-command! GdbInterruptAndRestart call gdb#InterruptAndRestart()
 command! GdbRefresh call gdb#Send("info line")
 command! GdbInfoLocal call gdb#Send("info local")
 command! GdbInfoBreak call gdb#Send("info break")
@@ -55,8 +54,8 @@ function! GdbLocalRemoteStr()
     endif
 endfunction
 
-"nnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
-"cnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
+nnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
+cnoremap <F2> :<c-u><C-\>e GdbLocalRemoteStr()<cr>
 
 "nnoremap <silent> <m-pageup> :GdbFrameUp<cr>
 "nnoremap <silent> <m-pagedown> :GdbFrameDown<cr>

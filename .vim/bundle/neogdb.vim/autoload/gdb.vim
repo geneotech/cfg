@@ -372,7 +372,12 @@ endfunction
 
 function! gdb#Spawn(conf, ...)
     if exists('g:gdb')
-        throw 'Gdb already running'
+        if g:restart_app_if_gdb_running
+            call jobsend(g:gdb._client_id, "\<c-c>info line\<cr>start\<cr>")
+            return    
+        else
+            throw 'Gdb already running'
+        endif
     endif
 
     let client_proc = (a:0 >= 1) ? a:1 : ''
@@ -718,12 +723,6 @@ function! gdb#Interrupt()
     call jobsend(g:gdb._client_id, "\<c-c>info line\<cr>")
 endfunction
 
-function! gdb#InterruptAndRestart()
-    if !exists('g:gdb')
-        throw 'Gdb is not running'
-    endif
-    call jobsend(g:gdb._client_id, "\<c-c>info line\<cr>start\<cr>")
-endfunction
 
 function! gdb#SaveVariable(var, file)
     call writefile([string(a:var)], a:file)
@@ -849,8 +848,8 @@ endfunction
 function! gdb#ClearBreak()
     let s:breakpoints = {}
     call gdb#Breaks2Qf()
-    call gdb#RefreshBreakpoints(2)
     call gdb#RefreshBreakpointSigns(0)
+    call gdb#RefreshBreakpoints(2)
 endfunction
 
 
@@ -923,6 +922,13 @@ function! gdb#Watch(expr)
     call gdb#Send('watch *$')
 endfunction
 
+" Other options
+if !exists("g:restart_app_if_gdb_running")
+    let g:restart_app_if_gdb_running = 1
+endif
+
+" Keymap options
+
 if !exists("g:gdb_keymap_refresh")
     let g:gdb_keymap_refresh = '<f3>'
 endif
@@ -947,6 +953,24 @@ endif
 if !exists("g:gdb_keymap_toggle_break_all")
     let g:gdb_keymap_toggle_break_all = '<f10>'
 endif
+if !exists("g:gdb_keymap_clear_break")
+    let g:gdb_keymap_clear_break = '<f21>'
+endif
+if !exists("g:gdb_keymap_debug_stop")
+    let g:gdb_keymap_debug_stop = '<f17>'
+endif
+
+if !exists("g:gdb_keymap_frame_up")
+    let g:gdb_keymap_frame_up = '<c-n>'
+endif
+
+if !exists("g:gdb_keymap_frame_down")
+    let g:gdb_keymap_frame_down = '<c-p>'
+endif
+
+if !exists("g:gdb_require_enter_after_toggling_breakpoint")
+    let g:gdb_require_enter_after_toggling_breakpoint = 0
+endif
 
 function! gdb#Map(type)
     "{
@@ -956,13 +980,15 @@ function! gdb#Map(type)
         exe 'unmap ' . g:gdb_keymap_next
         exe 'unmap ' . g:gdb_keymap_step
         exe 'unmap ' . g:gdb_keymap_finish
+        exe 'unmap ' . g:gdb_keymap_clear_break
+        exe 'unmap ' . g:gdb_keymap_debug_stop
         exe 'unmap ' . g:gdb_keymap_until
         exe 'unmap ' . g:gdb_keymap_toggle_break
         exe 'unmap ' . g:gdb_keymap_toggle_break_all
         exe 'vunmap ' . g:gdb_keymap_toggle_break
         exe 'cunmap ' . g:gdb_keymap_toggle_break
-        "unmap <c-n>
-        "unmap <c-p>
+        exe 'unmap ' . g:gdb_keymap_frame_up
+        exe 'unmap ' . g:gdb_keymap_frame_down
         exe 'tunmap ' . g:gdb_keymap_refresh
         exe 'tunmap ' . g:gdb_keymap_continue
         exe 'tunmap ' . g:gdb_keymap_next
@@ -970,15 +996,9 @@ function! gdb#Map(type)
         exe 'tunmap ' . g:gdb_keymap_finish
         exe 'tunmap ' . g:gdb_keymap_toggle_break_all
 
-nnoremap <silent> [q :call WrapCommand('up', 'c')<CR>
-nnoremap <silent> ]q :call WrapCommand('down', 'c')<CR>
-
-nnoremap <silent> <C-U> :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> <C-I> :call WrapCommand('down', 'l')<CR>
-
-let g:ctrlp_global_command = 'tabnew'
-let g:fzf_action = { 'enter': 'tabnew' }
-
+        if exists("*NeogdbvimUnmapCallback")
+            call NeogdbvimUnmapCallback()
+        endif
     elseif a:type ==# "tmap"
         exe 'tnoremap <silent> ' . g:gdb_keymap_refresh . ' <c-\><c-n>:GdbRefresh<cr>i'
         exe 'tnoremap <silent> ' . g:gdb_keymap_continue . ' <c-\><c-n>:GdbContinue<cr>i'
@@ -993,22 +1013,26 @@ let g:fzf_action = { 'enter': 'tabnew' }
         exe 'nnoremap <silent> ' . g:gdb_keymap_step . ' :GdbStep<cr>'
         exe 'nnoremap <silent> ' . g:gdb_keymap_finish . ' :GdbFinish<cr>'
         exe 'nnoremap <silent> ' . g:gdb_keymap_until . ' :GdbUntil<cr>'
-        exe 'nnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbToggleBreak<cr><cr>'
+
+        let toggle_break_binding = 'nnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbToggleBreak<cr>'
+
+        if !g:gdb_require_enter_after_toggling_breakpoint 
+            let toggle_break_binding = toggle_break_binding . '<cr>'
+        endif
+
+        exe toggle_break_binding
+
         exe 'nnoremap <silent> ' . g:gdb_keymap_toggle_break_all . ' :GdbToggleBreakAll<cr>'
         exe 'cnoremap <silent> ' . g:gdb_keymap_toggle_break . ' <cr>'
         exe 'vnoremap <silent> ' . g:gdb_keymap_toggle_break . ' :GdbEvalRange<cr>'
-        "nnoremap <silent> <c-n> :GdbFrameUp<cr>
-        "nnoremap <silent> <c-p> :GdbFrameDown<cr>
+        exe 'nnoremap <silent> ' . g:gdb_keymap_clear_break . ' :GdbClearBreak<cr>'
+        exe 'nnoremap <silent> ' . g:gdb_keymap_debug_stop . ' :GdbDebugStop<cr>'
+        exe 'nnoremap <silent> ' . g:gdb_keymap_frame_up . ' :GdbFrameUp<cr>'
+        exe 'nnoremap <silent> ' . g:gdb_keymap_frame_down . ' :GdbFrameDown<cr>'
 
-nnoremap <silent> [q :call WrapCommand('up', 'l')<CR>
-nnoremap <silent> ]q :call WrapCommand('down', 'l')<CR>
-
-let g:fzf_action = { 'enter': 'edit' }
-let g:ctrlp_global_command = 'edit'
-
-nmap <silent> <C-U> :GdbFrameUp<CR>
-nmap <silent> <C-I> :GdbFrameDown<CR>
-
+        if exists("*NeogdbvimNmapCallback")
+            call NeogdbvimNmapCallback()
+        endif
     endif
     "}
 endfunction
