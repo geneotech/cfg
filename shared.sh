@@ -29,6 +29,9 @@ function journalsize() {
 	sudo journalctl --vacuum-size=$1
 }
 
+alias ptsy='ls /dev/pts'
+alias procki='ps aux | ag '
+alias rbt='sudo reboot'
 alias journalgetsize='journalctl --disk-usage'
 alias whenlm="stat -c '%y' "
 alias mycha='source ~/.xinitrc'
