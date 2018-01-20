@@ -16,6 +16,8 @@ Plugin 'huawenyu/neogdb.vim'
 Plugin 'AndrewRadev/bufferize.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+Plugin 'vim-scripts/ibmedit.vim'
+Plugin 'elmindreda/vimcolors'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -152,7 +154,11 @@ nmap gf gF
 " Quickly select whole hunk the cursor is currently in
 nmap H vic
 
-" wrap :cnext/:cprevious and :lnext/:lprevious
+nnoremap Y ^yg_
+" F32 is bound to shift+backspace in alacritty
+nnoremap <F32> ^D"9dd
+inoremap <F32> <BS>
+
 function! WrapCommand(direction, prefix)
     if a:direction == "up"
         try
@@ -376,7 +382,8 @@ imap <c-p> <ESC><c-p>
 imap <F27> <ESC><F27>
 imap <F28> <ESC><F28>
 
-nmap <S-e> :Ranger<CR>
+" F33 is bound to ctrl+shift+e in alacritty
+nmap <F33> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
@@ -522,7 +529,7 @@ let g:gutentags_cache_dir='/tmp'
 " Color fixes
 set termguicolors
 
-colorscheme moonfly
+colorscheme phosphor
 
 " Wrap lines in diff mode by default
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
