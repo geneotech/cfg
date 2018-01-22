@@ -19,6 +19,7 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/ibmedit.vim'
 Plugin 'elmindreda/vimcolors'
 Plugin 'fcpg/vim-farout'
+Plugin 'machakann/vim-highlightedyank'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -664,3 +665,4 @@ autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
 
+let g:highlightedyank_highlight_duration = -1
