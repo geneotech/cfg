@@ -18,6 +18,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 Plugin 'vim-scripts/ibmedit.vim'
 Plugin 'elmindreda/vimcolors'
+Plugin 'fcpg/vim-farout'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -96,6 +97,7 @@ set incsearch
 set magic
 
 """""""""" Viewing
+set inccommand=nosplit
 
 set splitright " For GDB terminal
 set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
@@ -529,7 +531,7 @@ let g:gutentags_cache_dir='/tmp'
 " Color fixes
 set termguicolors
 
-colorscheme phosphor
+colorscheme farout
 
 " Wrap lines in diff mode by default
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
