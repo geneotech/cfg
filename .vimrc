@@ -385,8 +385,8 @@ imap <c-p> <ESC><c-p>
 imap <F27> <ESC><F27>
 imap <F28> <ESC><F28>
 
-" F33 is bound to ctrl+shift+e in alacritty
-nmap <F33> :Ranger<CR>
+" F34 is bound to ctrl+shift+e in alacritty
+nmap <F34> :Ranger<CR>
 cmap w!! w !sudo tee %
 
 " General keybindings
@@ -477,6 +477,20 @@ nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 """ Replacing """
 nmap <C-h> :cdo s///g <bar> update<left><left><left><left><left><left><left><left><left><left><left>
+
+function! FeedReplace()
+	let expanded = expand('<cword>') 
+
+	if strlen(expanded) > 0 
+		call feedkeys(':%s/' . expanded . '//g' . "\<left>\<left>")
+	else
+		call feedkeys(':%s///g' . "\<left>\<left>\<left>")
+	endif 
+endfunc
+
+" F35 is bound to C-S-h in Alacritty
+nmap R :call FeedReplace()<CR>
+vmap R :s///g<left><left><left>
 
 """ Searching current file """
 
