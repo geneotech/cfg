@@ -265,7 +265,7 @@ key_bindings:
   - { key: Apostrophe,     mods: Control,     chars: "\x1b[15;5~"                   }
   - { key: Comma,       mods: Control, chars: "\x1b[17;5~"                  }
   - { key: Period,       mods: Control, chars: "\x1b[18;5~"                  }
-  - { key: V,        mods: Control,    action: Paste               }
+  - { key: V,        mods: Control|Shift,    action: Paste               }
   - { key: C,        mods: Control|Shift,    action: Copy                }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }

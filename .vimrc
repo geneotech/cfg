@@ -55,9 +55,11 @@ endif " has("autocmd")
 " always append newline when appending to a register
 set cpoptions+=>
 
+" Keep the yank highlight 
+let g:highlightedyank_highlight_duration = -1
+
 """"""""" I/O fixes
 
-set clipboard=unnamedplus
 set backupdir=/tmp
 set undodir=/tmp
 set swapfile
@@ -98,7 +100,11 @@ set incsearch
 set magic
 
 """""""""" Viewing
+" On composing substitute command, see to-be-applied changes live
 set inccommand=nosplit
+
+" Highlight current line
+set cursorline
 
 set splitright " For GDB terminal
 set listchars=eol:⏎,tab:>-,trail:␠,nbsp:⎵
@@ -153,6 +159,9 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
+" Switch windows 
+nnoremap <Tab> <C-w><C-w>
+
 nmap gf gF
 " Quickly select whole hunk the cursor is currently in
 nmap H vic
@@ -161,6 +170,21 @@ nnoremap Y ^yg_
 " F32 is bound to shift+backspace in alacritty
 nnoremap <F32> ^D"9dd
 inoremap <F32> <BS>
+
+" C-v just pastes the register in insert mode
+inoremap <C-v> <C-r>"
+
+" set scroll=20
+" Faster moving around
+nnoremap <S-j> 10<C-e>
+nnoremap <S-k> 10<C-y>
+vnoremap <S-j> 10<C-e>
+vnoremap <S-k> 10<C-y>
+
+nnoremap <M-j> 10j
+nnoremap <M-k> 10k
+vnoremap <M-j> 10j
+vnoremap <M-k> 10k
 
 function! WrapCommand(direction, prefix)
     if a:direction == "up"
@@ -348,10 +372,12 @@ function! s:find_git_root()
 endfunction
 
 command! -nargs=1 CopyPath let @+ = <q-args>
+command! -nargs=1 CopyIncludePath let @+ = '#include "' . substitute(substitute(expand(<q-args>), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' . "\n" 
 
 let g:fzf_action = {
   \ 'enter': 'tab drop',
   \ 'ctrl-s': 'vsplit',
+  \ 'ctrl-i': 'CopyIncludePath',
   \ 'ctrl-c': 'CopyPath' }
 
 command! ProjectFiles execute 'Files' s:find_git_root()
@@ -397,22 +423,26 @@ vmap <silent> <F1> :Bufferize messages<CR>
 imap <silent> <F1> <ESC>:Bufferize messages<CR>
 
 " Terminal bindings
-tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n><C-w><C-p>
 
 " Make ESC always quit the fzf prompt and not just enter normal mode
 autocmd! FileType fzf tnoremap <buffer> <Esc> <c-q>
 
-tmap <M-h> <C-\><C-N><M-h>
-tmap <M-j> <C-\><C-N><M-j>
-tmap <M-k> <C-\><C-N><M-k>
-tmap <M-l> <C-\><C-N><M-l>
+" QUESTION: Determine good bindings for moving around windows in terminal?
+" SOLUTION: No need to. On escaping terminal, we'll always move to the
+" previously used window for convenience. See escape binding.
+" TODO: 
+" Allow for switching tabs even while in terminal
+tmap <C-h> <Esc><C-h>
+tmap <C-j> <Esc><C-j>
+tmap <C-k> <Esc><C-k>
+tmap <C-l> <Esc><C-l>
 
-tmap <C-h> <C-\><C-N><C-h>
-tmap <C-j> <C-\><C-N><C-j>
-tmap <C-k> <C-\><C-N><C-k>
-tmap <C-l> <C-\><C-N><C-l>
+" Allows choosing the candidates in fzf.vim with shift+j and shift+k \
+" instead of arrow keys
 
-inoremap <C-d> <C-\><C-o>dB
+tnoremap <S-k> <C-P>
+tnoremap <S-j> <C-N>
 
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
@@ -446,18 +476,6 @@ nmap <Return>s dd"0P
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
-" Easily move between splits
-
-nmap <silent> <M-h> :winc h<CR>
-nmap <silent> <M-j> :winc j<CR>
-nmap <silent> <M-k> :winc k<CR>
-nmap <silent> <M-l> :winc l<CR>
-
-imap <silent> <M-h> <ESC>:winc h<CR>
-imap <silent> <M-j> <ESC>:winc j<CR>
-imap <silent> <M-k> <ESC>:winc k<CR>
-imap <silent> <M-l> <ESC>:winc l<CR>
-
 " Also prevents the editor from being closed when the last tab closes
 nmap <silent> <c-w> :close<CR>
 imap <silent> <c-w> <ESC>:close<CR>
@@ -472,8 +490,8 @@ imap <silent> <C-j> <ESC>:tabprevious<CR>
 imap <silent> <C-k> <ESC>:tabnext<CR>
 imap <silent> <C-n> <ESC>:tabnew<CR>
 
-nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+"nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+"nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 """ Replacing """
 nmap <C-h> :cdo s///g <bar> update<left><left><left><left><left><left><left><left><left><left><left>
@@ -522,7 +540,8 @@ map <S-l> :execute "silent Glog -- %" <bar> redraw!<CR>
 " Browse commits in the whole repository
 map <C-l> :execute "silent Glog --" <bar> redraw!<CR> 
 
-map <silent> <C-s> :execute "Gstatus"<CR>
+map <silent> <C-s> :Gstatus <bar> wincmd T<CR>
+
 map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
 " map <C-C> :execute "Gcommit"<CR>
@@ -678,5 +697,3 @@ endfunction
 autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
-
-let g:highlightedyank_highlight_duration = -1
