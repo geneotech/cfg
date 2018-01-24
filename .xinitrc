@@ -24,4 +24,6 @@ done
 setxkbmap pl
 xrdb ~/.Xresources
 aw-qt
+xmodmap -e "clear lock"
+xmodmap -e "keysym Caps_Lock = Escape"
 exec i3
