@@ -160,7 +160,9 @@ let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
 " Switch windows 
-nnoremap <Tab> <C-w><C-w>
+" Don't map Tab button! For some reason, it screws up the <C-I> binding
+" Yeah, I know C-z mapping is strange, but I really have no keys left...
+nnoremap <C-z> <C-w><C-w>
 
 nmap gf gF
 " Quickly select whole hunk the cursor is currently in
@@ -168,11 +170,14 @@ nmap H vic
 
 nnoremap Y ^yg_
 " F32 is bound to shift+backspace in alacritty
-nnoremap <F32> ^D"9dd
+nnoremap <F32> ^"0D"9dd
 inoremap <F32> <BS>
 
 " C-v just pastes the register in insert mode
 inoremap <C-v> <C-r>"
+cnoremap <C-v> <C-R>=@"<CR>
+" Delete whole word backwards - F25 is bound to ctrl+backspace
+cnoremap <F25> <C-w>
 
 " set scroll=20
 
@@ -190,24 +195,17 @@ nnoremap <M-k> 10<C-y>
 vnoremap <M-j> 10<C-e>
 vnoremap <M-k> 10<C-y>
 
-" Standard move both cursor and viewport
-nmap <S-M-j> <M-j><S-j>
-nmap <S-M-k> <M-k><S-k>
-vmap <S-M-j> <M-j><S-j>
-vmap <S-M-k> <M-k><S-k>
-
-" Move viewport more
-nnoremap <C-M-j> 20<C-e>
-nnoremap <C-M-k> 20<C-y>
-vnoremap <C-M-j> 20<C-e>
-vnoremap <C-M-k> 20<C-y>
-
 " Move cursor more
 nnoremap <F36> 20j
 nnoremap <F37> 20k
 vnoremap <F36> 20j
 vnoremap <F37> 20k
 
+" Move viewport more
+nnoremap <S-M-j> 20<C-e>
+nnoremap <S-M-k> 20<C-y>
+vnoremap <S-M-j> 20<C-e>
+vnoremap <S-M-k> 20<C-y>
 
 function! WrapCommand(direction, prefix)
     if a:direction == "up"
@@ -394,8 +392,12 @@ function! s:find_git_root()
   return system('cd ' . expand("%:h") . '; git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-command! -nargs=1 CopyPath let @+ = <q-args>
-command! -nargs=1 CopyIncludePath let @+ = '#include "' . substitute(substitute(expand(<q-args>), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' . "\n" 
+function! ToCppIncludePath(fpath)
+	return '#include "' . substitute(substitute(expand(a:fpath), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' 
+endfunc
+
+command! -nargs=1 CopyPath let @" = <q-args>
+command! -nargs=1 CopyIncludePath let @" = ToCppIncludePath(<q-args>) . "\n"
 
 let g:fzf_action = {
   \ 'enter': 'tab drop',
@@ -454,7 +456,7 @@ autocmd! FileType fzf tnoremap <buffer> <Esc> <c-q>
 " QUESTION: Determine good bindings for moving around windows in terminal?
 " SOLUTION: No need to. On escaping terminal, we'll always move to the
 " previously used window for convenience. See escape binding.
-" TODO: 
+
 " Allow for switching tabs even while in terminal
 tmap <C-h> <Esc><C-h>
 tmap <C-j> <Esc><C-j>
@@ -479,7 +481,7 @@ nnoremap , "A
 "nnoremap ; :let @a=@a."\n"<CR>"A
 
 nmap <silent> <C-e> :History<CR>
-nmap <silent> <C-c> :let @+ = '#include "' . substitute(substitute(expand("%:f"), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' . "\n" <CR>
+nmap <silent> <C-c> :let @" = ToCppIncludePath(expand("%:f")) . "\n"<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
 
@@ -498,6 +500,10 @@ nmap <Return>W ciW<C-r>0<ESC>
 nmap <Return>b cib<C-r>0<ESC>
 nmap <Return>B ciB<C-r>0<ESC>
 nmap <Return>< ci<<C-r>0<ESC>
+nmap <Return>" ci"<C-r>0<ESC>
+nmap <Return>{ ci{<C-r>0<ESC>
+
+" Replace current line with the last yank
 nmap <Return>s dd"0P
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
@@ -558,6 +564,14 @@ vmap <F4>   <plug>(GrepperOperator)
 
 " For motions
 nmap gs  <plug>(GrepperOperator)
+
+function! FindWhereThisFileIsIncluded()
+	execute ("Grepper -tool ag -noprompt -query '" . ToCppIncludePath(expand("%:f")) . "'")
+endfunc
+
+" Find where the current file is included
+" F13 is bound to Ctrl+Shift+I in Alacritty
+nmap <silent> <F13> :call FindWhereThisFileIsIncluded()<CR>
 
 " vim-fugitive bindings 
 
