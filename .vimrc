@@ -175,16 +175,39 @@ inoremap <F32> <BS>
 inoremap <C-v> <C-r>"
 
 " set scroll=20
-" Faster moving around
-nnoremap <S-j> 10<C-e>
-nnoremap <S-k> 10<C-y>
-vnoremap <S-j> 10<C-e>
-vnoremap <S-k> 10<C-y>
 
-nnoremap <M-j> 10j
-nnoremap <M-k> 10k
-vnoremap <M-j> 10j
-vnoremap <M-k> 10k
+" Faster moving around
+
+" Standard move cursor
+nnoremap <S-j> 10j
+nnoremap <S-k> 10k
+vnoremap <S-j> 10j
+vnoremap <S-k> 10k
+
+" Standard move viewport
+nnoremap <M-j> 10<C-e>
+nnoremap <M-k> 10<C-y>
+vnoremap <M-j> 10<C-e>
+vnoremap <M-k> 10<C-y>
+
+" Standard move both cursor and viewport
+nmap <S-M-j> <M-j><S-j>
+nmap <S-M-k> <M-k><S-k>
+vmap <S-M-j> <M-j><S-j>
+vmap <S-M-k> <M-k><S-k>
+
+" Move viewport more
+nnoremap <C-M-j> 20<C-e>
+nnoremap <C-M-k> 20<C-y>
+vnoremap <C-M-j> 20<C-e>
+vnoremap <C-M-k> 20<C-y>
+
+" Move cursor more
+nnoremap <F36> 20j
+nnoremap <F37> 20k
+vnoremap <F36> 20j
+vnoremap <F37> 20k
+
 
 function! WrapCommand(direction, prefix)
     if a:direction == "up"
@@ -472,6 +495,9 @@ nmap <Space>w :set list!<CR>
 
 nmap <Return>w ciw<C-r>0<ESC>
 nmap <Return>W ciW<C-r>0<ESC>
+nmap <Return>b cib<C-r>0<ESC>
+nmap <Return>B ciB<C-r>0<ESC>
+nmap <Return>< ci<<C-r>0<ESC>
 nmap <Return>s dd"0P
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>

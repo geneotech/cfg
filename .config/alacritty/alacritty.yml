@@ -255,6 +255,8 @@ live_config_reload: false
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
+  - { key: J,     mods: Control|Shift,     chars: "\x1b[24;5~"                    }
+  - { key: K,     mods: Control|Shift,     chars: "\x1b[1;6P"                    }
   - { key: E,     mods: Control|Shift,     chars: "\x1b[21;5~"                    }
   - { key: H,     mods: Control|Shift,     chars: "\x1b[23;5~"                    }
   - { key: Back,     mods: Shift,     chars: "\x1b[19;5~"                    }
