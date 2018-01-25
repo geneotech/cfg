@@ -504,7 +504,7 @@ nmap <Return>" "_ci"<C-r>"<ESC>
 nmap <Return>{ "_ci{<C-r>"<ESC>
 
 " Replace current line with the last yank
-nmap <Return>s dd"0P
+nmap <Return>s "_ddP
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
