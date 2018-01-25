@@ -170,7 +170,7 @@ nmap H vic
 
 nnoremap Y ^yg_
 " F32 is bound to shift+backspace in alacritty
-nnoremap <F32> ^"0D"9dd
+nnoremap <F32> ^yg_"_dd
 inoremap <F32> <BS>
 
 " C-v just pastes the register in insert mode
@@ -495,13 +495,13 @@ nmap <Space>e :call OpenLastErrors()<CR>
 nmap <Space>v :e ~/cfg/.vimrc<CR>
 nmap <Space>w :set list!<CR>
 
-nmap <Return>w ciw<C-r>0<ESC>
-nmap <Return>W ciW<C-r>0<ESC>
-nmap <Return>b cib<C-r>0<ESC>
-nmap <Return>B ciB<C-r>0<ESC>
-nmap <Return>< ci<<C-r>0<ESC>
-nmap <Return>" ci"<C-r>0<ESC>
-nmap <Return>{ ci{<C-r>0<ESC>
+nmap <Return>w "_ciw<C-r>"<ESC>
+nmap <Return>W "_ciW<C-r>"<ESC>
+nmap <Return>b "_cib<C-r>"<ESC>
+nmap <Return>B "_ciB<C-r>"<ESC>
+nmap <Return>< "_ci<<C-r>"<ESC>
+nmap <Return>" "_ci"<C-r>"<ESC>
+nmap <Return>{ "_ci{<C-r>"<ESC>
 
 " Replace current line with the last yank
 nmap <Return>s dd"0P
