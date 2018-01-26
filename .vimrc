@@ -20,6 +20,7 @@ Plugin 'vim-scripts/ibmedit.vim'
 Plugin 'elmindreda/vimcolors'
 Plugin 'fcpg/vim-farout'
 Plugin 'machakann/vim-highlightedyank'
+Plugin 'easymotion/vim-easymotion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -489,6 +490,7 @@ nmap <Return>b "_cib<C-r>"<ESC>
 nmap <Return>B "_ciB<C-r>"<ESC>
 nmap <Return>< "_ci<<C-r>"<ESC>
 nmap <Return>" "_ci"<C-r>"<ESC>
+nmap <Return>' "_ci'<C-r>"<ESC>
 nmap <Return>{ "_ci{<C-r>"<ESC>
 
 " Replace current line with the last yank
@@ -727,3 +729,23 @@ autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
 
 nnoremap , ,
+nnoremap J \\j
+nnoremap z zz
+
+map J <Plug>(easymotion-j)
+map K <Plug>(easymotion-k)
+
+map <F36> <Plug>(easymotion-w)
+map <F37> <Plug>(easymotion-b)
+
+let g:EasyMotion_keys = 'asdghklzxcvbnqwertyuiopjfm'
+
+nnoremap <Up> <NOP>
+nnoremap <Down> <NOP>
+nnoremap <Left> <NOP>
+nnoremap <Right> <NOP>
+
+tnoremap <Up> <NOP>
+tnoremap <Down> <NOP>
+tnoremap <Left> <NOP>
+tnoremap <Right> <NOP>
