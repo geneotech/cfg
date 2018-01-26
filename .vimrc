@@ -183,29 +183,17 @@ cnoremap <F25> <C-w>
 
 " Faster moving around
 
-" Standard move cursor
-nnoremap <S-j> 10j
-nnoremap <S-k> 10k
-vnoremap <S-j> 10j
-vnoremap <S-k> 10k
-
 " Standard move viewport
-nnoremap <M-j> 10<C-e>
-nnoremap <M-k> 10<C-y>
-vnoremap <M-j> 10<C-e>
-vnoremap <M-k> 10<C-y>
-
-" Move cursor more
-nnoremap <F36> 20j
-nnoremap <F37> 20k
-vnoremap <F36> 20j
-vnoremap <F37> 20k
+nnoremap <F14> 10<C-e>
+nnoremap <F15> 10<C-y>
+vnoremap <F14> 10<C-e>
+vnoremap <F15> 10<C-y>
 
 " Move viewport more
-nnoremap <S-M-j> 20<C-e>
-nnoremap <S-M-k> 20<C-y>
-vnoremap <S-M-j> 20<C-e>
-vnoremap <S-M-k> 20<C-y>
+nnoremap <F16> 20<C-e>
+nnoremap <F18> 20<C-y>
+vnoremap <F16> 20<C-e>
+vnoremap <F18> 20<C-y>
 
 function! WrapCommand(direction, prefix)
     if a:direction == "up"
@@ -737,3 +725,5 @@ endfunction
 autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
+
+nnoremap , ,
