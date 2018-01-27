@@ -16,13 +16,29 @@ export EXTS=""
 source ~/.config/i3/workspace/current
 
 function gdbcore() {
-	gdb $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
+	if [ -f $WORKSPACE/build/current/Hypersomnia ]; then
+		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia
+	fi
+
+	if [ -f $WORKSPACE/build/current/Hypersomnia-Debug ]; then
+		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia-Debug
+	fi
+
+	gdb $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
 
 function hcore() {
+	if [ -f $WORKSPACE/build/current/Hypersomnia ]; then
+		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia
+	fi
+
+	if [ -f $WORKSPACE/build/current/Hypersomnia-Debug ]; then
+		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia-Debug
+	fi
+
 	#gdb -ex="set logging file bt.txt" -ex="set logging on" -ex="bt" -ex="q" $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
 	cd $WORKSPACE
-	gdb -ex="bt" -ex="q" $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
+	gdb -ex="bt" -ex="q" $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
 
 function journalsize() {
@@ -95,7 +111,7 @@ function make_with_logs() {
 		rm hypersomnia/core
 	fi
 
-	script -q -c "make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
+	script -q -c "time make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
 
 	# Remove timing info line
 	head -n -2 $LASTERR_PATH > /tmp/dobrazaraz

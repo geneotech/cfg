@@ -132,7 +132,7 @@ set viminfo^=%
 set title
 
 " Let us see relative line numbers by default
-set number relativenumber
+"set number relativenumber
 " set number
 
 " Let us only see the filename
@@ -237,6 +237,7 @@ let g:last_error_path_color = '/tmp/last_error_color.txt'
 function! OnBuildEvent(job_id, data, event) dict
 	if filereadable(g:last_error_path)
 		execute "lfile " . g:last_error_path
+		normal zz
 	else
 		echomsg "Build successful."
 	endif
@@ -245,6 +246,7 @@ endfunction
 function! OnDebugBuildEvent(job_id, data, event) dict
 	if filereadable(g:last_error_path)
 		execute "lfile " . g:last_error_path
+		normal zz
 	else
 		echomsg "Build successful."
 
@@ -492,6 +494,7 @@ nmap <Return>< "_ci<<C-r>"<ESC>
 nmap <Return>" "_ci"<C-r>"<ESC>
 nmap <Return>' "_ci'<C-r>"<ESC>
 nmap <Return>{ "_ci{<C-r>"<ESC>
+nmap <Return>t) "_ct)<C-r>"<ESC>
 
 " Replace current line with the last yank
 nmap <Return>s "_ddP
@@ -729,7 +732,6 @@ autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
 
 nnoremap , ,
-nnoremap J \\j
 nnoremap z zz
 
 map J <Plug>(easymotion-j)
@@ -749,3 +751,13 @@ tnoremap <Up> <NOP>
 tnoremap <Down> <NOP>
 tnoremap <Left> <NOP>
 tnoremap <Right> <NOP>
+
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+
+" These `n` & `N` mappings are options. You do not have to map `n` & `N` to
+" EasyMotion.
+" " Without these mappings, `n` & `N` works fine. (These mappings just provide
+" " different highlight method and have some other features )
+"map  n <Plug>(easymotion-next)
+"map  N <Plug>(easymotion-prev)
