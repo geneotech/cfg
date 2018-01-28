@@ -21,6 +21,7 @@ Plugin 'elmindreda/vimcolors'
 Plugin 'fcpg/vim-farout'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'romgrk/replace.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -495,8 +496,9 @@ nmap <Return>B "_ciB<C-r>"<ESC>
 nmap <Return>< "_ci<<C-r>"<ESC>
 nmap <Return>" "_ci"<C-r>"<ESC>
 nmap <Return>' "_ci'<C-r>"<ESC>
-nmap <Return>{ "_ci{<C-r>"<ESC>
-nmap <Return>t) "_ct)<C-r>"<ESC>
+
+nmap <Return> <Plug>ReplaceOperator
+vmap <Return> <Plug>ReplaceOperator
 
 " Replace current line with the last yank
 nmap <Return>s "_ddP
