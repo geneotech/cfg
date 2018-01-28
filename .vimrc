@@ -212,6 +212,8 @@ function! WrapCommand(direction, prefix)
         catch /^Vim\%((\a\+)\)\=:E\%(776\|42\):/
         endtry
     endif
+
+	normal zz
 endfunction
 
 " Alacritty bindings:
@@ -372,7 +374,7 @@ imap <silent> <F7> <ESC><F7>
 nmap <Space>h :execute "help " . expand("<cword>")<CR>
 
 " F25 is bound to Control + Backspace in Alacritty
-inoremap <F25> <C-W>
+inoremap <F25> <C-w>
 
 " fzf bindings
 
