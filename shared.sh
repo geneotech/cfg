@@ -63,6 +63,7 @@ alias diskspace='sudo gdmap -f "/"'
 alias upx='sudo xrdb ~/.Xresources'
 alias pls='sudo $(fc -ln -1)'
 alias gst="git status "
+alias gam="git commit --amend "
 alias glg="git log "
 alias gcm="git commit -m "
 alias gdiff='git diff '

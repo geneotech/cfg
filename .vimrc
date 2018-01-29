@@ -57,6 +57,8 @@ endif " has("autocmd")
 " always append newline when appending to a register
 set cpoptions+=>
 
+set notimeout
+"
 " Keep the yank highlight 
 let g:highlightedyank_highlight_duration = -1
 
@@ -765,3 +767,5 @@ tnoremap <Right> <NOP>
 " " different highlight method and have some other features )
 "map  n <Plug>(easymotion-next)
 "map  N <Plug>(easymotion-prev)
+
+autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
