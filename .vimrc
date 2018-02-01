@@ -366,7 +366,7 @@ let g:gdb_keymap_refresh = '<f12>'
 
 " Build bindings
 
-nmap <silent> <F19> :call SucklessMake(expand("%:f") . ".o")<CR>
+nmap <silent> <F19> :call SucklessMake(ToRepoPath(expand("%:f")) . ".o")<CR>
 nmap <silent> <F7> :call SucklessMake("all")<CR>
 nmap <silent> <F6> :call SucklessMakeDebug("all")<CR>
 nmap <silent> <F5> :call SucklessMake("run")<CR>
@@ -389,8 +389,12 @@ function! s:find_git_root()
   return system('cd ' . expand("%:h") . '; git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
+function! ToRepoPath(fpath)
+	return substitute(expand(a:fpath), "/home/pbc/Hypersomnia/", "", "")
+endfunc
+
 function! ToCppIncludePath(fpath)
-	return '#include "' . substitute(substitute(expand(a:fpath), "src/", "", ""), "/home/pbc/Hypersomnia/", "", "") . '"' 
+	return '#include "' . ToRepoPath(substitute(expand(a:fpath), "src/", "", "")) . '"' 
 endfunc
 
 command! -nargs=1 CopyPath let @" = <q-args>
