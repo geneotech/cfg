@@ -300,7 +300,7 @@ function! ConfHyper() abort
         \ "showbreakpoint" : 1,
         \ "showbacktrace" : 0,
         \ "conf_gdb_layout" : ["vsp"],
-        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', current_wp . "build/current/Hypersomnia-Debug"],
+        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', current_wp . "build/current/Hypersomnia"],
         \ "window" : [
         \   {   "name":   "gdbserver",
         \       "status":  0,
@@ -366,6 +366,7 @@ let g:gdb_keymap_refresh = '<f12>'
 
 " Build bindings
 
+nmap <silent> <F19> :call SucklessMake(expand("%:f") . ".o")<CR>
 nmap <silent> <F7> :call SucklessMake("all")<CR>
 nmap <silent> <F6> :call SucklessMakeDebug("all")<CR>
 nmap <silent> <F5> :call SucklessMake("run")<CR>
