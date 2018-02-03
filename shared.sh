@@ -1,27 +1,26 @@
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-PATH="/home/pbc/.gem/bin:$PATH"
-export GEM_HOME=$HOME/.gem
-# fzf looks only through filenames
-export FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
-# Don't freeze editor on Ctrl+S
-#stty -ixon
-export TERMINAL=alacritty
+# Important variables
 export EDITOR=nvim
 export VISUAL=~/cfg/runnvim.sh
-alias mkexe='sudo chmod +x '
-alias gitmkexe='git update-index --chmod=+x '
-alias wszystkim='sudo chmod 777 -R .'
-# my text file extensions for use in grep searches
-export EXTS=""
+export TERMINAL=alacritty
+
+# Ruby setup
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+PATH="/home/pbc/.gem/bin:$PATH"
+
+export GEM_HOME=$HOME/.gem
+
+# FZF setup
+export FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
+
+# Don't freeze editor on Ctrl+S
+# Looks like we no longer need it though
+# stty -ixon
+
 source ~/.config/i3/workspace/current
 
 function gdbcore() {
 	if [ -f $WORKSPACE/build/current/Hypersomnia ]; then
 		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia
-	fi
-
-	if [ -f $WORKSPACE/build/current/Hypersomnia-Debug ]; then
-		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia-Debug
 	fi
 
 	gdb $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
@@ -32,56 +31,14 @@ function hcore() {
 		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia
 	fi
 
-	if [ -f $WORKSPACE/build/current/Hypersomnia-Debug ]; then
-		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia-Debug
-	fi
-
 	#gdb -ex="set logging file bt.txt" -ex="set logging on" -ex="bt" -ex="q" $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
 	cd $WORKSPACE
 	gdb -ex="bt" -ex="q" $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
 
-function journalsize() {
-	sudo journalctl --vacuum-size=$1
-}
-
-alias ptsy='ls /dev/pts'
-alias procki='ps aux | ag '
-alias rbt='sudo reboot'
-alias journalgetsize='journalctl --disk-usage'
-alias whenlm="stat -c '%y' "
-alias mycha='source ~/.xinitrc'
-alias ag='ag --hidden'
-alias nuke='pkill -f '
 alias interrupt='pkill -f --signal 2 '
-alias int='interrupt '
-alias spac='sudo shutdown -h now'
 alias ls='ls --color=auto'
-alias relx='xrdb ~/.Xresources'
-alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'
-alias diskspace='sudo gdmap -f "/"'
-alias upx='sudo xrdb ~/.Xresources'
-alias pls='sudo $(fc -ln -1)'
-alias gst="git status "
-alias gam="git commit --amend "
-alias glg="git log "
-alias gcm="git commit -m "
-alias gdiff='git diff '
-alias gdifft='git difftool -d '
-alias gadd="git add "
-alias gall="git add ."
-alias gcmall="gall; gcm "
-alias gpush="git push "
-alias gclean="git clean -d -x -f "
-alias gcleanup="git reset --hard; git clean -d -x -f "
-alias meldh="meld $PWD"
-alias serve="bundle exec jekyll serve"
-alias xtr="/bin/extract"
-alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
-alias rmpkg="yaourt -Rsn "
-alias prmpkg="sudo pacman -Rsn "
-alias nogpg='yaourt --m-arg "--skippgpcheck"'
-alias uppkgs='yaourt -Su --aur '
+
 LASTERR_PATH=/tmp/last_error.txt
 LASTERR_PATH_COLOR=/tmp/last_error_color.txt
 
@@ -174,3 +131,47 @@ function reb() {
 
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
+
+alias ptsy='ls /dev/pts'
+alias procki='ps aux | ag '
+alias rbt='sudo reboot'
+alias journalgetsize='journalctl --disk-usage'
+alias whenlm="stat -c '%y' "
+alias mycha='source ~/.xinitrc'
+alias ag='ag --hidden'
+alias nuke='pkill -f '
+alias int='interrupt '
+alias spac='sudo shutdown -h now'
+alias relx='xrdb ~/.Xresources'
+alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'
+alias diskspace='sudo gdmap -f "/"'
+alias upx='sudo xrdb ~/.Xresources'
+alias pls='sudo $(fc -ln -1)'
+alias gst="git status "
+alias gam="git commit --amend "
+alias glg="git log "
+alias gcm="git commit -m "
+alias gdiff='git diff '
+alias gdifft='git difftool -d '
+alias gadd="git add "
+alias gall="git add ."
+alias gcmall="gall; gcm "
+alias gpush="git push "
+alias gclean="git clean -d -x -f "
+alias gcleanup="git reset --hard; git clean -d -x -f "
+alias meldh="meld $PWD"
+alias serve="bundle exec jekyll serve"
+alias xtr="/bin/extract"
+alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
+alias rmpkg="yaourt -Rsn "
+alias prmpkg="sudo pacman -Rsn "
+alias nogpg='yaourt --m-arg "--skippgpcheck"'
+alias uppkgs='yaourt -Su --aur '
+alias mkexe='sudo chmod +x '
+alias gitmkexe='git update-index --chmod=+x '
+alias wszystkim='sudo chmod 777 -R .'
+
+function journalsize() {
+	sudo journalctl --vacuum-size=$1
+}
+
