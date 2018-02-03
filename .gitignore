@@ -21,3 +21,4 @@ QtProject.conf
 .vim/.netrwhist
 .config/activitywatch
 .config/nvim/.netrwhist
+maincpp/main

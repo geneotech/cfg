@@ -238,13 +238,23 @@ endfunction
 
 let g:last_error_path = '/tmp/last_error.txt'
 let g:last_error_path_color = '/tmp/last_error_color.txt'
+let g:run_result_path = '/tmp/run_result.txt'
 
 function! OnBuildEvent(job_id, data, event) dict
 	if filereadable(g:last_error_path)
 		execute "lfile " . g:last_error_path
 		normal zz
 	else
-		echomsg "Build successful."
+		if filereadable(g:run_result_path)
+			"lfile g:run_result_path
+			let fff = readfile(g:run_result_path)
+
+			if len(fff) > 0 
+				echomsg fff[0]
+			endif
+		else
+			echomsg "Build successful."
+		endif
 	endif
 endfunction
 
@@ -262,13 +272,19 @@ endfunction
 function! SucklessMake(targetname)
 	wa
 
+	let runscript = expand("%:h") . "/run.sh"
+
     let callbacks = {
     \ 'on_exit': function('OnBuildEvent')
     \ }
 
 	let jobcmd = "zsh -c 'vim_target " . a:targetname . "'"
-	"echomsg jobcmd
 
+	if filereadable(runscript)
+		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; source " . runscript . "'"
+	endif
+
+	"echomsg jobcmd
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 
@@ -300,7 +316,7 @@ function! ConfHyper() abort
         \ "showbreakpoint" : 1,
         \ "showbacktrace" : 0,
         \ "conf_gdb_layout" : ["vsp"],
-        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', current_wp . "build/current/Hypersomnia"],
+        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', current_wp . "$WORKSPACE_EXE"],
         \ "window" : [
         \   {   "name":   "gdbserver",
         \       "status":  0,
@@ -366,6 +382,7 @@ let g:gdb_keymap_refresh = '<f12>'
 
 " Build bindings
 
+" F19 = S+F7
 nmap <silent> <F19> :call SucklessMake(ToRepoPath(expand("%:f")) . ".o")<CR>
 nmap <silent> <F7> :call SucklessMake("all")<CR>
 nmap <silent> <F6> :call SucklessMakeDebug("all")<CR>
@@ -390,7 +407,7 @@ function! s:find_git_root()
 endfunction
 
 function! ToRepoPath(fpath)
-	return substitute(expand(a:fpath), "/home/pbc/Hypersomnia/", "", "")
+	return substitute(expand(a:fpath), "$WORKSPACE/", "", "")
 endfunc
 
 function! ToCppIncludePath(fpath)
@@ -609,7 +626,7 @@ let g:gutentags_cache_dir='/tmp'
 " Color fixes
 set termguicolors
 
-colorscheme farout
+colorscheme moonfly
 
 " Wrap lines in diff mode by default
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif

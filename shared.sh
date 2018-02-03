@@ -18,20 +18,28 @@ export FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
 
 source ~/.config/i3/workspace/current
 
+export WORKSPACE_NAME=$(basename $WORKSPACE)
+export WORKSPACE_EXE=$WORKSPACE/build/current/$WORKSPACE_NAME
+export OUTPUT_TERM=/dev/pts/1
+
+if [ -f $WORKSPACE/build.sh ]; then
+	export WORKSPACE_CUSTOM_BUILD=true
+fi
+
 function gdbcore() {
-	if [ -f $WORKSPACE/build/current/Hypersomnia ]; then
-		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia
+	if [ -f $WORKSPACE_EXE ]; then
+		TARGET_EXECUTABLE=$WORKSPACE_EXE
 	fi
 
 	gdb $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
 
 function hcore() {
-	if [ -f $WORKSPACE/build/current/Hypersomnia ]; then
-		TARGET_EXECUTABLE=$WORKSPACE/build/current/Hypersomnia
+	if [ -f $WORKSPACE_EXE ]; then
+		TARGET_EXECUTABLE=$WORKSPACE_EXE
 	fi
 
-	#gdb -ex="set logging file bt.txt" -ex="set logging on" -ex="bt" -ex="q" $WORKSPACE/build/current/Hypersomnia $WORKSPACE/hypersomnia/core
+	#gdb -ex="set logging file bt.txt" -ex="set logging on" -ex="bt" -ex="q" $WORKSPACE_EXE $WORKSPACE/hypersomnia/core
 	cd $WORKSPACE
 	gdb -ex="bt" -ex="q" $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
@@ -39,8 +47,9 @@ function hcore() {
 alias interrupt='pkill -f --signal 2 '
 alias ls='ls --color=auto'
 
-LASTERR_PATH=/tmp/last_error.txt
-LASTERR_PATH_COLOR=/tmp/last_error_color.txt
+export LASTERR_PATH=/tmp/last_error.txt
+export LASTERR_PATH_COLOR=/tmp/last_error_color.txt
+export RUN_RESULT_PATH=/tmp/run_result.txt
 
 function rmlogs() {
 	rm $LASTERR_PATH
@@ -59,8 +68,6 @@ alias clnerr='stripcodes $LASTERR_PATH'
 function make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
-
-	OUTPUT_TERM=/dev/pts/1
 
 	rmlogs
 
@@ -91,8 +98,8 @@ function make_current() {
 }
 
 function handle_last_errors() {
-	ERRORS=$(grep -e "error:" $LASTERR_PATH)
-	LINKER_ERRORS=$(grep -e "error: ld" $LASTERR_PATH)
+	ERRORS=$(ag "error:" $LASTERR_PATH)
+	LINKER_ERRORS=$(ag "error: ld" $LASTERR_PATH)
 	
 	if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
 	then
