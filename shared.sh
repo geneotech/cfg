@@ -156,6 +156,7 @@ alias int='interrupt '
 alias spac='sudo shutdown -h now'
 
 # Common fs aliases
+alias fixspaces='for f in *\ *; do mv "$f" "${f// /_}"; done'
 alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'
 alias whenlm="stat -c '%y' "
 alias mkexe='sudo chmod +x '
@@ -168,7 +169,7 @@ alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
 alias rmpkg="yaourt -Rsn "
 alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yaourt --m-arg "--skippgpcheck"'
-alias uppkgs='yaourt -Su --aur '
+alias uppkgs='yaourt -Syu --aur '
 alias journalgetsize='journalctl --disk-usage'
 
 # Git aliases

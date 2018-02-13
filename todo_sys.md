@@ -10,6 +10,8 @@ system maintenance
 	- update alacritty as well
 	- test out the vimagit
 
+- consider having some rcs in ramfs?
+
 vim should always use zz whenever navigating through anything?
 	- except N, n, /, ? etc
 
