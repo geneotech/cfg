@@ -10,7 +10,7 @@ if [ -f ./main ]; then
 	rm ./main
 fi
 
-GCC_COMMAND='g++ -o ./main $(readlink -f ./main.cpp);'
+GCC_COMMAND='g++ -std=gnu++1z -o ./main $(readlink -f ./main.cpp);'
 
 script -q -c $GCC_COMMAND $LASTERR_PATH > $OUTPUT_TERM
 

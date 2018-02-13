@@ -168,7 +168,7 @@ let g:grepper.operator.stop = 300
 " Yeah, I know C-z mapping is strange, but I really have no keys left...
 nnoremap <C-z> <C-w><C-w>
 
-nmap gf gF
+nmap gf gFz
 " Quickly select whole hunk the cursor is currently in
 nmap H vic
 
@@ -316,7 +316,7 @@ function! ConfHyper() abort
         \ "showbreakpoint" : 1,
         \ "showbacktrace" : 0,
         \ "conf_gdb_layout" : ["vsp"],
-        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', current_wp . "$WORKSPACE_EXE"],
+        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', $WORKSPACE_EXE],
         \ "window" : [
         \   {   "name":   "gdbserver",
         \       "status":  0,
@@ -388,6 +388,7 @@ nmap <silent> <F7> :call SucklessMake("all")<CR>
 nmap <silent> <F6> :call SucklessMakeDebug("all")<CR>
 nmap <silent> <F5> :call SucklessMake("run")<CR>
 
+imap <silent> <F19> <ESC><F19>
 imap <silent> <F5> <ESC><F5>
 imap <silent> <F6> <ESC><F6>
 imap <silent> <F7> <ESC><F7>
@@ -407,7 +408,7 @@ function! s:find_git_root()
 endfunction
 
 function! ToRepoPath(fpath)
-	return substitute(expand(a:fpath), "$WORKSPACE/", "", "")
+	return substitute(expand(a:fpath), $WORKSPACE, "", "")
 endfunc
 
 function! ToCppIncludePath(fpath)
@@ -700,6 +701,7 @@ let g:indent_eol_closers = [
 
 let g:indent_decreasers = [
 	\'public:', 
+	\') \:',
 	\'protected:', 
 	\'private:'
 \]
@@ -791,3 +793,6 @@ tnoremap <Right> <NOP>
 "map  N <Plug>(easymotion-prev)
 
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
+
+inoremap <C-h> <C-G>U<Left>
+inoremap <C-l> <C-G>U<Right>
