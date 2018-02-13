@@ -45,7 +45,6 @@ function hcore() {
 }
 
 alias interrupt='pkill -f --signal 2 '
-alias ls='ls --color=auto'
 
 export LASTERR_PATH=/tmp/last_error.txt
 export LASTERR_PATH_COLOR=/tmp/last_error_color.txt
@@ -137,6 +136,7 @@ function reb() {
 }
 
 # Program aliases
+alias ls="exa"
 alias meldh="meld $PWD"
 alias serve="bundle exec jekyll serve"
 alias ag='ag --hidden'
