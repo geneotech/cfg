@@ -494,3 +494,5 @@ autocmd FilterWritePre * if &diff | highlight DiffChange guibg=#001538 | endif
 
 highlight SpecialKey guifg=#505050
 highlight NonText guifg=#505050
+
+highlight HighlightedyankRegion guifg=NONE guibg=#3f1000

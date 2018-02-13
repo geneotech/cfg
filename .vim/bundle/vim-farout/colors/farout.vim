@@ -208,3 +208,5 @@ highlight GitGutterAdd guifg=darkgreen
 highlight GitGutterChange guifg=darkyellow 
 highlight GitGutterChangeDelete guifg=darkyellow 
 highlight GitGutterDelete guifg=darkred
+
+highlight! HighlightedyankRegion guifg=NONE guibg=#3f1000

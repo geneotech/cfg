@@ -5,25 +5,29 @@ if !exists("s:init")
 endif
 
 
-function! state#Open(config) abort
+function! nelib#state#Open(config) abort
+    let l:__func__ = substitute(expand('<sfile>'), '.*\(\.\.\|\s\)', '', '')
+    silent! call s:log.info(l:__func__. " args=", string(a:config))
+
     let conf = a:config
     if type(conf) != type({})
        \ || ! has_key(conf, "Scheme")
-        throw "neogdb.state#Open: config not dict or have no 'Scheme'."
+        throw "neogdb.nelib#state#Open: config not dict or have no 'Scheme'."
     endif
 
     let Creator = function(conf.Scheme)
     if empty(Creator)
-        throw "neogdb.state#Open: no Creator '". conf['Scheme'] ."'."
+        throw "neogdb.nelib#state#Open: no Creator '". conf['Scheme'] ."'."
     endif
     let scheme = Creator()
-    silent! call s:log.info("Open ", conf['Scheme'])
-    let g:state_ctx = state#CreateRuntime(scheme, conf)
+    silent! call s:log.info(l:__func__. " ", conf['Scheme'])
+    let g:state_ctx = nelib#state#CreateRuntime(scheme, conf)
     return g:state_ctx
 endfunc
 
 
-function! state#CreateRuntime(scheme, config) abort
+function! nelib#state#CreateRuntime(scheme, config) abort
+    let l:__func__ = substitute(expand('<sfile>'), '.*\(\.\.\|\s\)', '', '')
     let scheme = a:scheme
     let conf = a:config
 
@@ -75,16 +79,16 @@ function! state#CreateRuntime(scheme, config) abort
         for i in v
             let matches = i.match
             if type(matches) != type([])
-                throw printf("neogdb.state#CreateRuntime: state '%s' match '%s' should be list"
+                throw printf("neogdb.nelib#state#CreateRuntime: state '%s' match '%s' should be list"
                         \ ,k, string(matches))
             endif
             for match in matches
                 call add(patterns, [ match, 'on_call'
-                            \ , [i.window, i.action, i.arg0] ])
+                            \ , [i.hint, i.window, i.action, i.arg0] ])
             endfor
         endfor
 
-        let state = expect#State(k, patterns)
+        let state = nelib#expect#State(k, patterns)
         let ctx.state[k] = state
 
         " self is termopen's target, here is the window, not state itself
@@ -99,10 +103,12 @@ function! state#CreateRuntime(scheme, config) abort
 
     " Load window
     " Create new tab as FSM's view
+    silent! call s:log.info("Creating the 'main' window ...")
     tabnew | silent! b2
     let ctx._tab = tabpagenr()
     silent! ball 1
     let ctx._wid_main = win_getid()
+    silent! call s:log.info("The 'main' window-id=", ctx._wid_main)
 
     let windows = scheme.window
     for conf_win in windows
@@ -111,21 +117,21 @@ function! state#CreateRuntime(scheme, config) abort
         endif
 
         if has_key(ctx.window, conf_win.name)
-            throw printf("neogdb.state#CreateRuntime: window duplicate '%s'"
+            throw printf("neogdb.nelib#state#CreateRuntime: window duplicate '%s'"
                         \ , conf_win.name)
         endif
         let window = {}
         let ctx.window[conf_win.name] = window
         let window._name = conf_win.name
         if !has_key(ctx.state, conf_win.state)
-            throw printf("neogdb.state#CreateRuntime: window ''%s' initstate '%s' not exist"
+            throw printf("neogdb.nelib#state#CreateRuntime: window ''%s' initstate '%s' not exist"
                         \ , conf_win.name, conf_win.state)
         endif
         let state0 = copy(ctx.state[conf_win.state])
         let window._state = state0
         let state0._window = window
 
-        let target = expect#Parser(state0, window)
+        let target = nelib#expect#Parser(state0, window)
         let window._target = target
         let window._ctx = ctx
 
@@ -154,6 +160,7 @@ function! state#CreateRuntime(scheme, config) abort
             endif
 
             let window._client_id = jobstart(cmdstr, target)
+            silent! call s:log.info(l:__func__, " jobstart[". string(window._client_id). "]: ", cmdstr)
         else
             for layout in layout_list
                 exec layout
@@ -164,6 +171,7 @@ function! state#CreateRuntime(scheme, config) abort
             let window._bufnr = bufnr('%')
             " Scroll to the end of terminal output
             normal G
+            silent! call s:log.info(l:__func__, " termopen:", cmdstr)
         endif
     endfor
 
@@ -171,43 +179,53 @@ function! state#CreateRuntime(scheme, config) abort
     if win_gotoid(ctx._wid_main) == 1
         let ctx._jump_window = win_id2win(ctx._wid_main)
         stopinsert
+    else
+        silent! call s:log.info("Backto 'main' window fail with window-id=", ctx._wid_main)
     endif
 
 
     " self is termopen's target, here is the window, not ctx itself
     " @match1: [i.window, i.action, i.arg0]
     function! ctx.on_call(match1, ...)
+        let l:__func__ = "ctx.on_call"
         let matched = a:match1
         silent! call s:log.info("matched: ", matched)
+        "silent! call s:log.trace("self=", string(self))
 
-        if empty(matched[1]) || empty(matched[2])
-            throw "neogdb.state#CreateRuntime: have no 'action','arg0' with " . string(matched)
+        if empty(matched[2]) || empty(matched[3])
+            throw "neogdb.nelib#state#CreateRuntime: have no 'action','arg0' with " . string(matched)
         endif
 
         let window = self
-        if !empty(matched[0])
-           \ && has_key(ctx.window, matched[0])
-            let window = ctx.window[matched[0]]
+        if !empty(matched[1])
+           \ && has_key(ctx.window, matched[1])
+            let window = ctx.window[matched[1]]
         endif
 
         try
-            if matched[1] ==# 'call'
+            if matched[2] ==# 'call'
                 let scheme = g:state_ctx.scheme
-                if has_key(scheme, matched[2])
-                    call call(scheme[matched[2]], a:000, window)
+                let l:funcname = matched[3]
+                if has_key(scheme, l:funcname)
+                    let l:funcargs = []
+                    call add(l:funcargs, l:funcname)
+                    call extend(l:funcargs, a:000)
+                    silent! call s:log.info(l:__func__, "func=", l:funcname,
+                                \" args=", string(l:funcargs))
+                    call call(scheme[l:funcname], l:funcargs, scheme)
                 else
                     silent! call s:log.info("Scheme '", scheme.name,
-                                \"' call function '", matched[2], "' not exist")
+                                \"' call function '", l:funcname, "' not exist")
                 endif
-            elseif matched[1] ==# 'send'
-                let str = call("printf", [matched[2]] + a:000)
+            elseif matched[2] ==# 'send'
+                let str = call("printf", [l:funcname] + a:000)
                 call jobsend(window._client_id, str."\<cr>")
-            elseif matched[1] ==# 'switch'
-                call state#Switch(window._name, matched[2], 0)
-            elseif matched[1] ==# 'push'
-                call state#Switch(window._name, matched[2], 1)
-            elseif matched[1] ==# 'pop'
-                call state#Switch(window._name, matched[2], 2)
+            elseif matched[2] ==# 'switch'
+                call state#Switch(window._name, l:funcname, 0)
+            elseif matched[2] ==# 'push'
+                call state#Switch(window._name, l:funcname, 1)
+            elseif matched[2] ==# 'pop'
+                call state#Switch(window._name, l:funcname, 2)
             endif
         catch
             silent! call s:log.info(matched, " trigger ", v:exception)

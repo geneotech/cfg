@@ -37,15 +37,22 @@ The code reference: https://github.com/neovim/neovim/blob/master/contrib/gdb/neo
 ```
 ## Screen Demo
 
-Press <F2> to toggle gdb-local or gdb-remote.
+Press <F2> to toggle Nbgdb or Nbgdbattach.
 
-### gdb local
+### gdb directly
 
-    :GdbLocal confloc#me a.out ""
+    :Nbgdb t1
 
-### gdb remote
+### gdb attach pid
 
-    :GdbRemote confos#me sysinit/init 10.1.1.125:444
+So far, the `attach` call by `sudo`, so maybe we should input the **sudo-password**. The reason is:
+    [gdb-attach-fails-with-ptrace-operation-not-permitted](https://blog.mellenthin.de/archives/2010/10/18/gdb-attach-fails-with-ptrace-operation-not-permitted/)
+
+    :Nbgdbattach t1 <t1-pid>
+
+### gdb remote target
+
+    :Nbgdbattach sysinit/init 10.1.1.125:444
 
 ### gif
 
@@ -75,7 +82,7 @@ Plugin 'huawenyu/neogdb.vim'
 # Usage
 
 ## commands
-  - :GdbLocal my_debug_app
+  - :GdbLocal
   - :GdbDebugStop
   - :GdbToggleBreakpoint
   - :GdbClearBreakpoints
@@ -90,15 +97,56 @@ Plugin 'huawenyu/neogdb.vim'
   - :GdbWatchWord
 
 ## Default keymaps
+  - `<F2>` Helper Start
   - `<F4>` continue
   - `<F5>` next
   - `<F6>` step
   - `<F7>` finish
-  - `<F9>` print <var>
+  - `<F8>` util
+  - `<F9>` Normal-mode: breakpoints
+  - `<F9>` Select-Mode: print <var>
+
+## Sample
+
+  There have a c file `autoload/examples/t1.c` in the plugin's dir.
+  Please copy it to your test dir.
+
+```sh
+    ### compile test
+    $ cd /dir/of/file/t1.c
+    $ gcc -g -O0 -o t1 t1.c
+    ### start gdb
+    $ vi t1.c
+      If default keymap, <F2>, the command line show `:Nbgdb t1`, <Enter> to start gdb.
+```
 
 # Customization
 
 Put these in your ``~/.vimrc`` to customize the keymaps:
+
+## keymaps leader
+
+If define *g:neobugger_leader*, will *ignore* all *g:gdb_keymap_...* customized.
+
+```vim
+let g:neobugger_leader = ';'
+```
+
+Then the keymaps will be `g:neobugger_leader` + `<char>`, the `<char>` like:
+  - `r`: GdbRefresh
+  - `c`: GdbContinue
+  - `n`: GdbNext
+  - `i`: GdbStep
+  - `N`: GdbFinish
+  - `t`: GdbUntil
+  - `b`: GdbToggleBreak
+  - `a`: GdbToggleBreakAll
+  - `C`: GdbClearBreak
+  - `x`: GdbDebugStop
+  - `k`: GdbFrameUp
+  - `j`: GdbFrameDown
+
+## keymaps without leader
 
 ```vim
 let g:gdb_keymap_continue = '<f8>'
@@ -119,10 +167,44 @@ let g:gdb_keymap_debug_stop = '<f17>'
 
 ## Miscellaneous
 
-By default, if you run ``GdbLocal`` or ``GdbRemote`` when GDB is already started,  
+### config windows
+
+Current implement only support two kinds of windows: `backtrace`, `breakpoint`.
+The default config is:
+- local-mode, diable these windows
+- attach-mode, open them
+
+But we can modify the default bahaviour by config:
+
+```vim
+let g:neogdb_window = ['backtrace', 'breakpoint']
+```
+
+### Customize attach parameter
+
+The ``Nbgdbattach`` always use `target remote` to connect a real searver which is different in everyone's env.  
+So we can specific a local host by put these into `.vimrc`:
+
+```vim
+if exists("$NBG_ATTACH_REMOTE_STR")
+  let g:neogdb_attach_remote_str = $NBG_ATTACH_REMOTE_STR
+else
+  let g:neogdb_attach_remote_str = 'sysinit/init 192.168.0.180:444'
+endif
+```
+
+Or define a env var `NBG_ATTACH_REMOTE_STR` by putting in `.bashrc`:
+```shell
+export NBG_ATTACH_REMOTE_STR="sysinit/init 192.168.0.180:444"
+```
+
+### Enable restart
+
+By default, if you run ``Nbgdb`` or ``Nbgdbattach`` when GDB is already started,  
 the plugin will send an interrupt (``<c-c>``) followed by a ``start``.  
 This is in order to speed up the edit-compile-test cycle.  
 If you instead want an error to be thrown when GDB is already started, change this variable:
+
 
 ```vim
 let g:restart_app_if_gdb_running = 0
@@ -130,6 +212,8 @@ let g:restart_app_if_gdb_running = 0
 
 By default, the plugin toggles the breakpoint right after pressing ``g:gdb_keymap_toggle_break``.  
 If this flag is set to 1, the plugin will require you to confirm the command with Enter which lets you edit the command before issuing it:
+
+### others
 
 ```vim
 let g:gdb_require_enter_after_toggling_breakpoint = 0
@@ -139,7 +223,7 @@ To send your own commands to GDB:
 
 ```vim
 " Prints the value of the variable under the cursor
-nmap <Space>p :call gdb#Send("print " . expand('<cword>'))<CR>
+nmap <Space>p :call neobugger#gdb#Send("print " . expand('<cword>'))<CR>
 ```
 
 ### Map and unmap callbacks
@@ -164,8 +248,22 @@ function! NeogdbvimUnmapCallback()
 endfunc
 ```
 
+## Troubleshooting by log
+
+### Enable **print c-tyle** log
+
+```vim: add plugin-log to your ~/.vimrc
+    Plug 'huawenyu/vimlogger'
+
+    " Also append this line to your ~/.vimrc to start our logfile
+    silent! call logger#init('ALL', ['/tmp/vim.log'])
+```
+
+### Check runtime log
+
+- Start vim
+- Using another terminal, off couse it's easy if you using `tmux` which you'll not regret to meet the tools.
+  watching the log by `tail -f /tmp/vim.log`
+
 # License
 Vim license, see LICENSE
-
-# Maintainer
-Wilson Huawen Yu <[huawen.yu@gmail.com](mailto:huawen.yu@gmail.com)>
