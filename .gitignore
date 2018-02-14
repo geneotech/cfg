@@ -21,4 +21,5 @@ QtProject.conf
 .vim/.netrwhist
 .config/activitywatch
 .config/nvim/.netrwhist
+.config/aacs
 maincpp/main

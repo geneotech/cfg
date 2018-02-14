@@ -54,6 +54,9 @@ else
 endif " has("autocmd")
 
 """"""""" General behaviour
+" Use system clipboard
+set clipboard=unnamedplus
+
 " always append newline when appending to a register
 set cpoptions+=>
 
@@ -178,7 +181,7 @@ nnoremap <F32> ^yg_"_dd
 inoremap <F32> <BS>
 
 " C-v just pastes the register in insert mode
-inoremap <C-v> <C-r>"
+inoremap <C-v> <ESC>pa
 cnoremap <C-v> <C-R>=@"<CR>
 " Delete whole word backwards - F25 is bound to ctrl+backspace
 cnoremap <F25> <C-w>
@@ -608,6 +611,8 @@ map <silent> <C-d> :execute "Gdiff"<CR>
 " We will anyway do it from the status window
 " map <C-C> :execute "Gcommit"<CR>
 nmap <silent> <C-a> GVgg
+imap <silent> <C-a> <ESC>GVgg
+
 nmap U :execute "GitGutterUndoHunk"<CR>
 
 runtime plugin/gitgutter.vim
@@ -758,8 +763,13 @@ function! GenericIndent(lnum)
 endfunction
 
 autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
+
+" On paste, fix indentation
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
+
+" But let C-v never indent
+nnoremap <C-v> p
 
 nnoremap , ,
 nnoremap z zz
@@ -776,11 +786,6 @@ nnoremap <Up> <NOP>
 nnoremap <Down> <NOP>
 nnoremap <Left> <NOP>
 nnoremap <Right> <NOP>
-
-tnoremap <Up> <NOP>
-tnoremap <Down> <NOP>
-tnoremap <Left> <NOP>
-tnoremap <Right> <NOP>
 
 "map  / <Plug>(easymotion-sn)
 "omap / <Plug>(easymotion-tn)

@@ -5,20 +5,22 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- drivers for corsair
+- use other terminal for normal work, that has a scrollback
+	- do some research
+	- still use alacritty for neovim work
+
+- fix rofi and caps
+	- caps lock might have been not bound accidentally? like mouse sometimes malfunctions
+	- actually that rofi position is better given that vim displays matches at the bottom as well 
+
+- look into zsh plugins
+
 system maintenance
 	- update activity-watch
-	- update alacritty as well
-	- test out the vimagit
+	- uninstall unimportant packages
 
 - consider having some rcs in ramfs?
-
-vim should always use zz whenever navigating through anything?
-	- except N, n, /, ? etc
-
-we could assume that the exe has always the same name as the exe
-
-If we're playing with neovim terminal, set scrollback=1 clears scrollback
-
 
 plan carefully the system's bash scripts behaviour for building, running etc 
 	- with bullet poitns!
@@ -26,4 +28,3 @@ plan carefully the system's bash scripts behaviour for building, running etc
 		- (perhaps should work on f5/f6/f7 or just s+f7?)
 		- should run a command like gdb sth sth
 
-c+s+n should open a new buffer in some predefined folder
