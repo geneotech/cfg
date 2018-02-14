@@ -787,6 +787,9 @@ nnoremap <Down> <NOP>
 nnoremap <Left> <NOP>
 nnoremap <Right> <NOP>
 
+tnoremap <Up> <NOP>
+tnoremap <Down> <NOP>
+
 "map  / <Plug>(easymotion-sn)
 "omap / <Plug>(easymotion-tn)
 
@@ -801,3 +804,16 @@ autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 
 inoremap <C-h> <C-G>U<Left>
 inoremap <C-l> <C-G>U<Right>
+
+if strlen($LAUNCH_TERMINAL) > 0
+	tnoremap <Up> <NOP>
+	tnoremap <Down> <NOP>
+
+	nnoremap o i<Return>
+
+	tunmap <S-k>
+	tunmap <S-j>
+
+	terminal
+	startinsert
+endif
