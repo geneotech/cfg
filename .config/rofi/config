@@ -1,1 +1,3 @@
 rofi.theme: /usr/share/rofi/themes//DarkBlue.rasi
+rofi.kb-row-down:J
+rofi.kb-row-up:K
