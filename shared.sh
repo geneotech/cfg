@@ -146,6 +146,10 @@ alias diskspace='sudo gdmap -f "/"'
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 
+alias cusr="rm -rf hypersomnia/cache/usr"
+alias cch="rm -rf hypersomnia/cache"
+alias ced="rm -rf hypersomnia/cache/usr/editor"
+
 # Common tasks aliases
 alias ptsy='ls /dev/pts'
 alias procki='ps aux | ag '
@@ -173,18 +177,18 @@ alias uppkgs='yaourt -Syu --aur '
 alias journalgetsize='journalctl --disk-usage'
 
 # Git aliases
-alias gst="git status "
-alias gam="git commit --amend "
-alias glg="git log "
-alias gcm="git commit -m "
-alias gdiff='git diff '
-alias gdifft='git difftool -d '
-alias gadd="git add "
-alias gall="git add ."
-alias gcmall="gall; gcm "
-alias gpush="git push "
-alias gclean="git clean -d -x -f "
-alias gcleanup="git reset --hard; git clean -d -x -f "
+#alias gst="git status "
+#alias gam="git commit --amend "
+#alias glg="git log "
+#alias gcm="git commit -m "
+#alias gdiff='git diff '
+#alias gdifft='git difftool -d '
+#alias gadd="git add "
+#alias gall="git add ."
+#alias gcmall="gall; gcm "
+#alias gpush="git push "
+#alias gclean="git clean -d -x -f "
+#alias gcleanup="git reset --hard; git clean -d -x -f "
 
 # Forgotten aliases
 alias relx='xrdb ~/.Xresources'

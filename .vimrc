@@ -182,7 +182,7 @@ inoremap <F32> <BS>
 
 " C-v just pastes the register in insert mode
 inoremap <C-v> <ESC>pa
-cnoremap <C-v> <C-R>=@"<CR>
+cnoremap <C-v> <C-R>=@+<CR>
 " Delete whole word backwards - F25 is bound to ctrl+backspace
 cnoremap <F25> <C-w>
 
@@ -629,10 +629,12 @@ runtime plugin/gutentags.vim
 " Gutentags settings
 let g:gutentags_cache_dir='/tmp'
 
-" Color fixes
-set termguicolors
+if strlen($LAUNCH_TERMINAL) > 0
 
-colorscheme moonfly
+else
+	colorscheme moonfly
+	set termguicolors
+endif
 
 " Wrap lines in diff mode by default
 autocmd FilterWritePre * if &diff | setlocal wrap< | endif
