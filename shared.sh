@@ -31,6 +31,7 @@ alias mycha='source ~/.xinitrc'
 alias nuke='pkill -f '
 alias int='interrupt '
 alias spac='sudo shutdown -h now'
+alias mounty='mount | column -t'
 
 # Common fs aliases
 alias fixspaces='for f in *\ *; do mv "$f" "${f// /_}"; done'
