@@ -6,15 +6,6 @@ summary: What needs to be done on the system.
 ---
 
 - drivers for corsair
-- use other terminal for normal work, that has a scrollback
-	- do some research
-	- still use alacritty for neovim work
-
-- fix rofi and caps
-	- caps lock might have been not bound accidentally? like mouse sometimes malfunctions
-	- actually that rofi position is better given that vim displays matches at the bottom as well 
-
-- look into zsh plugins
 
 system maintenance
 	- update activity-watch
@@ -29,6 +20,12 @@ plan carefully the system's bash scripts behaviour for building, running etc
 		- should run a command like gdb sth sth
 
 ## Done
+
+- look into zsh plugins
+
+- fix rofi and caps
+	- caps lock might have been not bound accidentally? like mouse sometimes malfunctions
+	- actually that rofi position is better given that vim displays matches at the bottom as well 
 
  Don't freeze editor on Ctrl+S
  Looks like we no longer need it though

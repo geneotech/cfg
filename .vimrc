@@ -447,7 +447,7 @@ imap <silent> <C-p> <ESC>:GFiles<CR>
 let g:ctrlp_global_command = 'tabnew'
 
 function! CtrlpGlobal()
-	let newloc = system("LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find:'); echo $LOCATION")
+	let newloc = system("LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find'); echo $LOCATION")
 
 	if strlen(newloc) > 1 
 		execute (g:ctrlp_global_command . " " . newloc)
