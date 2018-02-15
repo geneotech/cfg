@@ -141,7 +141,7 @@ function! NeobuggerCommandStr()
     endif
 endfunction
 
-nnoremap <F2> :<c-u><C-\>e NeobuggerCommandStr()<cr>
-cnoremap <F2> :<c-u><C-\>e NeobuggerCommandStr()<cr>
+"nnoremap <F2> :<c-u><C-\>e NeobuggerCommandStr()<cr>
+"cnoremap <F2> :<c-u><C-\>e NeobuggerCommandStr()<cr>
 " }}}
 

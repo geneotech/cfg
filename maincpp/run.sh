@@ -1,3 +1,5 @@
+source ~/cfg/vim_builders.sh
+
 rmlogs
 rm $RUN_RESULT_PATH
 

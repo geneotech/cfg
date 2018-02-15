@@ -418,7 +418,7 @@ function! s:find_git_root()
 endfunction
 
 function! ToRepoPath(fpath)
-	return substitute(expand(a:fpath), $PWD, "", "")
+	return substitute(expand(a:fpath), "$PWD", "", "")
 endfunc
 
 function! ToCppIncludePath(fpath)

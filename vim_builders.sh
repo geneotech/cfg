@@ -4,10 +4,6 @@ export WORKSPACE_NAME=$(basename $WORKSPACE)
 export WORKSPACE_EXE=$WORKSPACE/build/current/$WORKSPACE_NAME
 export OUTPUT_TERM=/dev/pts/1
 
-if [ -f $WORKSPACE/build.sh ]; then
-	export WORKSPACE_CUSTOM_BUILD=true
-fi
-
 function gdbcore() {
 	if [ -f $WORKSPACE_EXE ]; then
 		TARGET_EXECUTABLE=$WORKSPACE_EXE
