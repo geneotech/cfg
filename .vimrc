@@ -820,7 +820,14 @@ if strlen($LAUNCH_TERMINAL) > 0
 	tnoremap <Down> <NOP>
 	tnoremap <C-v> <C-\><C-n>pi
 
-	nnoremap o i<Return>
+	nnoremap I m'I
+	nnoremap A m'A
+	nnoremap i m'i
+	nnoremap o m'i<Return>
+
+	tnoremap <Esc> <C-\><C-n>
+
+	nnoremap <C-c> m'i<C-c><C-\><C-n><C-o>
 
 "	tunmap <S-k>
 "	tunmap <S-j>
