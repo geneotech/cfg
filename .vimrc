@@ -630,7 +630,6 @@ runtime plugin/gutentags.vim
 let g:gutentags_cache_dir='/tmp'
 
 if strlen($LAUNCH_TERMINAL) > 0
-
 else
 	colorscheme moonfly
 	set termguicolors
@@ -820,5 +819,9 @@ if strlen($LAUNCH_TERMINAL) > 0
 "	tunmap <S-j>
 
 	terminal
+	
+	" So the build errors don't switch to the terminal window
+	set notitle
+
 	startinsert
 endif
