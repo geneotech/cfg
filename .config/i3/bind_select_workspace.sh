@@ -14,5 +14,5 @@ NEW_WORKSPACE=$(echo $WORKSPACES | sed 1d | rofi -hide-scrollbar -dmenu -i -p "c
 if [[ ! -z $NEW_WORKSPACE ]]
 then
 	echo "export WORKSPACE=$NEW_WORKSPACE" > ~/.config/i3/workspace/current
-	source ~/cfg/.config/i3/bind_open_editor.sh
+	source ~/cfg/.config/i3/workspace/bind_workspace_editor.sh
 fi

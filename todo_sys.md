@@ -28,3 +28,15 @@ plan carefully the system's bash scripts behaviour for building, running etc
 		- (perhaps should work on f5/f6/f7 or just s+f7?)
 		- should run a command like gdb sth sth
 
+## Done
+
+ Don't freeze editor on Ctrl+S
+ Looks like we no longer need it though
+ stty -ixon
+
+function reb() {
+	git fetch upstream
+	git checkout master
+	git rebase upstream/master
+}
+

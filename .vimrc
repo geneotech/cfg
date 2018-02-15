@@ -1,3 +1,5 @@
+let $FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -285,7 +287,7 @@ function! SucklessMake(targetname)
     \ 'on_exit': function('OnBuildEvent')
     \ }
 
-	let jobcmd = "zsh -c 'vim_target " . a:targetname . "'"
+	let jobcmd = "zsh -c 'source ~/cfg/vim_builders.sh; vim_target " . a:targetname . "'"
 
 	if filereadable(runscript)
 		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; source " . runscript . "'"
@@ -306,16 +308,17 @@ function! SucklessMakeDebug(targetname)
     \ 'on_exit': function('OnDebugBuildEvent')
     \ }
 
-	let jobcmd = "zsh -c 'vim_target " . a:targetname . "'"
+	let jobcmd = "zsh -c 'source ~/cfg/vim_builders.sh; vim_target " . a:targetname . "'"
 	"echomsg jobcmd
 
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 
 function! ConfHyper() abort
-    " user special config
-	let current_wp = system("echo -n $WORKSPACE/")
+	let WORKSPACE_NAME=system("echo -n $(basename " . $PWD . ")")
+	let WORKSPACE_EXE= $PWD . "/build/current/" . WORKSPACE_NAME
 
+    " user special config
     let this = {
         \ "Scheme" : 'gdb#SchemeCreate',
         \ "autorun" : 1,
@@ -323,7 +326,7 @@ function! ConfHyper() abort
         \ "showbreakpoint" : 1,
         \ "showbacktrace" : 0,
         \ "conf_gdb_layout" : ["vsp"],
-        \ "conf_gdb_cmd" : ['cd $WORKSPACE; gdb -q -f -cd hypersomnia', $WORKSPACE_EXE],
+        \ "conf_gdb_cmd" : ["cd " . $PWD . "; gdb -q -f -cd hypersomnia", WORKSPACE_EXE],
         \ "window" : [
         \   {   "name":   "gdbserver",
         \       "status":  0,
@@ -415,7 +418,7 @@ function! s:find_git_root()
 endfunction
 
 function! ToRepoPath(fpath)
-	return substitute(expand(a:fpath), $WORKSPACE, "", "")
+	return substitute(expand(a:fpath), $PWD, "", "")
 endfunc
 
 function! ToCppIncludePath(fpath)
