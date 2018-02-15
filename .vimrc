@@ -54,6 +54,10 @@ else
 endif " has("autocmd")
 
 """"""""" General behaviour
+cnoreabbrev w w <bar> GitGutter
+
+nmap <Space>f :set foldenable!<CR>
+
 " Use system clipboard
 set clipboard=unnamedplus
 
@@ -493,12 +497,14 @@ tnoremap <S-j> <C-N>
 
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
-nmap <Space>o :on<CR>
+nmap <Space>o :on<CR>:GitGutter<CR>
+
+" Appending macros
 
 " If cpo-< ik not specified, then for some reason, having a newline anywhere in the register
 " makes appending to it add newlines automatically.
 " We have however specified it so we only need the comma
-nnoremap - :let @a=""<CR>
+"nnoremap - :let @a=""<CR>
 nnoremap , "A
 "nnoremap ; :let @a=@a."\n"<CR>"A
 
@@ -534,10 +540,10 @@ nmap <Return>s "_ddP
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " Also prevents the editor from being closed when the last tab closes
-nmap <silent> <c-w> :close<CR>
-imap <silent> <c-w> <ESC>:close<CR>
+nmap <silent> <C-w> :close<CR>:GitGutter<CR>
+imap <silent> <C-w> <ESC>:close<CR>
 
-nmap <silent> <c-x> :x<CR>
+nmap <silent> <C-x> :x<CR>
 
 nmap <silent> <C-j> :tabprevious<CR>
 nmap <silent> <C-k> :tabnext<CR>
@@ -618,6 +624,7 @@ nmap U :execute "GitGutterUndoHunk"<CR>
 runtime plugin/gitgutter.vim
 execute "GitGutterLineHighlightsEnable"
 "execute "GitGutterSignsDisable"
+nnoremap - :GitGutterStageHunk<CR>
 
 " Prevent live updating of git gutter, it annoys me while writing
 set updatetime=999999999
