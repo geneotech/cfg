@@ -809,10 +809,13 @@ if strlen($LAUNCH_TERMINAL) > 0
 	tnoremap <Up> <NOP>
 	tnoremap <Down> <NOP>
 
+	tnoremap <Down> <NOP>
+	tnoremap <C-v> <C-\><C-n>pi
+
 	nnoremap o i<Return>
 
-	tunmap <S-k>
-	tunmap <S-j>
+"	tunmap <S-k>
+"	tunmap <S-j>
 
 	terminal
 	startinsert
