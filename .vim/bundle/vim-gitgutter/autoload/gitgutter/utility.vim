@@ -1,3 +1,11 @@
+function! gitgutter#utility#supports_overscore_sign()
+  if s:windows()
+    return &encoding ==? 'utf-8'
+  else
+    return &termencoding ==? &encoding || &termencoding == ''
+  endif
+endfunction
+
 function! gitgutter#utility#setbufvar(buffer, varname, val)
   let dict = get(getbufvar(a:buffer, ''), 'gitgutter', {})
   let dict[a:varname] = a:val
@@ -39,7 +47,8 @@ function! gitgutter#utility#is_active(bufnr) abort
         \ !pumvisible() &&
         \ s:is_file_buffer(a:bufnr) &&
         \ s:exists_file(a:bufnr) &&
-        \ s:not_git_dir(a:bufnr)
+        \ s:not_git_dir(a:bufnr) &&
+        \ !s:vimdiff(a:bufnr)
 endfunction
 
 function! s:not_git_dir(bufnr) abort
@@ -137,7 +146,12 @@ function! s:set_path(bufnr, path)
 endfunction
 
 function! gitgutter#utility#cd_cmd(bufnr, cmd) abort
-  return 'cd '.s:dir(a:bufnr).' && '.a:cmd
+  let cd = s:unc_path(a:bufnr) ? 'pushd' : 'cd'
+  return cd.' '.s:dir(a:bufnr).' && '.a:cmd
+endfunction
+
+function! s:unc_path(bufnr)
+  return s:abs_path(a:bufnr, 0) =~ '^\\\\'
 endfunction
 
 function! s:use_known_shell() abort
@@ -174,4 +188,28 @@ endfunction
 
 function! s:strip_trailing_new_line(line) abort
   return substitute(a:line, '\n$', '', '')
+endfunction
+
+" Returns 1 if any of the given buffer's windows has the `&diff` option set,
+" or 0 otherwise.
+function! s:vimdiff(bufnr)
+  if exists('*win_findbuf')
+    for winid in win_findbuf(a:bufnr)
+      if getwinvar(winid, '&diff')
+        return 1
+      endif
+    endfor
+    return 0
+  else
+    for winnr in range(1, winnr('$'))
+      if winbufnr(winnr) == a:bufnr && getwinvar(winnr, '&diff')
+        return 1
+      endif
+    endfor
+    return 0
+  endif
+endfunction
+
+function! s:windows()
+  return has('win64') || has('win32') || has('win16')
 endfunction

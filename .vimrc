@@ -189,6 +189,8 @@ inoremap <F32> <BS>
 " C-v just pastes the register in insert mode
 inoremap <C-v> <ESC>pa
 cnoremap <C-v> <C-R>=@+<CR>
+cnoremap J <C-n>
+cnoremap K <C-p>
 " Delete whole word backwards - F25 is bound to ctrl+backspace
 cnoremap <F25> <C-w>
 
