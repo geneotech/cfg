@@ -53,7 +53,7 @@ function make_with_logs() {
 		rm hypersomnia/core
 	fi
 
-	script -q -c "time make $MAKE_TARGET -j5 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
+	script -q -c "time make $MAKE_TARGET -j8 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
 
 	# Remove timing info line
 	head -n -2 $LASTERR_PATH > /tmp/dobrazaraz

@@ -34,6 +34,7 @@ alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'
 
 # Common fs aliases
+alias ds='du -sh * | sort -rh'
 alias fixspaces='for f in *\ *; do mv "$f" "${f// /_}"; done'
 alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'
 alias whenlm="stat -c '%y' "
