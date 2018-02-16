@@ -15,6 +15,17 @@ alias serve="bundle exec jekyll serve"
 alias ag='ag --hidden'
 alias diskspace='sudo gdmap -f "/"'
 
+cf () {
+	export FZF_DEFAULT_OPTS=''
+
+	NEWLOC=$(fzf)
+
+	if [[ ! -z $NEWLOC ]]
+	then
+		cd $(dirname $NEWLOC)
+	fi
+}
+
 # Building aliases
 alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
