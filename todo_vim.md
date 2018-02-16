@@ -10,13 +10,12 @@ summary: What needs to be done for vim.
 		- anyway it originated from an idea to have a separate workspace for new files but that's just honestly stupid
 	- will have to set unique title for each
 		- we don't care anyway for window titles except when switching focus after build
-- c+n should open a new buffer in some predefined folder
-	- c+s+n just fzf with all new files in that foder
 - write a script that transform gdb's stack trace to quickfix format
 - better scripts for browsing past versions of repos?
  
 ## Done
 
+- c+n should open a new buffer in some predefined folder
 - let us use neovim's terminal
 	- make it so that it has different title
 		- maybe use a different vimrc?

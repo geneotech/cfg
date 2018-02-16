@@ -56,7 +56,7 @@ else
 endif " has("autocmd")
 
 """"""""" General behaviour
-cnoreabbrev w w <bar> GitGutter
+"cnoreabbrev w w <bar> GitGutter
 
 nmap <Space>f :set foldenable!<CR>
 
@@ -550,13 +550,33 @@ imap <silent> <C-w> <ESC>:close<CR>
 
 nmap <silent> <C-x> :x<CR>
 
+function! OpenNextUntitled()
+	let idx = 1
+
+	while idx < 1000	
+		let newfname = '/home/pbc/doc/new/unt' . idx
+
+		if filereadable(newfname)
+			let fff = readfile(newfname)
+
+			if len(fff) > 0 
+				let idx += 1
+				continue
+			endif
+		endif
+
+		execute 'tabnew ' . newfname
+		break
+	endwhile
+endfunction
+
 nmap <silent> <C-j> :tabprevious<CR>
 nmap <silent> <C-k> :tabnext<CR>
-nmap <silent> <C-n> :tabnew<CR>
+nmap <silent> <C-n> :call OpenNextUntitled()<CR>
 " So that we can switch tabs at any time
 imap <silent> <C-j> <ESC>:tabprevious<CR>
 imap <silent> <C-k> <ESC>:tabnext<CR>
-imap <silent> <C-n> <ESC>:tabnew<CR>
+imap <silent> <C-n> <ESC>:call OpenNextUntitled()<CR>
 
 "nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 "nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
