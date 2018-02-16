@@ -1,6 +1,6 @@
 " Environment variables setup
 let $FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
-let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -U -g ""'
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -444,13 +444,18 @@ let g:fzf_layout = { 'down': '~24%' }
 nmap <silent> <C-t> :Tags<CR>
 imap <silent> <C-t> <ESC>:Tags<CR>
 
+nnoremap <F22> :execute ("Files " . expand("%:h"))<CR>
+
 nmap <silent> <C-p> :GFiles<CR>
 imap <silent> <C-p> <ESC>:GFiles<CR>
 
 let g:ctrlp_global_command = 'tabnew'
 
 function! CtrlpGlobal()
-	let newloc = system("LOCATION=$(ag -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'ag'); echo $LOCATION")
+	" Looks like rofi is faster for exact matching,
+	" and we really want exact matching for so many files
+	
+	let newloc = system("echo $(ag -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | rofi -hide-scrollbar -dmenu -i -p 'ag')")
 
 	if strlen(newloc) > 1 
 		execute (g:ctrlp_global_command . " " . newloc)
@@ -464,6 +469,7 @@ nmap <silent> <F26> :ProjectFiles<CR>
 nmap <silent> <F27> :call CtrlpGlobal()<CR>
 
 " facilitate the above in insert mode as well
+nmap <F20> <ESC><F20>
 imap <c-p> <ESC><c-p>
 imap <F27> <ESC><F27>
 imap <F28> <ESC><F28>
@@ -481,6 +487,7 @@ imap <silent> <F1> <ESC>:Bufferize messages<CR>
 
 " Terminal bindings
 tnoremap <Esc> <C-\><C-n><C-w><C-p>
+tnoremap <C-v> <C-\><C-n>pi
 
 " Make ESC always quit the fzf prompt and not just enter normal mode
 autocmd! FileType fzf tnoremap <buffer> <Esc> <c-q>
@@ -863,7 +870,6 @@ tnoremap <Up> <NOP>
 	tnoremap <Down> <NOP>
 
 	tnoremap <Down> <NOP>
-	tnoremap <C-v> <C-\><C-n>pi
 
 	nnoremap I m'I
 	nnoremap A m'A

@@ -5,11 +5,6 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
-- consider a script that launches multiple vims with multiple workspaces at once
-	- it just won't work
-		- anyway it originated from an idea to have a separate workspace for new files but that's just honestly stupid
-	- will have to set unique title for each
-		- we don't care anyway for window titles except when switching focus after build
 - write a script that transform gdb's stack trace to quickfix format
 - better scripts for browsing past versions of repos?
  
@@ -22,6 +17,12 @@ summary: What needs to be done for vim.
 	- fix history arrows
 	- fix scrollback and add macro for clearing via scrollback=0?
 	- fix colors (maybe zsh plugins will do the trick?)
+
+- consider a script that launches multiple vims with multiple workspaces at once
+	- it just won't work
+		- anyway it originated from an idea to have a separate workspace for new files but that's just honestly stupid
+	- will have to set unique title for each
+		- we don't care anyway for window titles except when switching focus after build
 
 ## Maybe done
 
