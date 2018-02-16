@@ -1,4 +1,6 @@
+" Environment variables setup
 let $FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -413,7 +415,6 @@ inoremap <F25> <C-w>
 " fzf bindings
 
 " So that we also search through hidden files
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
 function! s:find_git_root()
   return system('cd ' . expand("%:h") . '; git rev-parse --show-toplevel 2> /dev/null')[:-2]
@@ -449,7 +450,7 @@ imap <silent> <C-p> <ESC>:GFiles<CR>
 let g:ctrlp_global_command = 'tabnew'
 
 function! CtrlpGlobal()
-	let newloc = system("LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) -not -iwholename '*.git*' -not -iwholename '*_site*' 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'find'); echo $LOCATION")
+	let newloc = system("LOCATION=$(ag -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'ag'); echo $LOCATION")
 
 	if strlen(newloc) > 1 
 		execute (g:ctrlp_global_command . " " . newloc)
