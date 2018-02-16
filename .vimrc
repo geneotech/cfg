@@ -252,22 +252,23 @@ endfunction
 let g:last_error_path = '/tmp/last_error.txt'
 let g:last_error_path_color = '/tmp/last_error_color.txt'
 let g:run_result_path = '/tmp/run_result.txt'
+let g:bt_path = '/tmp/bt.txt'
 
 function! OnBuildEvent(job_id, data, event) dict
 	if filereadable(g:last_error_path)
 		execute "lfile " . g:last_error_path
 		normal zz
-	else
-		if filereadable(g:run_result_path)
-			"lfile g:run_result_path
-			let fff = readfile(g:run_result_path)
+	elseif filereadable(g:bt_path)
+		execute "lfile " . g:bt_path
+	elseif filereadable(g:run_result_path)
+		"lfile g:run_result_path
+		let fff = readfile(g:run_result_path)
 
-			if len(fff) > 0 
-				echomsg fff[0]
-			endif
-		else
-			echomsg "Build successful."
+		if len(fff) > 0 
+			echomsg fff[0]
 		endif
+	else
+		echomsg "Build successful."
 	endif
 endfunction
 

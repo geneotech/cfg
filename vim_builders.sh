@@ -27,6 +27,7 @@ alias interrupt='pkill -f --signal 2 '
 export LASTERR_PATH=/tmp/last_error.txt
 export LASTERR_PATH_COLOR=/tmp/last_error_color.txt
 export RUN_RESULT_PATH=/tmp/run_result.txt
+export BT_PATH=/tmp/bt.txt
 
 function rmlogs() {
 	rm $LASTERR_PATH
@@ -51,6 +52,7 @@ function make_with_logs() {
 	if [[ "$MAKE_TARGET" = "run" ]]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		rm hypersomnia/core
+		rm $BT_PATH
 	fi
 
 	script -q -c "time make $MAKE_TARGET -j8 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
@@ -63,7 +65,10 @@ function make_with_logs() {
 		echo "Run-type target." > $OUTPUT_TERM
 		if [ -f hypersomnia/core ]; then
 			echo "Core found." > $OUTPUT_TERM
-			hcore | tee /dev/pts/1 bt.txt
+			hcore | tee /dev/pts/1 $BT_PATH
+			perl ~/cfg/tools/bt2ll.pl < $BT_PATH > /tmp/dobrazaraz
+			cp /tmp/dobrazaraz $BT_PATH
+			$(i3-msg "[title=NVIM] focus")
 		fi
 	fi
 }

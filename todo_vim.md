@@ -5,7 +5,7 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
-- write a script that transform gdb's stack trace to quickfix format
+- write a script that transforms gdb's stack trace to quickfix format
 - better scripts for browsing past versions of repos?
  
 ## Done

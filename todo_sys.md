@@ -5,10 +5,11 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
-
 - fix bindings for copying paths?
-
+	- works though
 - use sxiv bash script so we have more customization opts
+
+- remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
 
 - primary facilities
 	- NEOVIM (short: VIM)
@@ -19,9 +20,17 @@ summary: What needs to be done on the system.
 		- FILESYSTEM OPS
 			- only for single files (e.g. current)
 			- deletion, rename, new
-	- RANGER
+	- RANGER (low priority)
 		- NAVIGATION
-		- MASS OPTIONS		
+			- project overall exploration
+			- light-hearted file exploration
+		- FILESYSTEM OPS
+			- only bulk operations
+	- NEOVIM TERMINAL
+		- package installation/uninstallation
+		- various maintenance
+		- very precise filesystem ops
+		- sudo invocation
 
 - search modes
 	- exact matching is accomplished with ^
