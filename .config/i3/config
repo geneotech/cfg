@@ -175,6 +175,7 @@ bindsym $modw+c exec zsh -c ". ~/.config/i3/bind_copy_path.sh"
 bindsym $modw+o exec zsh -c ". ~/.config/i3/bind_open_containing_folder.sh"
 bindsym $modw+s exec zsh -c ". ~/.config/i3/bind_open_shell_in.sh"
 bindsym $modw+d exec zsh -c ". ~/.config/i3/bind_open_downloads.sh"
+bindsym $modw+m exec zsh -c ". ~/.config/i3/bind_open_music.sh"
 
 bindsym Control+Shift+s exec zsh -c ". ~/.config/i3/bind_select_workspace.sh"
 
@@ -228,14 +229,14 @@ client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 
 # for_window [title="Hypersomnia"] floating enable
 
-mode "moveit" {
-    bindsym Up move up 20px
-    bindsym Left move left 20px
-    bindsym Down move down 20px
-    bindsym Right move right 20px
-    bindsym Mod4+m mode "default"
-}
-bindsym $modw+m focus floating; mode "moveit"
+#mode "moveit" {
+    #bindsym Up move up 20px
+    #bindsym Left move left 20px
+    #bindsym Down move down 20px
+    #bindsym Right move right 20px
+    #bindsym Mod4+m mode "default"
+#}
+#bindsym $modw+m focus floating; mode "moveit"
 
 floating_minimum_size 1 x 1
 for_window[title="capture-border"] floating enabled

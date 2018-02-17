@@ -456,7 +456,7 @@ function! CtrlpGlobal()
 	" Looks like rofi is faster for exact matching,
 	" and we really want exact matching for so many files
 	
-	let newloc = system("echo $(ag -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | rofi -hide-scrollbar -dmenu -i -p 'ag')")
+	let newloc = system("echo $(ag --hidden -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | rofi -hide-scrollbar -dmenu -i -p 'ag')")
 
 	if strlen(newloc) > 1 
 		execute (g:ctrlp_global_command . " " . newloc)

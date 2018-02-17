@@ -8,6 +8,7 @@ export GEM_HOME=$HOME/.gem
 source ~/cfg/vim_builders.sh
 
 # Program aliases
+alias nt='export LAUNCH_TERMINAL=true; nvim'
 alias ls="exa"
 alias gcleanup="git reset --hard; git clean -d -x -f "
 alias meldh="meld $PWD"
@@ -15,7 +16,7 @@ alias serve="bundle exec jekyll serve"
 alias ag='ag --hidden'
 alias diskspace='sudo gdmap -f "/"'
 
-cf () {
+fd () {
 	export FZF_DEFAULT_OPTS=''
 
 	NEWLOC=$(fzf)
@@ -23,6 +24,17 @@ cf () {
 	if [[ ! -z $NEWLOC ]]
 	then
 		cd $(dirname $NEWLOC)
+	fi
+}
+
+fr () {
+	export FZF_DEFAULT_OPTS=''
+
+	NEWLOC=$(fzf)
+
+	if [[ ! -z $NEWLOC ]]
+	then
+		rifle $NEWLOC
 	fi
 }
 

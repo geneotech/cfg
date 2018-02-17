@@ -1,2 +1,2 @@
-LOCATION=$(find -L /home /etc /srv /boot /usr/share /bin | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'copy path:')
+LOCATION=$(ag -U -g --hidden '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | rofi -hide-scrollbar -dmenu -i -p 'copy path')
 echo -n $LOCATION | xclip -selection clipboard
