@@ -432,8 +432,8 @@ function! ToCppIncludePath(fpath)
 	return '#include "' . ToRepoPath(substitute(expand(a:fpath), "src/", "", "")) . '"' 
 endfunc
 
-command! -nargs=1 CopyPath let @" = <q-args>
-command! -nargs=1 CopyIncludePath let @" = ToCppIncludePath(<q-args>) . "\n"
+command! -nargs=1 CopyPath let @+ = <q-args>
+command! -nargs=1 CopyIncludePath let @+ = ToCppIncludePath(<q-args>) . "\n"
 
 let g:fzf_action = {
   \ 'enter': 'tab drop',
@@ -527,7 +527,7 @@ nnoremap , "A
 "nnoremap ; :let @a=@a."\n"<CR>"A
 
 nmap <silent> <C-e> :History<CR>
-nmap <silent> <C-c> :let @" = ToCppIncludePath(expand("%:f")) . "\n"<CR>
+nmap <silent> <C-c> :let @+ = ToCppIncludePath(expand("%:f")) . "\n"<CR>
 
 nmap <Space>s :source $MYVIMRC<CR>
 
