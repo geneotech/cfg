@@ -16,6 +16,8 @@ alias ag='ag --hidden'
 alias diskspace='sudo gdmap -f "/"'
 
 # additional git aliases
+
+# Restores the most recent version of a deleted file
 grestore () {
 	git checkout $(git rev-list -n 1 HEAD -- $1)^ -- $1
 }

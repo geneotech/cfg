@@ -187,6 +187,8 @@ nnoremap Y ^yg_
 " F32 is bound to shift+backspace in alacritty
 nnoremap <F32> ^yg_"_dd
 inoremap <F32> <BS>
+tnoremap <F32> <BS>
+cnoremap <F32> <BS>
 
 " C-v just pastes the register in insert mode
 inoremap <C-v> <ESC>pa
@@ -195,6 +197,7 @@ cnoremap J <C-n>
 cnoremap K <C-p>
 " Delete whole word backwards - F25 is bound to ctrl+backspace
 cnoremap <F25> <C-w>
+tnoremap <F25> <C-w>
 
 " set scroll=20
 
