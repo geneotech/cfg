@@ -10,11 +10,18 @@ source ~/cfg/vim_builders.sh
 # Program aliases
 alias nt='export LAUNCH_TERMINAL=true; nvim'
 alias ls="exa"
-alias gcleanup="git reset --hard; git clean -d -x -f "
 alias meldh="meld $PWD"
 alias serve="bundle exec jekyll serve"
 alias ag='ag --hidden'
 alias diskspace='sudo gdmap -f "/"'
+
+# additional git aliases
+grestore () {
+	git checkout $(git rev-list -n 1 HEAD -- $1)^ -- $1
+}
+
+alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
+alias gcleanup="git reset --hard; git clean -d -x -f "
 
 fd () {
 	export FZF_DEFAULT_OPTS=''

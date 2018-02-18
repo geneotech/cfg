@@ -22,4 +22,8 @@ QtProject.conf
 .config/activitywatch
 .config/nvim/.netrwhist
 .config/aacs
+.config/cmus/playlists/
+maincpp/main.cpp
 maincpp/main
+clangcpp/main.cpp
+clangcpp/main

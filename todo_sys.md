@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- drivers for corsair
+
 - fix bindings for copying paths?
 	- works though
 - use sxiv bash script so we have more customization opts
@@ -33,8 +35,6 @@ summary: What needs to be done on the system.
 		- sudo invocation
 
 - search modes
-	- exact matching is accomplished with ^
-		- sucks though to have to go that far
 	- notice that speed is only important when we're working on a project
 		- there also comes accuracy, but we can write specific file paths
 		Don't we really only care about vim's behaviour?
@@ -61,23 +61,23 @@ summary: What needs to be done on the system.
 		- all ignore .git files
 			- ag provides candidates?
 
-- drivers for corsair
-
 - sxiv
 	- a binding to edit in gimp?
 	- fix fullscreen?
 
 system maintenance
-	- update activity-watch
 	- uninstall unimportant packages
-
-- consider having some rcs in ramfs?
 
 plan carefully the system's bash scripts behaviour for building, running etc 
 	- with bullet poitns!
 	- introduce convenient single-file cpp build
 		- (perhaps should work on f5/f6/f7 or just s+f7?)
 		- should run a command like gdb sth sth
+
+## Disregarded
+
+- consider having some rcs in ramfs?
+- update activity-watch
 
 ## Done
 

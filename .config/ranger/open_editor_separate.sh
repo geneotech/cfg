@@ -8,6 +8,6 @@ then
 else
 	# echo "Term is ${TERM}. Opening $1 in place." >> /home/pbc/termlog.txt
 
-	$VISUAL $1
+	$EDITOR $1
 	# $EDITOR $1
 fi

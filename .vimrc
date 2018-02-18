@@ -245,7 +245,7 @@ nmap <silent> <F31> :call WrapCommand('up', 'l')<CR>
 nmap <silent> <F30> :call WrapCommand('down', 'l')<CR>
 
 function! StartDebugging()
-	let gdbcmd = "GdbLocal ConfHyper"
+	let gdbcmd = "Nbgdb ConfHyper"
 	execute gdbcmd 
 endfunction
 
@@ -512,6 +512,7 @@ tnoremap <S-j> <C-N>
 nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
 nmap <Space>o :on<CR>:GitGutter<CR>
+nmap ! :GitGutterPreviewHunk<CR>
 
 " Appending macros
 
@@ -845,6 +846,9 @@ tnoremap <Down> <NOP>
 "map  N <Plug>(easymotion-prev)
 
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
+
+" Update gitgutter on writes
+autocmd BufWritePost * GitGutter
 
 inoremap <C-h> <C-G>U<Left>
 inoremap <C-l> <C-G>U<Right>
