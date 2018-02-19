@@ -2,7 +2,7 @@ source ~/.config/i3/workspace/current
 
 export WORKSPACE_NAME=$(basename $WORKSPACE)
 export WORKSPACE_EXE=$WORKSPACE/build/current/$WORKSPACE_NAME
-export OUTPUT_TERM=/dev/pts/1
+source /tmp/viewing_tty
 
 function gdbcore() {
 	if [ -f $WORKSPACE_EXE ]; then
@@ -65,7 +65,7 @@ function make_with_logs() {
 		echo "Run-type target." > $OUTPUT_TERM
 		if [ -f hypersomnia/core ]; then
 			echo "Core found." > $OUTPUT_TERM
-			hcore | tee /dev/pts/1 $BT_PATH
+			hcore | tee $OUTPUT_TERM $BT_PATH
 			perl ~/cfg/tools/bt2ll.pl < $BT_PATH > /tmp/dobrazaraz
 			cp /tmp/dobrazaraz $BT_PATH
 			$(i3-msg "[title=NVIM] focus")

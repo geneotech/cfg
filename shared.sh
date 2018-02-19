@@ -5,6 +5,12 @@ PATH="/home/pbc/.gem/bin:$PATH"
 
 export GEM_HOME=$HOME/.gem
 
+vw () {
+	echo "export OUTPUT_TERM=$(tty)" > /tmp/viewing_tty
+}
+
+vw
+
 source ~/cfg/vim_builders.sh
 
 # Program aliases
