@@ -888,6 +888,8 @@ tnoremap <Up> <NOP>
 
 	nnoremap <C-c> m'i<C-c><C-\><C-n><C-o>
 
+	nnoremap <F32> :call delete(expand('%')) <bar> bdelete! <bar> terminal<CR>
+
 "	tunmap <S-k>
 "	tunmap <S-j>
 
