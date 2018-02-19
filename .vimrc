@@ -58,10 +58,6 @@ else
 endif " has("autocmd")
 
 """"""""" General behaviour
-"cnoreabbrev w w <bar> GitGutter
-
-nmap <Space>f :set foldenable!<CR>
-
 " Use system clipboard
 set clipboard=unnamedplus
 
@@ -174,6 +170,9 @@ let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
 """"""""""  General bindings
+nmap <Leader>s :execute "CopyPath " . 'cd $(dirname ' . expand("%:p") . ")"<CR>
+nmap <Space>f :set foldenable!<CR>
+
 " Switch windows 
 " Don't map Tab button! For some reason, it screws up the <C-I> binding
 " Yeah, I know C-z mapping is strange, but I really have no keys left...
