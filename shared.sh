@@ -28,6 +28,7 @@ grestore () {
 	git checkout $(git rev-list -n 1 HEAD -- $1)^ -- $1
 }
 
+alias gc='git commit -m'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
 
@@ -54,8 +55,10 @@ fr () {
 }
 
 # Building aliases
-alias cmkd="cmake/build.sh Debug x64 '-DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkr="cmake/build.sh Release x64 '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkc="cmake/clean.sh"
+alias mkc="pushd build/current; make clean; popd"
 
 alias cusr="rm -rf hypersomnia/cache/usr"
 alias cch="rm -rf hypersomnia/cache"
@@ -70,6 +73,7 @@ alias nuke='pkill -f '
 alias int='interrupt '
 alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'
+alias im="interrupt make"
 
 # Common fs aliases
 alias ds='du -sh * | sort -rh'
