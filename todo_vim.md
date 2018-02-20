@@ -5,6 +5,24 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- DEBUGGING SUPPORT
+	- leave it for later once we actually have a bug to test on
+	- GDB
+		- https://reverseengineering.stackexchange.com/questions/1392/decent-gui-for-gdb 
+		- check out "vimgdb" 
+		- check if cores produced by clang builds can be read by gdb
+			- also check if lldb isn't more accurate here
+			- if lldb is better we'll need to rewrite the perl script
+	- LLDB
+		- will be our weapon of choice due to clang super fast compilation times
+		- check out VSC + LLDB
+		- if not, check out native debug: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
+
+- fix that reverse command search to not suck
+- install https://github.com/powerman/vim-plugin-viewdoc
+
+- improve speed of easymotion
+- fix replacing offset by one character
 - rename untitled files with first line of content
 	- unt -> untitled
 

@@ -76,6 +76,7 @@ alias mounty='mount | column -t'
 alias im="interrupt make"
 
 # Common fs aliases
+alias mkb='mkdir build && cd build'
 alias ds='du -sh * | sort -rh'
 alias fixspaces='for f in *\ *; do mv "$f" "${f// /_}"; done'
 alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'
