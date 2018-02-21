@@ -55,6 +55,7 @@ fr () {
 }
 
 # Building aliases
+alias ucl="export CC=clang; export CXX=clang++;"
 alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkc="cmake/clean.sh"
@@ -77,6 +78,7 @@ alias im="interrupt make"
 
 # Common fs aliases
 alias mkb='mkdir build && cd build'
+alias clb='cd ../; rm -rf build; mkdir build; cd build'
 alias ds='du -sh * | sort -rh'
 alias fixspaces='for f in *\ *; do mv "$f" "${f// /_}"; done'
 alias filecnt='sudo find . -xdev -type f | cut -d "/" -f 2 | sort | uniq -c | sort -n'

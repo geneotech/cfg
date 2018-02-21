@@ -7,8 +7,6 @@ summary: What needs to be done on the system.
 
 - drivers for corsair
 
-- fix bindings for copying paths?
-	- works though
 - use sxiv bash script so we have more customization opts
 
 - remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
@@ -65,22 +63,21 @@ summary: What needs to be done on the system.
 	- a binding to edit in gimp?
 	- fix fullscreen?
 
-system maintenance
-	- uninstall unimportant packages
+## Disregarded
 
 plan carefully the system's bash scripts behaviour for building, running etc 
-	- with bullet poitns!
+	- with bullet points!
 	- introduce convenient single-file cpp build
 		- (perhaps should work on f5/f6/f7 or just s+f7?)
 		- should run a command like gdb sth sth
 
-## Disregarded
-
 - consider having some rcs in ramfs?
-- update activity-watch
 
 ## Done
 
+- update activity-watch
+- fix bindings for copying paths?
+	- works though
 - search
 	- modes
 		- (VIM) instant-startup git-ls-files selected-workspace-wide

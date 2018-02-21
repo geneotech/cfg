@@ -104,10 +104,6 @@ function vim_build() {
 	vim_target all
 }
 
-function vim_debug() {
-	vim_target conque_debug
-}
-
 function vim_run() {
 	vim_target run
 }

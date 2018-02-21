@@ -5,6 +5,18 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- fix that reverse command search to not suck
+
+- improve speed of easymotion
+- fix replacing offset by one character
+- rename untitled files with first line of content
+	- unt -> untitled
+
+- better scripts for browsing past versions of repos?
+	- past diffs could be good
+		- wrappers for Gdiff --cached and Gdiff HEAD?
+	- for now, gallexisted + grestore
+
 - DEBUGGING SUPPORT
 	- leave it for later once we actually have a bug to test on
 	- GDB
@@ -18,20 +30,7 @@ summary: What needs to be done for vim.
 		- check out VSC + LLDB
 		- if not, check out native debug: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
 
-- fix that reverse command search to not suck
 - install https://github.com/powerman/vim-plugin-viewdoc
-
-- improve speed of easymotion
-- fix replacing offset by one character
-- rename untitled files with first line of content
-	- unt -> untitled
-
-- fix gitgutter on write
- 
-- better scripts for browsing past versions of repos?
-	- past diffs could be good
-		- wrappers for Gdiff --cached and Gdiff HEAD?
-	- for now, gallexisted + grestore
 
 ## Maybe done
 
@@ -48,6 +47,8 @@ summary: What needs to be done for vim.
 If we're playing with neovim terminal, set scrollback=1 clears scrollback
 ## Done
 
+- fix gitgutter on write
+ 
 - write a script that transforms gdb's stack trace to quickfix format
 - c+n should open a new buffer in some predefined folder
 - let us use neovim's terminal

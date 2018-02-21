@@ -16,7 +16,6 @@ Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'francoiscabrol/ranger.vim'
 Plugin 'wojtekmach/vim-rename'
-Plugin 'huawenyu/neogdb.vim'
 Plugin 'AndrewRadev/bufferize.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
@@ -26,6 +25,7 @@ Plugin 'fcpg/vim-farout'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'romgrk/replace.vim'
+Plugin 'tpope/vim-git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -664,7 +664,8 @@ execute "GitGutterLineHighlightsEnable"
 nnoremap - :GitGutterStageHunk<CR>
 
 " Prevent live updating of git gutter, it annoys me while writing
-set updatetime=999999999
+" set updatetime=999999999
+autocmd! gitgutter CursorHold,CursorHoldI
 
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"

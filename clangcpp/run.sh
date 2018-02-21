@@ -1,42 +1,21 @@
 source ~/cfg/vim_builders.sh
 
-rm $BT_PATH
+echo "Clang build started." > $OUTPUT_TERM
 
-rmlogs
-rm $RUN_RESULT_PATH
-
-if [[ "$MAKE_TARGET" = "run" ]]; then
-	echo "Run-type target." > $OUTPUT_TERM
-	rm core
+if [ -f ./main.exe ]; then
+	rm ./main.exe
 fi
 
-if [ -f ./main ]; then
-	rm ./main
+if [ -f ./main.cpp.o ]; then
+	rm ./main.cpp.o
 fi
 
-GCC_COMMAND='clang++ -Wall -std=gnu++1z -o ./main $(readlink -f ./main.cpp);'
+echo "Init pass." > $OUTPUT_TERM
+clang++ -v -stdlib=libc++ -std=gnu++1z -o main.cpp.o -c main.cpp 
+echo "Link pass." > $OUTPUT_TERM
+clang++ -v -stdlib=libc++ -fuse-ld=lld main.cpp.o -o ./main.exe -lc++experimental
 
-script -q -c $GCC_COMMAND $LASTERR_PATH > $OUTPUT_TERM
-
-if [ -f ./main ]; then
-	script -q -c ./main $LASTERR_PATH > $OUTPUT_TERM
-fi
-
-# Remove timing info line
-
-head -n -2 $LASTERR_PATH > /tmp/dobrazaraz
-cp /tmp/dobrazaraz $LASTERR_PATH
-
-ERRORS=$(ag "error:" $LASTERR_PATH)
-LINKER_ERRORS=$(ag "error: ld" $LASTERR_PATH)
-
-if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
-then
-	cp $LASTERR_PATH $LASTERR_PATH_COLOR
-	clnerr
-	$(i3-msg "[title=NVIM] focus")
-else
-	cp $LASTERR_PATH $RUN_RESULT_PATH 
-	sed -i '1d' $RUN_RESULT_PATH
-	rmlogs
+if [ -f ./main.exe ]; then
+	echo "Clang build successful." > $OUTPUT_TERM
+	./main.exe > $OUTPUT_TERM
 fi

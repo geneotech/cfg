@@ -8,8 +8,11 @@ endfunction
 
 function! gitgutter#utility#setbufvar(buffer, varname, val)
   let dict = get(getbufvar(a:buffer, ''), 'gitgutter', {})
+  let needs_setting = empty(dict)
   let dict[a:varname] = a:val
-  call setbufvar(a:buffer, 'gitgutter', dict)
+  if needs_setting
+    call setbufvar(a:buffer, 'gitgutter', dict)
+  endif
 endfunction
 
 function! gitgutter#utility#getbufvar(buffer, varname, ...)
@@ -192,23 +195,25 @@ endfunction
 
 " Returns 1 if any of the given buffer's windows has the `&diff` option set,
 " or 0 otherwise.
-function! s:vimdiff(bufnr)
-  if exists('*win_findbuf')
+if exists('*win_findbuf')
+  function! s:vimdiff(bufnr) abort
     for winid in win_findbuf(a:bufnr)
       if getwinvar(winid, '&diff')
         return 1
       endif
     endfor
     return 0
-  else
+  endfunction
+else
+  function! s:vimdiff(bufnr) abort
     for winnr in range(1, winnr('$'))
       if winbufnr(winnr) == a:bufnr && getwinvar(winnr, '&diff')
         return 1
       endif
     endfor
     return 0
-  endif
-endfunction
+  endfunction
+endif
 
 function! s:windows()
   return has('win64') || has('win32') || has('win32unix') || has('win16')
