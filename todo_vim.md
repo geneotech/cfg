@@ -5,10 +5,7 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
-- fix that reverse command search to not suck
-
 - improve speed of easymotion
-- fix replacing offset by one character
 - rename untitled files with first line of content
 	- unt -> untitled
 
@@ -22,7 +19,6 @@ summary: What needs to be done for vim.
 	- GDB
 		- https://reverseengineering.stackexchange.com/questions/1392/decent-gui-for-gdb 
 		- check out "vimgdb" 
-		- check if cores produced by clang builds can be read by gdb
 			- also check if lldb isn't more accurate here
 			- if lldb is better we'll need to rewrite the perl script
 	- LLDB
@@ -45,9 +41,17 @@ summary: What needs to be done for vim.
 - always use zz whenever navigating through anything?
 	- except N, n, /, ? etc
 If we're playing with neovim terminal, set scrollback=1 clears scrollback
+
 ## Done
 
+- fix that reverse command search to not suck
+	- What?
+
+- check if cores produced by clang builds can be read by gdb
+	- DONE - they can.
+
 - fix gitgutter on write
+- fix replacing offset by one character
  
 - write a script that transforms gdb's stack trace to quickfix format
 - c+n should open a new buffer in some predefined folder

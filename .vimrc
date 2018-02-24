@@ -24,7 +24,6 @@ Plugin 'elmindreda/vimcolors'
 Plugin 'fcpg/vim-farout'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'romgrk/replace.vim'
 Plugin 'tpope/vim-git'
 
 " All of your Plugins must be added before the following line
@@ -540,6 +539,42 @@ nmap <Space>e :call OpenLastErrors()<CR>
 nmap <Space>v :e ~/cfg/.vimrc<CR>
 nmap <Space>w :set list!<CR>
 
+" Our custom replacement script
+
+fu! s:SID()
+    return matchstr(expand('<sfile>'),'<SNR>\zs\d\+\ze_SID$')
+endfu
+
+function! s:setOpfunc (name) 
+    exe 'set opfunc=<SNR>'.s:SID().'_'.a:name.'Opfunc'
+    return 'g@' 
+endfu
+
+nnoremap <expr> <Plug>ReplaceOperator   <SID>setOpfunc('replace')
+vnoremap <Plug>ReplaceOperator  :<C-u>call <SID>replaceOpfunc(visualmode())<CR>
+
+fu! s:replaceOpfunc (motion) 
+    let type     = get(a:, 'motion')
+    call s:replace(type)
+endfu
+
+function! s:replace (type) 
+    let type = get(a:, 'type')
+
+    if     type==#'char' | let expr = "`[v`]"
+    elseif type==#'line' | let expr = "'[v']"
+    elseif type==#'v'    | let expr = "`<v`>"
+    elseif type==#'V'    | let expr = "'<V'>"
+    else | return | end
+
+    exe 'normal! '.expr
+    exe "normal! \"_c\<C-r>\"\<ESC>"
+endfu
+
+nmap <Return> <Plug>ReplaceOperator
+vmap <Return> <Plug>ReplaceOperator
+
+" Shortcuts for frequently used cases
 nmap <Return>w "_ciw<C-r>"<ESC>
 nmap <Return>W "_ciW<C-r>"<ESC>
 nmap <Return>b "_cib<C-r>"<ESC>
@@ -547,11 +582,6 @@ nmap <Return>B "_ciB<C-r>"<ESC>
 nmap <Return>< "_ci<<C-r>"<ESC>
 nmap <Return>" "_ci"<C-r>"<ESC>
 nmap <Return>' "_ci'<C-r>"<ESC>
-
-nmap <Return> <Plug>ReplaceOperator
-vmap <Return> <Plug>ReplaceOperator
-
-" Replace current line with the last yank
 nmap <Return>s "_ddP
 
 map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
@@ -664,8 +694,9 @@ execute "GitGutterLineHighlightsEnable"
 nnoremap - :GitGutterStageHunk<CR>
 
 " Prevent live updating of git gutter, it annoys me while writing
-" set updatetime=999999999
+set updatetime=999999999
 autocmd! gitgutter CursorHold,CursorHoldI
+let g:gitgutter_diff_args = '-w'
 
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
@@ -909,4 +940,6 @@ if strlen($LAUNCH_TERMINAL) > 0
 	set notitle
 	"hi Search ctermfg=black ctermbg=yellow
 	startinsert
+else
+	silent edit /home/pbc/agenda.md
 endif
