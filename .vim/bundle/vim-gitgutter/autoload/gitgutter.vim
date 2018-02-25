@@ -3,7 +3,7 @@ let s:t_string = type('')
 " Primary functions {{{
 
 function! gitgutter#all(force) abort
-  for bufnr in tabpagebuflist()
+  for bufnr in s:uniq(tabpagebuflist())
     let file = expand('#'.bufnr.':p')
     if !empty(file)
       call gitgutter#init_buffer(bufnr)
@@ -58,7 +58,7 @@ function! gitgutter#disable() abort
     call extend(buflist, tabpagebuflist(i + 1))
   endfor
 
-  for bufnr in buflist
+  for bufnr in s:uniq(buflist)
     let file = expand('#'.bufnr.':p')
     if !empty(file)
       call s:clear(bufnr)
@@ -97,3 +97,19 @@ function! s:clear(bufnr)
   call gitgutter#hunk#reset(a:bufnr)
   call s:reset_tick(a:bufnr)
 endfunction
+
+if exists('*uniq')  " Vim 7.4.218
+  function! s:uniq(list)
+    return uniq(sort(a:list))
+  endfunction
+else
+  function! s:uniq(list)
+    let processed = []
+    for e in a:list
+      if index(processed, e) == -1
+        call add(processed, e)
+      endif
+    endfor
+    return processed
+  endfunction
+endif

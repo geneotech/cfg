@@ -25,6 +25,7 @@ Plugin 'fcpg/vim-farout'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-git'
+Plugin 'powerman/vim-plugin-viewdoc'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -154,6 +155,9 @@ set titlestring="VIM"
     "autocmd QuickFixCmdPost [^l]* cwindow | redraw!
     "autocmd QuickFixCmdPost l* lwindow | redraw!
 "augroup END
+
+""""""""" Plugin configuration
+let g:no_viewdoc_maps = 1
 
 runtime plugin/grepper.vim
 let g:grepper.dir = 'repo'
@@ -409,7 +413,7 @@ imap <silent> <F5> <ESC><F5>
 imap <silent> <F6> <ESC><F6>
 imap <silent> <F7> <ESC><F7>
 
-nmap <Space>h :execute "help " . expand("<cword>")<CR>
+nmap <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
 
 " F25 is bound to Control + Backspace in Alacritty
 inoremap <F25> <C-w>
@@ -941,5 +945,7 @@ if strlen($LAUNCH_TERMINAL) > 0
 	"hi Search ctermfg=black ctermbg=yellow
 	startinsert
 else
-	silent edit /home/pbc/agenda.md
+	if @% =~ "Untitled"
+		silent edit /home/pbc/agenda.md
+	endif
 endif
