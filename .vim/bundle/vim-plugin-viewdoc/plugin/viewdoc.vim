@@ -70,7 +70,7 @@ function ViewDoc(target, topic, ...)
 
 	if a:target != 'inplace'
 		let prev_tabpagenr = tabpagenr()
-		call s:OpenBuf(a:target)
+		silent call s:OpenBuf(a:target)
 		let b:stack = 0
 	endif
 
@@ -134,13 +134,15 @@ function ViewDoc(target, topic, ...)
 		let b:docft = h.docft
 	endif
 
+	inoremap <silent> <buffer> <C-w>		<C-O>:call <SID>CloseBuf()<CR>
+	nnoremap <silent> <buffer> <C-w>		:call <SID>CloseBuf()<CR>
 	inoremap <silent> <buffer> q		<C-O>:call <SID>CloseBuf()<CR>
 	nnoremap <silent> <buffer> q		:call <SID>CloseBuf()<CR>
 	vnoremap <silent> <buffer> q		<Esc>:call <SID>CloseBuf()<CR>
 	inoremap <silent> <buffer> <C-]>	<C-O>:call <SID>Next()<CR>
-	inoremap <silent> <buffer> <C-T>	<C-O>:call <SID>Prev()<CR>
+	inoremap <silent> <buffer> <C-O>	<C-O>:silent call <SID>Prev()<CR>
 	nnoremap <silent> <buffer> <C-]>	:call <SID>Next()<CR>
-	nnoremap <silent> <buffer> <C-T>	:call <SID>Prev()<CR>
+	nnoremap <silent> <buffer> <C-O>	:silent call <SID>Prev()<CR>
 	imap	 <silent> <buffer> <CR>		<C-O><C-]>
 	imap	 <silent> <buffer> <BS>		<C-O><C-T>
 	nmap	 <silent> <buffer> <CR>		<C-]>
@@ -163,10 +165,6 @@ function ViewDoc(target, topic, ...)
 		else
 			execute "normal! \<C-^>"
 		endif
-	endif
-
-	if is_empty
-		redraw | echohl ErrorMsg | echo 'Sorry, no doc for' h.topic | echohl None
 	endif
 endfunction
 
