@@ -66,11 +66,12 @@ alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
 
 # Common tasks aliases
+alias zajeb='pkill -f --signal=SIGKILL '
+alias nuke='pkill -f '
 alias ptsy='ls /dev/pts'
 alias procki='ps aux | ag '
 alias rbt='sudo reboot'
 alias mycha='source ~/.xinitrc'
-alias nuke='pkill -f '
 alias int='interrupt '
 alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'
