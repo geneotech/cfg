@@ -25,19 +25,38 @@ let s:temp_buffer = tempname()
 "
 "     git show :myfile > myfileA
 "
-" and myfileB is the buffer contents.  Ideally we would pass this to
-" git-diff on stdin via the second argument to vim's system() function.
-" Unfortunately git-diff does not do CRLF conversion for input received on
-" stdin, and git-show never performs CRLF conversion, so repos with CRLF
-" conversion report that every line is modified due to mismatching EOLs.
-"
-" Instead, we write the buffer contents to a temporary file - myfileB in this
-" example.  Note the file extension must be preserved for the CRLF
-" conversion to work.
+" and myfileB is the buffer contents.
 "
 " After running the diff we pass it through grep where available to reduce
 " subsequent processing by the plugin.  If grep is not available the plugin
 " does the filtering instead.
+"
+"
+" Regarding line endings:
+"
+" git-show does not convert line endings.
+" git-diff FILE FILE does convert line endings for the given files.
+"
+" If a file has CRLF line endings and git's core.autocrlf is true,
+" the file in git's object store will have LF line endings.  Writing
+" it out via git-show will produce a file with LF line endings.
+"
+" If this last file is one of the files passed to git-diff, git-diff will
+" convert its line endings to CRLF before diffing -- which is what we want --
+" but also by default output a warning on stderr.
+"
+"   warning: LF will be replace by CRLF in <temp file>.
+"   The file will have its original line endings in your working directory.
+"
+" When running the diff asynchronously, the warning message triggers the stderr
+" callbacks which assume the overall command has failed and reset all the
+" signs.  As this is not what we want, and we can safely ignore the warning,
+" we turn it off by passing the '-c "core.safecrlf=false"' argument to
+" git-diff.
+"
+" When writing the temporary files we preserve the original file's extension
+" so that repos using .gitattributes to control EOL conversion continue to
+" convert correctly.
 function! gitgutter#diff#run_diff(bufnr, preserve_full_diff) abort
   while gitgutter#utility#repo_path(a:bufnr, 0) == -1
     sleep 5m
@@ -74,17 +93,18 @@ function! gitgutter#diff#run_diff(bufnr, preserve_full_diff) abort
 
   " Write file from index to temporary file.
   let index_name = g:gitgutter_diff_base.':'.gitgutter#utility#repo_path(a:bufnr, 1)
-  let cmd .= g:gitgutter_git_executable.' show '.index_name.' > '.index_file.' && '
+  let cmd .= g:gitgutter_git_executable.' --no-pager show '.index_name.' > '.index_file.' && '
 
   " Write buffer to temporary file.
   " Note: this is synchronous.
   call s:write_buffer(a:bufnr, buff_file)
 
   " Call git-diff with the temporary files.
-  let cmd .= g:gitgutter_git_executable
+  let cmd .= g:gitgutter_git_executable.' --no-pager'
   if s:c_flag
     let cmd .= ' -c "diff.autorefreshindex=0"'
     let cmd .= ' -c "diff.noprefix=false"'
+    let cmd .= ' -c "core.safecrlf=false"'
   endif
   let cmd .= ' diff --no-ext-diff --no-color -U0 '.g:gitgutter_diff_args.' -- '.index_file.' '.buff_file
 
@@ -129,8 +149,11 @@ function! gitgutter#diff#handler(bufnr, diff) abort
   call gitgutter#hunk#set_hunks(a:bufnr, gitgutter#diff#parse_diff(a:diff))
   let modified_lines = gitgutter#diff#process_hunks(a:bufnr, gitgutter#hunk#hunks(a:bufnr))
 
-  if len(modified_lines) > g:gitgutter_max_signs
-    call gitgutter#utility#warn_once(a:bufnr, 'exceeded maximum number of signs (configured by g:gitgutter_max_signs).', 'max_signs')
+  let signs_count = len(modified_lines)
+  if signs_count > g:gitgutter_max_signs
+    call gitgutter#utility#warn_once(a:bufnr, printf(
+          \ 'exceeded maximum number of signs (%d > %d, configured by g:gitgutter_max_signs).',
+          \ signs_count, g:gitgutter_max_signs), 'max_signs')
     call gitgutter#sign#clear_signs(a:bufnr)
 
   else

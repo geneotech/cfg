@@ -7,6 +7,7 @@ summary: What needs to be done on the system.
 
 - drivers for corsair
 
+- ranger - some history option?
 - use sxiv bash script so we have more customization opts
 
 - remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables

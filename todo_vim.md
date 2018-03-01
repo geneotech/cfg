@@ -26,8 +26,6 @@ summary: What needs to be done for vim.
 		- check out VSC + LLDB
 		- if not, check out native debug: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
 
-- install https://github.com/powerman/vim-plugin-viewdoc
-
 ## Maybe done
 
 - fix escaping for searches
@@ -68,4 +66,7 @@ If we're playing with neovim terminal, set scrollback=1 clears scrollback
 	- will have to set unique title for each
 		- we don't care anyway for window titles except when switching focus after build
 
+- install https://github.com/powerman/vim-plugin-viewdoc
 
+- fix that escaping in grepper, perhaps use "
+	- it works. it's just that word anchors are different here, not \< and \>
