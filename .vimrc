@@ -148,14 +148,6 @@ set title
 " Let us only see the filename
 set titlestring="VIM"
 
-" Automatically opens the quickfix window after common commands
-" and redraws the window to avoid glitches
-"augroup myvimrc
-    "autocmd!
-    "autocmd QuickFixCmdPost [^l]* cwindow | redraw!
-    "autocmd QuickFixCmdPost l* lwindow | redraw!
-"augroup END
-
 """"""""" Plugin configuration
 let g:no_viewdoc_maps = 1
 
@@ -172,6 +164,7 @@ let g:grepper.operator.tools = ['ag']
 let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
 let g:grepper.operator.stop = 300
 
+let g:grepper.switch = 0
 """"""""""  General bindings
 nmap <Leader>s :execute "CopyPath " . 'cd $(dirname ' . expand("%:p") . ")"<CR>
 nmap <Space>f :set foldenable!<CR>
@@ -427,7 +420,7 @@ function! s:find_git_root()
 endfunction
 
 function! ToRepoPath(fpath)
-	return substitute(expand(a:fpath), "$PWD", "", "")
+	return substitute(expand(a:fpath), $PWD, "", "")
 endfunc
 
 function! ToCppIncludePath(fpath)
@@ -450,7 +443,25 @@ let g:fzf_layout = { 'down': '~24%' }
 nmap <silent> <C-t> :Tags<CR>
 imap <silent> <C-t> <ESC>:Tags<CR>
 
+function! OpenInBrowserImpl(link)
+	silent call jobstart("firefox " . a:link . '; $(i3-msg "[title=Firefox] focus")')
+endfunction
+
+command! -nargs=1 OpenInBrowser call OpenInBrowserImpl(<q-args>)
+
+function! BrowseDocs()
+    let old_fzf_action = g:fzf_action 
+	let old_fzf_opts = $FZF_DEFAULT_OPTS
+	let $FZF_DEFAULT_OPTS='--nth=-2,-1 --delimiter=/'
+    let g:fzf_action = { 'enter': 'OpenInBrowser' }
+
+	silent execute "Files " . "/home/pbc/doc/std/en/cpp"
+	let g:fzf_action = old_fzf_action
+	let $FZF_DEFAULT_OPTS= old_fzf_opts
+endfunction
+
 nnoremap <F22> :execute ("Files " . expand("%:h"))<CR>
+nnoremap <C-x> :call BrowseDocs()<CR>
 
 nmap <silent> <C-p> :GFiles<CR>
 imap <silent> <C-p> <ESC>:GFiles<CR>
@@ -593,8 +604,6 @@ map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 " Also prevents the editor from being closed when the last tab closes
 nmap <silent> <C-w> :close<CR>:GitGutter<CR>
 imap <silent> <C-w> <ESC>:close<CR>
-
-nmap <silent> <C-x> :x<CR>
 
 function! OpenNextUntitled()
 	let idx = 1
@@ -864,6 +873,7 @@ map <F36> <Plug>(easymotion-w)
 map <F37> <Plug>(easymotion-b)
 
 let g:EasyMotion_keys = 'asdghklzxcvbnqwertyuiopjfm'
+let g:EasyMotion_do_shade = 1
 
 nnoremap <Up> <NOP>
 nnoremap <Down> <NOP>
