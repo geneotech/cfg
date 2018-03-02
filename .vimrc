@@ -148,6 +148,11 @@ set title
 " Let us only see the filename
 set titlestring="VIM"
 
+""""""""" General custom commands
+
+command! -nargs=0 Td echo system("timedatectl")
+cnoreabbrev td Td
+
 """"""""" Plugin configuration
 let g:no_viewdoc_maps = 1
 
