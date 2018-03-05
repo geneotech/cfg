@@ -28,7 +28,13 @@ grestore () {
 	git checkout $(git rev-list -n 1 HEAD -- $1)^ -- $1
 }
 
+alias gp='git push'
 alias gc='git commit -m'
+alias gall='git add --all'
+alias gst='git status'
+alias gca='git add --all && git commit -m'
+alias gamd='git commit --amend -m'
+alias glg='git log --stat'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
 
