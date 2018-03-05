@@ -498,7 +498,7 @@ imap <F28> <ESC><F28>
 
 " F34 is bound to ctrl+shift+e in alacritty
 nmap <F34> :Ranger<CR>
-cmap w!! w !sudo tee %
+cnoremap w!! w !sudo tee %
 
 " General keybindings
 vmap <silent> <Space>d :w >> /home/pbc/vtrash<CR>gvd
@@ -506,6 +506,14 @@ vmap <silent> <Space>d :w >> /home/pbc/vtrash<CR>gvd
 nmap <silent> <F1> :Bufferize messages<CR>
 vmap <silent> <F1> :Bufferize messages<CR>
 imap <silent> <F1> <ESC>:Bufferize messages<CR>
+
+" Allow for switching tabs even while in command mode
+cmap <C-j> <NOP>
+cmap <C-k> <NOP>
+
+" move cursor
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
 
 " Terminal bindings
 tnoremap <Esc> <C-\><C-n><C-w><C-p>
@@ -521,8 +529,11 @@ autocmd! FileType fzf tnoremap <buffer> <Esc> <c-q>
 " Allow for switching tabs even while in terminal
 tmap <C-h> <Esc><C-h>
 tmap <C-j> <Esc><C-j>
-tmap <C-k> <Esc><C-k>
-tmap <C-l> <Esc><C-l>
+"
+" move cursor
+tnoremap <C-h> <Left>
+tnoremap <C-l> <Right>
+
 
 " Allows choosing the candidates in fzf.vim with shift+j and shift+k \
 " instead of arrow keys
