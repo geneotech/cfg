@@ -425,11 +425,15 @@ function! s:find_git_root()
 endfunction
 
 function! ToRepoPath(fpath)
-	return substitute(expand(a:fpath), $PWD, "", "")
+	return substitute(expand(a:fpath), $PWD . "/", "", "")
+endfunc
+
+function! CppToH(fpath)
+	return substitute(expand(a:fpath), '.cpp', '.h', "")
 endfunc
 
 function! ToCppIncludePath(fpath)
-	return '#include "' . ToRepoPath(substitute(expand(a:fpath), "src/", "", "")) . '"' 
+	return '#include "' . ToRepoPath(substitute(CppToH(a:fpath), "src/", "", "")) . '"' 
 endfunc
 
 command! -nargs=1 CopyPath let @+ = <q-args>
