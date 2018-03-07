@@ -26,6 +26,9 @@ Plugin 'machakann/vim-highlightedyank'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-git'
 Plugin 'powerman/vim-plugin-viewdoc'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

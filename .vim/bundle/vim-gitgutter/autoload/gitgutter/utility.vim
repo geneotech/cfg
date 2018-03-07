@@ -149,7 +149,7 @@ function! s:set_path(bufnr, path)
 endfunction
 
 function! gitgutter#utility#cd_cmd(bufnr, cmd) abort
-  let cd = s:unc_path(a:bufnr) ? 'pushd' : 'cd'
+  let cd = s:unc_path(a:bufnr) ? 'pushd' : (s:windows() ? 'cd /d' : 'cd')
   return cd.' '.s:dir(a:bufnr).' && '.a:cmd
 endfunction
 
@@ -216,5 +216,5 @@ else
 endif
 
 function! s:windows()
-  return has('win64') || has('win32') || has('win32unix') || has('win16')
+  return has('win64') || has('win32') || has('win16')
 endfunction

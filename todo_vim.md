@@ -70,3 +70,8 @@ If we're playing with neovim terminal, set scrollback=1 clears scrollback
 
 - fix that escaping in grepper, perhaps use "
 	- it works. it's just that word anchors are different here, not \< and \>
+
+- Ctrl+Shift+C should copy exact path quoted (e.g. for cmake)
+- install something for parenthesizing 
+- install something for commenting and uncommenting
+ 
