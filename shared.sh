@@ -63,6 +63,7 @@ fr () {
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
 alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkc="cmake/clean.sh"
 alias mkc="pushd build/current; make clean; popd"
