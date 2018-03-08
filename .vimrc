@@ -29,6 +29,7 @@ Plugin 'powerman/vim-plugin-viewdoc'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+" Plugin 'file:///home/pbc/rep/gregor.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -650,9 +651,26 @@ function! OpenNextUntitled()
 	endwhile
 endfunction
 
+command! -bar DuplicateTabpane
+      \ let s:sessionoptions = &sessionoptions |
+      \ try |
+      \   let &sessionoptions = '' |
+      \   let s:file = tempname() |
+      \   execute 'mksession ' . s:file |
+      \   tabnew |
+      \   execute 'source ' . s:file |
+      \ finally |
+      \   silent call delete(s:file) |
+      \   let &sessionoptions = s:sessionoptions |
+      \   unlet! s:file s:sessionoptions |
+      \ endtry
+
 nmap <silent> <C-j> :tabprevious<CR>
 nmap <silent> <C-k> :tabnext<CR>
-nmap <silent> <C-n> :call OpenNextUntitled()<CR>
+nmap <silent> <C-n> :DuplicateTabpane<CR>
+
+" F35 is bound to ctrl+shift+n
+nmap <silent> <F35> :call OpenNextUntitled()<CR>
 " So that we can switch tabs at any time
 imap <silent> <C-j> <ESC>:tabprevious<CR>
 imap <silent> <C-k> <ESC>:tabnext<CR>
@@ -674,7 +692,6 @@ function! FeedReplace()
 	endif 
 endfunc
 
-" F35 is bound to C-S-h in Alacritty
 nmap R :call FeedReplace()<CR>
 vmap R :s///g<left><left><left>
 
