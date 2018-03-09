@@ -754,12 +754,10 @@ imap <silent> <C-a> <ESC>GVgg
 nmap U :execute "GitGutterUndoHunk"<CR>
 
 runtime plugin/gitgutter.vim
-execute "GitGutterLineHighlightsEnable"
-"execute "GitGutterSignsDisable"
+GitGutterLineHighlightsEnable
 nnoremap - :GitGutterStageHunk<CR>
 
 " Prevent live updating of git gutter, it annoys me while writing
-set updatetime=999999999
 autocmd! gitgutter CursorHold,CursorHoldI
 let g:gitgutter_diff_args = '-w'
 
