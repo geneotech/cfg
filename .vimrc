@@ -693,16 +693,26 @@ function! FeedReplace()
 endfunc
 
 nmap R :call FeedReplace()<CR>
-vmap R :s///g<left><left><left>
+
+function! FeedReplaceVisual(kind)
+	if a:kind ==# "v"
+		return "\"hy:%s/\<C-r>h//g\<left>\<left>"
+	endif
+
+	return ":s///g\<left>\<left>\<left>"
+endfunc
+
+xnoremap <expr> R FeedReplaceVisual(mode())
 
 """ Searching current file """
 
-autocmd VimEnter * nmap <Leader>f :execute "Grepper -buffer -tool grep -noprompt -query ''"<left><left>
+autocmd VimEnter * nmap <Leader>f :Grepper -buffer -tool ag -noprompt -query ''<left>
 
 " General
 
 " Search word under cursor
-nmap <F3> :execute "Grepper -buffer -tool grep -cword -noprompt"<CR>
+nmap <F3> :execute "Grepper -buffer -tool ag -cword -noprompt"<CR>
+vmap <F3> "hy:execute "Grepper -buffer -tool ag -noprompt -query " . shellescape(escape('<C-r>h', '\^$.*+?()[]{}<bar>'))<CR>
 
 """ Searching whole project """
 
