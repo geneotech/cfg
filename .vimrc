@@ -102,8 +102,6 @@ autocmd BufReadPost *
 set viminfo^=%
 " Let the window's title be the filename
 set title
-" Let us only see the filename
-set titlestring="VIM"
 
 """"""""" General custom commands
 
@@ -144,8 +142,6 @@ source $VIMCFG/tabline.vim
 source $VIMCFG/indenting.vim
 source $VIMCFG/folding.vim
 source $VIMCFG/vimdiffcfg.vim
-
-let $VIMCFG='~/cfg/vimcfg'
 
 """"""""" Epilogue
 
