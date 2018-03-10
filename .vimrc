@@ -130,18 +130,18 @@ source $VIMCFG/grepper.vim
 source $VIMCFG/wrap_qf_nextprev.vim
 source $VIMCFG/make_integration.vim
 source $VIMCFG/copy_path_to_clipboard.vim
-source $VIMCFG/fzfcfg.vim
+source $VIMCFG/fzf_config.vim
 source $VIMCFG/browser_integration.vim
 source $VIMCFG/replace_operator.vim
 source $VIMCFG/open_next_untitled.vim
 source $VIMCFG/tab_navigation.vim
 source $VIMCFG/manual_replaces.vim
-source $VIMCFG/fugitivecfg.vim
+source $VIMCFG/fugitive_config.vim
 source $VIMCFG/gitgutter.vim
 source $VIMCFG/tabline.vim
 source $VIMCFG/indenting.vim
 source $VIMCFG/folding.vim
-source $VIMCFG/vimdiffcfg.vim
+source $VIMCFG/vimdiff_config.vim
 
 """"""""" Epilogue
 
