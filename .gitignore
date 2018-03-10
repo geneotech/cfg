@@ -23,7 +23,7 @@ QtProject.conf
 .config/nvim/.netrwhist
 .config/aacs
 .config/cmus/playlists/
-maincpp/main.cpp
-maincpp/main
-clangcpp/main.cpp
-clangcpp/main
+gcc_single_cpp/main.cpp
+gcc_single_cpp/main
+clang_single_cpp/main.cpp
+clang_single_cpp/main
