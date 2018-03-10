@@ -58,14 +58,14 @@ set nobackup
 set noswapfile
 set noundofile
 
-"""""""""" Formatting
+""""""""" Formatting
 
 autocmd FileType cpp setlocal fo=
 " Don't complete brackets for me (don't know why does this option have this name)
 set noshowmatch
 set nofixendofline
 
-"""""""""" Searching
+""""""""" Searching
 
 " When searching try to be smart about cases
 set smartcase
@@ -77,7 +77,8 @@ set incsearch
 " For regular expressions turn magic on
 set magic
 
-"""""""""" Viewing
+""""""""" Viewing
+
 " On composing substitute command, see to-be-applied changes live
 set inccommand=nosplit
 " Highlight current line
@@ -109,7 +110,7 @@ set titlestring="VIM"
 command! -nargs=0 Td echo system("timedatectl")
 cnoreabbrev td Td
 
-"""""""""" 'Unbindings' for breaking bad habits
+""""""""" 'Unbindings' for breaking bad habits
 
 nnoremap <Up> <NOP>
 nnoremap <Down> <NOP>
@@ -144,11 +145,17 @@ source $VIMCFG/indenting.vim
 source $VIMCFG/folding.vim
 source $VIMCFG/vimdiffcfg.vim
 
+let $VIMCFG='~/cfg/vimcfg'
+
+""""""""" Epilogue
+
 if strlen($LAUNCH_TERMINAL) > 0
 	source $VIMCFG/setup_terminal.vim
 else
 	colorscheme moonfly
 	set termguicolors
+
+	" On normal startup, open an agenda file
 
 	if @% =~ "Untitled"
 		silent edit /home/pbc/agenda.md
