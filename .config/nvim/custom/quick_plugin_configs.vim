@@ -6,6 +6,8 @@ nmap <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
 " F34 is bound to ctrl+shift+e in alacritty
 nmap <F34> :Ranger<CR>
 
+let g:bufferize_command='tabnew'
+
 " Gutentags settings
 runtime plugin/gutentags.vim
 let g:gutentags_cache_dir='/tmp'

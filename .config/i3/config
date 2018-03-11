@@ -164,18 +164,17 @@ bindsym $mod+r mode "resize"
 #}
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
-bindsym Control+$mod+Delete exec zsh -c ". ~/.config/i3/bind_htop.sh"
+bindsym Control+$mod+Delete exec zsh -c ". ~/.config/i3/programs/bind_htop.sh"
 bindsym $modw+x exec firefox
 bindsym $modw+t exec transmission-gtk
 bindsym $modw+v exec zsh -c ". ~/.config/i3/workspace/bind_workspace_editor.sh"
-bindsym $modw+g exec zsh -c ". ~/.config/i3/bind_google.sh"
 bindsym $mod+Shift+Return exec zsh -c ". ~/.config/i3/bind_one_time_command.sh"
 #bindsym $modw+f exec zsh -c ". ~/.config/i3/bind_find_all.sh"
 bindsym $modw+c exec zsh -c ". ~/.config/i3/bind_copy_path.sh"
 bindsym $modw+o exec zsh -c ". ~/.config/i3/bind_open_containing_folder.sh"
 bindsym $modw+s exec zsh -c ". ~/.config/i3/bind_open_shell_in.sh"
-bindsym $modw+d exec zsh -c ". ~/.config/i3/bind_open_downloads.sh"
-bindsym $modw+m exec zsh -c ". ~/.config/i3/bind_open_music.sh"
+bindsym $modw+d exec zsh -c ". ~/.config/i3/programs/bind_open_downloads.sh"
+bindsym $modw+m exec zsh -c ". ~/.config/i3/programs/bind_open_music.sh"
 
 bindsym Control+Shift+s exec zsh -c ". ~/.config/i3/bind_select_workspace.sh"
 
@@ -204,8 +203,8 @@ bindsym XF86AudioNext exec cmus-remote -n
 
 # Screen capture bindings
 
-bindsym Print exec ". ~/.config/i3/bind_print_screen.sh"
-bindsym $mod+shift+s exec ". ~/.config/i3/bind_region_select.sh"
+bindsym Print exec ". ~/.config/i3/capture/bind_print_screen.sh"
+bindsym $mod+shift+s exec ". ~/.config/i3/capture/bind_region_select.sh"
 bindsym $mod+shift+r exec zsh -c screen_capture.sh
 
 # IDE-like bindings
