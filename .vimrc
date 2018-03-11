@@ -119,34 +119,34 @@ tnoremap <Down> <NOP>
 
 """"""""" Includes
 
-let $VIM_SCRIPTS='~/cfg/vimscript'
+let $CUSTOM='~/.config/nvim/custom'
 
-source $VIM_SCRIPTS/bindings_for_builtins.vim
-source $VIM_SCRIPTS/quick_plugin_configs.vim
+source $CUSTOM/bindings_for_builtins.vim
+source $CUSTOM/quick_plugin_configs.vim
 
-source $VIM_SCRIPTS/backspace_hacks.vim
-source $VIM_SCRIPTS/moving_in_text.vim
-source $VIM_SCRIPTS/grepper.vim
-source $VIM_SCRIPTS/wrap_qf_nextprev.vim
-source $VIM_SCRIPTS/make_integration.vim
-source $VIM_SCRIPTS/copy_path_to_clipboard.vim
-source $VIM_SCRIPTS/fzf_config.vim
-source $VIM_SCRIPTS/browser_integration.vim
-source $VIM_SCRIPTS/replace_operator.vim
-source $VIM_SCRIPTS/open_next_untitled.vim
-source $VIM_SCRIPTS/tab_navigation.vim
-source $VIM_SCRIPTS/manual_replaces.vim
-source $VIM_SCRIPTS/fugitive_config.vim
-source $VIM_SCRIPTS/gitgutter.vim
-source $VIM_SCRIPTS/tabline.vim
-source $VIM_SCRIPTS/indenting.vim
-source $VIM_SCRIPTS/folding.vim
-source $VIM_SCRIPTS/vimdiff_config.vim
+source $CUSTOM/backspace_hacks.vim
+source $CUSTOM/moving_in_text.vim
+source $CUSTOM/grepper.vim
+source $CUSTOM/wrap_qf_nextprev.vim
+source $CUSTOM/make_integration.vim
+source $CUSTOM/copy_path_to_clipboard.vim
+source $CUSTOM/fzf_config.vim
+source $CUSTOM/browser_integration.vim
+source $CUSTOM/replace_operator.vim
+source $CUSTOM/open_next_untitled.vim
+source $CUSTOM/tab_navigation.vim
+source $CUSTOM/manual_replaces.vim
+source $CUSTOM/fugitive_config.vim
+source $CUSTOM/gitgutter.vim
+source $CUSTOM/tabline.vim
+source $CUSTOM/indenting.vim
+source $CUSTOM/folding.vim
+source $CUSTOM/vimdiff_config.vim
 
 """"""""" Epilogue
 
 if strlen($LAUNCH_TERMINAL) > 0
-	source $VIM_SCRIPTS/setup_terminal.vim
+	source $CUSTOM/setup_terminal.vim
 else
 	colorscheme moonfly
 	set termguicolors
