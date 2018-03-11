@@ -1,4 +1,8 @@
 stty -ixon
+
+export ZSH=/home/pbc/.oh-my-zsh
+. $ZSH/oh-my-zsh.sh
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
