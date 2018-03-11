@@ -1,8 +1,8 @@
-source ~/.config/i3/workspace/current
+. ~/.config/i3/workspace/current
 
 export WORKSPACE_NAME=$(basename $WORKSPACE)
 export WORKSPACE_EXE=$WORKSPACE/build/current/$WORKSPACE_NAME
-source /tmp/viewing_tty
+. /tmp/viewing_tty
 
 function gdbcore() {
 	if [ -f $WORKSPACE_EXE ]; then

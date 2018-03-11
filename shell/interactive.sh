@@ -11,7 +11,7 @@ vw () {
 
 vw
 
-source ~/cfg/shell/vim_builders.sh
+. ~/cfg/shell/vim_builders.sh
 
 # Program aliases
 alias nt='export LAUNCH_TERMINAL=true; nvim'
@@ -78,7 +78,7 @@ alias nuke='pkill -f '
 alias ptsy='ls /dev/pts'
 alias procki='ps aux | ag '
 alias rbt='sudo reboot'
-alias mycha='source ~/.xinitrc'
+alias mycha='. ~/.xinitrc'
 alias int='interrupt '
 alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'

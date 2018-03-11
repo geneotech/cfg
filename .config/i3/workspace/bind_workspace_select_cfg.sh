@@ -1,4 +1,4 @@
-source ~/.config/i3/workspace/current
+. ~/.config/i3/workspace/current
 cd $WORKSPACE/build
 
 CONFIGURATIONS=$(ls -1 | sed '/current/d')
