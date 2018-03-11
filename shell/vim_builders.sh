@@ -4,7 +4,7 @@ export WORKSPACE_NAME=$(basename $WORKSPACE)
 export WORKSPACE_EXE=$WORKSPACE/build/current/$WORKSPACE_NAME
 . /tmp/viewing_tty
 
-function gdbcore() {
+gdbcore() {
 	if [ -f $WORKSPACE_EXE ]; then
 		TARGET_EXECUTABLE=$WORKSPACE_EXE
 	fi
@@ -12,7 +12,7 @@ function gdbcore() {
 	gdb $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
 
-function hcore() {
+hcore() {
 	if [ -f $WORKSPACE_EXE ]; then
 		TARGET_EXECUTABLE=$WORKSPACE_EXE
 	fi
@@ -29,12 +29,12 @@ export LASTERR_PATH_COLOR=/tmp/last_error_color.txt
 export RUN_RESULT_PATH=/tmp/run_result.txt
 export BT_PATH=/tmp/bt.txt
 
-function rmlogs() {
+rmlogs() {
 	rm $LASTERR_PATH
 	rm $LASTERR_PATH_COLOR
 }
 
-function stripcodes() {
+stripcodes() {
 	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
 	sed -i 's/\r$//g' $1
 	sed -i -e '1d' $1
@@ -43,14 +43,14 @@ function stripcodes() {
 # Handy building aliases
 alias clnerr='stripcodes $LASTERR_PATH'
 
-function make_with_logs() {
+make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
 
 	rmlogs
 	rm $BT_PATH
 
-	if [[ "$MAKE_TARGET" = "run" ]]; then
+	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		rm hypersomnia/core
 	fi
@@ -61,7 +61,7 @@ function make_with_logs() {
 	head -n -2 $LASTERR_PATH > /tmp/dobrazaraz
 	cp /tmp/dobrazaraz $LASTERR_PATH
 
-	if [[ "$MAKE_TARGET" = "run" ]]; then
+	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		if [ -f hypersomnia/core ]; then
 			echo "Core found." > $OUTPUT_TERM
@@ -73,17 +73,17 @@ function make_with_logs() {
 	fi
 }
 
-function make_current() {
+make_current() {
 	MAKE_TARGET=$1
 
 	make_with_logs $MAKE_TARGET build/current
 }
 
-function handle_last_errors() {
+handle_last_errors() {
 	ERRORS=$(ag "error:" $LASTERR_PATH)
 	LINKER_ERRORS=$(ag "error: ld" $LASTERR_PATH)
 	
-	if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
+	if [ ! -z $ERRORS && -z $LINKER_ERRORS ]
 	then
 		cp $LASTERR_PATH $LASTERR_PATH_COLOR
 		clnerr
@@ -93,17 +93,17 @@ function handle_last_errors() {
 	fi
 }
 
-function vim_target() {
+vim_target() {
 	interrupt make
 	cd $WORKSPACE
 	make_current $1
 	handle_last_errors
 }
 
-function vim_build() {
+vim_build() {
 	vim_target all
 }
 
-function vim_run() {
+vim_run() {
 	vim_target run
 }

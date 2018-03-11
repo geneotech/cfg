@@ -1,14 +1,4 @@
 stty -ixon
-# Path to your oh-my-zsh installation.
-export ZSH=/home/pbc/.oh-my-zsh
-ZSH_THEME="simple"
-
-plugins=(
-  extract
-)
-
-. $ZSH/oh-my-zsh.sh
-
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000

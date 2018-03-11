@@ -43,7 +43,7 @@ fd () {
 
 	NEWLOC=$(fzf)
 
-	if [[ ! -z $NEWLOC ]]
+	if [ ! -z $NEWLOC ]
 	then
 		cd $(dirname $NEWLOC)
 	fi
@@ -54,7 +54,7 @@ fr () {
 
 	NEWLOC=$(fzf)
 
-	if [[ ! -z $NEWLOC ]]
+	if [ ! -z $NEWLOC ]
 	then
 		rifle $NEWLOC
 	fi
@@ -108,7 +108,7 @@ alias journalgetsize='journalctl --disk-usage'
 alias relx='xrdb ~/.Xresources'
 alias upx='sudo xrdb ~/.Xresources'
 
-function journalsize() {
+journalsize() {
 	sudo journalctl --vacuum-size=$1
 }
 

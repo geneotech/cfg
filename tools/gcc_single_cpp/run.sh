@@ -1,4 +1,4 @@
-. ~/cfg/vim_builders.sh
+. ~/cfg/shell/vim_builders.sh
 
 rm $BT_PATH
 

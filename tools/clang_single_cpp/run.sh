@@ -1,4 +1,4 @@
-. ~/cfg/vim_builders.sh
+. ~/cfg/shell/vim_builders.sh
 
 echo "Clang build started." > $OUTPUT_TERM
 
