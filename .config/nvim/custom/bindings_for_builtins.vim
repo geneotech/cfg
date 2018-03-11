@@ -5,7 +5,7 @@ autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 
 " We often play with vimrc
 nmap <Space>s :source $MYVIMRC<CR>
-nmap <Space>v :e ~/cfg/.vimrc<CR>
+nmap <Space>v :e $MYVIMRC<CR>
 
 " We center the view often
 nnoremap z zz

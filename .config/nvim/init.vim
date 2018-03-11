@@ -1,8 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-set rtp+=/home/pbc/.vim/bundle/Vundle.vim
-call vundle#begin()
+set rtp+=~/.config/nvim/bundle/Vundle.vim
+call vundle#begin("~/.config/nvim/bundle")
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-grepper'
@@ -30,15 +30,10 @@ Plugin 'tpope/vim-repeat'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-if has("autocmd")
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-  augroup END
-else
-endif 
+augroup vimrcEx
+	au!
+	autocmd FileType text setlocal textwidth=78
+augroup END
 
 """"""""" General behaviour
 
