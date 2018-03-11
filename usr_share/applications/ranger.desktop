@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=ranger
-Comment=Launches the ranger file manager
-Icon=utilities-terminal
-Terminal=true
-Exec=/home/pbc/.config/i3/open_ranger.sh
-Categories=ConsoleOnly;System;FileTools;FileManager
-MimeType=inode/directory;
