@@ -86,6 +86,11 @@ alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'
 alias im="interrupt make"
 alias rmpwd='sudo passwd -d '
+alias xtr='. ~/cfg/tools/extract.plugin.zsh; extract '
+
+relinksh () {
+	sudo ln -sfT $1 /usr/bin/sh
+}
 
 # Common fs aliases
 alias mkb='mkdir build && cd build'
