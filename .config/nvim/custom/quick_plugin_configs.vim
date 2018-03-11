@@ -17,6 +17,9 @@ let g:highlightedyank_highlight_duration = -1
 
 " Ease of access for bufferizing last echomsgs
 
-nmap <silent> <F1> :Bufferize messages<CR>
-vmap <silent> <F1> :Bufferize messages<CR>
-imap <silent> <F1> <ESC>:Bufferize messages<CR>
+nnoremap <silent> <F1> :Bufferize messages<CR>
+vnoremap <silent> <F1> :Bufferize messages<CR>
+inoremap <silent> <F1> <ESC>:Bufferize messages<CR>
+
+nnoremap <silent> { :SidewaysLeft<CR>
+nnoremap <silent> } :SidewaysRight<CR>

@@ -32,6 +32,8 @@ export BT_PATH=/tmp/bt.txt
 rmlogs() {
 	rm $LASTERR_PATH
 	rm $LASTERR_PATH_COLOR
+	rm $RUN_RESULT_PATH
+	rm $BT_PATH
 }
 
 stripcodes() {
@@ -81,7 +83,10 @@ make_current() {
 }
 
 handle_last_errors() {
-	ERRORS=$(ag "error:" $LASTERR_PATH)
+	# We need to be more specific about "error" string,
+	# because it may turn out that the game itself has emitted some "error:" messages,
+	# but we do not want NVIM to handle this.
+	ERRORS=$(ag ": error:" $LASTERR_PATH)
 	
 	if [ ! -z $ERRORS ];
 	then

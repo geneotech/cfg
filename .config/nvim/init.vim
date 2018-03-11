@@ -23,6 +23,7 @@ Plugin 'powerman/vim-plugin-viewdoc'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
+Plugin 'AndrewRadev/sideways.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
