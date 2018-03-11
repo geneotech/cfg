@@ -87,6 +87,7 @@ alias mounty='mount | column -t'
 alias im="interrupt make"
 alias rmpwd='sudo passwd -d '
 alias xtr='. ~/cfg/tools/extract.plugin.zsh; extract '
+alias chksh='readlink /usr/bin/sh'
 
 relinksh () {
 	sudo ln -sfT $1 /usr/bin/sh

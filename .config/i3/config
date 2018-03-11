@@ -225,7 +225,7 @@ client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 #bindsym $modw+m focus floating; mode "moveit"
 
 floating_minimum_size 1 x 1
-for_window[title="capture-border"] floating enabled
+#for_window[title="capture-border"] floating enabled
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
