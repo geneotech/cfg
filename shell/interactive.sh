@@ -11,7 +11,7 @@ vw () {
 
 vw
 
-source ~/cfg/vim_builders.sh
+source ~/cfg/shell/vim_builders.sh
 
 # Program aliases
 alias nt='export LAUNCH_TERMINAL=true; nvim'

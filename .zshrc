@@ -22,6 +22,6 @@ zstyle :compinstall filename '/home/pbc/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-. /home/pbc/cfg/shared.sh
+. /home/pbc/cfg/shell/interactive.sh
 # export PS1="%d>"
 
