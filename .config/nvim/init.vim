@@ -15,8 +15,6 @@ Plugin 'wojtekmach/vim-rename'
 Plugin 'AndrewRadev/bufferize.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-Plugin 'vim-scripts/ibmedit.vim'
-Plugin 'elmindreda/vimcolors'
 Plugin 'fcpg/vim-farout'
 Plugin 'machakann/vim-highlightedyank'
 Plugin 'easymotion/vim-easymotion'
@@ -25,7 +23,6 @@ Plugin 'powerman/vim-plugin-viewdoc'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-" Plugin 'file:///home/pbc/rep/gregor.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

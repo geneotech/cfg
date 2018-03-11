@@ -6,7 +6,6 @@ gcc_single_cpp/main
 clang_single_cpp/main.cpp
 clang_single_cpp/main
 .nvidia-settings-rc
-.vim/.netrwhist
 .config/Trolltech.conf
 .config/ranger/bookmarks
 .config/ranger/tagged
@@ -30,3 +29,4 @@ clang_single_cpp/main
 .config/aacs
 .config/cmus/playlists/
 .config/vlc
+.git
