@@ -5,6 +5,9 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- really something for that screen recording?
+- refactor i3/config
+
 - make ranger use trash
 - check if clang can't automatically remove includes from cpps
 - drivers for corsair

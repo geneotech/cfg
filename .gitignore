@@ -23,7 +23,9 @@ QtProject.conf
 .config/nvim/.netrwhist
 .config/aacs
 .config/cmus/playlists/
+.config/vlc
 gcc_single_cpp/main.cpp
 gcc_single_cpp/main
 clang_single_cpp/main.cpp
 clang_single_cpp/main
+.nvidia-settings-rc
