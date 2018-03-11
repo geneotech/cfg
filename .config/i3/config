@@ -169,22 +169,17 @@ bindsym $modw+x exec firefox
 bindsym $modw+t exec transmission-gtk
 bindsym $modw+v exec zsh -c ". ~/.config/i3/workspace/bind_workspace_editor.sh"
 bindsym $mod+Shift+Return exec zsh -c ". ~/.config/i3/bind_one_time_command.sh"
-#bindsym $modw+f exec zsh -c ". ~/.config/i3/bind_find_all.sh"
-bindsym $modw+c exec zsh -c ". ~/.config/i3/bind_copy_path.sh"
-bindsym $modw+o exec zsh -c ". ~/.config/i3/bind_open_containing_folder.sh"
-bindsym $modw+s exec zsh -c ". ~/.config/i3/bind_open_shell_in.sh"
+bindsym $modw+c exec zsh -c ". ~/.config/i3/selectors/bind_copy_path.sh"
+bindsym $modw+o exec zsh -c ". ~/.config/i3/selectors/bind_open_containing_folder.sh"
+bindsym $modw+s exec zsh -c ". ~/.config/i3/selectors/bind_open_shell_in.sh"
 bindsym $modw+d exec zsh -c ". ~/.config/i3/programs/bind_open_downloads.sh"
 bindsym $modw+m exec zsh -c ". ~/.config/i3/programs/bind_open_music.sh"
 
-bindsym Control+Shift+s exec zsh -c ". ~/.config/i3/bind_select_workspace.sh"
+bindsym Control+Shift+s exec zsh -c ". ~/.config/i3/selectors/bind_select_workspace.sh"
 
 # Current workspace bindings
 
 bindsym Control+Shift+d exec zsh -c ". ~/.config/i3/workspace/bind_workspace_select_cfg.sh"
-
-#bindsym Control+p exec zsh -c ". ~/.config/i3/workspace/bind_workspace_find_all.sh"
-#bindsym Control+Shift+a exec zsh -c ". ~/.config/i3/workspace/bind_workspace_status.sh"
-#bindsym Control+Shift+l exec zsh -c ". ~/.config/i3/workspace/bind_workspace_log.sh"
 bindsym $mod+Return exec zsh -c ". ~/.config/i3/workspace/bind_workspace_terminal.sh" 
 bindsym $modw+r exec zsh -c ". ~/.config/i3/workspace/bind_workspace_ranger.sh"
 
@@ -206,14 +201,6 @@ bindsym XF86AudioNext exec cmus-remote -n
 bindsym Print exec ". ~/.config/i3/capture/bind_print_screen.sh"
 bindsym $mod+shift+s exec ". ~/.config/i3/capture/bind_region_select.sh"
 bindsym $mod+shift+r exec zsh -c screen_capture.sh
-
-# IDE-like bindings
-
-# Global F5 bind will also prevent us from wasting time in firefox pressing F5.
-# We'll be forced to press Ctrl+F5 which will cause us to think about ours wasting time.
-#bindsym F5 exec zsh -c vim_run
-#bindsym F6 exec zsh -c vim_debug
-#bindsym F7 exec zsh -c vim_build
 
 client.background       #ffffff
 
