@@ -119,34 +119,34 @@ tnoremap <Down> <NOP>
 
 """"""""" Includes
 
-let $VIMCFG='~/cfg/vimcfg'
+let $VIM_SCRIPTS='~/cfg/vimscript'
 
-source $VIMCFG/bindings_for_builtins.vim
-source $VIMCFG/quick_plugin_configs.vim
+source $VIM_SCRIPTS/bindings_for_builtins.vim
+source $VIM_SCRIPTS/quick_plugin_configs.vim
 
-source $VIMCFG/backspace_hacks.vim
-source $VIMCFG/moving_in_text.vim
-source $VIMCFG/grepper.vim
-source $VIMCFG/wrap_qf_nextprev.vim
-source $VIMCFG/make_integration.vim
-source $VIMCFG/copy_path_to_clipboard.vim
-source $VIMCFG/fzf_config.vim
-source $VIMCFG/browser_integration.vim
-source $VIMCFG/replace_operator.vim
-source $VIMCFG/open_next_untitled.vim
-source $VIMCFG/tab_navigation.vim
-source $VIMCFG/manual_replaces.vim
-source $VIMCFG/fugitive_config.vim
-source $VIMCFG/gitgutter.vim
-source $VIMCFG/tabline.vim
-source $VIMCFG/indenting.vim
-source $VIMCFG/folding.vim
-source $VIMCFG/vimdiff_config.vim
+source $VIM_SCRIPTS/backspace_hacks.vim
+source $VIM_SCRIPTS/moving_in_text.vim
+source $VIM_SCRIPTS/grepper.vim
+source $VIM_SCRIPTS/wrap_qf_nextprev.vim
+source $VIM_SCRIPTS/make_integration.vim
+source $VIM_SCRIPTS/copy_path_to_clipboard.vim
+source $VIM_SCRIPTS/fzf_config.vim
+source $VIM_SCRIPTS/browser_integration.vim
+source $VIM_SCRIPTS/replace_operator.vim
+source $VIM_SCRIPTS/open_next_untitled.vim
+source $VIM_SCRIPTS/tab_navigation.vim
+source $VIM_SCRIPTS/manual_replaces.vim
+source $VIM_SCRIPTS/fugitive_config.vim
+source $VIM_SCRIPTS/gitgutter.vim
+source $VIM_SCRIPTS/tabline.vim
+source $VIM_SCRIPTS/indenting.vim
+source $VIM_SCRIPTS/folding.vim
+source $VIM_SCRIPTS/vimdiff_config.vim
 
 """"""""" Epilogue
 
 if strlen($LAUNCH_TERMINAL) > 0
-	source $VIMCFG/setup_terminal.vim
+	source $VIM_SCRIPTS/setup_terminal.vim
 else
 	colorscheme moonfly
 	set termguicolors
