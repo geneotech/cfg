@@ -149,3 +149,9 @@ else
 		silent edit /home/pbc/agenda.md
 	endif
 endif
+
+function! FixColors()
+	execute("source $CUSTOM/colorscheme_fixes/" . g:colors_name . "_fix.vim")
+endfunc
+
+autocmd ColorScheme * call FixColors()
