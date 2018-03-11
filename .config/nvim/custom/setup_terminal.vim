@@ -30,7 +30,7 @@ nnoremap <C-c> m'i<C-c><C-\><C-n><C-o>
 " F32 = shift+backspace
 nnoremap <F32> :call delete(expand('%')) <bar> bdelete! <bar> terminal<CR>
 
-terminal
+edit term://zsh
 
 " So the build errors don't switch to the terminal window
 set notitle

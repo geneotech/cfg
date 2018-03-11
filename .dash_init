@@ -1,0 +1,2 @@
+export PS1='$PWD>'
+. /home/pbc/cfg/shell/interactive.sh

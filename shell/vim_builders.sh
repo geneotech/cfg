@@ -36,6 +36,7 @@ rmlogs() {
 
 stripcodes() {
 	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
+	sed -i -r 's/\x1B\[0;1;3[1-2]m//g' $1
 	sed -i 's/\r$//g' $1
 	sed -i -e '1d' $1
 }
@@ -81,9 +82,8 @@ make_current() {
 
 handle_last_errors() {
 	ERRORS=$(ag "error:" $LASTERR_PATH)
-	LINKER_ERRORS=$(ag "error: ld" $LASTERR_PATH)
 	
-	if [ ! -z $ERRORS && -z $LINKER_ERRORS ]
+	if [ ! -z $ERRORS ];
 	then
 		cp $LASTERR_PATH $LASTERR_PATH_COLOR
 		clnerr

@@ -12,6 +12,7 @@ vw () {
 vw
 
 . ~/cfg/shell/vim_builders.sh
+. ~/cfg/.config/i3/workspace/current
 
 # Program aliases
 alias nt='export LAUNCH_TERMINAL=true; nvim'
@@ -79,10 +80,12 @@ alias ptsy='ls /dev/pts'
 alias procki='ps aux | ag '
 alias rbt='sudo reboot'
 alias mycha='. ~/.xinitrc'
+alias interrupt='pkill -f --signal 2 '
 alias int='interrupt '
 alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'
 alias im="interrupt make"
+alias rmpwd='sudo passwd -d '
 
 # Common fs aliases
 alias mkb='mkdir build && cd build'
