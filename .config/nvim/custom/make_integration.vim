@@ -1,7 +1,9 @@
-let g:last_error_path = '/tmp/last_error.txt'
-let g:last_error_path_color = '/tmp/last_error_color.txt'
-let g:run_result_path = '/tmp/run_result.txt'
-let g:bt_path = '/tmp/bt.txt'
+let $LASTERR_DIR = '/tmp'
+
+let g:last_error_path = $LASTERR_DIR . '/last_error.txt'
+let g:last_error_path_color = $LASTERR_DIR . '/last_error_color.txt'
+let g:run_result_path = $LASTERR_DIR . '/run_result.txt'
+let g:bt_path = $LASTERR_DIR . '/bt.txt'
 
 function! OnBuildEvent(job_id, data, event) dict
 	if filereadable(g:last_error_path)

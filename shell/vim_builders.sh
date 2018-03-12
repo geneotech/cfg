@@ -24,16 +24,13 @@ hcore() {
 
 alias interrupt='pkill -f --signal 2 '
 
-export LASTERR_PATH=/tmp/last_error.txt
-export LASTERR_PATH_COLOR=/tmp/last_error_color.txt
-export RUN_RESULT_PATH=/tmp/run_result.txt
-export BT_PATH=/tmp/bt.txt
+. ~/cfg/shell/log_paths.sh 
 
 rmlogs() {
-	rm $LASTERR_PATH
-	rm $LASTERR_PATH_COLOR
-	rm $RUN_RESULT_PATH
-	rm $BT_PATH
+	rm -f $LASTERR_PATH
+	rm -f $LASTERR_PATH_COLOR
+	rm -f $RUN_RESULT_PATH
+	rm -f $BT_PATH
 }
 
 stripcodes() {
@@ -51,26 +48,25 @@ make_with_logs() {
 	TARGET_DIR=$2
 
 	rmlogs
-	rm $BT_PATH
 
 	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
-		rm hypersomnia/core
+		rm -f hypersomnia/core
 	fi
 
 	script -q -c "time make $MAKE_TARGET -j8 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
 
 	# Remove timing info line
-	head -n -2 $LASTERR_PATH > /tmp/dobrazaraz
-	cp /tmp/dobrazaraz $LASTERR_PATH
+	head -n -2 $LASTERR_PATH > $LASTERR_TEMP_PATH
+	cp $LASTERR_TEMP_PATH $LASTERR_PATH
 
 	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		if [ -f hypersomnia/core ]; then
 			echo "Core found." > $OUTPUT_TERM
 			hcore | tee $OUTPUT_TERM $BT_PATH
-			perl ~/cfg/tools/bt2ll.pl < $BT_PATH > /tmp/dobrazaraz
-			cp /tmp/dobrazaraz $BT_PATH
+			perl ~/cfg/tools/bt2ll.pl < $BT_PATH > $LASTERR_TEMP_PATH
+			cp $LASTERR_TEMP_PATH $BT_PATH
 			$(i3-msg "[title=NVIM] focus")
 		fi
 	fi
@@ -86,12 +82,12 @@ handle_last_errors() {
 	# We need to be more specific about "error" string,
 	# because it may turn out that the game itself has emitted some "error:" messages,
 	# but we do not want NVIM to handle this.
+	cp $LASTERR_PATH $LASTERR_PATH_COLOR
+	clnerr
+
 	ERRORS=$(ag ": error:" $LASTERR_PATH)
 	
-	if [ ! -z $ERRORS ];
-	then
-		cp $LASTERR_PATH $LASTERR_PATH_COLOR
-		clnerr
+	if [ ! -z $ERRORS ]; then
 		$(i3-msg "[title=NVIM] focus")
 	else
 		rmlogs

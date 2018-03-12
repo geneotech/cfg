@@ -1,0 +1,6 @@
+export LASTERR_DIR="/tmp"
+export LASTERR_PATH="$LASTERR_DIR/last_error.txt"
+export LASTERR_TEMP_PATH="$LASTERR_DIR/temp.txt"
+export LASTERR_PATH_COLOR="$LASTERR_DIR/last_error_color.txt"
+export RUN_RESULT_PATH="$LASTERR_DIR/run_result.txt"
+export BT_PATH="$LASTERR_DIR/bt.txt"
