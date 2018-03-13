@@ -4,23 +4,23 @@
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 
 " We often play with vimrc
-nmap <Space>s :source $MYVIMRC<CR>
-nmap <Space>v :e $MYVIMRC<CR>
+nnoremap <Space>s :source $MYVIMRC<CR>
+nnoremap <Space>v :e $MYVIMRC<CR>
 
 " We center the view often
 nnoremap z zz
 
 " Switch between .h and .cpp back and forth
-map <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+noremap <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " Deletes current file
-nmap <Space><Del> :call delete(expand('%')) <bar> bdelete!
+nnoremap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 
 " Leaves only the current window open
-nmap <Space>o :on<CR>:GitGutter<CR>
+nnoremap <silent> <Space>o :on<CR>:GitGutter<CR>
 
 " Toggles whitespace view
-nmap <Space>w :set list!<CR>
+nnoremap <silent> <Space>w :set list!<CR>
 
 " Better go-to file under cursor
 nnoremap gf gFzz

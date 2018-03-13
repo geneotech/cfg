@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- make n ALWAYS go forward, even when using #
+
 - improve speed of easymotion
 - rename untitled files with first line of content
 	- unt -> untitled

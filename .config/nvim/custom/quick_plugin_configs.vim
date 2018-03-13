@@ -1,10 +1,10 @@
 """"""""" One-shot plugin configuration (longer configs go to separate files)
 
-nmap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
-nmap <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
+nnoremap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
+nnoremap <silent> <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
 
 " F34 is bound to ctrl+shift+e in alacritty
-nmap <F34> :Ranger<CR>
+nnoremap <F34> :Ranger<CR>
 
 let g:bufferize_command='tabnew'
 
@@ -23,3 +23,8 @@ inoremap <silent> <F1> <ESC>:Bufferize messages<CR>
 
 nnoremap <silent> { :SidewaysLeft<CR>
 nnoremap <silent> } :SidewaysRight<CR>
+
+omap aa <Plug>SidewaysArgumentTextobjA
+xmap aa <Plug>SidewaysArgumentTextobjA
+omap ia <Plug>SidewaysArgumentTextobjI
+xmap ia <Plug>SidewaysArgumentTextobjI
