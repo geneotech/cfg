@@ -1,5 +1,10 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" I tried experimenting with use of dash in my vim scripts,
+" apparently dash won't work for some plugins, e.g. gutentags
+set shell=/bin/zsh
+let $SHELL=&shell
+
+set nocompatible
+filetype off
 
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#begin("~/.config/nvim/bundle")
@@ -25,8 +30,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'AndrewRadev/sideways.vim'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()
+filetype plugin indent on
 
 augroup vimrcEx
 	au!
@@ -141,7 +146,7 @@ source $CUSTOM/vimdiff_config.vim
 if strlen($LAUNCH_TERMINAL) > 0
 	source $CUSTOM/setup_terminal.vim
 else
-	colorscheme moonfly
+	colorscheme industry
 	set termguicolors
 
 	" On normal startup, open an agenda file
