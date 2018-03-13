@@ -12,3 +12,5 @@ let g:gitgutter_diff_args = '-w'
 autocmd BufWritePost * GitGutter
 " Quickly select whole hunk the cursor is currently in
 nmap H vic
+
+nnoremap <Space>l :GitGutterLineHighlightsToggle<CR>
