@@ -33,3 +33,6 @@ highlight HighlightedyankRegion guifg=NONE guibg=#3f1000
 
 hi Underlined ctermbg=239 ctermfg=187 cterm=NONE guibg=#6B4035 guifg=#E0CCAE gui=NONE
 hi TabLine guibg=bg gui=NONE
+
+highlight Visual guibg=#484888
+GitGutterLineHighlightsDisable

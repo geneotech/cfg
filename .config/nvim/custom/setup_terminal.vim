@@ -1,4 +1,4 @@
-colorscheme moonfly
+colorscheme industry
 set termguicolors
 
 let g:terminal_color_0  = '#2e3436'
