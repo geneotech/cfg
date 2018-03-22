@@ -42,16 +42,31 @@ function! SucklessMake(targetname)
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 
+function! MakeCurrentFile()
+	let g:last_make_path = ToRepoPath(expand("%:f")) . ".o"
+	call SucklessMake(g:last_make_path)
+endfunction
+
+function! MakeLastFile()
+	if exists('g:last_make_path')
+		call SucklessMake(g:last_make_path)
+	else
+		echomsg "First build something with Shift+F7."
+	endif
+endfunction
+
 " Build bindings
 
 " F19 = S+F7
-nmap <silent> <F19> :call SucklessMake(ToRepoPath(expand("%:f")) . ".o")<CR>
-nmap <silent> <F7> :call SucklessMake("all")<CR>
-nmap <silent> <F5> :call SucklessMake("run")<CR>
+nnoremap <silent> <F19> :call MakeCurrentFile()<CR>
+nnoremap <silent> <F6> :call MakeLastFile()<CR>
+nnoremap <silent> <F7> :call SucklessMake("all")<CR>
+nnoremap <silent> <F5> :call SucklessMake("run")<CR>
 
-imap <silent> <F19> <ESC><F19>
-imap <silent> <F5> <ESC><F5>
-imap <silent> <F7> <ESC><F7>
+inoremap <silent> <F19> <ESC><F19>
+inoremap <silent> <F6> <ESC><F6>
+inoremap <silent> <F5> <ESC><F5>
+inoremap <silent> <F7> <ESC><F7>
 
 function! OpenLastErrors()
 	let opencmd = "tabnew term://bash -c 'cat " . g:last_error_path_color . "; bash'"

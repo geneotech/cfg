@@ -30,7 +30,6 @@ rmlogs() {
 	rm -f $LASTERR_PATH
 	rm -f $LASTERR_PATH_COLOR
 	rm -f $RUN_RESULT_PATH
-	rm -f $BT_PATH
 }
 
 stripcodes() {
@@ -52,6 +51,7 @@ make_with_logs() {
 	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		rm -f hypersomnia/core
+		rm -f $BT_PATH
 	fi
 
 	script -q -c "time make $MAKE_TARGET -j8 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM

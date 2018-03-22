@@ -146,8 +146,8 @@ source $CUSTOM/vimdiff_config.vim
 if strlen($LAUNCH_TERMINAL) > 0
 	source $CUSTOM/setup_terminal.vim
 else
-	colorscheme industry
 	set termguicolors
+	colorscheme moonfly
 
 	" On normal startup, open an agenda file
 

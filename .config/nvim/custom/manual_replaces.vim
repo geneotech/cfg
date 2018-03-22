@@ -12,7 +12,9 @@ nmap R :call FeedReplace()<CR>
 
 function! FeedReplaceVisual(kind)
 	if a:kind ==# "v"
-		return "\"hy:%s/\<C-r>h//g\<left>\<left>"
+		" We also simulate Space & BS so that the live result is shown right
+		" away, e.g. so that we have immediate feedback for deleting replaces
+		return "\"hy:%s/\<C-r>h//g\<left>\<left>\<Space>\<BS>"
 	endif
 
 	return ":s///g\<left>\<left>\<left>"
