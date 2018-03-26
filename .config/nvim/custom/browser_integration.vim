@@ -10,7 +10,7 @@ function! BrowseDocs()
 	let $FZF_DEFAULT_OPTS='--nth=-2,-1 --delimiter=/'
     let g:fzf_action = { 'enter': 'OpenInBrowser' }
 
-	silent execute "Files " . "/home/pbc/doc/std/en/cpp"
+	silent execute "Files " . "/home/pbc/offline/std/en/cpp"
 	let g:fzf_action = old_fzf_action
 	let $FZF_DEFAULT_OPTS= old_fzf_opts
 endfunction

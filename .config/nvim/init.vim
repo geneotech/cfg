@@ -152,7 +152,7 @@ else
 	" On normal startup, open an agenda file
 
 	if @% =~ "Untitled"
-		silent edit /home/pbc/agenda.md
+		silent edit /home/pbc/doc/agenda.md
 	endif
 endif
 

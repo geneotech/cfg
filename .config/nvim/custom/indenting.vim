@@ -30,6 +30,7 @@ let g:indent_eol_closers = [
 	\'\*/', 
 	\'}();',  
 	\')\s*{',
+	\')\s*const;',
 	\')\s*const\s*{',
 	\';\{1,}' 
 \]

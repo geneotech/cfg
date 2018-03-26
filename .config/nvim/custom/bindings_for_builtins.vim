@@ -1,5 +1,7 @@
 """""""""" Faster bindings for built-in vim functionality
 
+cnoreabbrev W w
+
 " In quickfix, let "o" open the location, it's closer than Enter
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 

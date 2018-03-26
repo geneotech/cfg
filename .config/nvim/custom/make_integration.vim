@@ -63,10 +63,10 @@ nnoremap <silent> <F6> :call MakeLastFile()<CR>
 nnoremap <silent> <F7> :call SucklessMake("all")<CR>
 nnoremap <silent> <F5> :call SucklessMake("run")<CR>
 
-inoremap <silent> <F19> <ESC><F19>
-inoremap <silent> <F6> <ESC><F6>
-inoremap <silent> <F5> <ESC><F5>
-inoremap <silent> <F7> <ESC><F7>
+imap <silent> <F19> <ESC><F19>
+imap <silent> <F6> <ESC><F6>
+imap <silent> <F5> <ESC><F5>
+imap <silent> <F7> <ESC><F7>
 
 function! OpenLastErrors()
 	let opencmd = "tabnew term://bash -c 'cat " . g:last_error_path_color . "; bash'"
