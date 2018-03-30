@@ -66,6 +66,13 @@ alias ucl="export CC=clang; export CXX=clang++;"
 alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+
+cmkrmin() {
+	export BUILD_FOLDER_SUFFIX=minimal;
+	cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1 -DBUILD_PROPERTY_EDITOR=0 -DBUILD_ENET=0 -DBUILD_ENET=0 -DBUILD_VERSION_FILE_GENERATOR=0'
+	export BUILD_FOLDER_SUFFIX=;
+}
+
 alias cmkc="cmake/clean.sh"
 alias mkc="pushd build/current; make clean; popd"
 
