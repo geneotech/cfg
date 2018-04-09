@@ -51,8 +51,9 @@ make_with_logs() {
 	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		rm -f hypersomnia/core
-		rm -f $BT_PATH
 	fi
+
+	rm -f $BT_PATH
 
 	script -q -c "time make $MAKE_TARGET -j8 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
 
