@@ -12,8 +12,6 @@ summary: What needs to be done for vim.
 - make n ALWAYS go forward, even when using #
 
 - improve speed of easymotion
-- rename untitled files with first line of content
-	- unt -> untitled
 
 - better scripts for browsing past versions of repos?
 	- past diffs could be good
@@ -31,6 +29,9 @@ summary: What needs to be done for vim.
 		- will be our weapon of choice due to clang super fast compilation times
 		- check out VSC + LLDB
 		- if not, check out native debug: https://marketplace.visualstudio.com/items?itemName=webfreak.debug
+
+- rename untitled files with first line of content
+	- unt -> untitled
 
 ## Maybe done
 

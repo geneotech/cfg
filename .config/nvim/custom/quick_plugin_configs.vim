@@ -10,6 +10,7 @@ let g:bufferize_command='tabnew'
 
 " Gutentags settings
 let g:gutentags_cache_dir='/tmp'
+let g:gutentags_ctags_extra_args=['-nu']
 
 nnoremap <M-]> :tn<CR>
 nnoremap <M-[> :tp<CR>
