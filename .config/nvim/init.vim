@@ -2,6 +2,7 @@
 " apparently dash won't work for some plugins, e.g. gutentags
 set shell=/bin/zsh
 let $SHELL=&shell
+let $WORKSPACE_NAME=fnamemodify($WORKSPACE, ":t")
 
 set nocompatible
 filetype off

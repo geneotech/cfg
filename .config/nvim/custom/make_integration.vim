@@ -43,7 +43,7 @@ function! SucklessMake(targetname)
 endfunction
 
 function! MakeCurrentFile()
-	let g:last_make_path = ToRepoPath(expand("%:f")) . ".o"
+	let g:last_make_path = "CMakeFiles/" . $WORKSPACE_NAME . ".dir/" . ToRepoPath(expand("%:f")) . ".o"
 	call SucklessMake(g:last_make_path)
 endfunction
 

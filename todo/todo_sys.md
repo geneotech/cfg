@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- fix directory view in sxiv and make it show sizes?
+
 - really something for that screen recording?
 - refactor i3/config
 
@@ -80,6 +82,8 @@ plan carefully the system's bash scripts behaviour for building, running etc
 - consider having some rcs in ramfs?
 
 ## Done
+
+- make ranger open zsh instead of dash on shift+S
 
 - update activity-watch
 - fix bindings for copying paths?

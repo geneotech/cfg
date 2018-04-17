@@ -63,13 +63,13 @@ fr () {
 
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
-alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 
 cmkmin() {
 	export BUILD_FOLDER_SUFFIX=minimal;
-	cmake/build.sh $1 x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1 -DBUILD_PROPERTY_EDITOR=0 -DBUILD_ENET=0 -DBUILD_ENET=0 -DBUILD_VERSION_FILE_GENERATOR=0'
+	cmake/build.sh $1 x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DBUILD_PROPERTY_EDITOR=0 -DBUILD_ENET=0 -DBUILD_VERSION_FILE_GENERATOR=0'
 	export BUILD_FOLDER_SUFFIX=;
 }
 
@@ -98,7 +98,7 @@ alias interrupt='pkill -f --signal 2 '
 alias int='interrupt '
 alias spac='sudo shutdown -h now'
 alias mounty='mount | column -t'
-alias im="interrupt make"
+alias im="interrupt ninja"
 alias rmpwd='sudo passwd -d '
 alias xtr='. ~/cfg/tools/extract.plugin.zsh; extract '
 alias chksh='readlink /usr/bin/sh'

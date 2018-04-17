@@ -5,6 +5,9 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- make tags jump to column
+- make those regexps damn consistent across ctrl+f and /?
+
 - make sideways work with <> cause we will use it surely
 - make n ALWAYS go forward, even when using #
 

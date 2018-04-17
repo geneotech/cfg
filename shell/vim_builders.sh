@@ -55,7 +55,7 @@ make_with_logs() {
 
 	rm -f $BT_PATH
 
-	script -q -c "time make $MAKE_TARGET -j8 -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
+	script -q -c "time ninja $MAKE_TARGET -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
 
 	# Remove timing info line
 	head -n -2 $LASTERR_PATH > $LASTERR_TEMP_PATH
@@ -96,7 +96,7 @@ handle_last_errors() {
 }
 
 vim_target() {
-	interrupt make
+	interrupt ninja
 	cd $WORKSPACE
 	make_current $1
 	handle_last_errors
