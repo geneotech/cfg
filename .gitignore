@@ -2,8 +2,10 @@ tags
 vlc-qt-interface.conf
 QtProject.conf
 tools/gcc_single_cpp/main.cpp
+tools/gcc_single_cpp/main.cpp.o
 tools/gcc_single_cpp/main
 tools/clang_single_cpp/main.cpp
+tools/clang_single_cpp/main.cpp.o
 tools/clang_single_cpp/main
 .nvidia-settings-rc
 .config/Trolltech.conf
