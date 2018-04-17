@@ -1,27 +1,24 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <variant>
-#include <utility>
-#include <memory>
-#include <vector>
+#include <tuple>
 #include <optional>
 
-struct A{
-	A() { std::cout << "A()\n"; } 
-	A(const A&) { std::cout << "A(const A&)\n"; }
+template <class F>
+void f(std::optional<F> t) {
+	if (t) {
+		t.value()(2);
+	}
+}
 
-	A(A&&) { std::cout << "Move ctor\n"; } 
-	A& operator=(A&&) { std::cout << "Move assign\n"; } 
-};
-
-template <class T>
-void fff(T&) {
-	static_assert(std::is_same_v<T, const A>);
+auto nullopt_lambda() {
+	auto o = std::make_optional([](auto&&...){});
+	o.reset();
+	return o;
 }
 
 int main() {
+	f(std::make_optional([](int){}));
+	f(nullopt_lambda());
 
-	std::cout << sizeof(unsigned long) << std::endl;
+	std::cout << "NAJS" << std::endl;
 	return 0;
 }
