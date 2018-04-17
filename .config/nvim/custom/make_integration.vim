@@ -12,7 +12,6 @@ function! OnBuildEvent(job_id, data, event) dict
 	elseif filereadable(g:bt_path)
 		execute "lfile " . g:bt_path
 	elseif filereadable(g:run_result_path)
-		"lfile g:run_result_path
 		let fff = readfile(g:run_result_path)
 
 		if len(fff) > 0 
@@ -24,7 +23,8 @@ function! OnBuildEvent(job_id, data, event) dict
 endfunction
 
 function! SucklessMake(targetname)
-	wa
+	silent wall
+	echomsg "Build started!"
 
 	let runscript = expand("%:h") . "/run.sh"
 

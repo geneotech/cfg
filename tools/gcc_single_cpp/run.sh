@@ -1,42 +1,21 @@
 . ~/cfg/shell/vim_builders.sh
 
-rm $BT_PATH
+wipe_all_logs
 
-rmlogs
-rm $RUN_RESULT_PATH
-
-if [[ "$MAKE_TARGET" = "run" ]]; then
-	echo "Run-type target." > $OUTPUT_TERM
-	rm core
-fi
-
-if [ -f ./main ]; then
-	rm ./main
-fi
+rm -f ./main
 
 GCC_COMMAND='g++ -std=gnu++1z -o ./main $(readlink -f ./main.cpp) -lstdc++fs -lpthread;'
 
-script -q -c $GCC_COMMAND $LASTERR_PATH > $OUTPUT_TERM
+script -q -c $GCC_COMMAND $INTERMEDIATE_LOG > $OUTPUT_TERM
+
+strip_timing_info_logs
+send_errors_to_vim_if_any
 
 if [ -f ./main ]; then
-	script -q -c ./main $LASTERR_PATH > $OUTPUT_TERM
-fi
+	echo "Build successful."
 
-# Remove timing info line
-
-head -n -2 $LASTERR_PATH > /tmp/dobrazaraz
-cp /tmp/dobrazaraz $LASTERR_PATH
-
-ERRORS=$(ag "error:" $LASTERR_PATH)
-LINKER_ERRORS=$(ag "error: ld" $LASTERR_PATH)
-
-if [[ ! -z $ERRORS && -z $LINKER_ERRORS ]]
-then
-	cp $LASTERR_PATH $LASTERR_PATH_COLOR
-	clnerr
-	$(i3-msg "[title=NVIM] focus")
+	script -q -c ./main $RUN_RESULT_PATH > $OUTPUT_TERM
+	cut_n_lines 1 $RUN_RESULT_PATH
 else
-	cp $LASTERR_PATH $RUN_RESULT_PATH 
-	sed -i '1d' $RUN_RESULT_PATH
-	rmlogs
+	echo "Executable not found."
 fi

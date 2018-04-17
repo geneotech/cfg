@@ -1,8 +1,15 @@
 . ~/.config/i3/workspace/current
+. ~/cfg/shell/log_paths.sh 
+. /tmp/viewing_tty
 
 export WORKSPACE_NAME=$(basename $WORKSPACE)
 export WORKSPACE_EXE=$WORKSPACE/build/current/$WORKSPACE_NAME
-. /tmp/viewing_tty
+
+export INTERMEDIATE_LOG="/tmp/intermediate_log.txt"
+export TEMP_PATH="/tmp/temp.txt"
+
+# Handy building aliases
+alias interrupt='pkill -f --signal 2 '
 
 gdbcore() {
 	if [ -f $WORKSPACE_EXE ]; then
@@ -22,52 +29,60 @@ hcore() {
 	gdb -ex="bt" -ex="q" $TARGET_EXECUTABLE $WORKSPACE/hypersomnia/core
 }
 
-alias interrupt='pkill -f --signal 2 '
-
-. ~/cfg/shell/log_paths.sh 
-
-rmlogs() {
-	rm -f $LASTERR_PATH
-	rm -f $LASTERR_PATH_COLOR
-	rm -f $RUN_RESULT_PATH
+cut_n_lines () {
+	sed -i -e "1,$1d" $2
 }
 
-stripcodes() {
+wipe_all_logs() {
+	rm -f $INTERMEDIATE_LOG
+
+	rm -f $LASTERR_PATH
+	rm -f $LASTERR_PATH_COLOR
+
+	rm -f $RUN_RESULT_PATH
+
+	rm -f $BT_PATH
+}
+
+strip_color_codes() {
 	sed -i -r 's/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g' $1
 	sed -i -r 's/\x1B\[0;1;3[1-2]m//g' $1
 	sed -i 's/\r$//g' $1
 	sed -i -e '1d' $1
 }
 
-# Handy building aliases
-alias clnerr='stripcodes $LASTERR_PATH'
+strip_timing_info_logs() {
+	head -n -2 $INTERMEDIATE_LOG > $TEMP_PATH
+	cp $TEMP_PATH $INTERMEDIATE_LOG
+}
+
+wipe_all_cores() {
+	rm -f core
+	rm -f hypersomnia/core
+}
 
 make_with_logs() {
 	MAKE_TARGET=$1
 	TARGET_DIR=$2
 
-	rmlogs
+	wipe_all_logs
 
 	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
-		rm -f hypersomnia/core
+		wipe_all_cores
 	fi
 
-	rm -f $BT_PATH
+	script -q -c "time ninja $MAKE_TARGET -C $TARGET_DIR" $INTERMEDIATE_LOG > $OUTPUT_TERM
 
-	script -q -c "time ninja $MAKE_TARGET -C $TARGET_DIR" $LASTERR_PATH > $OUTPUT_TERM
-
-	# Remove timing info line
-	head -n -2 $LASTERR_PATH > $LASTERR_TEMP_PATH
-	cp $LASTERR_TEMP_PATH $LASTERR_PATH
+	strip_timing_info_logs
 
 	if [ "$MAKE_TARGET" = "run" ]; then
 		echo "Run-type target." > $OUTPUT_TERM
 		if [ -f hypersomnia/core ]; then
 			echo "Core found." > $OUTPUT_TERM
 			hcore | tee $OUTPUT_TERM $BT_PATH
-			perl ~/cfg/tools/bt2ll.pl < $BT_PATH > $LASTERR_TEMP_PATH
-			cp $LASTERR_TEMP_PATH $BT_PATH
+			perl ~/cfg/tools/bt2ll.pl < $BT_PATH > $TEMP_PATH
+			cp $TEMP_PATH $BT_PATH
 			$(i3-msg "[title=NVIM] focus")
 		fi
 	fi
@@ -79,19 +94,20 @@ make_current() {
 	make_with_logs $MAKE_TARGET build/current
 }
 
-handle_last_errors() {
+send_errors_to_vim_if_any() {
 	# We need to be more specific about "error" string,
 	# because it may turn out that the game itself has emitted some "error:" messages,
 	# but we do not want NVIM to handle this.
-	cp $LASTERR_PATH $LASTERR_PATH_COLOR
-	clnerr
+	cp $INTERMEDIATE_LOG $TEMP_PATH
+	strip_color_codes $TEMP_PATH
 
-	ERRORS=$(ag ": error:" $LASTERR_PATH)
+	ERRORS=$(ag ": error:" $TEMP_PATH)
 	
 	if [ ! -z $ERRORS ]; then
+		mv $TEMP_PATH $LASTERR_PATH
+		mv $INTERMEDIATE_LOG $LASTERR_PATH_COLOR
+
 		$(i3-msg "[title=NVIM] focus")
-	else
-		rmlogs
 	fi
 }
 
@@ -99,7 +115,7 @@ vim_target() {
 	interrupt ninja
 	cd $WORKSPACE
 	make_current $1
-	handle_last_errors
+	send_errors_to_vim_if_any
 }
 
 vim_build() {
