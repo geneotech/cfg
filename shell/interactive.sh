@@ -29,6 +29,12 @@ grestore () {
 	git checkout $(git rev-list -n 1 HEAD -- $1)^ -- $1
 }
 
+gexport () {
+	git commit -m "Making a commit to export the changes"
+	git diff-tree -r --no-commit-id --name-only --diff-filter=ACMRT HEAD | xargs tar -rf "/bup/$1-backup.tar"
+	git reset --soft HEAD~
+}
+
 alias gp='git push'
 alias gc='git commit -m'
 alias gall='git add --all'
