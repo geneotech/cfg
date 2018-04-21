@@ -76,3 +76,10 @@ cnoremap w!! w !sudo tee %
 
 " Move selection to our home trash
 vmap <silent> <Space>d :w >> /home/pbc/vtrash<CR>gvd
+
+function! SucklessHash()
+	let @/ = expand("<cword>")
+	normal N
+endfunction
+
+nnoremap <silent> # :call SucklessHash()<CR>
