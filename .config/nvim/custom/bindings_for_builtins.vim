@@ -78,7 +78,7 @@ cnoremap w!! w !sudo tee %
 vmap <silent> <Space>d :w >> /home/pbc/vtrash<CR>gvd
 
 function! SucklessHash()
-	let @/ = expand("<cword>")
+	let @/ = '\<' . expand("<cword>") . '\>'
 	normal N
 endfunction
 

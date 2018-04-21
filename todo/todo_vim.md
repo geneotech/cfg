@@ -9,14 +9,11 @@ summary: What needs to be done for vim.
 - make those regexps damn consistent across ctrl+f and /?
 
 - make sideways work with <> cause we will use it surely
-- make n ALWAYS go forward, even when using #
-
-- improve speed of easymotion
-
 - better scripts for browsing past versions of repos?
+	- what is done:
+		- gallexisted + grestore
 	- past diffs could be good
 		- wrappers for Gdiff --cached and Gdiff HEAD?
-	- for now, gallexisted + grestore
 
 - DEBUGGING SUPPORT
 	- leave it for later once we actually have a bug to test on
@@ -32,6 +29,15 @@ summary: What needs to be done for vim.
 
 - rename untitled files with first line of content
 	- unt -> untitled
+
+## Disregarded
+
+- improve speed of easymotion
+	- will be damn hard, we've tried though
+
+- make n ALWAYS go forward, even when using #
+	- will be hard as well
+
 
 ## Maybe done
 

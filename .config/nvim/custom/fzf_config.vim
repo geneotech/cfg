@@ -51,3 +51,5 @@ imap <F27> <ESC><F27>
 imap <F28> <ESC><F28>
 imap <C-t> <ESC><C-t>
 imap <C-p> <ESC><C-p>
+
+nnoremap \a :Ag<CR>

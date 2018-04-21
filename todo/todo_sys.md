@@ -5,19 +5,30 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
-- fix directory view in sxiv and make it show sizes?
-
 - really something for that screen recording?
 - refactor i3/config
-
 - make ranger use trash
 - check if clang can't automatically remove includes from cpps
 - drivers for corsair
 
+- remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
+
+- sxiv
+	- a binding to edit in gimp?
+	- fix fullscreen?
+
+## Disregarded
+
 - ranger - some history option?
 - use sxiv bash script so we have more customization opts
 
-- remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
+plan carefully the system's bash scripts behaviour for building, running etc 
+	- with bullet points!
+	- introduce convenient single-file cpp build
+		- (perhaps should work on f5/f6/f7 or just s+f7?)
+		- should run a command like gdb sth sth
+
+- consider having some rcs in ramfs?
 
 - primary facilities
 	- NEOVIM (short: VIM)
@@ -66,22 +77,9 @@ summary: What needs to be done on the system.
 	- common points
 		- all ignore .git files
 			- ag provides candidates?
-
-- sxiv
-	- a binding to edit in gimp?
-	- fix fullscreen?
-
-## Disregarded
-
-plan carefully the system's bash scripts behaviour for building, running etc 
-	- with bullet points!
-	- introduce convenient single-file cpp build
-		- (perhaps should work on f5/f6/f7 or just s+f7?)
-		- should run a command like gdb sth sth
-
-- consider having some rcs in ramfs?
-
 ## Done
+
+- fix directory view in sxiv and make it show sizes?
 
 - make ranger open zsh instead of dash on shift+S
 
