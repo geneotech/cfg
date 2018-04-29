@@ -28,7 +28,7 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <C-c> m'i<C-c><C-\><C-n><C-o>
 
 " F32 = shift+backspace
-nnoremap <F32> :call delete(expand('%')) <bar> bdelete! <bar> terminal<CR>
+nnoremap <silent> <F32> :terminal<CR>
 
 edit term://zsh
 

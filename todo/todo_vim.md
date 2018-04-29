@@ -6,9 +6,7 @@ summary: What needs to be done for vim.
 ---
 
 - make tags jump to column
-- make those regexps damn consistent across ctrl+f and /?
 
-- make sideways work with <> cause we will use it surely
 - better scripts for browsing past versions of repos?
 	- what is done:
 		- gallexisted + grestore
@@ -41,6 +39,14 @@ summary: What needs to be done for vim.
 
 ## Maybe done
 
+- make those regexps damn consistent across ctrl+f and /?
+	- we'll need to use \v in vim to create queries for mass renaming
+	- then once it's created, just press q/ and copy it
+	- then paste it into ctrl+f
+	- and then construct normal replace pattern
+	- escaping has been fixed somewhat now that vim_query uses \v at the beginning
+		- so all will have special meaning in vim query, as in ctrl+f
+
 - fix escaping for searches
 	- i think it works though for most cases
 
@@ -54,6 +60,8 @@ summary: What needs to be done for vim.
 If we're playing with neovim terminal, set scrollback=1 clears scrollback
 
 ## Done
+
+- make sideways work with <> cause we will use it surely
 
 - fix that reverse command search to not suck
 	- What?
@@ -88,3 +96,7 @@ If we're playing with neovim terminal, set scrollback=1 clears scrollback
 - install something for parenthesizing 
 - install something for commenting and uncommenting
  
+## Nice schemes
+
+https://github.com/nightsense/office
+Plugin 'acarapetis/vim-colors-github'
