@@ -43,10 +43,10 @@ cnoremap <C-v> <C-R>=@+<CR>
 
 " My fingers hurt when I try to alternate between C-n and C-p
 " when wanting to execute previous or next command
-cnoremap J <C-n>
-cnoremap K <C-p>
-tnoremap J <C-N>
-tnoremap K <C-P>
+cnoremap <C-j> <C-n>
+cnoremap <C-k> <C-p>
+tnoremap <C-j> <C-n>
+tnoremap <C-k> <C-p>
 
 " Move cursor in insert, terminal and command modes,
 " without the need to reach for arrows.
@@ -56,11 +56,6 @@ tnoremap <C-h> <Left>
 tnoremap <C-l> <Right>
 inoremap <C-h> <C-G>U<Left>
 inoremap <C-l> <C-G>U<Right>
-
-" Unmap C-j as command confirmation because it is too close to my fingers,
-" and shit may hit the fan. I prefer Enter, really.
-cnoremap <C-j> <NOP>
-cnoremap <C-k> <NOP>
 
 " Terminal 'ease of access'
 tnoremap <Esc> <C-\><C-n><C-w><C-p>
@@ -83,3 +78,11 @@ function! SucklessHash()
 endfunction
 
 nnoremap <silent> # :call SucklessHash()<CR>
+
+nnoremap yia yi<
+nnoremap cia ci<
+nnoremap dia di<
+
+nnoremap yaa ya<
+nnoremap caa ca<
+nnoremap daa da<

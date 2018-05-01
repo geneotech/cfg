@@ -5,6 +5,7 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- make Ranger command spawn a separate terminal
 - make tags jump to column
 
 - better scripts for browsing past versions of repos?
@@ -39,6 +40,7 @@ summary: What needs to be done for vim.
 
 ## Maybe done
 
+- something that lets us select previous queries in fzf?
 - make those regexps damn consistent across ctrl+f and /?
 	- we'll need to use \v in vim to create queries for mass renaming
 	- then once it's created, just press q/ and copy it

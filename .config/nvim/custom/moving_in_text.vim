@@ -12,6 +12,9 @@ nnoremap <F18> 20<C-y>
 vnoremap <F16> 20<C-e>
 vnoremap <F18> 20<C-y>
 
+tnoremap <F14> <PageDown>
+tnoremap <F15> <PageUp>
+
 map J <Plug>(easymotion-j)
 map K <Plug>(easymotion-k)
 

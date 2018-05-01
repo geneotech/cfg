@@ -1,4 +1,4 @@
-let $FZF_DEFAULT_OPTS='--nth=-1 --delimiter=/'
+let $FZF_DEFAULT_OPTS='--bind=ctrl-n:jump-accept --bind=ctrl-p:jump-accept --bind=alt-k:previous-history --bind=alt-j:next-history --nth=-1 --delimiter=/'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -U -g ""'
 
 " So that we also search through hidden files
@@ -53,3 +53,5 @@ imap <C-t> <ESC><C-t>
 imap <C-p> <ESC><C-p>
 
 nnoremap \a :Ag<CR>
+
+let g:fzf_history_dir = '~/.local/share/fzf-history'

@@ -39,6 +39,8 @@ nmap <Return>W "_ciW<C-r>"<ESC>
 nmap <Return>b "_cib<C-r>"<ESC>
 nmap <Return>B "_ciB<C-r>"<ESC>
 nmap <Return>< "_ci<<C-r>"<ESC>
+nmap <Return>ia "_ci<<C-r>"<ESC>
+nmap <Return>aa "_ca<<C-r>"<ESC>
 nmap <Return>" "_ci"<C-r>"<ESC>
 nmap <Return>' "_ci'<C-r>"<ESC>
 nmap <Return>s "_ddP
