@@ -25,6 +25,9 @@ nnoremap o m'i<Return>
 
 tnoremap <Esc> <C-\><C-n>
 
+tnoremap <C-j> <C-n>
+tnoremap <C-k> <C-p>
+
 nnoremap <C-c> m'i<C-c><C-\><C-n><C-o>
 
 " F32 = shift+backspace

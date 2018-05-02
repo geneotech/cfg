@@ -5,6 +5,11 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- hack around fzf so that letters for matches are also shown to the right
+	- as we most of the time look to the right
+
+- fix EasyMotion in insert mode so that it can be repeated normally
+
 - make Ranger command spawn a separate terminal
 - make tags jump to column
 
@@ -63,6 +68,7 @@ If we're playing with neovim terminal, set scrollback=1 clears scrollback
 
 ## Done
 
+- fix path copying routines so that we can use enter replace command
 - make sideways work with <> cause we will use it surely
 
 - fix that reverse command search to not suck

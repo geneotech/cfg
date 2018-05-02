@@ -1,4 +1,4 @@
-let $FZF_DEFAULT_OPTS='--bind=ctrl-n:jump-accept --bind=ctrl-p:jump-accept --bind=alt-k:previous-history --bind=alt-j:next-history --nth=-1 --delimiter=/'
+let $FZF_DEFAULT_OPTS='--bind=ctrl-j:jump-accept --bind=ctrl-k:jump-accept --bind=alt-k:previous-history --bind=alt-j:next-history --nth=-1 --delimiter=/'
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -U -g ""'
 
 " So that we also search through hidden files
@@ -8,8 +8,8 @@ function! s:find_git_root()
 endfunction
 
 let g:fzf_action = {
+  \ '': 'tab drop',
   \ 'enter': 'tab drop',
-  \ 'ctrl-s': 'vsplit',
   \ 'ctrl-i': 'CopyIncludePath',
   \ 'ctrl-c': 'CopyPath' }
 

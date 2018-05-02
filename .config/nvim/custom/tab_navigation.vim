@@ -23,7 +23,7 @@ inoremap <silent> <C-k> <ESC>:tabnext<CR>
 
 " Also prevents the editor from being closed when the last tab closes
 nnoremap <silent> <C-w> :close<CR>:GitGutter<CR>
-inoremap <silent> <C-w> <ESC>:close<CR>
+" inoremap <silent> <C-w> <ESC>:close<CR>
 
 "nmap <silent> <S-j> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 "nmap <silent> <S-k> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>

@@ -1,6 +1,9 @@
 """""""""" Faster bindings for built-in vim functionality
 
-cnoreabbrev W w
+nnoremap <Space>w :w<CR>
+
+cnoreabbrev W stopit
+cnoreabbrev w stopit
 
 " In quickfix, let "o" open the location, it's closer than Enter
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
@@ -22,7 +25,7 @@ nnoremap <Space><Del> :call delete(expand('%')) <bar> bdelete!
 nnoremap <silent> <Space>o :on<CR>:GitGutter<CR>
 
 " Toggles whitespace view
-nnoremap <silent> <Space>w :set list!<CR>
+"nnoremap <silent> <Space>w :set list!<CR>
 
 " Better go-to file under cursor
 nnoremap gf gFzz
@@ -45,8 +48,6 @@ cnoremap <C-v> <C-R>=@+<CR>
 " when wanting to execute previous or next command
 cnoremap <C-j> <C-n>
 cnoremap <C-k> <C-p>
-tnoremap <C-j> <C-n>
-tnoremap <C-k> <C-p>
 
 " Move cursor in insert, terminal and command modes,
 " without the need to reach for arrows.
@@ -56,6 +57,23 @@ tnoremap <C-h> <Left>
 tnoremap <C-l> <Right>
 inoremap <C-h> <C-G>U<Left>
 inoremap <C-l> <C-G>U<Right>
+
+" inoremap <Backspace> <NOP>
+" cnoremap <Backspace> <NOP>
+" tnoremap <Backspace> <NOP>
+
+"inoremap <CR> <NOP>
+" This would break our bindings...
+"cnoremap <CR> <NOP>
+"tnoremap <CR> <NOP>
+
+imap <C-o> <CR>
+cmap <C-o> <CR>
+tmap <C-o> <CR>
+
+inoremap <C-e> <Backspace>
+cnoremap <C-e> <Backspace>
+tnoremap <C-e> <Backspace>
 
 " Terminal 'ease of access'
 tnoremap <Esc> <C-\><C-n><C-w><C-p>
