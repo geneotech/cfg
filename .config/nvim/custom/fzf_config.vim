@@ -1,4 +1,9 @@
-let $FZF_DEFAULT_OPTS='--bind=ctrl-j:jump-accept --bind=ctrl-k:jump-accept --bind=alt-k:previous-history --bind=alt-j:next-history --nth=-1 --delimiter=/'
+let g:my_normal_fzf_opts = '--bind=ctrl-j:jump-accept --bind=ctrl-k:jump-accept --bind=alt-k:previous-history --bind=alt-j:next-history'
+
+let g:fzf_only_filename = g:my_normal_fzf_opts . ' --nth=-1 --delimiter=/'
+let g:fzf_only_filename_and_last_folder = g:my_normal_fzf_opts . ' --nth=-2,-1 --delimiter=/'
+
+let $FZF_DEFAULT_OPTS=g:fzf_only_filename
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -U -g ""'
 
 " So that we also search through hidden files
@@ -22,17 +27,14 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Our global version of file searching
 
-let g:ctrlp_global_command = 'tabnew'
+let g:ctrlp_global_command = 'tab drop'
 
 function! CtrlpGlobal()
-	" Looks like rofi is faster for exact matching,
-	" and we really want exact matching for so many files
-	
-	let newloc = system("echo $(ag --hidden -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null | rofi -hide-scrollbar -dmenu -i -p 'ag')")
+	let old_opts = $FZF_DEFAULT_OPTS
 
-	if strlen(newloc) > 1 
-		execute (g:ctrlp_global_command . " " . newloc)
-	endif
+	let $FZF_DEFAULT_OPTS = g:my_normal_fzf_opts
+	call fzf#run({'sink' : g:ctrlp_global_command, 'source' : "ag --hidden -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null "})
+	let $FZF_DEFAULT_OPTS = old_opts
 endfunction
 
 " F26 is bound to Ctrl+Shift+P in Alacritty
