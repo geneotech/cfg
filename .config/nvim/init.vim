@@ -16,7 +16,6 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'bluz71/vim-moonfly-colors'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'francoiscabrol/ranger.vim'
 Plugin 'wojtekmach/vim-rename'
 Plugin 'AndrewRadev/bufferize.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
