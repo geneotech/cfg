@@ -33,7 +33,7 @@ function! CtrlpGlobal()
 	let old_opts = $FZF_DEFAULT_OPTS
 
 	let $FZF_DEFAULT_OPTS = g:my_normal_fzf_opts
-	call fzf#run({'sink' : g:ctrlp_global_command, 'source' : "ag --hidden -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null "})
+	call fzf#run(fzf#wrap('global', {'sink' : g:ctrlp_global_command, 'source' : "ag --hidden -U -g '' $(cat ~/.config/i3/find_all_locations) 2> /dev/null "}, 1))
 	let $FZF_DEFAULT_OPTS = old_opts
 endfunction
 
