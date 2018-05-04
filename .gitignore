@@ -32,3 +32,4 @@ tools/clang_single_cpp/main
 .config/cmus/playlists/
 .config/vlc
 .git
+.config/aseprite

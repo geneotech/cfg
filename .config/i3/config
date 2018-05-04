@@ -163,6 +163,7 @@ bindsym $modw+x exec firefox
 bindsym $modw+t exec transmission-gtk
 bindsym $modw+d exec zsh -c ". ~/.config/i3/programs/bind_open_downloads.sh"
 bindsym $modw+m exec zsh -c ". ~/.config/i3/programs/bind_open_music.sh"
+bindsym $modw+i exec zsh -c "~/Downloads/Discord/Discord"
 bindsym Control+$mod+Delete exec zsh -c ". ~/.config/i3/programs/bind_htop.sh"
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
