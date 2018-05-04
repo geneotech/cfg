@@ -14,7 +14,6 @@ summary: What needs to be done for vim.
 
 - fix EasyMotion in insert mode so that it can be repeated normally
 
-- make Ranger command spawn a separate terminal
 - make tags jump to column
 
 - better scripts for browsing past versions of repos?
@@ -112,3 +111,4 @@ If we're playing with neovim terminal, set scrollback=1 clears scrollback
 
 https://github.com/nightsense/office
 Plugin 'acarapetis/vim-colors-github'
+- make Ranger command spawn a separate terminal

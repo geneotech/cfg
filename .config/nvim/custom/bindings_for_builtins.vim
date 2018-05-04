@@ -101,3 +101,5 @@ nnoremap dia di<
 nnoremap yaa ya<
 nnoremap caa ca<
 nnoremap daa da<
+
+autocmd CmdwinEnter * nnoremap <buffer> <C-o> :let g:CmdWindowLineMark=line(".")<CR><CR>q::execute "normal ".g:CmdWindowLineMark."G"<CR>

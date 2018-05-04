@@ -38,4 +38,6 @@ edit term://zsh
 " So the build errors don't switch to the terminal window
 set notitle
 "hi Search ctermfg=black ctermbg=yellow
+set modifiable
+"call feedkeys("q:")
 startinsert

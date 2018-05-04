@@ -7,23 +7,15 @@ summary: What needs to be done on the system.
 
 - fix bindings for alacritty to resemble our vim-likes
 	- we won't use it as the terminal but other programs will use alacritty directly
-
-- might be good to ditch rofi because it doesnt use bindings properly
-	- it will be OKAY though if we fix those bindings!
-		- pretty much nothing wrong with it other than that
-		- then we can still properly use it 
-	- so just fix bindings for rofi
-
+	- a different, non-vim config for alacritty would be the best
+		- then ranger and cmus and alike could simply use them
+					
 - really something for that screen recording?
 - refactor i3/config
 - make ranger use trash
 - drivers for corsair
 
 - remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
-
-- sxiv
-	- a binding to edit in gimp?
-	- fix fullscreen?
 
 ## Disregarded
 
@@ -120,9 +112,13 @@ plan carefully the system's bash scripts behaviour for building, running etc
  Looks like we no longer need it though
  stty -ixon
 
-function reb() {
-	git fetch upstream
-	git checkout master
-	git rebase upstream/master
-}
+- sxiv
+	- a binding to edit in gimp?
+	- fix fullscreen?
+
+- might be good to ditch rofi because it doesnt use bindings properly
+	- it will be OKAY though if we fix those bindings!
+		- pretty much nothing wrong with it other than that
+		- then we can still properly use it 
+	- so just fix bindings for rofi
 
