@@ -1,4 +1,6 @@
 rofi.theme: /usr/share/rofi/themes//DarkBlue.rasi
-rofi.kb-row-down:J
-rofi.kb-row-up:K
+rofi.kb-row-down:Ctrl+j
+rofi.kb-row-up:Ctrl+k
+rofi.kb-accept-entry:Ctrl+o
+rofi.kb-remove-to-eol:
 rofi.font: Misc Fixed Medium Semi-Condensed 10
