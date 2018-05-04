@@ -5,6 +5,10 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- think about what to bind alt+hjkl to, as it is currently unbound
+	- we won't move around windows this often because we use tabs
+	- some easymotion bindings?
+
 - hack around fzf so that letters for matches are also shown to the right
 	- as we most of the time look to the right
 

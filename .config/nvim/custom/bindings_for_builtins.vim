@@ -2,9 +2,6 @@
 
 nnoremap <Space>w :w<CR>
 
-cnoreabbrev W stopit
-cnoreabbrev w stopit
-
 " In quickfix, let "o" open the location, it's closer than Enter
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 

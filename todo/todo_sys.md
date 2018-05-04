@@ -5,6 +5,15 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- fix bindings for alacritty to resemble our vim-likes
+	- we won't use it as the terminal but other programs will use alacritty directly
+
+- might be good to ditch rofi because it doesnt use bindings properly
+	- it will be OKAY though if we fix those bindings!
+		- pretty much nothing wrong with it other than that
+		- then we can still properly use it 
+	- so just fix bindings for rofi
+
 - really something for that screen recording?
 - refactor i3/config
 - make ranger use trash
