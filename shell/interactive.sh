@@ -35,6 +35,7 @@ gexport () {
 	git reset --soft HEAD~
 }
 
+alias gch='git checkout'
 alias gp='git push'
 alias gc='git commit -m'
 alias gall='git add --all'
@@ -73,6 +74,7 @@ alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION
 alias cmkdg="export BUILD_FOLDER_SUFFIX=g; cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
 alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkru="export BUILD_FOLDER_SUFFIX=ultra; cmake/build.sh Release x64 clang clang++ '-DULTRA_OPTS=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
 
 cmkmin() {
 	export BUILD_FOLDER_SUFFIX=minimal;
@@ -91,6 +93,7 @@ cmkrmin() {
 alias cmkc="pushd build/current; cmake $OLDPWD; popd"
 
 alias cusr="rm -rf hypersomnia/cache/usr"
+alias catl="rm -rf hypersomnia/cache/gen/atlases"
 alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
 

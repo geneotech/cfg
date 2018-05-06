@@ -35,10 +35,11 @@ function! SucklessMake(targetname)
 	let jobcmd = "zsh -c '. ~/cfg/shell/vim_builders.sh; export SHELL=/bin/zsh; vim_target " . a:targetname . "'"
 
 	if filereadable(runscript)
-		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . " . runscript . "'"
+		" echomsg "Runscript readable."
+		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . ./run.sh'"
 	endif
 
-	"echomsg jobcmd
+	" echomsg jobcmd
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 
