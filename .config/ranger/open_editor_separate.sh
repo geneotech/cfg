@@ -1,4 +1,3 @@
-export LAUNCH_TERMINAL=
 if [[ "${TERM}" == "linux" ]]
 then
 	# echo "Term is ${TERM}. Opening $1 in separate $TERMINAL" >> /home/pbc/termlog.txt
@@ -8,6 +7,6 @@ then
 else
 	# echo "Term is ${TERM}. Opening $1 in place." >> /home/pbc/termlog.txt
 
-	$EDITOR $1
+	$VISUAL $1
 	# $EDITOR $1
 fi

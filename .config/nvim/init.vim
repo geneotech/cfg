@@ -140,6 +140,7 @@ source $CUSTOM/vimdiff_config.vim
 """"""""" Epilogue
 
 if strlen($LAUNCH_TERMINAL) > 0
+	let $LAUNCH_TERMINAL=""
 	source $CUSTOM/setup_terminal.vim
 else
 	set termguicolors
@@ -147,7 +148,7 @@ else
 
 	" On normal startup, open an agenda file
 
-	if @% =~ "Untitled"
+	if strlen(@%) == 0 
 		silent edit /home/pbc/doc/agenda.md
 	endif
 endif
