@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+STEM=$1
+
+if [ -z $1 ]
+then
+	echo "No arguments passed. Nothing was done."
+	exit 1
+fi
+
+AFFECTED_FILE="/usr/bin/$STEM" 
+AFFECTED_ORIG="/usr/bin/$STEM.original.prelink" 
+
+if [ -f $AFFECTED_ORIG ]; then
+	echo "Uncustomizing $AFFECTED_FILE."
+	rm $AFFECTED_FILE
+
+	mv $AFFECTED_ORIG $AFFECTED_FILE 
+else
+	echo "No customization found for $AFFECTED_FILE."
+fi
+

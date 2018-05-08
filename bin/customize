@@ -1,0 +1,42 @@
+#!/usr/bin/env zsh
+
+STEM=$1
+
+if [ -z $STEM ]
+then
+	echo "No stem passed. Nothing was done."
+	exit 1
+fi
+
+if [ -z $2 ]
+then
+	echo "No target invocation passed. Nothing was done."
+	exit 1
+fi
+
+AFFECTED_FILE="/usr/bin/$STEM" 
+AFFECTED_ORIG="/usr/bin/$STEM.original" 
+
+if [ -f $AFFECTED_ORIG ]; then
+	echo "$STEM is already customized and its original sits at $AFFECTED_ORIG."
+	echo "Setting the new customization in place of old one."
+else
+	# Moves but, once again, only if the destination does not exist.
+	mv -vn $AFFECTED_FILE $AFFECTED_ORIG
+fi
+
+shift
+
+CUSTOMIZED_CALL="$@ \$@"
+echo "Customizing $STEM to call:"
+echo "$CUSTOMIZED_CALL"
+
+echo "#!/usr/bin/env zsh
+echo \"Invoking replaced executable:\"
+echo \"argv[0]: \$0\"
+echo \"rest: \$@\"
+export ARGV0=\$0
+$CUSTOMIZED_CALL" > $AFFECTED_FILE
+
+# Make it executable
+chmod +x $AFFECTED_FILE
