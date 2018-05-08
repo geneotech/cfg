@@ -97,6 +97,20 @@ function! sideways#util#ReplaceCols(line, start, end, text)
   return 1
 endfunction
 
+" function! sideways#util#ReplaceItem({start_line, start_col, end_line, end_col}, text) {{{2
+"
+" Replace the given item with the text
+function! sideways#util#ReplaceItem(item, text)
+  let original_mark = getpos("'z")
+
+  call setpos('.',  [bufnr('%'), a:item.start_line, a:item.start_col, 0])
+  call setpos("'z", [bufnr('%'), a:item.end_line,   a:item.end_col,   0])
+
+  let result = sideways#util#ReplaceMotion('v`z', a:text)
+  call setpos("'z", original_mark)
+  return result
+endfunction
+
 " Text retrieval {{{1
 "
 " These functions are similar to the text replacement functions, only retrieve
@@ -135,6 +149,19 @@ function! sideways#util#GetCols(line, start, end)
   return strpart(getline(a:line), a:start - 1, a:end - a:start + 1)
 endfunction
 
+" function! sideways#util#GetItem({start_line, start_col, end_line, end_col}) {{{2
+"
+" Retrieve the text from the given start to end positions
+function! sideways#util#GetItem(item)
+  let original_mark = getpos("'z")
+  call setpos('.',  [bufnr('%'), a:item.start_line, a:item.start_col, 0])
+  call setpos("'z", [bufnr('%'), a:item.end_line,   a:item.end_col,   0])
+
+  let result = sideways#util#GetMotion('v`z')
+  call setpos("'z", original_mark)
+  return result
+endfunction
+
 " Positioning the cursor {{{1
 "
 
@@ -151,7 +178,7 @@ endfunction
 " Searching for patterns {{{1
 "
 
-" function! sj#SearchSkip(pattern, skip, ...) {{{2
+" function! sideways#util#SearchSkip(pattern, skip, ...) {{{2
 "
 " A partial replacement to search() that consults a skip pattern when
 " performing a search, just like searchpair().

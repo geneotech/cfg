@@ -1,6 +1,11 @@
-" Extract column positions for "arguments" on the current line. Returns a list
-" of triplets, each triplet contains the line and start and end columns of the
-" item.
+" Extract column positions for "arguments" on the current line. Returns the
+" used definition, and a list of objects, each one containing the start and
+" end positions of the item:
+"
+" {
+"   start_line: 3, end_line: 3,
+"   start_col: 12, end_col: 17
+" }
 "
 " Example:
 "
@@ -11,7 +16,14 @@
 "
 " The result would be:
 "
-"   [ [1, 14, 16], [1, 19, 21], [2, 3, 7] ]
+"   [
+"     { start: '(\_s*', end: ')', ... },
+"     [
+"       {start_line: 1, end_line: 1, start_col: 14, end_col: 16},
+"       {start_line: 1, end_line: 1, start_col: 19, end_col: 21},
+"       {start_line: 2, end_line: 2, start_col: 3, end_col: 7},
+"     ]
+"   ]
 "
 function! sideways#parsing#Parse(definitions)
   let viewpos = winsaveview()
@@ -23,7 +35,7 @@ function! sideways#parsing#Parse(definitions)
 
   if empty(definition)
     call winrestview(viewpos)
-    return []
+    return [{}, []]
   endif
 
   let start_pattern           = definition.start
@@ -127,12 +139,17 @@ function! sideways#parsing#Parse(definitions)
 
   let &whichwrap = original_whichwrap
 
-  if current_item[2] < 0
+  if current_item.end_col < 0
     " parsing ended before current item was finalized
-    let current_item[2] = col('.') - 1
+    let current_item.end_col = col('.') - 1
+    let current_item.end_line = line('.')
   endif
 
-  if current_item[1] <= current_item[2]
+  if current_item.start_line < current_item.end_line ||
+        \ (
+        \   current_item.start_line == current_item.end_line &&
+        \   current_item.start_col  <= current_item.end_col
+        \ )
     call add(items, current_item)
   else
     " it's an invalid item, ignore it
@@ -141,7 +158,7 @@ function! sideways#parsing#Parse(definitions)
   " call s:DebugItems(items)
 
   call winrestview(viewpos)
-  return items
+  return [definition, items]
 endfunction
 
 function! s:LocateBestDefinition(definitions)
@@ -149,7 +166,10 @@ function! s:LocateBestDefinition(definitions)
 
   let best_definition      = {}
   let best_definition_col  = 0
-  let best_definition_line = -1
+  let best_definition_line = 0
+
+  let cursor_line = line('.')
+  let cursor_col  = col('.')
 
   for definition in a:definitions
     let start_pattern = definition.start
@@ -158,20 +178,35 @@ function! s:LocateBestDefinition(definitions)
     let skip_expression = s:SkipSyntaxExpression(definition)
     call sideways#util#PushCursor()
 
-    if searchpair(start_pattern, '', end_pattern, 'bW', skip_expression) <= 0
+    if searchpair(start_pattern, '', end_pattern, 'bW',
+          \ skip_expression, best_definition_line, g:sideways_search_timeout) <= 0
       call sideways#util#PopCursor()
       continue
     else
       call sideways#util#SearchSkip(start_pattern, skip_expression, 'Wce', line('.'))
       normal! l
+      let match_start_line = line('.')
+      let match_start_col  = col('.')
 
-      let match_line = line('.')
-      let match_col = col('.')
+      if searchpair(start_pattern, '', end_pattern, 'W', skip_expression) > 0
+        normal! h
+        let match_end_line = line('.')
+        let match_end_col  = col('.')
 
-      if match_line > best_definition_line ||
-            \ (match_line == best_definition_line && match_col > best_definition_col)
-        let best_definition_line = match_line
-        let best_definition_col  = match_col
+        if !s:Between(
+              \ [cursor_line, cursor_col],
+              \ [match_start_line, match_start_col],
+              \ [match_end_line, match_end_col]
+              \ )
+          call sideways#util#PopCursor()
+          continue
+        endif
+      end
+
+      if match_start_line > best_definition_line ||
+            \ (match_start_line == best_definition_line && match_start_col > best_definition_col)
+        let best_definition_line = match_start_line
+        let best_definition_col  = match_start_col
         let best_definition      = definition
       endif
     endif
@@ -218,18 +253,37 @@ endfunction
 
 " Finalize the current item and push it to the store
 function! s:PushItem(items, current_item, final_col)
-  let a:current_item[0] = line('.')
-  let a:current_item[2] = a:final_col
+  let a:current_item.end_line = line('.')
+  let a:current_item.end_col = a:final_col
 
   call add(a:items, a:current_item)
 endfunction
 
 " Initialize a brand new item, starting at the current position
 function! s:NewItem()
-  return [line('.'), col('.'), -1]
+  return {
+        \   'start_line': line('.'), 'end_line': line('.'),
+        \   'start_col':  col('.'),  'end_col':  -1,
+        \ }
+endfunction
+
+function! s:Between(position, start, end)
+  let [line, col]             = a:position
+  let [start_line, start_col] = a:start
+  let [end_line, end_col]     = a:end
+
+  if line < start_line  || line > end_line  | return 0 | endif
+  if line == start_line && col  < start_col | return 0 | endif
+  if line == end_line   && col  > end_col   | return 0 | endif
+
+  return 1
 endfunction
 
 function! s:SkipSyntaxExpression(definition)
+  if !g:sideways_skip_strings_and_comments
+    return ''
+  endif
+
   if has_key(a:definition, 'skip_syntax')
     let syntax_groups = a:definition.skip_syntax
   elseif exists('b:sideways_skip_syntax')
@@ -250,6 +304,12 @@ endfunction
 
 " Simple debugging
 function! s:DebugItems(items)
-  Decho a:items
-  Decho map(copy(a:items), 'sideways#util#GetCols(v:val[0], v:val[1], v:val[2])')
+  for item in a:items
+    let text = sideways#util#GetItem(item)
+    Decho string([
+          \   string(item.start_line).":".string(item.start_col),
+          \   string(item.end_line).":".string(item.end_col),
+          \   text
+          \ ])
+  endfor
 endfunction
