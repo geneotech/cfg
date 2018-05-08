@@ -1,0 +1,42 @@
+customizelink () {
+	mv /usr/bin/$1 /usr/bin/$1.original.prelink
+	ln -s /usr/bin/$1
+}
+
+uncustomizelink () {
+	mv /usr/bin/$1 /usr/bin/$1.original.prelink
+	ln -s /usr/bin/$1
+}
+
+flagi() {
+	sudo customize clang++ "clang-6.0" $@
+	sudo customize clang "clang-6.0" $@
+}
+
+flagig() {
+	sudo customize gcc gcc.original $@
+	sudo customize g++ g++.original $@
+}
+
+cleanflags() {
+	sudo uncustomize g++
+	sudo uncustomize gcc
+
+	sudo uncustomize clang++
+	sudo uncustomize "clang-6.0"
+	sudo uncustomize clang
+	sudo uncustomize cmake
+
+	sudo uncustomize ld
+}
+
+optujtwardo() {
+	#sudo customize clang++ "clang-6.0" -O3 -fuse-ld=lld -flto -fwhole-program-vtables
+	#sudo customize clang "clang-6.0" -O3 -fuse-ld=lld -flto
+	#sudo customize cmake "cmake.original" -DCMAKE_LINKER=/usr/bin/ld.lld
+
+	sudo customize clang++ "clang-6.0" -O3
+	sudo customize clang "clang-6.0" -O3 -flto
+	sudo customize ld "ld.lld" --verbose
+}
+
