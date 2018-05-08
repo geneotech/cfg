@@ -1,5 +1,5 @@
 export CXX=clang++
 export CC=clang
-export EDITOR=nvim-launcher.sh
-export VISUAL=nvim-launcher.sh
+export EDITOR=nvim-EDITOR
+export VISUAL=nvim-EDITOR
 export TERMINAL=alacritty 

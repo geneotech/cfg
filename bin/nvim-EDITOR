@@ -1,0 +1,3 @@
+#!/bin/dash
+$(i3-msg "[title=NVIM] focus")
+nvr --servername /tmp/mojserwco --remote-tab $@

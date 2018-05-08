@@ -1,2 +1,3 @@
 export LAUNCH_TERMINAL=true;
-. ~/.config/i3/workspace/bind_workspace_editor.sh
+. ~/.config/i3/workspace/current
+cd $WORKSPACE; alacritty -e nvim
