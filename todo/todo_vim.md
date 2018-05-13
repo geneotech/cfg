@@ -5,10 +5,6 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
-- think about what to bind alt+hjkl to, as it is currently unbound
-	- we won't move around windows this often because we use tabs
-	- some easymotion bindings?
-
 - hack around fzf so that letters for matches are also shown to the right
 	- as we most of the time look to the right
 
@@ -42,10 +38,6 @@ summary: What needs to be done for vim.
 - improve speed of easymotion
 	- will be damn hard, we've tried though
 
-- make n ALWAYS go forward, even when using #
-	- will be hard as well
-
-
 ## Maybe done
 
 - something that lets us select previous queries in fzf?
@@ -62,14 +54,23 @@ summary: What needs to be done for vim.
 
 - test out the vimagit
 - maybe fix some bindings in ex mode so that we can easily navigate with ctrl+arrows?
-- remember most problems with alacritty will be gone once neovim terminal used
-	- fix suggestions with tab cause it works just like it wants
-		- especially for some long names for downloads
 - always use zz whenever navigating through anything?
 	- except N, n, /, ? etc
 If we're playing with neovim terminal, set scrollback=1 clears scrollback
 
 ## Done
+
+- remember most problems with alacritty will be gone once neovim terminal used
+	- fix suggestions with tab cause it works just like it wants
+		- especially for some long names for downloads
+
+- make n ALWAYS go forward, even when using #
+	- will be hard as well
+
+- think about what to bind alt+hjkl to, as it is currently unbound
+	- **We bound it to move around hunks. Pretty effective.**
+	- we won't move around windows this often because we use tabs
+	- some easymotion bindings?
 
 - fix path copying routines so that we can use enter replace command
 - make sideways work with <> cause we will use it surely

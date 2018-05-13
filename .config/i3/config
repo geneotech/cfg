@@ -187,8 +187,8 @@ bindsym XF86AudioNext exec cmus-remote -n
 
 # Screen capture bindings
 
-bindsym Print exec ". ~/.config/i3/capture/bind_print_screen.sh"
-bindsym $mod+shift+s exec ". ~/.config/i3/capture/bind_region_select.sh"
+bindsym Print exec ~/.config/i3/capture/bind_print_screen
+bindsym --release $mod+shift+s exec ~/.config/i3/capture/bind_region_select
 bindsym $mod+shift+r exec zsh -c screen_capture.sh
 
 client.background       #ffffff

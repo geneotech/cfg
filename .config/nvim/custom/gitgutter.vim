@@ -1,5 +1,9 @@
 nmap U :execute "GitGutterUndoHunk"<CR>
 nmap ! :GitGutterPreviewHunk<CR>
+
+nnoremap <M-j> :call gitgutter#hunk#next_hunk(1) <bar> normal zz<CR>
+nnoremap <M-k> :call gitgutter#hunk#prev_hunk(1) <bar> normal zz<CR>
+
 runtime plugin/gitgutter.vim
 GitGutterLineHighlightsEnable
 nnoremap - :GitGutterStageHunk<CR>

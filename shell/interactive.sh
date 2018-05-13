@@ -93,6 +93,7 @@ cmkrmin() {
 alias cmkc="pushd build/current; cmake $OLDPWD; popd"
 
 alias cusr="rm -rf hypersomnia/cache/usr"
+alias cgen="rm -rf hypersomnia/cache/gen"
 alias catl="rm -rf hypersomnia/cache/gen/atlases"
 alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
