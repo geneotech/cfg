@@ -8,4 +8,4 @@ rofi.kb-clear-line:Ctrl+s
 rofi.kb-move-end:Ctrl+a
 rofi.kb-move-front:Ctrl+i
 rofi.kb-remove-char-back:Ctrl+e
-rofi.font: Misc Fixed Medium Semi-Condensed 10
+rofi.font: Liberation Sans 9
