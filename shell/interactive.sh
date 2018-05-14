@@ -99,6 +99,7 @@ alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
 
 # Common tasks aliases
+alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias coto='yaourt -Qi'
 alias zajeb='pkill -f --signal=SIGKILL '
 alias nuke='pkill -f '
