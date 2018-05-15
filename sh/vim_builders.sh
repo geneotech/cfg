@@ -1,5 +1,5 @@
 . ~/.config/i3/workspace/current
-. ~/cfg/shell/log_paths.sh 
+. ~/cfg/sh/log_paths.sh 
 . /tmp/viewing_tty
 
 export WORKSPACE_NAME=$(basename $WORKSPACE)

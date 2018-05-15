@@ -11,7 +11,7 @@ vw () {
 
 vw
 
-. ~/cfg/shell/vim_builders.sh
+. ~/cfg/sh/vim_builders.sh
 . ~/cfg/.config/i3/workspace/current
 
 # Program aliases
@@ -109,7 +109,7 @@ alias gitmkexe='git update-index --chmod=+x '
 alias wszystkim='sudo chmod 777 -R .'
 
 # Common tasks aliases
-alias start_weston='source ~/cfg/shell/start_weston.sh'
+alias start_weston='source ~/cfg/sh/start_weston.sh'
 alias coto='yaourt -Qi'
 alias zajeb='pkill -f --signal=SIGKILL '
 alias nuke='pkill -f '
