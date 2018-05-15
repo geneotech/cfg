@@ -151,7 +151,7 @@ bindsym $mod+r mode "resize"
 
 # Quick application launching bindings
 
-bindsym $modw+v exec ~/cfg/sh/open/workspace/bind_workspace_editor
+bindsym $modw+v exec ~/cfg/sh/open/workspace/open_workspace_editor
 bindsym $modw+x exec firefox
 bindsym $modw+t exec transmission-gtk
 bindsym $modw+d exec zsh -c ". ~/cfg/sh/open/programs/bind_open_downloads.sh"
@@ -168,9 +168,9 @@ bindsym Control+Shift+s exec zsh -c ". ~/cfg/sh/open/selectors/bind_select_works
 
 # Current workspace bindings
 
-bindsym Control+Shift+d exec zsh -c ". ~/cfg/sh/open/workspace/bind_workspace_select_cfg.sh"
-bindsym $mod+Return exec ~/cfg/sh/open/workspace/bind_workspace_terminal
-bindsym $modw+r exec zsh -c ". ~/cfg/sh/open/workspace/bind_workspace_ranger.sh"
+bindsym Control+Shift+d exec zsh -c ". ~/cfg/sh/open/workspace/open_workspace_select_cfg.sh"
+bindsym $mod+Return exec ~/cfg/sh/open/workspace/open_workspace_terminal
+bindsym $modw+r exec zsh -c ". ~/cfg/sh/open/workspace/open_workspace_ranger.sh"
 
 # Volume bindings
 
