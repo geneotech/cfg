@@ -7,7 +7,6 @@ tools/gcc_single_cpp/main
 tools/clang_single_cpp/main.cpp
 tools/clang_single_cpp/main.cpp.o
 tools/clang_single_cpp/main
-.nvidia-settings-rc
 .config/Trolltech.conf
 .config/ranger/bookmarks
 .config/ranger/tagged
