@@ -155,9 +155,9 @@ bindsym $modw+v exec ~/cfg/sh/open/workspace/open_workspace_editor
 bindsym $modw+x exec firefox
 bindsym $modw+t exec transmission-gtk
 bindsym $modw+d exec zsh -c ". ~/cfg/sh/open/programs/bind_open_downloads.sh"
-bindsym $modw+m exec zsh -c ". ~/cfg/sh/open/programs/bind_open_music.sh"
+bindsym $modw+m exec zsh -c ". ~/cfg/sh/open/programs/open_music.sh"
 bindsym $modw+i exec discord
-bindsym Control+$mod+Delete exec zsh -c ". ~/cfg/sh/open/programs/bind_htop.sh"
+bindsym Control+$mod+Delete exec zsh -c ". ~/cfg/sh/open/programs/open_htop.sh"
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
 bindsym $mod+Shift+Return exec zsh -c ". ~/cfg/sh/open/bind_one_time_command.sh"
