@@ -15,9 +15,7 @@ vw
 . ~/cfg/.config/i3/workspace/current
 
 # Program aliases
-alias nt='export LAUNCH_TERMINAL=true; nvim'
 alias ls="exa"
-alias meldh="meld $PWD"
 alias serve="bundle exec jekyll serve"
 alias ag='ag --hidden'
 alias diskspace='sudo gdmap -f "/"'
@@ -46,28 +44,6 @@ alias glg='git log --stat'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
 
-fd () {
-	export FZF_DEFAULT_OPTS=''
-
-	NEWLOC=$(fzf)
-
-	if [ ! -z $NEWLOC ]
-	then
-		cd $(dirname $NEWLOC)
-	fi
-}
-
-fr () {
-	export FZF_DEFAULT_OPTS=''
-
-	NEWLOC=$(fzf)
-
-	if [ ! -z $NEWLOC ]
-	then
-		rifle $NEWLOC
-	fi
-}
-
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
 alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
@@ -91,37 +67,36 @@ cmkrmin() {
 }
 
 alias cmkc="pushd build/current; cmake $OLDPWD; popd"
-
 alias cusr="rm -rf hypersomnia/cache/usr"
 alias cgen="rm -rf hypersomnia/cache/gen"
 alias catl="rm -rf hypersomnia/cache/gen/atlases"
 alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
 
-# Common tasks aliases
-alias start_weston='source ~/cfg/shell/start_weston.sh'
-alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias coto='yaourt -Qi'
-alias zajeb='pkill -f --signal=SIGKILL '
-alias nuke='pkill -f '
-alias ptsy='ls /dev/pts'
-alias procki='ps aux | ag '
-alias rbt='sudo reboot'
-alias mycha='. ~/.xinitrc'
-alias interrupt='pkill -f --signal 2 '
-alias int='interrupt '
-alias spac='sudo shutdown -h now'
-alias mounty='mount | column -t'
-alias im="interrupt ninja"
-alias rmpwd='sudo passwd -d '
-alias xtr='. ~/cfg/tools/extract.plugin.zsh; extract '
-alias chksh='readlink /usr/bin/sh'
+# System maintenance tasks aliases
+journalsize() {
+	sudo journalctl --vacuum-size=$1
+}
 
 relinksh () {
 	sudo ln -sfT $1 /usr/bin/sh
 }
 
-# Common fs aliases
+alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias mkmkinit='mkinitcpio -p linux'
+alias mounty='mount | column -t'
+alias rmpwd='sudo passwd -d '
+alias chksh='readlink /usr/bin/sh'
+alias journalgetsize='journalctl --disk-usage'
+
+# Package management aliases
+alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
+alias rmpkg="yaourt -Rsn "
+alias prmpkg="sudo pacman -Rsn "
+alias nogpg='yaourt --m-arg "--skippgpcheck"'
+alias uppkgs='yaourt -Syu --aur '
+
+# Filesystem task aliases
 alias mkb='mkdir build && cd build'
 alias clb='cd ../; rm -rf build; mkdir build; cd build'
 alias ds='du -sh * | sort -rh'
@@ -133,20 +108,46 @@ alias mkexe='sudo chmod +x '
 alias gitmkexe='git update-index --chmod=+x '
 alias wszystkim='sudo chmod 777 -R .'
 
-# System maintenance aliases
+# Common tasks aliases
+alias start_weston='source ~/cfg/shell/start_weston.sh'
+alias coto='yaourt -Qi'
+alias zajeb='pkill -f --signal=SIGKILL '
+alias nuke='pkill -f '
+alias ptsy='ls /dev/pts'
+alias procki='ps aux | ag '
+alias rbt='sudo reboot'
+alias mycha='. ~/.xinitrc'
+alias interrupt='pkill -f --signal 2 '
+alias int='interrupt '
+alias spac='sudo shutdown -h now'
+alias im="interrupt ninja"
+alias xtr='. ~/cfg/tools/extract.plugin.zsh; extract '
 alias pls='sudo $(fc -ln -1)'
-alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
-alias rmpkg="yaourt -Rsn "
-alias prmpkg="sudo pacman -Rsn "
-alias nogpg='yaourt --m-arg "--skippgpcheck"'
-alias uppkgs='yaourt -Syu --aur '
-alias journalgetsize='journalctl --disk-usage'
 
 # Forgotten aliases
 alias relx='xrdb ~/.Xresources'
 alias upx='sudo xrdb ~/.Xresources'
 
-journalsize() {
-	sudo journalctl --vacuum-size=$1
+# Navigation aliases
+
+fd () {
+	export FZF_DEFAULT_OPTS=''
+
+	NEWLOC=$(fzf)
+
+	if [ ! -z $NEWLOC ]
+	then
+		cd $(dirname $NEWLOC)
+	fi
 }
 
+fr () {
+	export FZF_DEFAULT_OPTS=''
+
+	NEWLOC=$(fzf)
+
+	if [ ! -z $NEWLOC ]
+	then
+		rifle $NEWLOC
+	fi
+}
