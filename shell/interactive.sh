@@ -83,7 +83,7 @@ relinksh () {
 }
 
 alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-alias mkmkinit='mkinitcpio -p linux'
+alias mkmkinit='sudo mkinitcpio -p linux'
 alias mounty='mount | column -t'
 alias rmpwd='sudo passwd -d '
 alias chksh='readlink /usr/bin/sh'

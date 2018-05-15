@@ -4,7 +4,7 @@ nnoremap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
 nnoremap <silent> <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
 
 " F34 is bound to ctrl+shift+e in alacritty
-nnoremap <F34> :call jobstart('alacritty -e ranger --selectfile=' . expand("%:f"))<CR>
+nnoremap <F34> :call jobstart('WAYLAND_DISPLAY= alacritty -e ranger --selectfile=' . expand("%:f"))<CR>
 
 let g:bufferize_command='tabnew'
 
