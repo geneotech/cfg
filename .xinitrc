@@ -25,7 +25,6 @@ setxkbmap pl
 xmodmap -e "clear lock"
 xmodmap -e "keysym Caps_Lock = Escape"
 
-# Disable vsync right away
-nvidia-settings --load-config-only
+~/cfg/sh/init_nvidia
 
 exec i3

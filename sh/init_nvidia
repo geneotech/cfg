@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+MKINITCPIO_PATH=~/cfg/etc/mkinitcpio.conf
+ENABLED_NVIDIA=$(ag '^MODULES="nvidia' $MKINITCPIO_PATH)
+
+if [ ! -z $ENABLED_NVIDIA ]; then
+	# Disable vsync right away
+	echo "Loading ~/.nvidia-settings-rc."
+	nvidia-settings --load-config-only
+fi
+

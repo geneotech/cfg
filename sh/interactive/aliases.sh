@@ -88,6 +88,7 @@ alias mounty='mount | column -t'
 alias rmpwd='sudo passwd -d '
 alias chksh='readlink /usr/bin/sh'
 alias journalgetsize='journalctl --disk-usage'
+alias mody='lsmod | ag'
 
 # Package management aliases
 alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "

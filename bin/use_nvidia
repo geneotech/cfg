@@ -1,0 +1,22 @@
+#!/usr/bin/env zsh
+
+MKINITCPIO_PATH=~/cfg/etc/mkinitcpio.conf
+
+ENABLED_NVIDIA=$(ag '^MODULES="nvidia' $MKINITCPIO_PATH)
+
+if [ ! -z  $ENABLED_NVIDIA ]; then
+	echo "Nvidia is already enabled."
+	exit 0
+fi
+
+sed -i 's/^MODULES="nouveau"/#MODULES="nouveau"/g' $MKINITCPIO_PATH
+sed -i 's/^#MODULES="nvidia/MODULES="nvidia/g' $MKINITCPIO_PATH
+
+NVIDIA_CONF_PATH=/usr/lib/modprobe.d/nvidia.conf
+sudo sed -i 's/#blacklist nouveau/blacklist nouveau/g' $NVIDIA_CONF_PATH
+
+mv ~/cfg/etc/X11/20-nvidia.conf ~/cfg/etc/X11/xorg.conf.d/20-nvidia.conf 
+mv ~/cfg/etc/X11/xorg.conf.d/20-nouveau.conf ~/cfg/etc/X11/20-nouveau.conf 
+
+sudo mkinitcpio -p linux
+sudo grub-mkconfig -o /boot/grub/grub.cfg
