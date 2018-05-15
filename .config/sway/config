@@ -187,8 +187,8 @@ bindsym XF86AudioNext exec cmus-remote -n
 
 # Screen capture bindings
 
-bindsym Print exec ~/cfg/sh/open/capture/bind_print_screen
-bindsym --release $mod+shift+s exec ~/cfg/sh/open/capture/bind_region_select
+bindsym Print exec ~/cfg/sh/open/capture/print_screen
+bindsym --release $mod+shift+s exec ~/cfg/sh/open/capture/region_select
 bindsym $mod+shift+r exec zsh -c screen_capture.sh
 
 client.background       #ffffff
