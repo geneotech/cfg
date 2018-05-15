@@ -4,7 +4,7 @@ cd $WORKSPACE/build
 CONFIGURATIONS=$(ls -1 | sed '/current/d' | sed '/last/d')
 
 CURRENT_CONFIGURATION=$(readlink current)
-NEW_CONFIGURATION=$(echo $CONFIGURATIONS | rofi -hide-scrollbar -dmenu -i -p "change $CURRENT_CONFIGURATION to")
+NEW_CONFIGURATION=$(echo $CONFIGURATIONS | rofi -hide-scrollbar -dmenu -i -p "switch from $CURRENT_CONFIGURATION to")
 echo "+$NEW_CONFIGURATION+"
 
 if [[ ! -z $NEW_CONFIGURATION ]]
