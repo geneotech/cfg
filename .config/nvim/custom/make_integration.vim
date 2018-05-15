@@ -32,7 +32,7 @@ function! SucklessMake(targetname)
     \ 'on_exit': function('OnBuildEvent')
     \ }
 
-	let jobcmd = "zsh -c '. ~/cfg/sh/vim_builders.sh; export SHELL=/bin/zsh; vim_target " . a:targetname . "'"
+	let jobcmd = "zsh -c '. ~/cfg/sh/build/vim_builders.sh; export SHELL=/bin/zsh; vim_target " . a:targetname . "'"
 
 	if filereadable(runscript)
 		" echomsg "Runscript readable."

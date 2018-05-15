@@ -1,4 +1,4 @@
-. ~/cfg/sh/vim_builders.sh
+. ~/cfg/sh/build/vim_builders.sh
 
 build_single_file() {
 	TARGET_EXECUTABLE=$1

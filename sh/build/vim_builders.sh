@@ -1,5 +1,5 @@
 . ~/.config/i3/workspace/current
-. ~/cfg/sh/log_paths.sh 
+. ~/cfg/sh/build/log_paths.sh 
 . /tmp/viewing_tty
 
 export WORKSPACE_NAME=$(basename $WORKSPACE)
@@ -85,7 +85,7 @@ make_with_logs() {
 			# This line is necessary for vim to parse the relative paths to sources correctly.
 			echo "ninja: Entering directory '$TARGET_DIR'" > $TEMP_PATH
 
-			perl ~/cfg/tools/bt2ll.pl < $BT_PATH >> $TEMP_PATH
+			perl ~/cfg/sh/build/bt2ll.pl < $BT_PATH >> $TEMP_PATH
 			cp $TEMP_PATH $BT_PATH
 			$(i3-msg "[title=NVIM] focus")
 		fi

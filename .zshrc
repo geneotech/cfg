@@ -16,6 +16,6 @@ zstyle :compinstall filename '/home/pbc/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-. /home/pbc/cfg/sh/interactive.sh
+. /home/pbc/cfg/sh/interactive/aliases.sh
 export PS1="%d>"
 
