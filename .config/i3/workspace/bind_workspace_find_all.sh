@@ -6,13 +6,13 @@ LOCATION=$(find -L $WORKSPACE -not -iwholename '*.git*' -not -iwholename '*_site
 
 if [[ -d $LOCATION ]] 
 then
-  $TERMINAL -e ranger $LOCATION
+  IN_TERMINAL ranger $LOCATION
 else
  cd $(dirname $LOCATION)
  RIFLE_RESULT=$(rifle $LOCATION)
  if [[ ! -z $RIFLE_RESULT ]]
  then
-   # $TERMINAL -e ranger --selectfile=$LOCATION
+   # IN_TERMINAL ranger --selectfile=$LOCATION
    # We can anyway open ranger from vim quickly, so let's just edit it as text
    # $VISUAL $LOCATION
  fi 

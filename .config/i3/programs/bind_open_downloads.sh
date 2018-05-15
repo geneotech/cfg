@@ -1,1 +1,1 @@
-$TERMINAL -e ranger ~/Downloads
+IN_TERMINAL ranger ~/Downloads

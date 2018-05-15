@@ -1,1 +1,1 @@
-$TERMINAL -e htop
+IN_TERMINAL htop

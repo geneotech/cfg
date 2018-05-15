@@ -4,7 +4,7 @@ LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) | sed 1d | rofi -hide-
 
 if [[ -d $LOCATION ]] 
 then
-  $TERMINAL -e ranger $LOCATION
+  IN_TERMINAL ranger $LOCATION
 else
-  $TERMINAL -e ranger --selectfile=$LOCATION 
+  IN_TERMINAL ranger --selectfile=$LOCATION 
 fi

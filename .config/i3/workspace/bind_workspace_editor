@@ -2,4 +2,5 @@
 . ~/.config/i3/workspace/current
 cd $WORKSPACE;
 export NVIM_LISTEN_ADDRESS=/tmp/mojserwco
+WAYLAND_DISPLAY=
 alacritty -e nvim

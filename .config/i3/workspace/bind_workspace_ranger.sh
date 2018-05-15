@@ -1,2 +1,2 @@
 . ~/.config/i3/workspace/current
-$TERMINAL -e ranger $WORKSPACE
+IN_TERMINAL ranger $WORKSPACE

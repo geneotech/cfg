@@ -1,4 +1,5 @@
 #!/bin/dash
 export LAUNCH_TERMINAL=true;
 . ~/.config/i3/workspace/current
+WAYLAND_DISPLAY=
 cd $WORKSPACE; alacritty -e nvim

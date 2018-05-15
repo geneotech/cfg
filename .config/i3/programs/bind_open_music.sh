@@ -1,2 +1,2 @@
 cd /media/fun/Music
-$TERMINAL -e cmus
+IN_TERMINAL cmus
