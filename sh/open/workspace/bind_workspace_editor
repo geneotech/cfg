@@ -1,5 +1,5 @@
 #!/bin/dash
-. ~/.config/i3/workspace/current
+. ~/cfg/sh/open/workspace/current
 cd $WORKSPACE;
 export NVIM_LISTEN_ADDRESS=/tmp/mojserwco
 WAYLAND_DISPLAY=

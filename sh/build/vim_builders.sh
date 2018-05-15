@@ -1,4 +1,4 @@
-. ~/.config/i3/workspace/current
+. ~/cfg/sh/open/workspace/current
 . ~/cfg/sh/build/log_paths.sh 
 . /tmp/viewing_tty
 

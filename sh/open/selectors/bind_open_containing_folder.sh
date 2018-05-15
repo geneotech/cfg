@@ -1,4 +1,4 @@
-LOCATION=$(find -L $(cat ~/.config/i3/find_all_locations) | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'open containing folder')
+LOCATION=$(find -L $(cat ~/cfg/sh/open/find_all_locations) | sed 1d | rofi -hide-scrollbar -dmenu -i -p 'open containing folder')
 
 [[ -z $LOCATION ]] && return
 

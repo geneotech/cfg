@@ -22,7 +22,7 @@ tools/clang_single_cpp/main
 .config/cmus/playlist.pl
 .config/cmus/search-history
 .config/meld/history.ini
-.config/i3/workspace/current
+sh/open/workspace/current
 .config/transmission
 .config/Syncplay
 .config/discord

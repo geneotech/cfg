@@ -12,7 +12,7 @@ vw () {
 vw
 
 . ~/cfg/sh/build/vim_builders.sh
-. ~/cfg/.config/i3/workspace/current
+. ~/cfg/sh/open/workspace/current
 
 # Program aliases
 alias ls="exa"
