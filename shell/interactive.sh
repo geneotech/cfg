@@ -99,6 +99,7 @@ alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
 
 # Common tasks aliases
+alias start_weston='source ~/cfg/shell/start_weston.sh'
 alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias coto='yaourt -Qi'
 alias zajeb='pkill -f --signal=SIGKILL '
