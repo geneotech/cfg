@@ -1,2 +1,4 @@
 #!/bin/zsh
 echo -n $1 | xclip -selection clipboard
+# Preview right away
+mpv $1

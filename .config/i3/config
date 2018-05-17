@@ -188,8 +188,7 @@ bindsym XF86AudioNext exec cmus-remote -n
 bindsym Print exec ~/cfg/sh/open/capture/print_screen
 bindsym --release $mod+shift+s exec ~/cfg/sh/open/capture/region_select
 
-bindsym $mod+shift+r exec screen_capture.sh mp4 "mpv "
-bindsym $mod+shift+c exec screen_capture.sh mp4 "~/cfg/sh/open/capture/copy_path_to_clip "
+bindsym $mod+shift+r exec screen_capture.sh mp4 "~/cfg/sh/open/capture/copy_path_to_clip "
 
 bindsym Shift+Print exec screen_capture.sh mp4 "alacritty -e ranger --selectfile="
 
