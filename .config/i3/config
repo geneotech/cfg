@@ -114,8 +114,6 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym Control+Shift+q restart
 # exit i3 (logs you out of your X session)
@@ -189,7 +187,11 @@ bindsym XF86AudioNext exec cmus-remote -n
 
 bindsym Print exec ~/cfg/sh/open/capture/print_screen
 bindsym --release $mod+shift+s exec ~/cfg/sh/open/capture/region_select
-bindsym --release $mod+shift+r exec zsh -c screen_capture.sh
+
+bindsym $mod+shift+r exec screen_capture.sh mp4 "mpv "
+bindsym $mod+shift+c exec screen_capture.sh mp4 "~/cfg/sh/open/capture/copy_path_to_clip "
+
+bindsym Shift+Print exec screen_capture.sh mp4 "alacritty -e ranger --selectfile="
 
 client.background       #ffffff
 
