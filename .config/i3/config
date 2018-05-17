@@ -189,7 +189,7 @@ bindsym XF86AudioNext exec cmus-remote -n
 
 bindsym Print exec ~/cfg/sh/open/capture/print_screen
 bindsym --release $mod+shift+s exec ~/cfg/sh/open/capture/region_select
-bindsym $mod+shift+r exec zsh -c screen_capture.sh
+bindsym --release $mod+shift+r exec zsh -c screen_capture.sh
 
 client.background       #ffffff
 
@@ -214,7 +214,7 @@ client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 #bindsym $modw+m focus floating; mode "moveit"
 
 floating_minimum_size 1 x 1
-#for_window[title="capture-border"] floating enabled
+for_window[title="capture-border"] floating enabled
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
