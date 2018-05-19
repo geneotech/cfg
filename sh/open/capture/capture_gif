@@ -1,0 +1,3 @@
+#!/bin/zsh
+. /tmp/viewing_tty
+screen_capture.sh gif "~/cfg/sh/open/capture/copy_path_to_clip " > $OUTPUT_TERM

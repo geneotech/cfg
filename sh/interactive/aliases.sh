@@ -2,6 +2,7 @@
 # Ruby setup
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/pbc/.gem/bin:$PATH"
+PATH="/home/pbc/.cargo/bin:$PATH"
 
 export GEM_HOME=$HOME/.gem
 
@@ -46,11 +47,15 @@ alias gcleanup="git reset --hard; git clean -d -x -f "
 
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
-alias cmkd="cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkdg="export BUILD_FOLDER_SUFFIX=g; cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+
+alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+
 alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkru="export BUILD_FOLDER_SUFFIX=ultra; cmake/build.sh Release x64 clang clang++ '-DULTRA_OPTS=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+alias cmkr="cmake/build.sh RelWithDebInfo x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+
+# Production build
+alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 
 cmkmin() {
 	export BUILD_FOLDER_SUFFIX=minimal;
@@ -63,7 +68,7 @@ cmkdmin() {
 }
 
 cmkrmin() {
-	cmkmin Release
+	cmkmin RelWithDebInfo
 }
 
 alias cmkc="pushd build/current; cmake $OLDPWD; popd"

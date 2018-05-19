@@ -1,6 +1,5 @@
-nmap U :execute "GitGutterUndoHunk"<CR>
+nmap U :GitGutterUndoHunk<CR>
 nmap ! :GitGutterPreviewHunk<CR>
-
 nnoremap <M-j> :call gitgutter#hunk#next_hunk(1) <bar> normal zz<CR>
 nnoremap <M-k> :call gitgutter#hunk#prev_hunk(1) <bar> normal zz<CR>
 

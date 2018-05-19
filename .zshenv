@@ -1,3 +1,4 @@
+export PATH="$HOME/.cargo/bin:$PATH"
 export CXX=clang++
 export CC=clang
 export EDITOR=nvim-EDITOR
