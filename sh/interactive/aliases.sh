@@ -96,7 +96,7 @@ alias journalgetsize='journalctl --disk-usage'
 alias mody='lsmod | ag'
 
 # Package management aliases
-alias rmorphans="sudo pacman -Rns $(pacman -Qtdq) "
+alias rmorphans="yaourt -Rns $(yaourt -Qtdq)"
 alias rmpkg="yaourt -Rsn "
 alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yaourt --m-arg "--skippgpcheck"'
@@ -115,6 +115,7 @@ alias gitmkexe='git update-index --chmod=+x '
 alias wszystkim='sudo chmod 777 -R .'
 
 # Common tasks aliases
+alias ypng='xclip -selection clipboard -t image/png -i '
 alias start_weston='source ~/cfg/sh/interactive/start_weston.sh'
 alias coto='yaourt -Qi'
 alias zajeb='pkill -f --signal=SIGKILL '
