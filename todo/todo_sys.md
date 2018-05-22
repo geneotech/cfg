@@ -5,20 +5,20 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- Some prettifier for C++ errors? especially for formatting the template names
+
 - fix bindings for alacritty to resemble our vim-likes
 	- we won't use it as the terminal but other programs will use alacritty directly
 	- a different, non-vim config for alacritty would be the best
 		- then ranger and cmus and alike could simply use them
 					
-- really something for that screen recording?
 - refactor i3/config
 - make ranger use trash
 - drivers for corsair
 
-- remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
-
 ## Disregarded
 
+- remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables
 - ranger - some history option?
 - use sxiv bash script so we have more customization opts
 
@@ -79,6 +79,7 @@ plan carefully the system's bash scripts behaviour for building, running etc
 			- ag provides candidates?
 ## Done
 
+- really something for that screen recording?
 - fix directory view in sxiv and make it show sizes?
 
 - make ranger open zsh instead of dash on shift+S

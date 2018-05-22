@@ -149,6 +149,7 @@ bindsym $mod+r mode "resize"
 
 # Quick application launching bindings
 
+bindsym $modw+a exec alacritty -e alsamixer
 bindsym $modw+v exec ~/cfg/sh/open/workspace/open_workspace_editor
 bindsym $modw+x exec firefox
 bindsym $modw+t exec transmission-gtk

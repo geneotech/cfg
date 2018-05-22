@@ -1,6 +1,7 @@
 """""""""" Faster bindings for built-in vim functionality
 
 nnoremap <Space>w :w<CR>
+nnoremap <Space>x :x<CR>
 
 " In quickfix, let "o" open the location, it's closer than Enter
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
@@ -64,10 +65,6 @@ inoremap <C-l> <C-G>U<Right>
 "cnoremap <CR> <NOP>
 "tnoremap <CR> <NOP>
 
-imap <C-o> <CR>
-cmap <C-o> <CR>
-tmap <C-o> <CR>
-
 inoremap <C-e> <Backspace>
 cnoremap <C-e> <Backspace>
 tnoremap <C-e> <Backspace>
@@ -102,4 +99,4 @@ nnoremap yaa ya<
 nnoremap caa ca<
 nnoremap daa da<
 
-autocmd CmdwinEnter * nnoremap <buffer> <C-o> :let g:CmdWindowLineMark=line(".")<CR><CR>q::execute "normal ".g:CmdWindowLineMark."G"<CR>
+autocmd CmdwinEnter * nnoremap <buffer> <C-m> :let g:CmdWindowLineMark=line(".")<CR><CR>q::execute "normal ".g:CmdWindowLineMark."G"<CR>

@@ -1,7 +1,7 @@
 rofi.theme: /usr/share/rofi/themes//DarkBlue.rasi
 rofi.kb-row-down:Ctrl+j
 rofi.kb-row-up:Ctrl+k
-rofi.kb-accept-entry:Ctrl+o
+rofi.kb-accept-entry:Ctrl+m
 rofi.kb-remove-to-eol:
 rofi.kb-remove-word-back:Ctrl+w
 rofi.kb-clear-line:Ctrl+s

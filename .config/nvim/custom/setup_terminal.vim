@@ -27,6 +27,7 @@ tnoremap <Esc> <C-\><C-n>
 
 tnoremap <C-j> <C-n>
 tnoremap <C-k> <C-p>
+tnoremap <C-o> <NOP>
 
 nnoremap <C-c> m'i<C-c><C-\><C-n><C-o>
 
