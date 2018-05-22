@@ -56,14 +56,8 @@ tnoremap <C-l> <Right>
 inoremap <C-h> <C-G>U<Left>
 inoremap <C-l> <C-G>U<Right>
 
-" inoremap <Backspace> <NOP>
-" cnoremap <Backspace> <NOP>
-" tnoremap <Backspace> <NOP>
-
-"inoremap <CR> <NOP>
-" This would break our bindings...
-"cnoremap <CR> <NOP>
-"tnoremap <CR> <NOP>
+inoremap <C-k> <C-left>
+inoremap <C-j> <C-right>
 
 inoremap <C-e> <Backspace>
 cnoremap <C-e> <Backspace>

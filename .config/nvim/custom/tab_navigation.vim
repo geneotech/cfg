@@ -17,10 +17,6 @@ nnoremap <silent> <C-j> :tabprevious<CR>
 nnoremap <silent> <C-k> :tabnext<CR>
 nnoremap <silent> <C-n> :DuplicateTabpane<CR>
 
-" So that we can switch tabs at any time
-inoremap <silent> <C-j> <ESC>:tabprevious<CR>
-inoremap <silent> <C-k> <ESC>:tabnext<CR>
-
 " Also prevents the editor from being closed when the last tab closes
 nnoremap <silent> <C-w> :close<CR>:GitGutter<CR>
 " inoremap <silent> <C-w> <ESC>:close<CR>

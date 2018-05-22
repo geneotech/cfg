@@ -7,5 +7,4 @@ rofi.kb-remove-word-back:Ctrl+w
 rofi.kb-clear-line:Ctrl+s
 rofi.kb-move-end:Ctrl+a
 rofi.kb-move-front:Ctrl+i
-rofi.kb-remove-char-back:Ctrl+e
 rofi.font: Liberation Sans 9

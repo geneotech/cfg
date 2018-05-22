@@ -159,7 +159,7 @@ bindsym $modw+i exec discord
 bindsym Control+$mod+Delete exec zsh -c ". ~/cfg/sh/open/programs/open_htop.sh"
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
-bindsym $mod+Shift+Return exec zsh -c ". ~/cfg/sh/open/one_time_command.sh"
+bindsym $modw+Return exec zsh -c ". ~/cfg/sh/open/one_time_command.sh"
 bindsym $modw+o exec zsh -c ". ~/cfg/sh/open/selectors/open_containing_folder.sh"
 bindsym $modw+s exec zsh -c ". ~/cfg/sh/open/selectors/open_shell_in.sh"
 
