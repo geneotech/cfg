@@ -94,3 +94,12 @@ nnoremap caa ca<
 nnoremap daa da<
 
 autocmd CmdwinEnter * nnoremap <buffer> <C-m> :let g:CmdWindowLineMark=line(".")<CR><CR>q::execute "normal ".g:CmdWindowLineMark."G"<CR>
+
+" F34 is bound to ctrl+shift+e in alacritty
+" Open ranger and select the current file
+nnoremap <F34> :call jobstart('WAYLAND_DISPLAY= alacritty -e ranger --selectfile=' . expand("%:f"))<CR>
+
+" Go to next/prev match for the last tag
+nnoremap <M-]> :tn<CR>
+nnoremap <M-[> :tp<CR>
+

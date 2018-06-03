@@ -1,29 +1,27 @@
 """"""""" One-shot plugin configuration (longer configs go to separate files)
 
+" Rename plugin
 nnoremap <Space>r :call feedkeys(":Rename " . expand('%@'))<CR>
+
+" ViewDoc plugin for better manpages
 nnoremap <silent> <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
-
-" F34 is bound to ctrl+shift+e in alacritty
-nnoremap <F34> :call jobstart('WAYLAND_DISPLAY= alacritty -e ranger --selectfile=' . expand("%:f"))<CR>
-
-let g:bufferize_command='tabnew'
 
 " Gutentags settings
 let g:gutentags_cache_dir='/tmp'
 let g:gutentags_ctags_extra_args=['-nu']
 
-nnoremap <M-]> :tn<CR>
-nnoremap <M-[> :tp<CR>
-
+" highlightedyank settings
 " Keep the yank highlight infinite
 let g:highlightedyank_highlight_duration = -1
 
-" Ease of access for bufferizing last echomsgs
+" Bufferize settings
+let g:bufferize_command='tabnew'
 
 nnoremap <silent> <F1> :Bufferize messages<CR>
 vnoremap <silent> <F1> :Bufferize messages<CR>
 imap <silent> <F1> <ESC><F1>
 
+" Sideways settings
 nnoremap <silent> { :SidewaysLeft<CR>
 nnoremap <silent> } :SidewaysRight<CR>
 
