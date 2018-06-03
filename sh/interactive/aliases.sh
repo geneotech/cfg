@@ -98,6 +98,8 @@ alias mody='lsmod | ag'
 # Package management aliases
 alias rmorphans="yaourt -Rns $(yaourt -Qtdq)"
 alias rmpkg="yaourt -Rsn "
+# Recursive
+alias rrmpkg="yaourt -Rsnc "
 alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yaourt --m-arg "--skippgpcheck"'
 alias uppkgs='yaourt -Syu --aur '

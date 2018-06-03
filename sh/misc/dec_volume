@@ -1,0 +1,8 @@
+#!/bin/dash
+lockdir=/tmp/volume_change.lock
+
+if mkdir "$lockdir"
+then
+	amixer -q sset Master 2%-
+	rmdir $lockdir
+fi

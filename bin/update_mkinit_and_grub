@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+mkinitcpio -p linux
+grub-mkconfig -o /boot/grub/grub.cfg

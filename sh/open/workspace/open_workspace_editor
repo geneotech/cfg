@@ -2,5 +2,6 @@
 . ~/cfg/sh/open/workspace/current
 cd $WORKSPACE;
 export NVIM_LISTEN_ADDRESS=/tmp/mojserwco
+rm -rf $NVIM_LISTEN_ADDRESS
 WAYLAND_DISPLAY=
 alacritty -e nvim

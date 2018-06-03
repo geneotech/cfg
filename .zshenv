@@ -8,3 +8,5 @@ IN_TERMINAL() {
 	WAYLAND_DISPLAY=
 	alacritty -e $@
 }
+
+export TERMINAL=alacritty

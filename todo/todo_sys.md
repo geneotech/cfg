@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- Write scripts to facilitate switching pulseaudio on and off
+
 - Some prettifier for C++ errors? especially for formatting the template names
 
 - fix bindings for alacritty to resemble our vim-likes
@@ -78,6 +80,11 @@ plan carefully the system's bash scripts behaviour for building, running etc
 		- all ignore .git files
 			- ag provides candidates?
 ## Done
+
+- Fix volume tweaking by putting a mutex. That is the probable cause
+	- Or just wait each time until no alsa processes are found?
+		- Is this reliable? Two instances might still fire at the same time.
+		- File locks will be better.
 
 - really something for that screen recording?
 - fix directory view in sxiv and make it show sizes?

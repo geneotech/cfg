@@ -173,8 +173,8 @@ bindsym $modw+r exec zsh -c ". ~/cfg/sh/open/workspace/open_workspace_ranger.sh"
 
 # Volume bindings
 
-bindsym XF86AudioRaiseVolume exec amixer -q sset Master 2%+
-bindsym XF86AudioLowerVolume exec amixer -q sset Master 2%-
+bindsym XF86AudioRaiseVolume exec ~/cfg/sh/misc/inc_volume
+bindsym XF86AudioLowerVolume exec ~/cfg/sh/misc/dec_volume
 bindsym XF86AudioMute exec amixer -q sset Master toggle
 
 # Player bindings
