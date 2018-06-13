@@ -111,6 +111,10 @@ send_errors_to_vim_if_any() {
 		mv $TEMP_PATH $LASTERR_PATH
 		mv $INTERMEDIATE_LOG $LASTERR_PATH_COLOR
 
+		if [ "$1" = "silent" ]; then
+			exit 0
+		fi
+		
 		$(i3-msg "[title=NVIM] focus")
 	fi
 }
@@ -118,8 +122,9 @@ send_errors_to_vim_if_any() {
 vim_target() {
 	interrupt ninja
 	cd $WORKSPACE
+
 	make_current $1
-	send_errors_to_vim_if_any
+	send_errors_to_vim_if_any $2
 }
 
 vim_build() {

@@ -18,14 +18,12 @@ function! WrapCommand(direction, prefix)
 	normal zz
 endfunction
 
-" Alacritty bindings:
 " F28 = Ctrl + ;
 " F29 = Ctrl + '
-" F30 = Ctrl + .
-" F31 = Ctrl + /
-
 nmap <silent> <F29> :call WrapCommand('up', 'c')<CR>
 nmap <silent> <F28> :call WrapCommand('down', 'c')<CR>
 
-nmap <silent> <F31> :call WrapCommand('up', 'l')<CR>
-nmap <silent> <F30> :call WrapCommand('down', 'l')<CR>
+" F21 = Ctrl + ,
+" F22 = Ctrl + .
+nmap <silent> <F21> :call WrapCommand('up', 'l')<CR>
+nmap <silent> <F22> :call WrapCommand('down', 'l')<CR>
