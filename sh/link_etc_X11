@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+cd /etc
+rm -rf X11
+ln -s /home/pbc/cfg/etc/X11

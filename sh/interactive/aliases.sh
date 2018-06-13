@@ -50,6 +50,9 @@ alias ucl="export CC=clang; export CXX=clang++;"
 
 alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
 alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+alias cmkrf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+
+alias cmkdfgcc="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 gcc gcc++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
 
 alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh RelWithDebInfo x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
@@ -105,6 +108,30 @@ alias nogpg='yaourt --m-arg "--skippgpcheck"'
 alias uppkgs='yaourt -Syu --aur '
 
 # Filesystem task aliases
+alias peny='lsblk -f'
+
+pen() {
+	device_name=$1
+
+	if [[ -z "$1" ]]
+	then
+		device_name="sdc"
+	fi
+
+	pmount -D $device_name
+}
+
+unpen() {
+	device_name=$1
+
+	if [[ -z "$1" ]]
+	then
+		device_name="sdc"
+	fi
+
+	pumount -D $device_name
+}
+
 alias mkb='mkdir build && cd build'
 alias clb='cd ../; rm -rf build; mkdir build; cd build'
 alias ds='du -sh * | sort -rh'
