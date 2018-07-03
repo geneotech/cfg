@@ -34,6 +34,8 @@ gexport () {
 	git reset --soft HEAD~
 }
 
+alias try='git stash -k'
+alias gap='git stash apply'
 alias gch='git checkout'
 alias gp='git push'
 alias gc='git commit -m'
@@ -48,17 +50,19 @@ alias gcleanup="git reset --hard; git clean -d -x -f "
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
 
-alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
-alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
-alias cmkrf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
-alias cmkdfgcc="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 gcc gcc++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=;"
+alias cmkdfgcc="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 gcc gcc++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
-alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_PROPERTY_EDITOR=0 -DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkrgcc="cmake/build.sh RelWithDebInfo x64 gcc g++ '-DBUILD_PROPERTY_EDITOR=0 -DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkrgccfull="cmake/build.sh RelWithDebInfo x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
 alias cmkr="cmake/build.sh RelWithDebInfo x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 
 # Production build
-alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
 
 cmkmin() {
 	export BUILD_FOLDER_SUFFIX=minimal;

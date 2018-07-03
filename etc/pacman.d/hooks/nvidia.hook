@@ -8,4 +8,4 @@ Target=nvidia
 [Action]
 Depends=mkinitcpio
 When=PostTransaction
-Exec=sudo update_mkinit_and_grub
+Exec=sudo /usr/bin/update_mkinit_and_grub
