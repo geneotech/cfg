@@ -3,6 +3,9 @@ stty -ixon
 export ZSH=/home/pbc/.oh-my-zsh
 . $ZSH/oh-my-zsh.sh
 
+. ~/cfg/sh/interactive/fzf-key-bindings.zsh
+. /usr/share/fzf/completion.zsh
+
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000

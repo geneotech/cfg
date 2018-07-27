@@ -29,18 +29,22 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 let g:ctrlp_global_command = 'tab drop'
 
-function! CtrlpGlobal()
+function! CtrlpGlobal(locations)
 	let old_opts = $FZF_DEFAULT_OPTS
 
 	let $FZF_DEFAULT_OPTS = g:my_normal_fzf_opts
-	call fzf#run(fzf#wrap('global', {'sink' : g:ctrlp_global_command, 'source' : "ag --hidden -U -g '' $(cat ~/cfg/sh/open/find_all_locations) 2> /dev/null "}, 1))
+	call fzf#run(fzf#wrap('global', {'sink' : g:ctrlp_global_command, 'source' : "ag --hidden -U -g '' $(cat ~/cfg/sh/open/" . a:locations . ") 2> /dev/null "}, 1))
 	let $FZF_DEFAULT_OPTS = old_opts
+endfunction
+
+function! CtrlpGlobalSsh()
+	call CtrlpGlobal("find_all_locations_ssh")
 endfunction
 
 " F26 is bound to Ctrl+Shift+P in Alacritty
 nnoremap <silent> <F26> :ProjectFiles<CR>
 " F27 is bound to Win+P in Alacritty
-nnoremap <silent> <F27> :call CtrlpGlobal()<CR>
+nnoremap <silent> <F27> :call CtrlpGlobal("find_all_locations")<CR>
 nnoremap <silent> <C-t> :Tags<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-e> :History<CR>

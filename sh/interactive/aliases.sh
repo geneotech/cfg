@@ -43,12 +43,14 @@ alias gall='git add --all'
 alias gst='git status'
 alias gca='git add --all && git commit -m'
 alias gamd='git commit --amend -m'
+alias gano='git commit --amend --no-edit'
 alias glg='git log --stat'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
 
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
+alias rmbu="rm -rf build"
 
 alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"

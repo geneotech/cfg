@@ -262,6 +262,7 @@ key_bindings:
   - { key: Back,     mods: Control,     chars: "\x1b[1;5P"                    }
   - { key: P,     mods: Control|Shift,     chars: "\x1b[1;5Q"                    }
   - { key: P,     mods: Command,     chars: "\x1b[1;5R"                    }
+  - { key: P,     mods: Command|Shift,     chars: ":call CtrlpGlobalSsh()\r"                    }
   - { key: Semicolon,     mods: Control,     chars: "\x1b[1;5S"                    }
   - { key: Apostrophe,     mods: Control,     chars: "\x1b[15;5~"                   }
   - { key: Comma,       mods: Control, chars: "\x1b[20;2~"                  }

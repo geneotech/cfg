@@ -1,6 +1,7 @@
 WORKSPACES="
 /home/pbc/Hypersomnia
 /home/pbc/cfg
+/home/pbc/rep/rectpack2D
 /home/pbc/cfg/maincpp"
 
 . ~/cfg/sh/open/workspace/current
