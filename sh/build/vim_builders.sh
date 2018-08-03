@@ -114,9 +114,9 @@ send_errors_to_vim_if_any() {
 		if [ "$1" = "silent" ]; then
 			exit 0
 		fi
-		
-		$(i3-msg "[title=NVIM] focus")
 	fi
+		
+	$(i3-msg "[title=NVIM] focus")
 }
 
 vim_target() {

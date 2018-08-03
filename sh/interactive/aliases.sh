@@ -149,8 +149,20 @@ alias mkexe='sudo chmod +x '
 alias gitmkexe='git update-index --chmod=+x '
 alias wszystkim='sudo chmod 777 -R .'
 
+save_clipboard_to() {
+	new_path=$1
+
+	if [[ -z "$1" ]]
+	then
+		new_path="/tmp/clipboard.png"
+	fi
+
+	xclip -selection clipboard -t image/png -o > $new_path
+}
+
 # Common tasks aliases
 alias ypng='xclip -selection clipboard -t image/png -i '
+alias svcl='save_clipboard_to'
 alias start_weston='source ~/cfg/sh/interactive/start_weston.sh'
 alias coto='yaourt -Qi'
 alias zajeb='pkill -f --signal=SIGKILL '

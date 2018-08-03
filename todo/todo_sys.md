@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- Fix fzf hacks (alt+c and ctrl+t) for neovim terminal
+
 - Write scripts to facilitate switching pulseaudio on and off
 
 - Some prettifier for C++ errors? especially for formatting the template names
