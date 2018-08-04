@@ -34,6 +34,10 @@ gexport () {
 	git reset --soft HEAD~
 }
 
+wf2() {
+	waifu2x -i $1
+}
+
 alias try='git stash -k'
 alias gap='git stash apply'
 alias gch='git checkout'

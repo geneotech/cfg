@@ -9,6 +9,6 @@ do
         "C-c")
                 echo -n "$file" | xclip -selection clipboard ;;
         "C-w")
-                nitrogen --save --set-zoom-fill "$file" ;;
+                waifu2x -i "$file" ;;
         esac
 done
