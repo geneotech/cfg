@@ -38,6 +38,12 @@ wf2() {
 	waifu2x -i $1
 }
 
+focus() {
+	zajeb discord
+	zajeb Discord
+	zajeb firefox
+}
+
 alias try='git stash -k'
 alias gap='git stash apply'
 alias gch='git checkout'
