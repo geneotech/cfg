@@ -1,6 +1,6 @@
 . ~/cfg/sh/build/vim_builders.sh
 
-build_single_file() {
+build_and_run_file() {
 	TARGET_EXECUTABLE=$1
 	COMPILER_COMMANDS_SCRIPT=$2
 
@@ -22,4 +22,19 @@ build_single_file() {
 	else
 		echo "Executable not found."
 	fi
+}
+
+build_file() {
+	TARGET_EXECUTABLE=$1
+	COMPILER_COMMANDS_SCRIPT=$2
+
+	wipe_all_logs
+
+	rm -f $TARGET_EXECUTABLE
+
+	COMPILER_COMMANDS="source $COMPILER_COMMANDS_SCRIPT"
+	script -q -c $COMPILER_COMMANDS $INTERMEDIATE_LOG > $OUTPUT_TERM
+
+	strip_timing_info_logs
+	send_errors_to_vim_if_any
 }

@@ -14,6 +14,7 @@ vw
 
 . ~/cfg/sh/build/vim_builders.sh
 . ~/cfg/sh/open/workspace/current
+. ~/cfg/sh/interactive/pngize.sh
 
 # Program aliases
 alias ls="exa"
@@ -115,6 +116,7 @@ alias journalgetsize='journalctl --disk-usage'
 alias mody='lsmod | ag'
 
 # Package management aliases
+alias dawaj="yaourt --noconfirm "
 alias rmorphans="yaourt -Rns $(yaourt -Qtdq)"
 alias rmpkg="yaourt -Rsn "
 # Recursive

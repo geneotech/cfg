@@ -35,6 +35,7 @@ cut_n_lines () {
 
 wipe_all_logs() {
 	rm -f $INTERMEDIATE_LOG
+	rm -f $BUILD_SUCCESS_PATH
 
 	rm -f $LASTERR_PATH
 	rm -f $LASTERR_PATH_COLOR
@@ -114,6 +115,8 @@ send_errors_to_vim_if_any() {
 		if [ "$1" = "silent" ]; then
 			exit 0
 		fi
+	else
+		echo "." > $BUILD_SUCCESS_PATH
 	fi
 		
 	$(i3-msg "[title=NVIM] focus")

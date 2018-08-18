@@ -32,3 +32,7 @@ sh/open/workspace/current
 .config/vlc
 .git
 .config/aseprite
+core
+cpp/plotting/main
+cpp/plotting/points.txt
+cpp/plotting/main.cpp.o

@@ -4,11 +4,14 @@ let g:last_error_path = $LASTERR_DIR . '/last_error.txt'
 let g:last_error_path_color = $LASTERR_DIR . '/last_error_color.txt'
 let g:run_result_path = $LASTERR_DIR . '/run_result.txt'
 let g:bt_path = $LASTERR_DIR . '/bt.txt'
+let g:build_success_path = $LASTERR_DIR . '/build_success.txt'
 
 function! OnBuildEventSilent(job_id, data, event) dict
 	if filereadable(g:last_error_path)
 		echomsg "Silent build ended with errors."
-	else
+	elseif filereadable(g:build_success_path)
+		echomsg "Unknown error occurred during build."
+	endif
 		echomsg "Silent build successful."
 	endif
 endfunction
@@ -24,9 +27,13 @@ function! OnBuildEvent(job_id, data, event) dict
 
 		if len(fff) > 0 
 			echomsg fff[0]
+		else
+			echomsg "Run result exists, but empty."
 		endif
-	else
+	elseif filereadable(g:build_success_path)
 		echomsg "Build successful."
+	else
+		echomsg "Unknown error occurred during build."
 	endif
 endfunction
 
