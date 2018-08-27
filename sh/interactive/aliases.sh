@@ -45,6 +45,40 @@ focus() {
 	zajeb firefox
 }
 
+upsub() {
+	subname=$1
+	target_branch=$2
+
+	if [[ -z "$2" ]]
+	then
+		target_branch="master"
+	fi
+
+	pushd $subname
+	git checkout $target_branch
+	git pull
+	popd
+}
+
+update_trivial_3rdparties() {
+	D=./src/3rdparty
+
+	upsub $D/Catch 
+	upsub $D/concurrentqueue
+	upsub $D/enet
+	upsub $D/freetype
+	upsub $D/lodepng
+	upsub $D/ogg
+	upsub $D/openal-soft
+	upsub $D/polypartition
+	upsub $D/rectpack2D
+	upsub $D/sol2 develop
+	upsub $D/vorbis
+
+	upsub cmake/Introspector-generator hypersomnia
+	upsub hypersomnia/scripts/serpent
+}
+
 alias try='git stash -k'
 alias gap='git stash apply'
 alias gch='git checkout'
@@ -117,13 +151,14 @@ alias mody='lsmod | ag'
 
 # Package management aliases
 alias dawaj="yaourt --noconfirm "
-alias rmorphans="yaourt -Rns $(yaourt -Qtdq)"
+alias rmorphans="yaourt -Rsn $(yaourt -Qtdq)"
 alias rmpkg="yaourt -Rsn "
 # Recursive
 alias rrmpkg="yaourt -Rsnc "
 alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yaourt --m-arg "--skippgpcheck"'
 alias uppkgs='yaourt -Syu --aur '
+alias clcache='yaourt -Scy'
 
 # Filesystem task aliases
 alias peny='lsblk -f'

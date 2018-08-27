@@ -107,8 +107,9 @@ send_errors_to_vim_if_any() {
 	strip_color_codes $TEMP_PATH
 
 	ERRORS=$(ag ": error:" $TEMP_PATH)
+	FATAL_ERRORS=$(ag ": fatal error:" $TEMP_PATH)
 	
-	if [ ! -z $ERRORS ]; then
+	if [ ! -z $ERRORS ] || [ ! -z $FATAL_ERRORS ] ; then
 		mv $TEMP_PATH $LASTERR_PATH
 		mv $INTERMEDIATE_LOG $LASTERR_PATH_COLOR
 
