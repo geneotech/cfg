@@ -15,6 +15,7 @@ vw
 . ~/cfg/sh/build/vim_builders.sh
 . ~/cfg/sh/open/workspace/current
 . ~/cfg/sh/interactive/pngize.sh
+. ~/cfg/sh/interactive/replace_color.sh
 
 # Program aliases
 alias ls="exa"
