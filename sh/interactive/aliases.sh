@@ -151,15 +151,15 @@ alias journalgetsize='journalctl --disk-usage'
 alias mody='lsmod | ag'
 
 # Package management aliases
-alias dawaj="yaourt --noconfirm "
-alias rmorphans="yaourt -Rsn $(yaourt -Qtdq)"
-alias rmpkg="yaourt -Rsn "
+alias dawaj="yay --noconfirm "
+alias rmorphans="yay -Rsn $(yay -Qtdq)"
+alias rmpkg="yay -Rsn "
 # Recursive
-alias rrmpkg="yaourt -Rsnc "
+alias rrmpkg="yay -Rsnc "
 alias prmpkg="sudo pacman -Rsn "
-alias nogpg='yaourt --m-arg "--skippgpcheck"'
-alias uppkgs='yaourt -Syu --aur '
-alias clcache='yaourt -Scy'
+alias nogpg='yay --m-arg "--skippgpcheck"'
+alias uppkgs='yay -Syu'
+alias clcache='yay -Scy'
 
 # Filesystem task aliases
 alias peny='lsblk -f'
@@ -212,7 +212,7 @@ save_clipboard_to() {
 alias ypng='xclip -selection clipboard -t image/png -i '
 alias svcl='save_clipboard_to'
 alias start_weston='source ~/cfg/sh/interactive/start_weston.sh'
-alias coto='yaourt -Qi'
+alias coto='yay -Qi'
 alias zajeb='pkill -f --signal=SIGKILL '
 alias nuke='pkill -f '
 alias ptsy='ls /dev/pts'
