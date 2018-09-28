@@ -33,6 +33,15 @@ sh/open/workspace/current
 .git
 .config/aseprite
 core
-cpp/plotting/main
 cpp/plotting/points.txt
+cpp/plotting/main
+cpp/plotting/main.cpp
 cpp/plotting/main.cpp.o
+.config/kritadisplayrc
+.config/kritarc
+.config/libreoffice
+.config/obs-studio
+.config/gtk-3.0/bookmarks
+.config/configstore
+.config/pavucontrol.ini
+.config/pulse

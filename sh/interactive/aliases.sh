@@ -82,6 +82,8 @@ update_trivial_3rdparties() {
 
 alias try='git stash -k'
 alias gap='git stash apply'
+alias gforget='git rm --cached'
+alias grforget='git rm -r --cached'
 alias gch='git checkout'
 alias gp='git push'
 alias gc='git commit -m'
