@@ -10,7 +10,7 @@ function! BrowseDocs()
 	let $FZF_DEFAULT_OPTS = g:fzf_only_filename_and_last_folder
     let g:fzf_action = { '': 'OpenInBrowser', 'enter': 'OpenInBrowser' }
 
-	silent execute "Files " . "$HOME/offline/en.cppreference.com/w/cpp"
+	silent execute "Files " . "$HOME/offline/en/cpp"
 
 	" Cleanup
 	let g:fzf_action = old_fzf_action

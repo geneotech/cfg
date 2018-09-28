@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+
+CFG_DIR=$PWD
+
+dolink() {
+	$CFG_DIR/sh/relink $CFG_DIR $1
+}
+
+dolink /etc/mkinitcpio.conf
+dolink /etc/pacman.conf
+
+dolink /etc/default/grub
+dolink /etc/X11
+
+dolink /etc/fstab
+
+dolink /etc/sysctl.d/override.conf
+dolink /etc/systemd/system/getty@tty1.service.d/override.conf
+
+dolink /bin/custom_link
+dolink /bin/customize
+dolink /bin/nvim-EDITOR
+dolink /bin/sxiv-rifle
+dolink /bin/uncustom_link
+dolink /bin/uncustomize
+dolink /bin/update_mkinit_and_grub
+dolink /bin/use_nouveau
+dolink /bin/use_nvidia
