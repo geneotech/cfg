@@ -1,8 +1,8 @@
 # Important variables
 # Ruby setup
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-PATH="/home/pbc/.gem/bin:$PATH"
-PATH="/home/pbc/.cargo/bin:$PATH"
+PATH="$HOME/.gem/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
 
 export GEM_HOME=$HOME/.gem
 
@@ -142,6 +142,10 @@ journalsize() {
 
 relinksh () {
 	sudo ln -sfT $1 /usr/bin/sh
+}
+
+relinketcx11() {
+	sudo $HOME/cfg/sh/link_etc_X11 $HOME/cfg/etc/X11
 }
 
 alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'

@@ -1,6 +1,6 @@
 stty -ixon
 
-export ZSH=/home/pbc/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 . $ZSH/oh-my-zsh.sh
 
 . ~/cfg/sh/interactive/fzf-key-bindings.zsh
@@ -14,11 +14,11 @@ setopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/pbc/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-. /home/pbc/cfg/sh/interactive/aliases.sh
+. $HOME/cfg/sh/interactive/aliases.sh
 export PS1="%d>"
 

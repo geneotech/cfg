@@ -76,7 +76,7 @@ nnoremap <C-z> <C-w><C-w>
 cnoremap w!! w !sudo tee %
 
 " Move selection to our home trash
-vmap <silent> <Space>d :w >> /home/pbc/vtrash<CR>gvd
+vmap <silent> <Space>d :w >> $HOME/vtrash<CR>gvd
 
 function! SucklessHash()
 	let @/ = '\<' . expand("<cword>") . '\>'

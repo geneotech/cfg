@@ -16,16 +16,5 @@ s.erase(s.begin(), s.begin() + t.length());
 }
 
 const auto cmd = "rifle " + s;
-
-#if 0
-{
-    std::ofstream logs("/home/pbc/lastffopen.txt");
-    logs << "Last command:\n" << std::endl;
-    logs << cmd << std::endl;
-}
-
-    std::cout << cmd << std::endl;
-#endif
-
     system(cmd.c_str());
 }
