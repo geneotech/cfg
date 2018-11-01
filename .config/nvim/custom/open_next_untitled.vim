@@ -2,7 +2,7 @@ function! OpenNextUntitled()
 	let idx = 1
 
 	while idx < 1000	
-		let newfname = $HOME . "/doc/new/unt" . idx
+		let newfname = $HOME . "/new/unt" . idx
 
 		if filereadable(newfname)
 			let fff = readfile(newfname)
