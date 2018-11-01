@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+CFG_DIR=$1
+
+homelink() {
+	rm -f $1
+	ln -s $CFG_DIR/$1
+}
+
+homelink .agignore
+homelink .gdbinit
+homelink .gitignore
+homelink .gtkrc-2.0
+homelink .nvidia-settings-rc
+homelink .profile
+homelink .xinitrc
+homelink .zprofile
+homelink .zshenv
+homelink .zshrc

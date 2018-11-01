@@ -37,6 +37,7 @@ cpp/plotting/points.txt
 cpp/plotting/main
 cpp/plotting/main.cpp
 cpp/plotting/main.cpp.o
+cpp/plotting/modulitki.cpp
 .config/kritadisplayrc
 .config/kritarc
 .config/libreoffice

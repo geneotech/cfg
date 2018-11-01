@@ -134,6 +134,7 @@ alias cgen="rm -rf hypersomnia/cache/gen"
 alias catl="rm -rf hypersomnia/cache/gen/atlases"
 alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
+alias rmau="rm -rf /tmp/autosave"
 
 # System maintenance tasks aliases
 journalsize() {
@@ -148,6 +149,7 @@ relinketcx11() {
 	sudo $HOME/cfg/sh/link_etc_X11 $HOME/cfg/etc/X11
 }
 
+alias dhealth='sudo smartctl -a'
 alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkmkinit='sudo mkinitcpio -p linux'
 alias mounty='mount | column -t'
@@ -160,6 +162,7 @@ alias mody='lsmod | ag'
 alias dawaj="yay --noconfirm "
 alias rmorphans="yay -Rsn $(yay -Qtdq)"
 alias rmpkg="yay -Rsn "
+alias wyjeb="yay -Rsn "
 # Recursive
 alias rrmpkg="yay -Rsnc "
 alias prmpkg="sudo pacman -Rsn "
@@ -258,4 +261,11 @@ fr () {
 	then
 		rifle $NEWLOC
 	fi
+}
+
+# ssh
+
+sshuj() {
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
 }

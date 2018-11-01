@@ -1,15 +1,14 @@
-# 
-# /etc/fstab: static file system information
-#
-# <file system>	<dir>	<type>	<options>	<dump>	<pass>
-# /dev/sda3
-UUID=6ceeace6-8533-4db0-a056-4c137b957506	/         	ext4      	rw,relatime,data=ordered	0 1
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/sda5
+UUID=a274a098-6312-4264-a281-3c1448d0fd99	/         	ext4      	rw,relatime	0 1
 
 # /dev/sda1
-UUID=4C6F-0B30      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro	0 2
+UUID=11B3-C0D1      	/efi      	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
 
-# /dev/sda2
-UUID=3dc1fb1e-d22d-4eb1-8247-8f1d9fbfd276	none      	swap      	defaults  	0 0
+UUID=cfee191f-7d52-41ed-8391-58b88f256357	none      	swap      	defaults  	0 0
 
 /dev/sdb1	/media/fun	ntfs-3g	gid=users	0	0
 /dev/sdb2	/media/work	ntfs-3g	gid=users	0	0

@@ -51,7 +51,7 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 
 	if filereadable(runscript)
 		" echomsg "Runscript readable."
-		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . ./run.sh'"
+		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . $(readlink -f ./run.sh)'"
 	endif
 
 	" echomsg jobcmd

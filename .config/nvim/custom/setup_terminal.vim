@@ -41,4 +41,5 @@ set notitle
 "hi Search ctermfg=black ctermbg=yellow
 set modifiable
 "call feedkeys("q:")
+set scrollback=100000
 startinsert
