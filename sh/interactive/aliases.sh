@@ -96,6 +96,14 @@ alias glg='git log --stat'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
 
+function mkssh() {
+	git remote set-url $1 git@github.com:$2/$3.git
+}
+
+function origssh() {
+	mkssh origin $1 $2
+}
+
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
 alias rmbu="rm -rf build"
@@ -218,6 +226,11 @@ save_clipboard_to() {
 }
 
 # Common tasks aliases
+rbtwin() {
+	sudo grub-reboot Windows10
+	sudo reboot
+}
+
 alias ypng='xclip -selection clipboard -t image/png -i '
 alias svcl='save_clipboard_to'
 alias start_weston='source ~/cfg/sh/interactive/start_weston.sh'

@@ -9,6 +9,7 @@ dolink() {
 dolink /etc/mkinitcpio.conf
 dolink /etc/pacman.conf
 
+dolink /etc/grub.d/40_custom
 dolink /etc/default/grub
 dolink /etc/X11
 
