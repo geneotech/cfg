@@ -119,7 +119,9 @@ send_errors_to_vim_if_any() {
 	else
 		echo "." > $BUILD_SUCCESS_PATH
 	fi
-		
+}
+
+focus_vim() {
 	$(i3-msg "[title=NVIM] focus")
 }
 
@@ -129,6 +131,7 @@ vim_target() {
 
 	make_current $1
 	send_errors_to_vim_if_any $2
+	focus_vim
 }
 
 vim_build() {

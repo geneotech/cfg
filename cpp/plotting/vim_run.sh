@@ -1,4 +1,3 @@
-#!/usr/bin/env zsh
 . ~/cfg/sh/build/build_single_file.sh
 
 TARGET_EXECUTABLE=./main

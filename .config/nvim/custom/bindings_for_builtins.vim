@@ -103,3 +103,4 @@ nnoremap <F34> :call jobstart('WAYLAND_DISPLAY= alacritty -e ranger --selectfile
 nnoremap <M-]> :tn<CR>
 nnoremap <M-[> :tp<CR>
 
+nnoremap <silent> <Esc> :noh<CR>

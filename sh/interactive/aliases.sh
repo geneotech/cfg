@@ -40,6 +40,8 @@ wf2() {
 	waifu2x -i $1
 }
 
+alias zbd='zajeb discord'
+
 focus() {
 	zajeb discord
 	zajeb Discord
@@ -247,6 +249,7 @@ alias spac='shutdown -h now'
 alias im="interrupt ninja"
 alias xtr='. ~/cfg/sh/interactive/extract.plugin.zsh; extract '
 alias pls='sudo $(fc -ln -1)'
+alias run='./run.sh'
 
 # Forgotten aliases
 alias relx='xrdb ~/.Xresources'

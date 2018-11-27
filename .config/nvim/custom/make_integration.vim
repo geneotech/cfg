@@ -41,7 +41,7 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 	silent wall
 	echomsg a:message
 
-	let runscript = expand("%:h") . "/run.sh"
+	let runscript = expand("%:h") . "/vim_run.sh"
 
     let callbacks = {
     \ 'on_exit': function(a:exitfuncname)
@@ -51,7 +51,7 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 
 	if filereadable(runscript)
 		" echomsg "Runscript readable."
-		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . $(readlink -f ./run.sh)'"
+		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . $(readlink -f ./vim_run.sh)'"
 	endif
 
 	" echomsg jobcmd
