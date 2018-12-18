@@ -1,3 +1,6 @@
+# Usage:
+# replace_color file "#source_col1" "#dest_col1" "#source_col2" "#dest_col2" ...
+
 replace_color() {
 	target_file=$1
 	source_col=$2
