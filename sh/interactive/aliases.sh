@@ -112,8 +112,12 @@ alias rmbu="rm -rf build"
 
 alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkdfs="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DLINK_STATICALLY=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdfs="export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdfsnol="export BUILD_FOLDER_SUFFIX=faststaticnol; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1 -DPREFER_LIBCXX=0' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkrf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrg="export BUILD_FOLDER_SUFFIX=g; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrgs="export BUILD_FOLDER_SUFFIX=gstatic; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrfs="export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DSTATIC_LINK=1 -DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
 alias cmkdfgcc="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 gcc gcc++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
@@ -123,7 +127,7 @@ alias cmkrgccfull="cmake/build.sh RelWithDebInfo x64 gcc g++ '-DBUILD_IN_CONSOLE
 alias cmkr="cmake/build.sh RelWithDebInfo x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
 
 # Production build
-alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DLINK_STATICALLY=1'"
+alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
 
 cmkmin() {
 	export BUILD_FOLDER_SUFFIX=minimal;
@@ -146,6 +150,8 @@ alias catl="rm -rf hypersomnia/cache/gen/atlases"
 alias cch="rm -rf hypersomnia/cache"
 alias ced="rm -rf hypersomnia/cache/usr/editor"
 alias rmau="rm -rf /tmp/autosave"
+
+alias n="sudo dhcpcd"
 
 # System maintenance tasks aliases
 journalsize() {

@@ -42,4 +42,4 @@ set notitle
 set modifiable
 "call feedkeys("q:")
 set scrollback=100000
-startinsert
+call feedkeys("i")
