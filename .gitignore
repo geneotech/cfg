@@ -27,6 +27,7 @@ sh/open/workspace/current
 .config/discord
 .config/activitywatch
 .config/nvim/.netrwhist
+.config/nvim/bundle
 .config/aacs
 .config/cmus/playlists/
 .config/vlc
