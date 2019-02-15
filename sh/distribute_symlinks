@@ -9,8 +9,6 @@ dolink() {
 dolink /etc/mkinitcpio.conf
 dolink /etc/pacman.conf
 
-dolink /etc/grub.d/40_custom
-dolink /etc/default/grub
 dolink /etc/X11
 
 dolink /etc/fstab
@@ -24,6 +22,5 @@ dolink /bin/nvim-EDITOR
 dolink /bin/sxiv-rifle
 dolink /bin/uncustom_link
 dolink /bin/uncustomize
-dolink /bin/update_mkinit_and_grub
 dolink /bin/use_nouveau
 dolink /bin/use_nvidia

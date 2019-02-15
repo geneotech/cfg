@@ -19,4 +19,3 @@ mv ~/cfg/etc/X11/20-nvidia.conf ~/cfg/etc/X11/xorg.conf.d/20-nvidia.conf
 mv ~/cfg/etc/X11/xorg.conf.d/20-nouveau.conf ~/cfg/etc/X11/20-nouveau.conf 
 
 sudo mkinitcpio -p linux
-sudo grub-mkconfig -o /boot/grub/grub.cfg

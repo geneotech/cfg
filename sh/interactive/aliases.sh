@@ -168,7 +168,6 @@ relinketcx11() {
 }
 
 alias dhealth='sudo smartctl -a'
-alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mkmkinit='sudo mkinitcpio -p linux'
 alias mounty='mount | column -t'
 alias rmpwd='sudo passwd -d '
