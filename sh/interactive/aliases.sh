@@ -3,7 +3,7 @@
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="$HOME/.gem/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
-
+ 
 export GEM_HOME=$HOME/.gem
 
 vw () {
@@ -185,7 +185,7 @@ alias rrmpkg="yay -Rsnc "
 alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yay --m-arg "--skippgpcheck"'
 alias uppkgs='yay -Syu'
-alias clcache='yay -Scy'
+alias clcache='yay -Sc && sudo pacman -Scc'
 
 # Filesystem task aliases
 alias peny='lsblk -f'
@@ -236,10 +236,12 @@ save_clipboard_to() {
 
 # Common tasks aliases
 rbtwin() {
-	sudo grub-reboot Windows10
+	BOOTNUMBER=$(efibootmgr | ag "Windows Boot Manager" | head -n1 | sed -r "s/^Boot([0123456789]*).*/\1/g")
+	sudo efibootmgr -n $BOOTNUMBER
 	sudo reboot
 }
 
+alias i3exit='i3-msg exit'
 alias ypng='xclip -selection clipboard -t image/png -i '
 alias svcl='save_clipboard_to'
 alias start_weston='source ~/cfg/sh/interactive/start_weston.sh'

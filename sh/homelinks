@@ -17,3 +17,4 @@ homelink .xinitrc
 homelink .zprofile
 homelink .zshenv
 homelink .zshrc
+homelink .config

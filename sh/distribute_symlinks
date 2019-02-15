@@ -16,7 +16,7 @@ dolink /etc/X11
 dolink /etc/fstab
 
 dolink /etc/sysctl.d/90-override.conf
-dolink /etc/systemd/system/getty@tty1.service.d/override.conf
+#dolink /etc/systemd/system/getty@tty1.service.d/override.conf
 
 dolink /bin/custom_link
 dolink /bin/customize
