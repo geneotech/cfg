@@ -219,15 +219,30 @@ client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 floating_minimum_size 1 x 1
 for_window[title="capture-border"] floating enabled
 
-for_window[title="Project Settings"] floating enabled
-for_window[title="Editor Preferences"] floating enabled
-for_window[title="Open Project"] floating enabled
-for_window[title="Message Log"] floating enabled
-for_window[title="UE4Editor"] floating enabled
-for_window[class="UE4Editor"] floating enabled
+#for_window[title="Project Settings"] floating enabled resize set 1920 1080
+#for_window[title="Editor Preferences"] floating enabled resize set 1920 1080
+#for_window[title="Open Project"] floating enabled resize set 1920 1080
+#for_window[title="Message Log"] floating enabled resize set 1920 1080
+#for_window[title="UE4Editor"] floating enabled
+#
+
+for_window[class="UE4Editor"] floating enabled 
+for_window[class="UE4Editor"] move position 0 0 
+for_window[class="UE4Editor"] resize set 1920 1080 
+
+for_window[title="Editor Preferences"] floating enabled 
+for_window[class="Editor Preferences"] move position 0 0 
+for_window[class="Editor Preferences"] resize set 1920 1080 
+
+for_window[title="Project Settings"] floating enabled 
+for_window[class="Project Settings"] move position 0 0 
+for_window[class="Project Settings"] resize set 1920 1080 
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
+
+focus_follows_mouse no
+
