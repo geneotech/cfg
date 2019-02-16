@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+BOOTNUMBER=$(efibootmgr | ag "Windows Boot Manager" | head -n1 | sed -r "s/^Boot([0123456789]*).*/\1/g")
+echo $BOOTNUMBER
+efibootmgr -n $BOOTNUMBER
+sleep 1
+reboot

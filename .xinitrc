@@ -28,3 +28,6 @@ xmodmap -e "keysym Caps_Lock = Escape"
 ~/cfg/sh/init_nvidia
 
 exec i3
+
+#export GDK_BACKEND=x11
+#exec gnome-session

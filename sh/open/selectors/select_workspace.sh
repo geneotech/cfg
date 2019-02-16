@@ -1,8 +1,8 @@
 WORKSPACES="
 $HOME/Hypersomnia
 $HOME/cfg
-$HOME/rep/rectpack2D
-$HOME/cfg/maincpp"
+$HOME/ue/MyProject3
+"
 
 . ~/cfg/sh/open/workspace/current
 

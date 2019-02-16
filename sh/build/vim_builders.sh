@@ -125,6 +125,10 @@ focus_vim() {
 	$(i3-msg "[title=NVIM] focus")
 }
 
+focus_ue4() {
+	$(i3-msg "[title=\"$WORKSPACE_NAME - Unreal Editor\"] focus")
+}
+
 vim_target() {
 	interrupt ninja
 	cd $WORKSPACE
@@ -132,6 +136,22 @@ vim_target() {
 	make_current $1
 	send_errors_to_vim_if_any $2
 	focus_vim
+}
+
+vim_ue4_target() {
+	interrupt ue4build
+	cd $WORKSPACE
+
+	wipe_all_logs
+	script -q -c "time ue4build $WORKSPACE/$WORKSPACE_NAME.uproject" $INTERMEDIATE_LOG > $OUTPUT_TERM
+
+	send_errors_to_vim_if_any $2
+
+	if [ ! -z $ERRORS ] ; then
+		focus_vim
+	else
+		focus_ue4
+	fi
 }
 
 vim_build() {

@@ -1,4 +1,6 @@
 let $WORKSPACE_NAME=fnamemodify($WORKSPACE, ":t")
+let $UPROJECT=$WORKSPACE . "/" . $WORKSPACE_NAME . ".uproject"
+let g:is_ue4_project = filereadable($UPROJECT)
 
 set nocompatible
 filetype off

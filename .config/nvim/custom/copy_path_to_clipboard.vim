@@ -26,3 +26,4 @@ nmap <silent> <F24> :execute 'CopyRepoPath "' . expand("%:f") . '"'<CR>
 nmap <silent> <F8> :CopyCurrentFilename<CR>
 
 nmap <Leader>s :execute "CopyPath " . 'cd $(dirname ' . expand("%:p") . ")"<CR>
+nmap <Leader>c :execute "CopyPath " . expand("%:p")<CR>

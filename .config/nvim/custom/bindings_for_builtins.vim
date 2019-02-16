@@ -31,6 +31,10 @@ nnoremap gf gFzz
 " Fix path for it by the way
 set path+=src/**
 
+if g:is_ue4_project 
+	set path+=/opt/unreal-engine/Engine/Source/Runtime
+endif
+
 " Y copies the current line without surrounding whitespace and newline
 nnoremap Y ^yg_
 

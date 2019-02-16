@@ -54,6 +54,11 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . $(readlink -f ./vim_run.sh)'"
 	endif
 
+	if g:is_ue4_project 
+		" echomsg ".uproject file readable."
+		let jobcmd = "zsh -c '. ~/cfg/sh/build/vim_builders.sh; export SHELL=/bin/zsh; vim_ue4_target " . a:targetname . "'"
+	endif
+
 	" echomsg jobcmd
     let job1 = jobstart(jobcmd, callbacks)
 endfunction

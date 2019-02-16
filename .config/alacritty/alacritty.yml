@@ -273,6 +273,7 @@ key_bindings:
   - { key: Key0,     mods: Control, action: ResetFontSize                }
   - { key: Equals,   mods: Control, action: IncreaseFontSize             }
   - { key: Subtract, mods: Control, action: DecreaseFontSize             }
+  - { key: P,       mods: Control|Alt,   chars: "\x1b[15;2~"                  }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
@@ -323,7 +324,6 @@ key_bindings:
   - { key: F2,       mods: Shift,   chars: "\x1b[1;2Q"                   }
   - { key: F3,       mods: Shift,   chars: "\x1b[1;2R"                   }
   - { key: F4,       mods: Shift,   chars: "\x1b[1;2S"                   }
-  - { key: F5,       mods: Shift,   chars: "\x1b[15;2~"                  }
   - { key: F6,       mods: Shift,   chars: "\x1b[17;2~"                  }
   - { key: F7,       mods: Shift,   chars: "\x1b[18;2~"                  }
   - { key: F8,       mods: Shift,   chars: "\x1b[19;2~"                  }

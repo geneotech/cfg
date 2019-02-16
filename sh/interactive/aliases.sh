@@ -3,6 +3,7 @@
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="$HOME/.gem/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="/opt/unreal-engine/Engine/Binaries/Linux:$PATH"
  
 export GEM_HOME=$HOME/.gem
 
@@ -235,11 +236,6 @@ save_clipboard_to() {
 }
 
 # Common tasks aliases
-rbtwin() {
-	BOOTNUMBER=$(efibootmgr | ag "Windows Boot Manager" | head -n1 | sed -r "s/^Boot([0123456789]*).*/\1/g")
-	sudo efibootmgr -n $BOOTNUMBER
-	sudo reboot
-}
 
 alias i3exit='i3-msg exit'
 alias ypng='xclip -selection clipboard -t image/png -i '
@@ -251,6 +247,7 @@ alias nuke='pkill -f '
 alias ptsy='ls /dev/pts'
 alias procki='ps aux | ag '
 alias rbt='reboot'
+alias rbtwin='sudo reboot_to_windows'
 alias mycha='. ~/.xinitrc'
 alias interrupt='pkill -f --signal 2 '
 alias int='interrupt '
