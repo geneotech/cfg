@@ -167,8 +167,8 @@ int main()
 		Mat image;
 		image = cv::imread( p, IMREAD_UNCHANGED );
 
-		const auto prev_cols = image.cols;
-		const auto prev_rows = image.rows;
+		const auto prev_cols = double(image.cols);
+		const auto prev_rows = double(image.rows);
 
 		const auto prev_size = prev_cols * prev_rows;
 
@@ -204,35 +204,35 @@ int main()
 					double x = 0, y = 0;
 					ss >> x >> y;
 
-					const auto prev_cx = double(prev_cols) * x;
-					const auto prev_cy = double(prev_rows) * y;
+					const auto prev_cx = prev_cols * x;
+					const auto prev_cy = prev_rows * y;
 
 #if LOGGING
 					std::cout << x << " " << y << endl;
-					std::cout << prev_cx << " " << prev_cy << endl;
+					std::cout << prev_cx << " " << prev_cy << "( " << (prev_rows - prev_cy) << ")" << endl;
 #endif
 
 					const auto& r = *cropped;
 
 					const auto next_cx = prev_cx - r.x;
-					const auto next_cy = prev_cy - r.y;
+					const auto next_cy = prev_cy - (prev_rows - (r.y + r.height));
 
-					const auto next_cols = image.cols;
-					const auto next_rows = image.rows;
+					const auto next_cols = double(image.cols);
+					const auto next_rows = double(image.rows);
 #if LOGGING
 					std::cout << "Initial: " << prev_cols << "x" << prev_rows << endl;
 					std::cout << "Cropped: " << next_cols << "x" << next_rows << endl;
 					std::cout << "r: " << r.x << " " << r.y << " " << r.width << " " << r.height << endl;
 #endif
 
-					const auto next_x_coord = next_cx / double(next_cols);
-					const auto next_y_coord = next_cy / double(next_rows);
+					const auto next_x_coord = next_cx / next_cols;
+					const auto next_y_coord = next_cy / next_rows;
 
 #if LOGGING
 					std::cout << "Changed to: " << endl;
 
 					std::cout << next_x_coord << " " << next_y_coord << endl;
-					std::cout << next_cx << " " << next_cy << endl;
+					std::cout << next_cx << " " << next_cy << " (" << (next_rows - next_cy) << ")" << endl;
 
 					std::cout << "Trimmed " << prev_cols - image.cols << "x" << prev_rows - image.rows << " (" << total_trimmed << " pixels)" << endl;
 #endif
