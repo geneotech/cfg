@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( ocv )
+find_package( OpenCV REQUIRED )
+set(CMAKE_CXX_FLAGS " -std=gnu++1z ")
+add_executable( ocv main.cpp )
+message("Opencv libs: ${OpenCV_LIBS}")
+target_link_libraries( ocv stdc++fs ${OpenCV_LIBS} )

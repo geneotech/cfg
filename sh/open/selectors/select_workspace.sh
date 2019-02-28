@@ -1,6 +1,7 @@
 WORKSPACES="
 $HOME/Hypersomnia
 $HOME/cfg
+$HOME/cfg/cpp/ocv
 $HOME/ue/MyProject3
 "
 
