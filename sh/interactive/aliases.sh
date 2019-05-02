@@ -4,6 +4,7 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="$HOME/.gem/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="/opt/unreal-engine/Engine/Binaries/Linux:$PATH"
+PATH=~/bin:$PATH
  
 export GEM_HOME=$HOME/.gem
 
@@ -83,15 +84,24 @@ update_trivial_3rdparties() {
 	upsub hypersomnia/scripts/serpent
 }
 
+# git aliases
+
+alias gfe='git fetch'
+alias gsh='git show'
+alias grv='git remote -v'
 alias try='git stash -k'
 alias gap='git stash apply'
 alias gforget='git rm --cached'
 alias grforget='git rm -r --cached'
 alias gch='git checkout'
-alias gp='git push'
+alias gps='git push'
+alias gpu='git pull'
 alias gc='git commit -m'
+alias ga='git add'
 alias gall='git add --all'
 alias gst='git status'
+alias gg='git status | ag'
+alias gd='git diff'
 alias gcl='git clone'
 alias gca='git add --all && git commit -m'
 alias gamd='git commit --amend -m'
@@ -99,6 +109,7 @@ alias gano='git commit --amend --no-edit'
 alias glg='git log --stat'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
+alias agq="ag -Q"
 
 function mkssh() {
 	git remote set-url $1 git@github.com:$2/$3.git
@@ -175,6 +186,10 @@ alias rmpwd='sudo passwd -d '
 alias chksh='readlink /usr/bin/sh'
 alias journalgetsize='journalctl --disk-usage'
 alias mody='lsmod | ag'
+
+sw () {
+	echo "export WORKSPACE=$PWD" > ~/cfg/sh/open/workspace/current
+}
 
 # Package management aliases
 alias dawaj="yay --noconfirm "
@@ -270,7 +285,7 @@ fd () {
 
 	if [ ! -z $NEWLOC ]
 	then
-		cd $(dirname $NEWLOC)
+		cd "$(dirname $NEWLOC)"
 	fi
 }
 
@@ -281,7 +296,7 @@ fr () {
 
 	if [ ! -z $NEWLOC ]
 	then
-		rifle $NEWLOC
+		rifle "$NEWLOC"
 	fi
 }
 

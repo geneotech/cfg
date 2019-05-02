@@ -20,6 +20,7 @@
 #define LOGGING 0
 
 const auto target_folder = "Assets";
+const auto omit_cropping_of = "";
 
 namespace augs {
 	std::string exec(const std::string cmd) {
@@ -172,28 +173,42 @@ int main()
 
 		const auto prev_size = prev_cols * prev_rows;
 
-		{
+		auto meta_path = p;
+		meta_path.replace_extension(".png.meta");
+
+		const auto outputmetapath = path_type("results") / meta_path;
+
+		auto save_meta = [&]() {
+			fs::copy(meta_path, outputmetapath);
+		};
+
+		auto save_png = [&]() {
+			vector<int> compression_params;
+			compression_params.push_back(IMWRITE_PNG_COMPRESSION);
+			compression_params.push_back(9);
+
+			cv::imwrite(outputpath, image, compression_params);
+		};
+
+		if (string(omit_cropping_of).size() > 0 && p.string().find(omit_cropping_of) != std::string::npos) {
+			std::cout << "Omitting cropping of " << p << std::endl;
+			save_png();
+			save_meta();
+		}
+		else {
 			const auto cropped = cut_empty_edges(image);
 
 			const auto new_size = image.cols * image.rows;
 			const auto total_trimmed = prev_size - new_size;
 			pixels_saved += total_trimmed;
 
-			vector<int> compression_params;
-			compression_params.push_back(IMWRITE_PNG_COMPRESSION);
-			compression_params.push_back(9);
-
-			cv::imwrite(outputpath, image, compression_params);
-
-			auto meta_path = p;
-			meta_path.replace_extension(".png.meta");
+			save_png();
 
 			if (!fs::exists(meta_path)) {
 				std::cout << "Error! " << meta_path << " Does not exist.";
 			}
 			else {
-				const auto outputmetapath = path_type("results") / meta_path;
-				fs::copy(meta_path, outputmetapath);
+				save_meta();
 
 				if (cropped) {
 					++total_trimmed_images;
