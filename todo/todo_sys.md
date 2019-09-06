@@ -5,6 +5,9 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- introduce shift+esc for in-line normal mode in terminal
+
+
 - properly reload images on applying waifu2x in sxiv
 - Fix fzf hacks (alt+c and ctrl+t) for neovim terminal
 

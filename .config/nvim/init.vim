@@ -151,7 +151,7 @@ else
 	" On normal startup, open an agenda file
 
 	if strlen(@%) == 0 
-		silent edit $HOME/doc/agenda.md
+		silent edit $HOME/agenda.md
 	endif
 endif
 

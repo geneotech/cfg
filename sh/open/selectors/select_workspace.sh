@@ -1,4 +1,6 @@
 WORKSPACES="
+$HOME/bf
+$HOME/opi
 $HOME/Hypersomnia
 $HOME/cfg
 $HOME/cfg/cpp/ocv

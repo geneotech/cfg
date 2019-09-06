@@ -3,6 +3,8 @@
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="$HOME/.gem/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
+PATH="$HOME/go/bin:$PATH"
+PATH="$HOME/SVP4:$PATH"
 PATH="/opt/unreal-engine/Engine/Binaries/Linux:$PATH"
 PATH=~/bin:$PATH
  
@@ -87,6 +89,8 @@ update_trivial_3rdparties() {
 # git aliases
 
 alias gfe='git fetch'
+alias gbr='git branch'
+alias gre='git reset'
 alias gsh='git show'
 alias grv='git remote -v'
 alias try='git stash -k'
@@ -99,7 +103,7 @@ alias gpu='git pull'
 alias gc='git commit -m'
 alias ga='git add'
 alias gall='git add --all'
-alias gst='git status'
+alias g='git status'
 alias gg='git status | ag'
 alias gd='git diff'
 alias gcl='git clone'
@@ -107,6 +111,7 @@ alias gca='git add --all && git commit -m'
 alias gamd='git commit --amend -m'
 alias gano='git commit --amend --no-edit'
 alias glg='git log --stat'
+alias gl='git log'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
 alias gcleanup="git reset --hard; git clean -d -x -f "
 alias agq="ag -Q"
@@ -121,23 +126,26 @@ function origssh() {
 
 # Building aliases
 alias ucl="export CC=clang; export CXX=clang++;"
+alias ugcc="export CC=clang; export CXX=clang++;"
 alias rmbu="rm -rf build"
 
-alias cmkdg="export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkdf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkdfs="export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkdfsnol="export BUILD_FOLDER_SUFFIX=faststaticnol; 	  cmake/build.sh Debug x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1 -DPREFER_LIBCXX=0' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkrf="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkrg="export BUILD_FOLDER_SUFFIX=g; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkrgs="export BUILD_FOLDER_SUFFIX=gstatic; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
-alias cmkrfs="export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh RelWithDebInfo x64 clang clang++ '-DSTATIC_LINK=1 -DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdg="ucl; export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdf="ucl; export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdfs="ucl; export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdfsnol="ucl; export BUILD_FOLDER_SUFFIX=faststaticnol; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1 -DPREFER_LIBCXX=0' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrf="ucl; export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrg="ucl; export BUILD_FOLDER_SUFFIX=g; 	  cmake/build.sh RelWithDebInfo x64 '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrgs="ucl; export BUILD_FOLDER_SUFFIX=gstatic; 	  cmake/build.sh RelWithDebInfo x64 '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkrfs="ucl; export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh RelWithDebInfo x64 '-DSTATIC_LINK=1 -DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
-alias cmkdfgcc="export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 gcc gcc++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdfgcc="ugcc; export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
-alias cmkdgcc="cmake/build.sh Debug x64 gcc g++ '-DBUILD_PROPERTY_EDITOR=0 -DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkrgcc="cmake/build.sh RelWithDebInfo x64 gcc g++ '-DBUILD_PROPERTY_EDITOR=0 -DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkrgccfull="cmake/build.sh RelWithDebInfo x64 gcc g++ '-DBUILD_IN_CONSOLE_MODE=1'"
-alias cmkr="cmake/build.sh RelWithDebInfo x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkdgcc="ugcc; cmake/build.sh Debug x64 '-DBUILD_PROPERTY_EDITOR=0 -DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkrgcc="ugcc; cmake/build.sh RelWithDebInfo x64 '-DBUILD_PROPERTY_EDITOR=0 -DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkrgccfull="ugcc; cmake/build.sh RelWithDebInfo x64 '-DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkr="ucl; cmake/build.sh RelWithDebInfo x64 clang clang++ '-DBUILD_IN_CONSOLE_MODE=1'"
+
+alias cmkrsanitize="ucl; export BUILD_FOLDER_SUFFIX=sanit; 	  cmake/build.sh RelWithDebInfo x64 '-DENABLE_THREADSANITIZER=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 
 # Production build
 alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
@@ -157,11 +165,10 @@ cmkrmin() {
 }
 
 alias cmkc="pushd build/current; cmake $OLDPWD; popd"
-alias cusr="rm -rf hypersomnia/cache/usr"
-alias cgen="rm -rf hypersomnia/cache/gen"
-alias catl="rm -rf hypersomnia/cache/gen/atlases"
-alias cch="rm -rf hypersomnia/cache"
-alias ced="rm -rf hypersomnia/cache/usr/editor"
+alias cusr="rm -rf hypersomnia/user"
+alias cgen="rm -rf hypersomnia/cache"
+alias catl="rm -rf hypersomnia/cache/atlases"
+alias ced="rm -rf hypersomnia/user/editor"
 alias rmau="rm -rf /tmp/autosave"
 
 alias n="sudo dhcpcd"
@@ -239,6 +246,8 @@ alias mkexe='chmod +x '
 alias gitmkexe='git update-index --chmod=+x '
 alias wszystkim='sudo chmod 777 -R .'
 
+alias rg='IN_TERMINAL ranger $PWD'
+
 save_clipboard_to() {
 	new_path=$1
 
@@ -307,6 +316,21 @@ sshuj() {
 	ssh-add ~/.ssh/id_rsa
 }
 
-alias cli="../build/current/Hypersomnia --connect"
-alias srv="../build/current/Hypersomnia --server"
-alias dsrv="../build/current/Hypersomnia --dedicated-server"
+alias cli="pushd hypersomnia; ../build/current/Hypersomnia --connect; popd"
+alias srv="pushd hypersomnia; ../build/current/Hypersomnia --server; popd"
+alias dsrv="pushd hypersomnia; ../build/current/Hypersomnia --dedicated-server; popd"
+
+trims() {
+	ffmpeg -ss $2 -i "$1.mkv" -c copy -t $3 -map 0:v:0 -map 0:a:1 "$1_out.mkv"
+}
+
+replaceaudio() {
+	ffmpeg -i /bup/rpl/in.mp4 -i /bup/rpl/in.wav -c:v copy -map 0:v:0 -map 1:a:0 /bup/rpl/out.mp4
+}
+
+LOCAL_ZSH_RC="$WORKSPACE/.zshrc"
+
+if [ ! -z $LOCAL_ZSH_RC ]
+then
+. $LOCAL_ZSH_RC
+fi

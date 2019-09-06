@@ -11,6 +11,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd
+# TODO: Fix Ctrl+R not working under bindkey -v if we ever get to using it
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall

@@ -1,6 +1,6 @@
-MAIN_PATH=$(readlink -f ./main.c)
+MAIN_PATH=$(readlink -f ./main.cpp)
 
 echo "Init pass."
-clang -O3 -pthread -o main.c.o -c $MAIN_PATH 
+clang++ -stdlib=libc++ -std=gnu++1z -O3 -pthread -o main.cpp.o -c $MAIN_PATH 
 echo "Link pass."
-clang -O3 -pthread -fuse-ld=lld main.c.o -o ./main 
+clang++ -stdlib=libc++ -std=gnu++1z -O3 -pthread -fuse-ld=lld main.cpp.o -o ./main 

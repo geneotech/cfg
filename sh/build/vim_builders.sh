@@ -11,6 +11,22 @@ export TEMP_PATH="/tmp/temp.txt"
 # Handy building aliases
 alias interrupt='pkill -f --signal 2 '
 
+gdbtarget() {
+	if [ -f $WORKSPACE_EXE ]; then
+		TARGET_EXECUTABLE=$WORKSPACE_EXE
+	fi
+
+	gdb $TARGET_EXECUTABLE
+}
+
+lldbtarget() {
+	if [ -f $WORKSPACE_EXE ]; then
+		TARGET_EXECUTABLE=$WORKSPACE_EXE
+	fi
+
+	lldb $TARGET_EXECUTABLE
+}
+
 gdbcore() {
 	if [ -f $WORKSPACE_EXE ]; then
 		TARGET_EXECUTABLE=$WORKSPACE_EXE

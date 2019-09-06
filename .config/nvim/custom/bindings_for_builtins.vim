@@ -7,14 +7,14 @@ nnoremap <Space>x :x<CR>
 autocmd BufReadPost quickfix nnoremap <buffer> o <CR>
 
 " We often play with vimrc
-nnoremap <Space>s :source $MYVIMRC<CR>
-nnoremap <Space>v :e $MYVIMRC<CR>
+nnoremap <silent> <Space>s :source $MYVIMRC<CR>
+nnoremap <silent> <Space>v :e $MYVIMRC<CR>
 
 " We center the view often
 nnoremap z zz
 
 " Switch between .h and .cpp back and forth
-noremap <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+noremap <silent> <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
 
 " Deletes current file
 nnoremap <Space><Del> :call delete(expand('%')) <bar> bdelete!

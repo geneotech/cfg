@@ -5,18 +5,7 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
-## UE4
-
-- If ue project, copyincludepath should only copy the last two elements of the path
-- gf could simply look for all files in the system if entry not found in path
-	- similarly f2, but it should try the project files, not the whole system
-- remap 'U to 'u etc as we never use the lowercase maps
-	- unmap the shifted to fix the habit
-
-
 ## Others
-
-
 
 - hack around fzf so that letters for matches are also shown to the right
 	- as we most of the time look to the right
@@ -120,9 +109,19 @@ If we're playing with neovim terminal, set scrollback=1 clears scrollback
 - Ctrl+Shift+C should copy exact path quoted (e.g. for cmake)
 - install something for parenthesizing 
 - install something for commenting and uncommenting
- 
+
 ## Nice schemes
 
 https://github.com/nightsense/office
 Plugin 'acarapetis/vim-colors-github'
 - make Ranger command spawn a separate terminal
+
+## outdated
+### UE4
+
+- If ue project, copyincludepath should only copy the last two elements of the path
+- gf could simply look for all files in the system if entry not found in path
+	- similarly f2, but it should try the project files, not the whole system
+- remap 'U to 'u etc as we never use the lowercase maps
+	- unmap the shifted to fix the habit
+ 

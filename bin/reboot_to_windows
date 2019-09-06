@@ -4,4 +4,4 @@ BOOTNUMBER=$(efibootmgr | ag "Windows Boot Manager" | head -n1 | sed -r "s/^Boot
 echo $BOOTNUMBER
 efibootmgr -n $BOOTNUMBER
 sleep 1
-reboot
+#reboot
