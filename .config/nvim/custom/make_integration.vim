@@ -41,7 +41,13 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 	silent wall
 	echomsg a:message
 
-	let runscript = expand("%:h") . "/vim_run.sh"
+	if a:targetname == 'all'
+		let runscript_fname = "vim_build.sh"
+	else
+		let runscript_fname = "vim_" . a:targetname . ".sh"
+	end
+
+	let runscript = expand("%:h") . "/" . runscript_fname
 
     let callbacks = {
     \ 'on_exit': function(a:exitfuncname)
@@ -51,7 +57,8 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 
 	if filereadable(runscript)
 		" echomsg "Runscript readable."
-		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; . $(readlink -f ./vim_run.sh)'"
+		let current_file_path = expand("%:t")
+		let jobcmd = "zsh -c 'cd " . expand("%:h") . "; export CURFILE=$(readlink -f ./" . current_file_path  . "); . $(readlink -f ./" . runscript_fname . ")'"
 	endif
 
 	if g:is_ue4_project 
@@ -59,7 +66,6 @@ function! SucklessMakeImpl(targetname, message, exitfuncname)
 		let jobcmd = "zsh -c '. ~/cfg/sh/build/vim_builders.sh; export SHELL=/bin/zsh; vim_ue4_target " . a:targetname . "'"
 	endif
 
-	" echomsg jobcmd
     let job1 = jobstart(jobcmd, callbacks)
 endfunction
 

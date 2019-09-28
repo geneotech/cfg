@@ -21,5 +21,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 . $HOME/cfg/sh/interactive/aliases.sh
+
 export PS1="%d>"
+#For other devices
+#export PS1="%B$FG[154]PI: %b%d>"
 

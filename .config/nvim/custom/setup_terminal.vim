@@ -1,6 +1,3 @@
-colorscheme industry
-set termguicolors
-
 let g:terminal_color_0  = '#2e3436'
 let g:terminal_color_1  = '#cc0000'
 let g:terminal_color_2  = '#4e9a06'

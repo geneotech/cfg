@@ -5,6 +5,25 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+vim window detection is fucked up with multiple terminals?
+	it's because it's no longer named Alacritty
+
+fix auto-indent on insert in e.g. kv files
+	== works so why shouldn't insert
+		actually it doesn't.. at least properly
+	it only is fucked up if we insert with i/o/O while on an unindented line
+
+dot-repeat a and ctrl+v combo
+
+Why does insert start at the beginning of the line after successful indent?
+
+FIX THAT REPLACING SO THAT WE CAN DO IT SERIALLY...
+
+## Better python support
+
+- errors to quickfix
+- single file playground: print result
+
 ## Others
 
 - hack around fzf so that letters for matches are also shown to the right

@@ -18,3 +18,4 @@ homelink .zprofile
 homelink .zshenv
 homelink .zshrc
 homelink .config
+homelink .Xresources

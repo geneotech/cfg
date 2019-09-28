@@ -5,6 +5,11 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- more comprehensive open_with for ranger
+- sxiv: copy to clipboard image or path
+
+- dmenu for important directories
+
 - introduce shift+esc for in-line normal mode in terminal
 
 

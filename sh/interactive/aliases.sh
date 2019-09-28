@@ -110,6 +110,9 @@ alias gcl='git clone'
 alias gca='git add --all && git commit -m'
 alias gamd='git commit --amend -m'
 alias gano='git commit --amend --no-edit'
+alias gchc='git cherry-pick --continue'
+alias grm='git rm'
+alias grem='git remote'
 alias glg='git log --stat'
 alias gl='git log'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
@@ -209,6 +212,7 @@ alias prmpkg="sudo pacman -Rsn "
 alias nogpg='yay --m-arg "--skippgpcheck"'
 alias uppkgs='yay -Syu'
 alias clcache='yay -Sc && sudo pacman -Scc'
+alias ins='yay -S'
 
 # Filesystem task aliases
 alias peny='lsblk -f'
@@ -330,7 +334,36 @@ replaceaudio() {
 
 LOCAL_ZSH_RC="$WORKSPACE/.zshrc"
 
-if [ ! -z $LOCAL_ZSH_RC ]
+if [ -f $LOCAL_ZSH_RC ]
 then
 . $LOCAL_ZSH_RC
 fi
+
+name(){
+  arg1=$1
+  arg2=$2
+  echo "$arg1 $arg2"
+}
+
+# python aliases
+alias pym='python main.py'
+
+# Raspberry pi aliases
+
+RASPBERRYPI_ADDR=raspberrypi
+
+setip() {
+	RASPBERRYPI_ADDR="10.0.1.$1"
+}
+
+ppi() {
+	ping $RASPBERRYPI_ADDR
+}
+
+spi() {
+	ssh pi@$RASPBERRYPI_ADDR
+}
+
+sfs() {
+	sshfs pi@$RASPBERRYPI_ADDR:/ ~/sfs -C
+}

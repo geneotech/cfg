@@ -1,3 +1,6 @@
+set shortmess=filnxtToOFI
+let is_terminal = strlen($LAUNCH_TERMINAL) > 0
+
 let $WORKSPACE_NAME=fnamemodify($WORKSPACE, ":t")
 let $UPROJECT=$WORKSPACE . "/" . $WORKSPACE_NAME . ".uproject"
 let g:is_ue4_project = filereadable($UPROJECT)
@@ -35,6 +38,14 @@ augroup vimrcEx
 	au!
 	autocmd FileType text setlocal textwidth=78
 augroup END
+
+if is_terminal
+	set termguicolors
+	colorscheme industry
+else
+	set termguicolors
+	colorscheme moonfly
+endif
 
 """"""""" General behaviour
 
@@ -97,7 +108,10 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 " Let the window's title be the filename
-set title
+
+if !is_terminal
+	set title
+endif
 
 """"""""" General custom commands
 
@@ -141,13 +155,10 @@ source $CUSTOM/vimdiff_config.vim
 
 """"""""" Epilogue
 
-if strlen($LAUNCH_TERMINAL) > 0
+if is_terminal
 	let $LAUNCH_TERMINAL=""
 	source $CUSTOM/setup_terminal.vim
 else
-	set termguicolors
-	colorscheme moonfly
-
 	" On normal startup, open an agenda file
 
 	if strlen(@%) == 0 

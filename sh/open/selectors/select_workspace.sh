@@ -1,10 +1,10 @@
 WORKSPACES="
 $HOME/bf
 $HOME/opi
+$HOME/kivy
 $HOME/Hypersomnia
 $HOME/cfg
 $HOME/cfg/cpp/ocv
-$HOME/ue/MyProject3
 "
 
 . ~/cfg/sh/open/workspace/current
