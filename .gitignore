@@ -48,3 +48,4 @@ cpp/plotting/modulitki.cpp
 .config/configstore
 .config/pavucontrol.ini
 .config/pulse
+py/playground/main.py

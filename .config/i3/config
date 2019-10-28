@@ -218,6 +218,7 @@ client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 
 floating_minimum_size 1 x 1
 for_window[title="capture-border"] floating enabled
+#for_window[title="Main"] floating enabled
 
 #for_window[title="Project Settings"] floating enabled resize set 1920 1080
 #for_window[title="Editor Preferences"] floating enabled resize set 1920 1080

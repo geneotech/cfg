@@ -1,4 +1,5 @@
 WORKSPACES="
+$HOME/page
 $HOME/bf
 $HOME/opi
 $HOME/kivy

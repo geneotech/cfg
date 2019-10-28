@@ -5,6 +5,14 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- We should really consider dropping the nvim terminal altogether
+	- but  then we can't use scrollback content properly
+		- Maybe there's an option to open scrollback buffer in vim
+	- but then fzf's history search corrupts the scrollback
+
+- Alacritty tabs should reflect the cwd instead of just "Alacritty"
+	- This works automatically with Alacritty on its own
+
 - more comprehensive open_with for ranger
 - sxiv: copy to clipboard image or path
 

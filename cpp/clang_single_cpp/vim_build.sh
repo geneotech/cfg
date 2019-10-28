@@ -1,1 +1,1 @@
-. vim_run.sh
+source ./vim_run.sh

@@ -20,6 +20,7 @@ vw
 . ~/cfg/sh/open/workspace/current
 . ~/cfg/sh/interactive/pngize.sh
 . ~/cfg/sh/interactive/replace_color.sh
+. ~/cfg/sh/interactive/rsync_aliases.sh
 
 # Program aliases
 alias ls="exa"
@@ -351,9 +352,16 @@ alias pym='python main.py'
 # Raspberry pi aliases
 
 RASPBERRYPI_ADDR=raspberrypi
+RASPBERRY_HOST_FILE=/tmp/raspberry_host
+
+if [ -f $RASPBERRY_HOST_FILE ]
+then
+	. $RASPBERRY_HOST_FILE
+fi
 
 setip() {
-	RASPBERRYPI_ADDR="10.0.1.$1"
+	echo "export RASPBERRYPI_ADDR=$1" > $RASPBERRY_HOST_FILE
+	. $RASPBERRY_HOST_FILE
 }
 
 ppi() {
@@ -366,4 +374,12 @@ spi() {
 
 sfs() {
 	sshfs pi@$RASPBERRYPI_ADDR:/ ~/sfs -C
+}
+
+net_on() {
+	sudo ifconfig enp3s0 up
+}
+
+net_off() {
+	sudo ifconfig enp3s0 down
 }
