@@ -152,10 +152,10 @@ bindsym $mod+r mode "resize"
 bindsym $modw+a exec alacritty -e alsamixer
 bindsym $modw+v exec ~/cfg/sh/open/workspace/open_workspace_editor
 bindsym $modw+x exec firefox
-bindsym $modw+t exec transmission-gtk
 bindsym $modw+d exec zsh -c ". ~/cfg/sh/open/programs/open_downloads.sh"
 bindsym $modw+m exec zsh -c ". ~/cfg/sh/open/programs/open_music.sh"
 bindsym $modw+i exec discord
+bindsym $modw+t exec telegram-desktop
 bindsym Control+$mod+Delete exec zsh -c ". ~/cfg/sh/open/programs/open_htop.sh"
 
 bindsym $mod+Tab exec rofi -hide-scrollbar -show window
@@ -219,6 +219,8 @@ client.placeholder      #000000 #000000 #ffffff #000000   #0c0c0c
 floating_minimum_size 1 x 1
 for_window[title="capture-border"] floating enabled
 #for_window[title="Main"] floating enabled
+#for_window[title="Hypersomnia"] floating enabled
+for_window[title="Mozilla Firefox"] floating disabled
 
 #for_window[title="Project Settings"] floating enabled resize set 1920 1080
 #for_window[title="Editor Preferences"] floating enabled resize set 1920 1080

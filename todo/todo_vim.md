@@ -5,6 +5,11 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- ctrl+w on quickfix freezes the entire vim
+
+- let gitgutter stage whitespace too, though still ignore the viewing, if it is possible
+	- as a last resort we can let both view and stage
+
 vim window detection is fucked up with multiple terminals?
 	it's because it's no longer named Alacritty
 

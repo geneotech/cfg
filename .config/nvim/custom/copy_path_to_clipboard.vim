@@ -23,7 +23,10 @@ command! -nargs=0 CopyCurrentFilename let @+ = expand('%:t')
 
 nmap <silent> <C-c> :execute "CopyIncludePath " . expand("%:f")<CR>
 nmap <silent> <F24> :execute 'CopyRepoPath "' . expand("%:f") . '"'<CR>
-nmap <silent> <F8> :CopyCurrentFilename<CR>
+"
+"" F8 is bound to Ctrl+Shift+F
 
-nmap <Leader>s :execute "CopyPath " . 'cd $(dirname ' . expand("%:p") . ")"<CR>
-nmap <Leader>c :execute "CopyPath " . expand("%:p")<CR>
+nmap <Space>s :execute "CopyPath " . 'cd $(dirname ' . expand("%:p") . ")"<CR>
+nmap <Space>f :CopyCurrentFilename<CR>
+nmap <Space>p :execute "CopyPath " . expand("%:p")<CR>
+nmap <Space>d :execute "CopyPath " . expand("%:h")<CR>

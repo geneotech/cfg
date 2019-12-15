@@ -1,5 +1,3 @@
-nmap <Space>f :set foldenable!<CR>
-
 function! FoldMaps()
 	setlocal foldmethod=syntax
 	"nnoremap <buffer> o za

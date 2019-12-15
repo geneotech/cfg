@@ -99,7 +99,6 @@ alias gap='git stash apply'
 alias gforget='git rm --cached'
 alias grforget='git rm -r --cached'
 alias gch='git checkout'
-alias gps='git push'
 alias gpu='git pull'
 alias gc='git commit -m'
 alias ga='git add'
@@ -153,6 +152,7 @@ alias cmkrsanitize="ucl; export BUILD_FOLDER_SUFFIX=sanit; 	  cmake/build.sh Rel
 
 # Production build
 alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkds="export BUILD_FOLDER_SUFFIX=dedicated-server; cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DHYPERSOMNIA_DEDICATED_SERVER=1'"
 
 cmkmin() {
 	export BUILD_FOLDER_SUFFIX=minimal;
@@ -382,4 +382,22 @@ net_on() {
 
 net_off() {
 	sudo ifconfig enp3s0 down
+}
+
+test_in_tmp() {
+	rm -rf /tmp/test_hyper
+
+	cp -rf hypersomnia /tmp/test_hyper
+	cp -rf build/current/Hypersomnia /tmp/test_hyper/.Hypersomnia
+
+	pushd /tmp/test_hyper
+	./Hypersomnia
+	popd
+}
+
+unph() {
+	rm -rf hypersomnia
+	chmod +x Hypersomnia-for-Linux.sfx
+	./Hypersomnia-for-Linux.sfx
+	cd hypersomnia
 }
