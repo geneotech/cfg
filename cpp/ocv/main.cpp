@@ -19,7 +19,7 @@
 
 #define LOGGING 0
 
-const auto target_folder = "Assets";
+const auto target_folder = "gfx";
 const auto omit_cropping_of = "";
 
 namespace augs {
@@ -190,10 +190,11 @@ int main()
 			cv::imwrite(outputpath, image, compression_params);
 		};
 
-		if (string(omit_cropping_of).size() > 0 && p.string().find(omit_cropping_of) != std::string::npos) {
+		if (true) {
+			//if (string(omit_cropping_of).size() > 0 && p.string().find(omit_cropping_of) != std::string::npos) {
 			std::cout << "Omitting cropping of " << p << std::endl;
 			save_png();
-			save_meta();
+			//save_meta();
 		}
 		else {
 			const auto cropped = cut_empty_edges(image);

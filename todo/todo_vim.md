@@ -31,9 +31,6 @@ FIX THAT REPLACING SO THAT WE CAN DO IT SERIALLY...
 
 ## Others
 
-- hack around fzf so that letters for matches are also shown to the right
-	- as we most of the time look to the right
-
 - fix EasyMotion in insert mode so that it can be repeated normally
 
 - make tags jump to column

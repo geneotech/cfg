@@ -13,8 +13,42 @@ nnoremap <silent> <Space>v :e $MYVIMRC<CR>
 " We center the view often
 nnoremap z zz
 
+function! SwitchSourceHeader()
+  let tail = expand("%:t")
+
+  if (tail[-4:] == "\.cpp")
+    e %:h/%:t:r.h
+  elseif  (tail[-2:] == "\.h")
+    e %:h/%:t:r.cpp
+  elseif  (tail[-7:] == "\.prefab")
+    e %:h/%:t:r.prefab.meta
+  elseif  (tail[-12:] == "\.prefab.meta")
+    e %:h/%:t:r
+  elseif  (tail[-3:] == "\.cs")
+    e %:h/%:t:r.cs.meta
+  elseif  (tail[-8:] == "\.cs.meta")
+    e %:h/%:t:r
+  elseif  (tail[-6:] == "\.asset")
+    e %:h/%:t:r.asset.meta
+  elseif  (tail[-11:] == "\.asset.meta")
+    e %:h/%:t:r
+  elseif  (tail[-5:] == "\.anim")
+    e %:h/%:t:r.anim.meta
+  elseif  (tail[-10:] == "\.anim.meta")
+    e %:h/%:t:r
+  elseif  (tail[-11:] == "\.controller")
+    e %:h/%:t:r.controller.meta
+  elseif  (tail[-16:] == "\.controller.meta")
+    e %:h/%:t:r
+  elseif  (tail[-4:] == "\.mat")
+    e %:h/%:t:r.mat.meta
+  elseif  (tail[-9:] == "\.mat.meta")
+    e %:h/%:t:r
+  endif
+endfunction
+
 " Switch between .h and .cpp back and forth
-noremap <silent> <F2> :e %:p:s,.h$,.X123X,:s,.cpp$,.h,:s,.X123X$,.cpp,<CR>
+noremap <silent> <F2> :call SwitchSourceHeader()<CR>
 
 " Deletes current file
 nnoremap <Space><Del> :call delete(expand('%')) <bar> bdelete!

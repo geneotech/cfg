@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- sxiv: copy to clipboard image or path
+
 - We should really consider dropping the nvim terminal altogether
 	- but  then we can't use scrollback content properly
 		- Maybe there's an option to open scrollback buffer in vim
@@ -14,7 +16,6 @@ summary: What needs to be done on the system.
 	- This works automatically with Alacritty on its own
 
 - more comprehensive open_with for ranger
-- sxiv: copy to clipboard image or path
 
 - dmenu for important directories
 

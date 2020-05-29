@@ -44,6 +44,7 @@ nnoremap <silent> <F27> :call CtrlpGlobal("find_all_locations")<CR>
 nnoremap <silent> <F17> :call CtrlpGlobal("find_really_all_locations")<CR>
 nnoremap <silent> <C-t> :Tags<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
+nnoremap <silent> <C-x> :GFiles?<CR>
 nnoremap <silent> <C-e> :History<CR>
 nnoremap <silent> <M-p> :execute ("Files " . expand("%:h"))<CR>
 

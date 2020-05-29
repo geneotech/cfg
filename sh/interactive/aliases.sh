@@ -4,6 +4,7 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="$HOME/.gem/bin:$PATH"
 PATH="$HOME/.cargo/bin:$PATH"
 PATH="$HOME/go/bin:$PATH"
+PATH="$HOME/rider/bin:$PATH"
 PATH="$HOME/SVP4:$PATH"
 PATH="/opt/unreal-engine/Engine/Binaries/Linux:$PATH"
 PATH=~/bin:$PATH
@@ -30,6 +31,14 @@ alias diskspace='sudo gdmap -f "/"'
 
 # additional git aliases
 
+far() {
+	git ls-files -z | xargs -0 sed -i -e "s/$1/$2/g"
+}
+
+farw() {
+	git ls-files -z | xargs -0 sed -i -e "s/\b$1\b/$2/g"
+}
+
 # Restores the most recent version of a deleted file
 grestore () {
 	git checkout $(git rev-list -n 1 HEAD -- $1)^ -- $1
@@ -39,6 +48,16 @@ gexport () {
 	git commit -m "Making a commit to export the changes"
 	git diff-tree -r --no-commit-id --name-only --diff-filter=ACMRT HEAD | xargs tar -rf "/bup/$1-backup.tar"
 	git reset --soft HEAD~
+}
+
+zjebanylfs()
+{
+	git lfs uninstall
+	git reset --hard
+	git lfs install
+	git lfs pull
+	git reset --hard
+	git clean -dxf
 }
 
 wf2() {
@@ -89,6 +108,7 @@ update_trivial_3rdparties() {
 
 # git aliases
 
+alias gs='git show'
 alias gfe='git fetch'
 alias gbr='git branch'
 alias gre='git reset'
@@ -119,6 +139,25 @@ alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -
 alias gcleanup="git reset --hard; git clean -d -x -f "
 alias agq="ag -Q"
 
+function bfpushupto()
+{
+	git push origin $1:"feature/s16/wz_opt_new"
+}
+
+function amenddate() {
+	NEWDATE="$1 2019 +0100"
+
+	GIT_COMMITTER_DATE="$NEWDATE" git commit --amend --no-edit --date "$NEWDATE"
+	git rebase --continue
+}
+
+function amenddateyr() {
+	NEWDATE="$1 +0100"
+
+	GIT_COMMITTER_DATE="$NEWDATE" git commit --amend --no-edit --date "$NEWDATE"
+	git rebase --continue
+}
+
 function mkssh() {
 	git remote set-url $1 git@github.com:$2/$3.git
 }
@@ -134,6 +173,8 @@ alias rmbu="rm -rf build"
 
 alias cmkdg="ucl; export BUILD_FOLDER_SUFFIX=g; 		  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkdf="ucl; export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkdglfw="ucl; export BUILD_FOLDER_SUFFIX=glfw; 	  cmake/build.sh Debug x64 '-DUSE_GLFW=1 -DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
+alias cmkprglfw="ucl; export BUILD_FOLDER_SUFFIX=glfw; 	  cmake/build.sh Release x64 '-DUSE_GLFW=1 -DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkdfs="ucl; export BUILD_FOLDER_SUFFIX=faststatic; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkdfsnol="ucl; export BUILD_FOLDER_SUFFIX=faststaticnol; 	  cmake/build.sh Debug x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DSTATIC_LINK=1 -DPREFER_LIBCXX=0' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkrf="ucl; export BUILD_FOLDER_SUFFIX=fast; 	  cmake/build.sh RelWithDebInfo x64 '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1' export BUILD_FOLDER_SUFFIX=\"\";"
@@ -152,6 +193,7 @@ alias cmkrsanitize="ucl; export BUILD_FOLDER_SUFFIX=sanit; 	  cmake/build.sh Rel
 
 # Production build
 alias cmkpr="cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1'"
+alias cmkprg="export BUILD_FOLDER_SUFFIX=prod-debug; cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=1 -DBUILD_IN_CONSOLE_MODE=0' export BUILD_FOLDER_SUFFIX=\"\";"
 alias cmkds="export BUILD_FOLDER_SUFFIX=dedicated-server; cmake/build.sh Release x64 clang clang++ '-DGENERATE_DEBUG_INFORMATION=0 -DBUILD_IN_CONSOLE_MODE=1 -DHYPERSOMNIA_DEDICATED_SERVER=1'"
 
 cmkmin() {
@@ -324,6 +366,7 @@ sshuj() {
 alias cli="pushd hypersomnia; ../build/current/Hypersomnia --connect; popd"
 alias srv="pushd hypersomnia; ../build/current/Hypersomnia --server; popd"
 alias dsrv="pushd hypersomnia; ../build/current/Hypersomnia --dedicated-server; popd"
+alias msrv="pushd hypersomnia; ../build/current/Hypersomnia --masterserver; popd"
 
 trims() {
 	ffmpeg -ss $2 -i "$1.mkv" -c copy -t $3 -map 0:v:0 -map 0:a:1 "$1_out.mkv"
@@ -388,7 +431,7 @@ test_in_tmp() {
 	rm -rf /tmp/test_hyper
 
 	cp -rf hypersomnia /tmp/test_hyper
-	cp -rf build/current/Hypersomnia /tmp/test_hyper/.Hypersomnia
+	cp -rf build/current/Hypersomnia /tmp/test_hyper/Hypersomnia
 
 	pushd /tmp/test_hyper
 	./Hypersomnia

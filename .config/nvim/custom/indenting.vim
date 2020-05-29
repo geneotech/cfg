@@ -10,11 +10,11 @@ set nosmartindent
 " Matches return statement breaked over lines
 
 let g:indent_eol_openers = [
-	\'[\[<({]\{1,}',
-	\'/\*', 
-	\'=',
-	\'return'
-\]
+      \'[\[<({]\{1,}',
+      \'/\*', 
+      \'=',
+      \'return'
+      \]
 
 " The closers are in this order:
 
@@ -26,34 +26,34 @@ let g:indent_eol_openers = [
 " After long assignment
 
 let g:indent_eol_closers = [
-	\'[\]>)}]\{1,}[;,]\{,1}', 
-	\'\*/', 
-	\'}();',  
-	\')\s*{',
-	\')\s*const;',
-	\')\s*const\s*{',
-	\';\{1,}' 
-\]
+      \'[\]>)}]\{1,}[;,]\{,1}', 
+      \'\*/', 
+      \'}();',  
+      \')\s*{',
+      \')\s*const;',
+      \')\s*const\s*{',
+      \';\{1,}' 
+      \]
 
 let g:indent_decreasers = [
-	\'public:', 
-	\') \:',
-	\'protected:', 
-	\'private:'
-\]
+      \'public:', 
+      \') \:',
+      \'protected:', 
+      \'private:'
+      \]
 
 function! ListToPattern(mylist, prologue, epilogue)
-	let result_pattern = ''
+  let result_pattern = ''
 
-	for elem in a:mylist
-		if strlen(result_pattern) > 0
-			let result_pattern = result_pattern . '\|' 
-		endif
+  for elem in a:mylist
+    if strlen(result_pattern) > 0
+      let result_pattern = result_pattern . '\|' 
+    endif
 
-		let result_pattern = result_pattern . a:prologue . elem . a:epilogue
-	endfor	
+    let result_pattern = result_pattern . a:prologue . elem . a:epilogue
+  endfor	
 
-	return result_pattern
+  return result_pattern
 endfunction
 
 let g:indent_opener_pattern = ListToPattern(g:indent_eol_openers, '', '\s*$')
@@ -66,7 +66,7 @@ function! GenericIndent(lnum)
   let curline = getline(a:lnum)
 
   if (curline =~ g:indent_zeroer_pattern)
-	  return 0
+    return 0
   endif
 
   let lnum = prevnonblank(a:lnum - 1)
@@ -98,6 +98,7 @@ autocmd FileType cpp setlocal indentexpr=GenericIndent(v:lnum)
 " On paste, fix indentation
 autocmd FileType cpp nnoremap <buffer> p p=`]`]
 autocmd FileType cpp nnoremap <buffer> P P=`]`[
+autocmd FileType cpp let b:sleuth_automatic = 0
 
 " But let C-v never indent
 nnoremap <C-v> p

@@ -12,7 +12,7 @@ let g:grepper.stop = 1000
 let g:grepper.operator.dir = 'repo'
 let g:grepper.operator.highlight = 1
 let g:grepper.operator.tools = ['ag']
-let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep'
+let g:grepper.operator.ag.grepprg = 'ag --hidden --vimgrep -Q'
 let g:grepper.operator.ag.escape = ''
 let g:grepper.operator.stop = 1000
 

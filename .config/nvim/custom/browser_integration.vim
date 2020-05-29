@@ -17,4 +17,4 @@ function! BrowseDocs()
 	let $FZF_DEFAULT_OPTS = old_fzf_opts
 endfunction
 
-nnoremap <C-x> :call BrowseDocs()<CR>
+" nnoremap <C-x> :call BrowseDocs()<CR>

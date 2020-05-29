@@ -9,6 +9,7 @@ nnoremap <silent> <Space>h :execute "ViewDocHelp " . expand("<cword>")<CR>
 " Gutentags settings
 let g:gutentags_cache_dir='/tmp'
 let g:gutentags_ctags_extra_args=['-nu']
+let g:gutentags_ctags_exclude=['*.md']
 
 " highlightedyank settings
 " Keep the yank highlight infinite

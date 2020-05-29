@@ -30,6 +30,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'AndrewRadev/sideways.vim'
+Plugin 'tpope/vim-sleuth'
 
 call vundle#end()
 filetype plugin indent on
