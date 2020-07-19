@@ -5,6 +5,10 @@ permalink: todo
 summary: What needs to be done on the system. 
 ---
 
+- Proper recording facility
+	- Recording screen regions is fucked up because of sound encoding issues
+	- Cursor is being shown in screenshots which is annoying as fuck
+
 - sxiv: copy to clipboard image or path
 
 - We should really consider dropping the nvim terminal altogether

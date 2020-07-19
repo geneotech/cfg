@@ -32,11 +32,13 @@ alias diskspace='sudo gdmap -f "/"'
 # additional git aliases
 
 far() {
-	git ls-files -z | xargs -0 sed -i -e "s/$1/$2/g"
+  # mass find and replace
+  ag -l -0 "$1"   | xargs -0 sed -i -e "s/$1/$2/g"
 }
 
 farw() {
-	git ls-files -z | xargs -0 sed -i -e "s/\b$1\b/$2/g"
+  # mass find and replace word
+  git ls-files -z | xargs -0 sed -i -e "s/\b$1\b/$2/g"
 }
 
 # Restores the most recent version of a deleted file
@@ -136,8 +138,19 @@ alias grem='git remote'
 alias glg='git log --stat'
 alias gl='git log'
 alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
-alias gcleanup="git reset --hard; git clean -d -x -f "
 alias agq="ag -Q"
+alias chdalej="GIT_EDITOR=true git cherry-pick --continue"
+alias rbdalej="GIT_EDITOR=true git rebase --continue"
+
+nasz() {
+  git checkout --ours $1
+  git add $1
+}
+
+ich() {
+  git checkout --theirs $1
+  git add $1
+}
 
 function bfpushupto()
 {
@@ -443,4 +456,32 @@ unph() {
 	chmod +x Hypersomnia-for-Linux.sfx
 	./Hypersomnia-for-Linux.sfx
 	cd hypersomnia
+}
+
+server_upgrade() {
+  pushd ~/rep/arena.hypersomnia.xyz/user
+  zsh vim_build.sh && zsh vim_run.sh
+  popd
+}
+
+server_restart() {
+  pushd ~/rep/arena.hypersomnia.xyz/user
+  zsh vim_run.sh
+  popd
+}
+
+sensible_mp4() {
+  ffmpeg -i $1 \
+    -c:v libx264 -crf 23 -profile:v baseline -level 3.0 -pix_fmt yuv444p \
+    -c:a aac -ac 2 -b:a 256k \
+    -movflags faststart \
+    output.mp4
+}
+
+windows_server() {
+  cat ~/.ssh/wserver_pass | /usr/bin/rdesktop -g 1440x900 -P -z -x l -r sound:off -u Administrator $1 -p -
+}
+
+mount_windows() {
+  sudo mount /dev/sda3 /media/win
 }
