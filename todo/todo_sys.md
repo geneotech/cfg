@@ -8,6 +8,7 @@ summary: What needs to be done on the system.
 - Proper recording facility
 	- Recording screen regions is fucked up because of sound encoding issues
 	- Cursor is being shown in screenshots which is annoying as fuck
+	- region select is fucked up too
 
 - sxiv: copy to clipboard image or path
 

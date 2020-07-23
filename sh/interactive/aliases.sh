@@ -341,6 +341,11 @@ alias xtr='. ~/cfg/sh/interactive/extract.plugin.zsh; extract '
 alias pls='sudo $(fc -ln -1)'
 alias run='./run.sh'
 
+# adb aliases
+alias adi='adb install'
+alias add='adb devices -l'
+alias adr='adb kill-server && adb start-server'
+
 # Forgotten aliases
 alias relx='xrdb ~/.Xresources'
 alias upx='sudo xrdb ~/.Xresources'
@@ -479,9 +484,14 @@ sensible_mp4() {
 }
 
 windows_server() {
-  cat ~/.ssh/wserver_pass | /usr/bin/rdesktop -g 1440x900 -P -z -x l -r sound:off -u Administrator $1 -p -
+  cat ~/.ssh/wserver_pass | /usr/bin/rdesktop -r disk:tmp=/home/pbc/Desktop -g 1440x900 -P -z -x l -r sound:off -u Administrator $1 -p -
 }
 
 mount_windows() {
   sudo mount /dev/sda3 /media/win
+}
+
+mp4towebm() {
+  ffmpeg  -i $1  -b:v 0  -crf 30  -pass 1  -an -f webm /dev/null
+  ffmpeg  -i $1  -b:v 0  -crf 30  -pass 2  $2
 }

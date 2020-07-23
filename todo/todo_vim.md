@@ -5,6 +5,8 @@ permalink: todo
 summary: What needs to be done for vim.
 ---
 
+- Fix that fucking paste and line opening so that they always indent correctly
+	- corner case: #if #else in cs files
 - ctrl+w on quickfix freezes the entire vim
 
 - let gitgutter stage whitespace too, though still ignore the viewing, if it is possible
