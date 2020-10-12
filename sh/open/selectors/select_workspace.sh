@@ -1,5 +1,13 @@
 WORKSPACES="
+$HOME/avm
+$HOME/hurry_heroes
+$HOME/testgodot
+$HOME/blackops
 $HOME/page
+$HOME/Avio
+$HOME/rep/industry-4.0
+$HOME/beautyfactory_v2
+$HOME/rep/slapper
 $HOME/bf
 $HOME/opi
 $HOME/kivy

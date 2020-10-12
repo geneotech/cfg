@@ -26,8 +26,6 @@ summary: What needs to be done on the system.
 
 - introduce shift+esc for in-line normal mode in terminal
 
-
-- properly reload images on applying waifu2x in sxiv
 - Fix fzf hacks (alt+c and ctrl+t) for neovim terminal
 
 - Write scripts to facilitate switching pulseaudio on and off
@@ -44,6 +42,8 @@ summary: What needs to be done on the system.
 - drivers for corsair
 
 ## Disregarded
+
+- properly reload images on applying waifu2x in sxiv
 
 - ranger binding for copying current path?
 - remember that if you want to configure fzf for terminal, nvim sets its own global fzf command variables

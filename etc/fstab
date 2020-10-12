@@ -7,5 +7,5 @@ UUID=9228-139F      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,cod
 # /dev/sda4
 UUID=bc39dfc0-774c-4e21-80cb-47d7fd05ec20	none      	swap      	defaults,pri=-2	0 0
 
-/dev/sdb1	/media/fun	ntfs-3g	gid=users	0	0
-/dev/sdb2	/media/work	ntfs-3g	gid=users	0	0
+#/dev/sdb1	/media/fun	ntfs-3g	gid=users	0	0
+#/dev/sdb2	/media/work	ntfs-3g	gid=users	0	0

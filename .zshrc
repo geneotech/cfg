@@ -39,4 +39,4 @@ compinit
 export PS1="%d>"
 #For other devices
 #export PS1="%B$FG[154]PI: %b%d>"
-
+export PAGER="less -i"

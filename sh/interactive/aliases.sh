@@ -36,9 +36,17 @@ far() {
   ag -l -0 "$1"   | xargs -0 sed -i -e "s/$1/$2/g"
 }
 
-farw() {
+farww() {
   # mass find and replace word
-  git ls-files -z | xargs -0 sed -i -e "s/\b$1\b/$2/g"
+  git ls-files -z | xargs -0 sed -i -e 's/\b'$1'\b/'$2'/g'
+}
+
+erasenewlines() {
+  git ls-files -z | xargs -0 sed -i ':a;N;$!ba;s/\n/ /g'
+}
+
+eraseleadingws() {
+  git ls-files -z | xargs -0 sed -i 's/^[ \t]*//;s/[ \t]*$//'
 }
 
 # Restores the most recent version of a deleted file
@@ -114,6 +122,7 @@ alias gs='git show'
 alias gfe='git fetch'
 alias gbr='git branch'
 alias gre='git reset'
+alias greh='git reset --hard'
 alias gsh='git show'
 alias grv='git remote -v'
 alias try='git stash -k'
@@ -121,6 +130,7 @@ alias gap='git stash apply'
 alias gforget='git rm --cached'
 alias grforget='git rm -r --cached'
 alias gch='git checkout'
+alias gchm='git checkout master'
 alias gpu='git pull'
 alias gc='git commit -m'
 alias ga='git add'
@@ -135,9 +145,10 @@ alias gano='git commit --amend --no-edit'
 alias gchc='git cherry-pick --continue'
 alias grm='git rm'
 alias grem='git remote'
-alias glg='git log --stat'
-alias gl='git log'
-alias gallexisted='git log --pretty=format: --name-only --diff-filter=A | sort -u'
+alias glg='git log -i --stat'
+alias gl='git log -i'
+alias glm='git log -i master'
+alias gallexisted='git log -i --pretty=format: --name-only --diff-filter=A | sort -u'
 alias agq="ag -Q"
 alias chdalej="GIT_EDITOR=true git cherry-pick --continue"
 alias rbdalej="GIT_EDITOR=true git rebase --continue"
@@ -340,6 +351,7 @@ alias im="interrupt ninja"
 alias xtr='. ~/cfg/sh/interactive/extract.plugin.zsh; extract '
 alias pls='sudo $(fc -ln -1)'
 alias run='./run.sh'
+alias uhu='unityhub &!'
 
 # adb aliases
 alias adi='adb install'
