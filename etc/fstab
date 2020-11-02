@@ -1,11 +1,10 @@
-# /dev/sda5
-UUID=10debcc7-106b-4eb6-985e-407d1436f622	/         	ext4      	rw,relatime	0 1
+# Static information about the filesystems.
+# See fstab(5) for details.
 
-# /dev/sda1
-UUID=9228-139F      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+# <file system> <dir> <type> <options> <dump> <pass>
+# /dev/nvme0n1p2
+UUID=3cf68b69-f050-4d6b-803e-5d60997e691c	/         	ext4      	rw,relatime	0 1
 
-# /dev/sda4
-UUID=bc39dfc0-774c-4e21-80cb-47d7fd05ec20	none      	swap      	defaults,pri=-2	0 0
+# /dev/nvme0n1p1
+UUID=4A5C-195C      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
 
-#/dev/sdb1	/media/fun	ntfs-3g	gid=users	0	0
-#/dev/sdb2	/media/work	ntfs-3g	gid=users	0	0

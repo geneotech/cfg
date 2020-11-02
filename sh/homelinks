@@ -9,9 +9,8 @@ homelink() {
 
 homelink .agignore
 homelink .gdbinit
-homelink .gitignore
 homelink .gtkrc-2.0
-homelink .nvidia-settings-rc
+#homelink .nvidia-settings-rc
 homelink .profile
 homelink .xinitrc
 homelink .zprofile

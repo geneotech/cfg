@@ -22,8 +22,8 @@ dolink /bin/nvim-EDITOR
 dolink /bin/sxiv-rifle
 dolink /bin/uncustom_link
 dolink /bin/uncustomize
-dolink /bin/use_nouveau
-dolink /bin/use_nvidia
+#dolink /bin/use_nouveau
+#dolink /bin/use_nvidia
 dolink /bin/reboot_to_windows
 dolink /bin/ue4build
 dolink /bin/ue4open
